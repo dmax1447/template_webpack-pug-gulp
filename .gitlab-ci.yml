@@ -1,0 +1,57 @@
+image: node
+
+deploy landman dev:
+  stage: deploy
+  only:
+    - /master/
+  image: lorisleiva/laravel-docker:latest
+  cache:
+    paths:
+      - vendor/
+  script:
+    - scp -P 2222 -i ./key -r landman/* gitlab@omp-frontend.elantum.com:/home/hakamada/www/hakamada-tmn.ru/dev
+    - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /home/hakamada/www/hakamada-tmn.ru/dev; composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts --no-dev"
+
+
+deploy landman prod:
+  stage: deploy
+  only:
+    - /prod/
+  image: lorisleiva/laravel-docker:latest
+  cache:
+    paths:
+      - vendor/
+  script:
+    - scp -P 2222 -i ./key -r landman/* gitlab@omp-frontend.elantum.com:/home/hakamada/www/hakamada-tmn.ru
+    - ssh -p 2222 -v -i ./key gitlab@omp-frontend.elantum.com "cd /home/hakamada/www/hakamada-tmn.ru; composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts --no-dev"
+
+before_script:
+  - npm install
+  - mkdir -p ~/.ssh
+  - echo "$elantum_private_key" > ./key
+  - chmod 700 ./key
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+cache:
+  paths:
+    - node_modules/
+
+pages:
+  only:
+    - /master/
+  artifacts:
+    paths:
+      - public
+  script:
+    - npm run build
+    - scp -P 2222 -v -i ./key -r public/* gitlab@omp-frontend.elantum.com:/home/hakamada/www/hakamada-tmn.ru/dev/public
+
+prod:
+  only:
+    - /prod/
+  artifacts:
+    paths:
+      - public
+  script:
+    - BUILD=prod npm run build
+    - scp -P 2222 -v -i ./key -r public/* gitlab@omp-frontend.elantum.com:/home/hakamada/www/hakamada-tmn.ru/public

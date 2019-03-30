@@ -1,0 +1,10 @@
+@import "./rem.scss";
+@import "./styles/_parts.scss";
+@import "./styles/hero.scss";
+@import "./styles/animate.scss";
+@import "./styles/carousel.scss";
+
+body {
+    margin: 0;
+    font-family: 'Source Sans Pro';
+}

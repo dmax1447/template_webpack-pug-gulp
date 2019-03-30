@@ -1,0 +1,24 @@
+{
+  "name": "bereza-portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.pug --out-dir public",
+    "build": "parcel build src/index.pug --out-dir public --public-url . --no-minify --no-content-hash"
+  },
+  "author": "morglod",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jquery": "^3.3.29",
+    "owl.carousel": "^2.3.4",
+    "parcel-bundler": "^1.12.3",
+    "smoothscroll-polyfill": "^0.4.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.5.0",
+    "pug": "^2.0.3",
+    "sass": "^1.17.3",
+    "typescript": "^3.3.4000"
+  }
+}

@@ -1,0 +1,86 @@
+html {
+    font-size: 4px;
+}
+
+body {
+    font-size: initial;
+}
+
+
+@media screen and (min-width: 306px) {
+    html {
+        font-size: 3px;
+    }
+}
+
+
+@media screen and (min-width: 408px) {
+    html {
+        font-size: 4px;
+    }
+}
+
+@media screen and (min-width: 570px) {
+    html {
+        font-size: 5px;
+    }
+}
+
+// -------- FIX --------------
+@media screen and (min-width: 571px) {
+    html {
+        font-size: 2px;
+    }
+}
+// ---------------------------
+
+@media screen and (min-width: 882px) {
+    html {
+        font-size: 3px;
+    }
+}
+
+
+@media screen and (min-width: 1176px) {
+    html {
+        font-size: 4px;
+    }
+}
+
+@media screen and (min-width: 1470px) { // width >= 1470
+    html {
+        font-size: 5px;
+    }
+}
+
+@function v($px, $basePix: 4, $minusPx: 0) {
+    @if $minusPx == 0 {
+        @if variable-exists(noRems) {
+            @return ($px - $minusPx) + px;
+        }
+        @return ($px / $basePix) + rem;
+    }
+    @if variable-exists(noRems) {
+        @return $px + px;
+    }
+    @return unquote('calc(' + ($px / $basePix) + 'rem - ' + $minusPx + 'px)');
+}
+
+@function vm($px, $basePix: 5, $minusPx: 0) {
+    @if $minusPx == 0 {
+        @if variable-exists(noRems) {
+            @return ($px - $minusPx) + px;
+        }
+        @return ($px / $basePix) + rem;
+    }
+    @if variable-exists(noRems) {
+        @return $px + px;
+    }
+    @return unquote('calc(' + ($px / $basePix) + 'rem - ' + $minusPx + 'px)');
+}
+
+@mixin mobile {
+	@media (max-width: 571px) {
+		@content;
+	}
+}
