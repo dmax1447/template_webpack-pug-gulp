@@ -16,9 +16,10 @@ mixin request-estimate-btn
         i.fas.fa-calculator
         span Request estimate
 
-mixin hero-slide(key, head, text, ctaText, ctaLink, class_)
-    div(class=("hero-slide " + class_ || ''), id=key)
-        h1.hero-slide__head!= head
+mixin hero-slide(key, head, text, ctaText, ctaLink, isFirst=false)
+    div(class=("hero-slide " + (isFirst ? "hero-slide--visible" : "")), id=(key + "-slide"))
+        .hero-slide__head-wrapper
+            h1.hero-slide__head!= head
         p.hero-slide__text!= text
         a.hero-slide__cta(href=ctaLink)
             i.fas.fa-arrow-right
@@ -37,6 +38,17 @@ mixin hero-slide-item(icons, text, number_)
 mixin mouse-help-icon
     .mouse-help-icon
         .mouse-help-icon__wheel
+
+mixin hero-video(key, videoSrc, isFirst=false)
+    div(id=(key + "-video") class=("hero-slide-video " + (isFirst ? "hero-slide-video--visible" : "")))
+        video(playsinline autoplay muted loop)
+            source(src=videoSrc, type="video/mp4")
+
+mixin hero-video-progress(key, text, isFirst=false)
+    div(id=(key + "-progressbar") class=("hero-video-progress " + (isFirst ? "hero-video-progress--active" : "")))
+        p!= text
+        .hero-video-progress__bar
+            .hero-video-progress__bar-fill
 
 <!DOCTYPE html>
 html
@@ -58,6 +70,13 @@ html
             // METRICS
     body
         section.hero.full#hero
+            +hero-video("rapiddev", "./assets/rapiddev.mp4", "first video")
+            +hero-video("moderntech", "./assets/moderntech.mp4")
+            +hero-video("expteam", "./assets/expteam.mp4")
+            .hero-shadow-up
+            .hero-shadow-left
+            .hero-shadow-right
+            .hero-shadow-bottom
             .section-content
                 header.top-bar
                     img.top-bar__logo(src="./assets/logo.svg")
@@ -80,5 +99,9 @@ html
                         +hero-slide-item([], "Developers in the Team", 8)
                         +hero-slide-item([], "Languages spoken", 5)
                         +hero-slide-item([], "Years of Experience average", 8)
+                .hero-video-progress-menu
+                    +hero-video-progress("rapiddev", "we create", "first")
+                    +hero-video-progress("moderntech", "we use")
+                    +hero-video-progress("expteam", "we are")
             script.
-                tryAnimateHero();
+                //- tryAnimateHero();

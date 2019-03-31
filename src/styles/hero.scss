@@ -49,6 +49,66 @@
         margin-right: v(32);
     }
 
+    .hero-shadow-up {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        height: v(96);
+        background: linear-gradient(179.81deg, rgba(0, 0, 0, 0.6) 1.99%, rgba(0, 0, 0, 0) 97.93%);
+    }
+    .hero-shadow-left {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: v(408);
+        background: linear-gradient(89.93deg, rgba(0, 0, 0, 0.6) 0.09%, rgba(0, 0, 0, 0) 99.88%);
+    }
+    .hero-shadow-right {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: v(312);
+        background: linear-gradient(270deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+    .hero-shadow-bottom {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: v(528);
+        background: linear-gradient(179.67deg, rgba(0, 0, 0, 0) 1.99%, rgba(0, 0, 0, 0.6) 97.93%);
+    }
+
+    .hero-slide-video {
+        z-index: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background: black;
+        display: none;
+
+        video {
+            display: none;
+
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &--visible {
+            display: block;
+            video {
+                display: block;
+            }
+        }
+    }
+
     .hero-slide-wrapper {
         position: absolute;
         top: 0;
@@ -65,20 +125,40 @@
             bottom: 0;
             right: 0;
 
-            &.visible {
+            &--visible {
                 display: block;
             }
 
-            &__head {
+            &__head-wrapper {
+                display: inline-block;
+                position: relative;
                 margin: 0;
                 margin-top: v(144);
                 margin-bottom: v(24);
-                padding-left: v(72);
+                margin-left: v(72);
+            }
+
+            &__head {
+                display: inline-block;
+                margin: 0;
                 color: white;
-                outline: 8px solid rgba(0,0,0,30%);
                 font-size: v(54);
                 line-height: v(64);
             }
+
+            // &__head-outline {
+            //     display: inline-block;
+            //     position: absolute;
+            //     left: 50%;
+            //     top: 50%;
+            //     transform: translate(-50%, -50%); //  scale(1.1, 1.1);
+            //     width: 100%;
+
+            //     margin: 0;
+            //     color: white;
+            //     font-size: v(54);
+            //     line-height: v(64);
+            // }
 
             &__text {
                 margin: 0;
@@ -152,6 +232,61 @@
                     color: white;
                     font-size: v(16);
                     line-height: v(24);
+                }
+            }
+        }
+    }
+
+    .hero-video-progress-menu {
+        position: absolute;
+        right: v(72);
+        top: v(312);
+
+        .hero-video-progress {
+            text-align: right;
+            cursor: pointer;
+
+            p {
+                display: inline;
+                margin: 0;
+                font-size: v(12);
+                line-height: v(24);
+                color: #CCCCCC;
+                font-family: 'Source Sans Pro';
+                margin-right: 8px;
+                text-align: right;
+
+                transition-duration: 0.1s;
+                transition-property: font-size, color;
+            }
+
+            &__bar {
+                display: inline-block;
+                width: v(24);
+                height: v(2);
+                background-color: #4A8200;
+                margin-bottom: 0.6rem;
+            }
+
+            &__bar-fill {
+                height: 100%;
+                background-color: #70C000;
+
+                transition-duration: 0.5s;
+                transition-property: width;
+            }
+
+            &--active {
+                p {
+                    font-size: v(16);
+                    color: white;
+                }
+
+                .hero-video-progress__bar {
+                    width: v(48);
+                    height: v(2);
+                    background-color: #4A8200;
+                    margin-bottom: 0.8rem;
                 }
             }
         }
