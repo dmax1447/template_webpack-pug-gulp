@@ -55,23 +55,54 @@
         top: 0;
         right: 0;
         height: v(96);
-        background: linear-gradient(179.81deg, rgba(0, 0, 0, 0.6) 1.99%, rgba(0, 0, 0, 0) 97.93%);
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 1.99%, rgba(0, 0, 0, 0) 97.93%);
+
+        &::before {
+            position: absolute;
+            content: ' ';
+            background-color: rgba(0, 0, 0, 0.6);
+            width: 100vw;
+            height: 50vh;
+            top: -100%;
+        }
     }
     .hero-shadow-left {
+        $width: 408;
+
         position: absolute;
         left: 0;
         top: 0;
         bottom: 0;
-        width: v(408);
-        background: linear-gradient(89.93deg, rgba(0, 0, 0, 0.6) 0.09%, rgba(0, 0, 0, 0) 99.88%);
+        width: v($width);
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0.09%, rgba(0, 0, 0, 0) 99.88%);
+
+        &::before {
+            position: absolute;
+            content: ' ';
+            background-color: rgba(0, 0, 0, .712);
+            width: 50vw;
+            height: 100vh;
+            right: v($width); // <<<<<<<<<<<<<<< fix like this all
+        }
     }
     .hero-shadow-right {
+        $width: 312;
+
         position: absolute;
         top: 0;
         right: 0;
         bottom: 0;
-        width: v(312);
+        width: v($width);
         background: linear-gradient(270deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+
+        &::before {
+            position: absolute;
+            content: ' ';
+            background-color: rgba(0, 0, 0, 0.6);
+            width: 50vw;
+            height: 100vh;
+            right: -v($width);
+        }
     }
     .hero-shadow-bottom {
         position: absolute;
@@ -79,7 +110,15 @@
         right: 0;
         bottom: 0;
         top: v(528);
-        background: linear-gradient(179.67deg, rgba(0, 0, 0, 0) 1.99%, rgba(0, 0, 0, 0.6) 97.93%);
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 1.99%, rgba(0, 0, 0, 0.6) 97.93%);
+        &::before {
+            position: absolute;
+            content: ' ';
+            background-color: rgba(0, 0, 0, 0.6);
+            width: 100vw;
+            height: 50vh;
+            bottom: -100%;
+        }
     }
 
     .hero-slide-video {
