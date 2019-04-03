@@ -38,11 +38,13 @@ mixin hero-slide-item(icons, text, number_)
 mixin mouse-help-icon
     .mouse-help-icon
         .mouse-help-icon__wheel
+        .mouse-help-icon__label Scroll down
 
 mixin hero-video(key, videoSrc, isFirst=false)
-    div(id=(key + "-video") class=("hero-slide-video " + (isFirst ? "hero-slide-video--visible" : "")))
-        video(playsinline autoplay muted loop)
-            source(src=videoSrc, type="video/mp4")
+    div(id=(key + "-video") class=("hero-slide-video " + (isFirst ? "hero-slide-video--visible" : "")) data-src=(videoSrc))
+        video(playsinline autoplay muted)
+            if !!isFirst
+                source(src=videoSrc, type="video/mp4")
 
 mixin hero-video-progress(key, text, isFirst=false)
     div(id=(key + "-progressbar") class=("hero-video-progress " + (isFirst ? "hero-video-progress--active" : "")))
@@ -74,10 +76,10 @@ html
             +hero-video("moderntech", "./assets/moderntech.mp4")
             +hero-video("expteam", "./assets/expteam.mp4")
             .section-content
-                .hero-shadow-up
-                .hero-shadow-left
-                .hero-shadow-right
-                .hero-shadow-bottom
+                //- .hero-shadow-up
+                //- .hero-shadow-left
+                //- .hero-shadow-right
+                //- .hero-shadow-bottom
                 header.top-bar
                     img.top-bar__logo(src="./assets/logo.svg")
                     +request-estimate-btn
@@ -105,3 +107,7 @@ html
                     +hero-video-progress("expteam", "we are")
             script.
                 //- tryAnimateHero();
+        section.we-help#we-help
+            .section-content(style="height: 200vh")
+                h1 Hello ola
+                p Hello world

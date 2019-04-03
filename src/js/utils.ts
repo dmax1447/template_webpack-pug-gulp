@@ -121,3 +121,15 @@ export function prepareDragging<ArgT = any>(
 export function betweenRate(a: number, x: number, b: number) {
     return (x - a) / (b - a);
 }
+
+export function disableScroll() {
+    document.body.style.overflow = 'hidden';
+}
+
+export function enableScroll() {
+    document.body.style.overflow = null;
+}
+
+export function smoothScrollTo(el: HTMLElement) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}

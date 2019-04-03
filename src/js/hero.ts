@@ -1,5 +1,5 @@
 import {
-    $, $all,
+    $, $all, disableScroll, enableScroll, smoothScrollTo,
 } from './utils';
 
 const slides: {
@@ -9,8 +9,9 @@ const slides: {
         slideEl: HTMLDivElement,
     }
 } = {};
-let slideKeys: string[] = [];
 
+let slideKeys: string[] = [];
+let currentSlideKey: string;
 let videoProgressBarUpdater = 0;
 
 function resetProgress(currentActiveKey: string) {
@@ -27,10 +28,16 @@ function resetProgress(currentActiveKey: string) {
         videoGroupEl.classList.toggle('hero-slide-video--visible', false);
         slideEl.classList.toggle('hero-slide--visible', false);
     }
+
+    const {
+        videoGroupEl,
+        progressBarEl,
+    } = slides[currentActiveKey];
+
     window.clearInterval(videoProgressBarUpdater);
-    const video = slides[currentActiveKey].videoGroupEl.querySelector('video');
-    const barFill = slides[currentActiveKey].progressBarEl.querySelector('.hero-video-progress__bar-fill') as HTMLDivElement;
-    slides[currentActiveKey].progressBarEl.classList.toggle('hero-video-progress--active', true);
+    const video = videoGroupEl.querySelector('video');
+    const barFill = progressBarEl.querySelector('.hero-video-progress__bar-fill') as HTMLDivElement;
+    progressBarEl.classList.toggle('hero-video-progress--active', true);
     video.currentTime = 0;
 
     videoProgressBarUpdater = window.setInterval(() => {
@@ -38,7 +45,41 @@ function resetProgress(currentActiveKey: string) {
     }, 500);
 }
 
-function changeSlide(slideKey: string) {
+function preloadSlideVideo(slideKey: string) {
+    const {
+        videoGroupEl,
+    } = slides[slideKey];
+
+    const src = videoGroupEl.getAttribute('data-src');
+    const videoEl = videoGroupEl.querySelector('video');
+    const videoSourceEl = videoGroupEl.querySelector('source');
+
+    if (!videoSourceEl) {
+        const sourceEl = document.createElement('source');
+        sourceEl.src = src;
+        sourceEl.type = 'video/mp4';
+        videoEl.appendChild(sourceEl);
+    }
+
+    if (videoEl.seekable.length === 0) {
+        videoEl.load();
+    }
+
+    try {
+        videoEl.play().catch(() => {});
+    } catch {}
+}
+
+const MIN_TIME_BEFORE_SLIDE_CHANGE = 500;
+let lastTimeSlideChanged = 0;
+
+function changeSlide(slideKey: string, noTimeout: boolean|'no timeout' = false) {
+    const _now = Date.now();
+    if (!noTimeout && lastTimeSlideChanged + MIN_TIME_BEFORE_SLIDE_CHANGE > _now) {
+        console.log('skipping changeSlide, because it changed less then MIN_TIME_BEFORE_SLIDE_CHANGE ago', { lastTimeSlideChanged, MIN_TIME_BEFORE_SLIDE_CHANGE, now: _now });
+        return;
+    }
+
     resetProgress(slideKey);
 
     for (const k of slideKeys) {
@@ -48,10 +89,49 @@ function changeSlide(slideKey: string) {
         } = slides[k];
         videoGroupEl.classList.toggle('hero-slide-video--visible', false);
         slideEl.classList.toggle('hero-slide--visible', false);
+
+        videoGroupEl.querySelector('video').pause();
     }
 
-    slides[slideKey].videoGroupEl.classList.toggle('hero-slide-video--visible', true);
-    slides[slideKey].slideEl.classList.toggle('hero-slide--visible', true);
+    const {
+        videoGroupEl,
+        slideEl,
+    } = slides[slideKey];
+
+    videoGroupEl.classList.toggle('hero-slide-video--visible', true);
+    slideEl.classList.toggle('hero-slide--visible', true);
+
+    preloadSlideVideo(slideKey);
+    currentSlideKey = slideKey;
+
+    lastTimeSlideChanged = Date.now();
+}
+
+function prevSlide() {
+    let i = slideKeys.indexOf(currentSlideKey);
+    i = (i - 1);
+    if (i < 0) i = slideKeys.length - 1;
+    changeSlide(slideKeys[i]);
+}
+
+function nextSlide() {
+    let i = slideKeys.indexOf(currentSlideKey);
+    i = (i + 1) % slideKeys.length;
+    changeSlide(slideKeys[i]);
+}
+
+function onWheel(evt: WheelEvent) {
+    if (evt.deltaY > 0) {
+        if (slideKeys.indexOf(currentSlideKey) === slideKeys.length - 1) {
+            enableScroll();
+            smoothScrollTo($('section.we-help'));
+            return;
+        }
+        nextSlide();
+    }
+    else {
+        prevSlide();
+    }
 }
 
 export function initHero() {
@@ -59,6 +139,11 @@ export function initHero() {
         const key = slideVideoEl.id.substr(0, slideVideoEl.id.length - "-video".length);
         if (!slides[key]) slides[key] = {} as any;
         slides[key]["videoGroupEl"] = slideVideoEl;
+
+        const video = slideVideoEl.querySelector('video');
+        video.onended = () => {
+            nextSlide();
+        };
     });
 
     $all('.hero-video-progress').forEach(videoProgressEl => {
@@ -66,7 +151,7 @@ export function initHero() {
         if (!slides[key]) slides[key] = {} as any;
         slides[key]["progressBarEl"] = videoProgressEl;
 
-        videoProgressEl.onclick = () => changeSlide(key);
+        videoProgressEl.onclick = () => changeSlide(key, 'no timeout');
     });
 
     $all('.hero-slide').forEach(slideEl => {
@@ -78,4 +163,9 @@ export function initHero() {
     slideKeys = Object.keys(slides);
 
     changeSlide(slideKeys[0]);
+
+    if (window.scrollY === 0) {
+        disableScroll();
+    }
+    window.addEventListener('wheel', onWheel);
 }

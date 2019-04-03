@@ -400,27 +400,33 @@ form {
 @keyframes mouse-help-icon-wheel-anim {
     0% {
         top: 1.5rem;
-        opacity: 1;
+        opacity: 0;
     }
     50% {
-        top: 1.8rem;
-    }
-    60% {
-        opacity: 0.8;
-        top: 2rem;
+        opacity: 1;
     }
     100% {
-        top: 2.5rem;
+        top: 3.5rem;
         opacity: 0;
+    }
+}
+
+@keyframes mouse-help-icon-label-anim {
+    0% {
+        color: rgba(255, 255, 255, 0.63);
+    }
+    100% {
+        color: rgba(255, 255, 255, 0.85);
     }
 }
 
 .mouse-help-icon {
     position: relative;
-    width: v(12);
-    height: v(20);
-    border: 0.7rem solid rgba(255,255,255,30%);
-    border-radius: 3rem;
+
+    width: 5rem;
+    height: 8rem;
+    border: 0.5rem solid rgba(255, 255, 255, 0.3);
+    border-radius: 2.7rem;
 
     &__wheel {
         position: absolute;
@@ -432,5 +438,17 @@ form {
         border-radius: v(2);
         background-color: white;
         animation: mouse-help-icon-wheel-anim 2s infinite;
+    }
+
+    &__label {
+        position: absolute;
+        left: 50%;
+        top: 9rem;
+        transform: translateX(-50%);
+        font-family: 'Source Sans Pro', sans-serif;
+        white-space: nowrap;
+        font-size: 3rem;
+        color: rgba(255, 255, 255, 0.63);
+        animation: mouse-help-icon-label-anim 1.8s infinite alternate;
     }
 }
