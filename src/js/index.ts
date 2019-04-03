@@ -3,7 +3,7 @@ import smoothscroll from 'smoothscroll-polyfill';
 import {
     $, $all,
 } from './utils';
-import { initAnimations, runAnimation, pickAnimParams, isAnimPlaying, isAnimStopped } from './anim';
+import { initAnimations, runAnimation, pickAnimParams, isAnimPlaying, isAnimStopped } from '../libs/anim';
 import { initCarousels } from './carousel';
 import { remFix } from './rem-fix';
 import { initHero } from './hero';

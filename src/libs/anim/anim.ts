@@ -1,6 +1,6 @@
 import {
     $, $all, isElementInViewport, getGlobalRect, isGlobalRectInViewport, intersectionRate, getWindowGlobalRect, isElementVisible,
-} from './utils';
+} from '../../js/utils';
 
 export function isAnimWaiting(el: HTMLElement) {
     return el.classList.contains('anim--is-waiting');
