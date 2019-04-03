@@ -1,56 +1,4 @@
-mixin nav-menu-item(href, text, class_="")
-    a(href=href, class=class_)
-        span.nav-menu__item-placeholder= text
-        span.nav-menu__item-text= text
-
-mixin nav-menu
-    nav.nav-menu(role="navigation")
-        +nav-menu-item("#cases", "Cases", "first-el")
-        +nav-menu-item("#tech", "Technology")
-        +nav-menu-item("#team", "Team")
-        +nav-menu-item("#contacts", "Contacts")
-        //- +nav-menu-item("#estimate-calc", "Reuest estimate")
-
-mixin request-estimate-btn
-    button.request-estimate-btn
-        i.fas.fa-calculator
-        span Request estimate
-
-mixin hero-slide(key, head, text, ctaText, ctaLink, isFirst=false)
-    div(class=("hero-slide " + (isFirst ? "hero-slide--visible" : "")), id=(key + "-slide"))
-        .hero-slide__head-wrapper
-            h1.hero-slide__head!= head
-        p.hero-slide__text!= text
-        a.hero-slide__cta(href=ctaLink)
-            i.fas.fa-arrow-right
-            span!= ctaText
-        ul.hero-slide__items
-            block
-
-mixin hero-slide-item(icons, text, number_)
-    li.hero-slide__item
-        each iconSrc in icons
-            img(src=iconSrc)
-        if number_ !== undefined
-            span.hero-slide-item__number= number_
-        p!= text
-
-mixin mouse-help-icon
-    .mouse-help-icon
-        .mouse-help-icon__wheel
-        .mouse-help-icon__label Scroll down
-
-mixin hero-video(key, videoSrc, isFirst=false)
-    div(id=(key + "-video") class=("hero-slide-video " + (isFirst ? "hero-slide-video--visible" : "")) data-src=(videoSrc))
-        video(playsinline autoplay muted)
-            if !!isFirst
-                source(src=videoSrc, type="video/mp4")
-
-mixin hero-video-progress(key, text, isFirst=false)
-    div(id=(key + "-progressbar") class=("hero-video-progress " + (isFirst ? "hero-video-progress--active" : "")))
-        p!= text
-        .hero-video-progress__bar
-            .hero-video-progress__bar-fill
+include ./views/_parts.pug
 
 <!DOCTYPE html>
 html
@@ -65,48 +13,13 @@ html
         link(href="./styles.scss" rel="stylesheet")
         link(href="./core/styles-no-rem.scss" rel="stylesheet" async)
         script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
-        script(src="./js/index.ts")
+        script(src="./index.ts")
         noscript
             link(href="./core/no-script.scss" rel="stylesheet")
         if process.env.BUILD === 'prod'
             // METRICS
     body
-        section.hero.full#hero
-            +hero-video("rapiddev", "./assets/rapiddev.mp4", "first video")
-            +hero-video("moderntech", "./assets/moderntech.mp4")
-            +hero-video("expteam", "./assets/expteam.mp4")
-            .section-content
-                //- .hero-shadow-up
-                //- .hero-shadow-left
-                //- .hero-shadow-right
-                //- .hero-shadow-bottom
-                header.top-bar
-                    img.top-bar__logo(src="./assets/logo.svg")
-                    +request-estimate-btn
-                    div.top-bar__menu.top-bar__menu--closed
-                        +nav-menu
-                    i.far.fa-bars.top-bar__mobile-menu(role="button")
-                    i.fal.fa-times.top-bar__mobile-menu-close(role="button")
-                .hero-slide-wrapper
-                    +hero-slide("rapiddev", "Rapid<br>web and mobile<br>development", "Estimate in few hours<br>Prototype in few weeks<br>MVP in few months", "See cases", "#cases", "first")
-                        +hero-slide-item([ "./assets/hero-design-icon.svg" ], "User research & System analysis<br>UI/UX Prototyping & Design")
-                        +hero-slide-item([ "./assets/hero-dev-icon.svg" ], "Cross-platform Front-end,<br>API & Back-end development")
-                        +hero-slide-item([ "./assets/hero-ecom-icon.svg" ], "E-commerce & Online-media<br>development & support")
-                        +mouse-help-icon
-                    +hero-slide("moderntech", "Proven, modern<br>technology stack<br>and approach", "JavaScript-powered Development<br>Continuos Integration and Continuos Delivery<br>Agile approach", "Discover our Tech & Process", "#tech")
-                        +hero-slide-item([ "./assets/hero-bullfinch-icon.svg", "./assets/hero-figma-icon.svg" ], "Our own Design Language<br>with CI to Front-end")
-                        +hero-slide-item([ "./assets/hero-react-icon.svg", "./assets/hero-vue-icon.svg", "./assets/hero-nodejs-icon.svg" ], "Full JavaScript Stack for<br>New Products")
-                        +hero-slide-item([ "./assets/hero-laravel-icon.svg", "./assets/hero-bitrix-icon.svg" ], "PHP-driven systems support<br>and development")
-                    +hero-slide("expteam", "Experienced,<br>versatile and<br>dedicated team", "UI/UX Designers<br>Front-end and Back-end Developers<br>QA and DevOps", "Meet the Team", "#team")
-                        +hero-slide-item([], "Developers in the Team", 8)
-                        +hero-slide-item([], "Languages spoken", 5)
-                        +hero-slide-item([], "Years of Experience average", 8)
-                .hero-video-progress-menu
-                    +hero-video-progress("rapiddev", "we create", "first")
-                    +hero-video-progress("moderntech", "we use")
-                    +hero-video-progress("expteam", "we are")
-            script.
-                //- tryAnimateHero();
+        include ./views/hero.pug
         section.we-help#we-help
             .section-content(style="height: 200vh")
                 h1 Hello ola

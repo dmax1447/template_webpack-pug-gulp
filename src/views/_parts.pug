@@ -1,0 +1,22 @@
+mixin nav-menu-item(href, text, class_="")
+    a(href=href, class=class_)
+        span.nav-menu__item-placeholder= text
+        span.nav-menu__item-text= text
+
+mixin nav-menu
+    nav.nav-menu(role="navigation")
+        +nav-menu-item("#cases", "Cases", "first-el")
+        +nav-menu-item("#tech", "Technology")
+        +nav-menu-item("#team", "Team")
+        +nav-menu-item("#contacts", "Contacts")
+        //- +nav-menu-item("#estimate-calc", "Reuest estimate")
+
+mixin request-estimate-btn
+    button.request-estimate-btn
+        i.fas.fa-calculator
+        span Request estimate
+
+mixin mouse-help-icon
+    .mouse-help-icon
+        .mouse-help-icon__wheel
+        .mouse-help-icon__label Scroll down
