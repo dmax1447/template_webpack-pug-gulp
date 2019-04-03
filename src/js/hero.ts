@@ -1,6 +1,6 @@
 import {
     $, $all, disableScroll, enableScroll, smoothScrollTo,
-} from './utils';
+} from '../core/utils';
 
 const slides: {
     [slideKey: string]: {

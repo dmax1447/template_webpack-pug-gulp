@@ -1,8 +1,8 @@
-@import "./rem.scss";
+@import "./core/rem.scss";
+@import "./core/anim/animate.scss";
+
 @import "./styles/_parts.scss";
 @import "./styles/hero.scss";
-@import "./styles/animate.scss";
-@import "./styles/carousel.scss";
 
 body {
     margin: 0;

@@ -2,10 +2,10 @@ import smoothscroll from 'smoothscroll-polyfill';
 
 import {
     $, $all,
-} from './utils';
-import { initAnimations, runAnimation, pickAnimParams, isAnimPlaying, isAnimStopped } from '../libs/anim';
-import { initCarousels } from './carousel';
-import { remFix } from './rem-fix';
+} from '../core/utils';
+import { initAnimations, runAnimation, pickAnimParams, isAnimPlaying, isAnimStopped } from '../core/anim';
+import { initCarousels } from '../core/owl-carousel';
+import { remFix } from '../core/rem-fix';
 import { initHero } from './hero';
 
 remFix();
