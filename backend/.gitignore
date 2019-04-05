@@ -1,0 +1,6 @@
+/public/hot
+/public/uploads
+/storage/*.key
+/vendor
+.env
+bereza.sqlite

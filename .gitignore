@@ -1,9 +1,4 @@
 /node_modules
 /public
 /.cache
-/backend/public/hot
-/backend/public/uploads
-/backend/storage/*.key
-/backend/vendor
-/backend/.env
 /.idea
