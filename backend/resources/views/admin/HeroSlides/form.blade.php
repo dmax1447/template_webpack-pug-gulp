@@ -40,5 +40,5 @@
         'note' => 'Ссылка слайда'
     ])
 
-    @formField('block_editor')
+    @formField('block_editor', ['blocks' => ['slide_item']])
 @stop
