@@ -14,4 +14,8 @@ class HeroSlideController extends ModuleController
             'field' => 'header',
         ],
     ];
+
+    protected $indexOptions = [
+        'reorder' => true,
+    ];
 }

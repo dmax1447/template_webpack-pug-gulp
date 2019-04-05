@@ -18,6 +18,7 @@ class HeroSlide extends Model implements Sortable
         'position',
         'header',
         'text',
+        'css_id',
         // 'public',
         // 'featured',
         // 'publish_start_date',
