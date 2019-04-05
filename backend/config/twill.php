@@ -12,5 +12,15 @@ return [
                 'icon' => 'text',
                 'component' => 'a17-block-slide_item',
             ],
+        ],
+        'crops' => [
+            'icons' => [
+                'desktop' => [
+                    [
+                        'name' => 'desktop',
+                        'ratio' => 1,
+                    ],
+                ]
+            ]
         ]
     ]];

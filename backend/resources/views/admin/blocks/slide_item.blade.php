@@ -4,3 +4,10 @@
     'translated' => true,
     'maxlength' => 200
 ])
+
+@formField('medias', [
+    'name' => 'icons',
+    'label' => 'Иконки',
+    'max' => 3,
+    'note' => 'SVG иконки'
+])
