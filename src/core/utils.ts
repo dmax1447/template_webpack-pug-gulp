@@ -133,3 +133,14 @@ export function enableScroll() {
 export function smoothScrollTo(el: HTMLElement) {
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+export function sleep(ms: number) {
+    return new Promise<void>(resolve => setTimeout(() => resolve(), ms));
+}
+
+export function getScroll() {
+    const doc = document.documentElement;
+    const left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
+    const top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
+    return { left, top };
+}

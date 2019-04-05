@@ -1,6 +1,8 @@
 import {
-    $, $all, disableScroll, enableScroll, smoothScrollTo,
+    $, $all, disableScroll, enableScroll, smoothScrollTo, sleep, getScroll,
 } from '../core/utils';
+
+import { NumSVGs } from '../assets/nums';
 
 const slides: {
     [slideKey: string]: {
@@ -10,9 +12,15 @@ const slides: {
     }
 } = {};
 
+const MIN_TIME_BEFORE_SLIDE_CHANGE = 500;
+const SLIDE_DISAPPEARING_TIME = 500;
+
 let slideKeys: string[] = [];
 let currentSlideKey: string;
 let videoProgressBarUpdater = 0;
+
+let lastTimeSlideChanged = 0;
+let isHeroMode = false;
 
 function resetProgress(currentActiveKey: string) {
     // reset
@@ -70,14 +78,35 @@ function preloadSlideVideo(slideKey: string) {
     } catch {}
 }
 
-const MIN_TIME_BEFORE_SLIDE_CHANGE = 500;
-let lastTimeSlideChanged = 0;
+async function animateSlideDisappearing(slideKey, fadeDirection: 'up'|'down' = 'down') {
+    const {
+        slideEl,
+    } = slides[slideKey];
 
-function changeSlide(slideKey: string, noTimeout: boolean|'no timeout' = false) {
+    slideEl.classList.toggle('--up', fadeDirection === 'up');
+    slideEl.classList.add('hero-slide--disappearing');
+    await sleep(SLIDE_DISAPPEARING_TIME);
+    slideEl.classList.remove('hero-slide--visible');
+    slideEl.classList.remove('hero-slide--disappearing');
+}
+
+async function changeSlide(slideKey: string, noTimeout: boolean|'no timeout' = false) {
     const _now = Date.now();
     if (!noTimeout && lastTimeSlideChanged + MIN_TIME_BEFORE_SLIDE_CHANGE > _now) {
         console.log('skipping changeSlide, because it changed less then MIN_TIME_BEFORE_SLIDE_CHANGE ago', { lastTimeSlideChanged, MIN_TIME_BEFORE_SLIDE_CHANGE, now: _now });
         return;
+    }
+
+    if (slideKey === currentSlideKey) {
+        console.log('skipping changeSlide, because it is active now');
+        return;
+    }
+
+    const _curSlideIndex = slideKeys.indexOf(currentSlideKey);
+    const _newSlideIndex = slideKeys.indexOf(slideKey);
+
+    if (currentSlideKey) {
+        await animateSlideDisappearing(currentSlideKey, _newSlideIndex > _curSlideIndex ? 'down' : 'up');
     }
 
     resetProgress(slideKey);
@@ -108,10 +137,8 @@ function changeSlide(slideKey: string, noTimeout: boolean|'no timeout' = false) 
 }
 
 function prevSlide() {
-    let i = slideKeys.indexOf(currentSlideKey);
-    i = (i - 1);
-    if (i < 0) i = slideKeys.length - 1;
-    changeSlide(slideKeys[i]);
+    const i = slideKeys.indexOf(currentSlideKey) - 1;
+    if (i >= 0) changeSlide(slideKeys[i]);
 }
 
 function nextSlide() {
@@ -121,16 +148,23 @@ function nextSlide() {
 }
 
 function onWheel(evt: WheelEvent) {
-    if (evt.deltaY > 0) {
-        if (slideKeys.indexOf(currentSlideKey) === slideKeys.length - 1) {
-            enableScroll();
-            smoothScrollTo($('section.we-help'));
-            return;
+    if (isHeroMode) {
+        if (evt.deltaY > 0) {
+            if (slideKeys.indexOf(currentSlideKey) === slideKeys.length - 1) {
+                leaveHeroMode();
+                return;
+            }
+            nextSlide();
+        } else {
+            prevSlide();
         }
-        nextSlide();
-    }
-    else {
-        prevSlide();
+    } else {
+        if (evt.deltaY < 0) {
+            const { top } = getScroll();
+            if (top <= $('section.hero').getBoundingClientRect().height / 2) {
+                enterHeroMode();
+            }
+        }
     }
 }
 
@@ -160,12 +194,35 @@ export function initHero() {
         slides[key]["slideEl"] = slideEl;
     });
 
+    $all('.hero-slide-item__number[data-number]').forEach(numEl => {
+        const numberStr = numEl.getAttribute('data-number') || '';
+        for (let i = 0; i < numberStr.length; ++i) {
+            const ni = parseInt(numberStr[i], 10);
+            if (ni !== NaN) {
+                const numberImg = document.createElement('img');
+                numberImg.src = NumSVGs[ni];
+                numEl.appendChild(numberImg);
+            }
+        }
+    });
+
     slideKeys = Object.keys(slides);
+    window.addEventListener('wheel', onWheel);
 
     changeSlide(slideKeys[0]);
 
-    if (window.scrollY === 0) {
-        disableScroll();
+    if (window.scrollY <= ($('section.hero').getBoundingClientRect().height / 2)) {
+        enterHeroMode();
     }
-    window.addEventListener('wheel', onWheel);
+}
+
+export function enterHeroMode() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    disableScroll();
+    isHeroMode = true;
+}
+
+export function leaveHeroMode() {
+    enableScroll();
+    isHeroMode = false;
 }
