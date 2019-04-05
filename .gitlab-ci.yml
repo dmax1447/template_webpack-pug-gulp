@@ -1,5 +1,17 @@
 image: node
 
+deploy backend dev:
+  stage: deploy
+  only:
+  - /master/
+  image: lorisleiva/laravel-docker:latest
+  cache:
+    paths:
+    - vendor/
+  script:
+  - scp -P 2222 -i ./key -r backend/* gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
+  - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/dev.berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts --no-dev; php artisan migrate"
+
 # deploy landman dev:
 #   stage: deploy
 #   only:
@@ -27,10 +39,10 @@ image: node
 
 before_script:
   - npm install
-  # - mkdir -p ~/.ssh
-  # - echo "$elantum_private_key" > ./key
-  # - chmod 700 ./key
-  # - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  - mkdir -p ~/.ssh
+  - echo "$elantum_private_key" > ./key
+  - chmod 700 ./key
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 
 cache:
   paths:
