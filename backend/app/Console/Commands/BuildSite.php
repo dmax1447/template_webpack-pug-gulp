@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use A17\Twill\Models\Setting;
 use App\Models\HeroSlide;
 use Illuminate\Console\Command;
 
@@ -38,11 +39,14 @@ class BuildSite extends Command
      */
     public function handle() {
         $slides = [];
+        $blocks = [];
         foreach ((array) config('translatable.locales') as $locale) {
             $slides[$locale] = $this->buildSlides($locale);
             \Storage::disk('local')->put('build/hero.' . $locale . '.json', json_encode($slides[$locale], JSON_UNESCAPED_UNICODE));
+            $blocks[$locale] = $this->buildBlocks($locale);
+            \Storage::disk('local')->put('build/blocks.' . $locale . '.json', json_encode($blocks[$locale], JSON_UNESCAPED_UNICODE));
         }
-        dump($slides);
+        dump($blocks);
     }
 
     protected function buildSlides($locale) {
@@ -67,6 +71,16 @@ class BuildSite extends Command
                 $s['icons'][]= $i;
             }
             $data[] = $s;
+        }
+        return $data;
+    }
+
+    protected function buildBlocks($locale) {
+        \App::setLocale($locale);
+        $set = Setting::query()->where('section', 'blocks')->get();
+        $data = [];
+        foreach ($set as $s) {
+            $data[$s->key] = $s->value;
         }
         return $data;
     }

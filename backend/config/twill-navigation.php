@@ -14,10 +14,15 @@ return [
         'route' => 'admin.settings',
         'params' => ['section' => 'site'],
         'primary_navigation' => [
-            'section_name' => [
+            'site' => [
                 'title' => 'Сайт',
                 'route' => 'admin.settings',
                 'params' => ['section' => 'site']
+            ],
+            'blocks' => [
+                'title' => 'Блоки контента',
+                'route' => 'admin.settings',
+                'params' => ['section' => 'blocks']
             ],
         ]
     ]
