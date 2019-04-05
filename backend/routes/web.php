@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/build', function () {
     Artisan::call('bereza:build');
     return view('welcome');
 });

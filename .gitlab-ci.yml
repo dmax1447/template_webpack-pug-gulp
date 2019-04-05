@@ -10,7 +10,7 @@ deploy backend dev:
     - vendor/
   script:
   - scp -P 2222 -i ./key -r backend/* gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
-  - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/dev.berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts --no-dev; php artisan migrate"
+  - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/dev.berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress; php artisan migrate"
 
 # deploy landman dev:
 #   stage: deploy
