@@ -16,6 +16,7 @@ class HeroSlide extends Model implements Sortable
     protected $fillable = [
         'published',
         'position',
+        'title',
         'header',
         'text',
         'css_id',
@@ -27,6 +28,7 @@ class HeroSlide extends Model implements Sortable
 
     // uncomment and modify this as needed if you use the HasTranslation trait
      public $translatedAttributes = [
+         'title',
          'header',
          'text',
          'cta_text',

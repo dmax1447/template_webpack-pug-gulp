@@ -7,6 +7,7 @@ use A17\Twill\Models\Model;
 class HeroSlideTranslation extends Model
 {
     protected $fillable = [
+        'title',
         'header',
         'text',
         'cta_text',

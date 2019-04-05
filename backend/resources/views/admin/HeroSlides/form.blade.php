@@ -9,6 +9,14 @@
     ])
 
     @formField('input', [
+        'name' => 'header',
+        'label' => 'Заголовок',
+        'maxlength' => 100,
+        'translated' => true,
+        'note' => 'Заголовок слайда'
+    ])
+
+    @formField('input', [
         'name' => 'text',
         'label' => 'Текст',
         'translated' => true,

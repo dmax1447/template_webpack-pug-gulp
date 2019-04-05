@@ -7,10 +7,14 @@ use A17\Twill\Http\Controllers\Admin\ModuleController;
 class HeroSlideController extends ModuleController
 {
     protected $moduleName = 'HeroSlides';
-    protected $titleColumnKey = 'header';
+    protected $titleColumnKey = 'title';
     protected $indexColumns = [
-        'header' => [
+        'title' => [
             'title' => 'Слайд',
+            'field' => 'title',
+        ],
+        'header' => [
+            'title' => 'Заголовок',
             'field' => 'header',
         ],
     ];
