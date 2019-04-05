@@ -92,6 +92,15 @@
         margin-right: v(32);
     }
 
+    .hero-backdrop {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background: radial-gradient(275.50px at 59.19% 54.38%, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.14) 100%), radial-gradient(368.00px at 59.4% 51.36%, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.18) 100%), radial-gradient(614.48px at 57.97% 54.31%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.44) 100%);
+    }
+
     .hero-shadow-up {
         position: absolute;
         background-color: rgba(0, 0, 0, 0.6);
