@@ -10,14 +10,39 @@
     }
 }
 
-@keyframes hero-slide-appear {
+@keyframes hero-slide-head-appearing {
     0% {
-        transform: translateY(-5%) scale(1.05);
+        max-width: 0;
+    }
+    100% {
+        max-width: 70vw;
+    }
+}
+
+@keyframes hero-slide-element-appearing {
+    0% {
         opacity: 0;
     }
     100% {
-        transform: translateY(0%) scale(1);
         opacity: 1;
+    }
+}
+
+@keyframes hero-slide-head-disappearing {
+    0% {
+        max-width: 70vw;
+    }
+    100% {
+        max-width: 0;
+    }
+}
+
+@keyframes hero-slide-element-disappearing {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }
 
@@ -28,6 +53,13 @@
     & > .section-content {
         min-height: v(696);
         height: 100vh;
+    }
+
+    .hero-video-backdrop {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
     }
 
     .top-bar {
@@ -62,77 +94,31 @@
 
     .hero-shadow-up {
         position: absolute;
-        left: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        width: 100%;
+        height: calc((100% - 870px) / 2);
         top: 0;
-        right: 0;
-        height: v(96);
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 1.99%, rgba(0, 0, 0, 0) 97.93%);
-
-        &::before {
-            position: absolute;
-            content: ' ';
-            background-color: rgba(0, 0, 0, 0.6);
-            width: 100vw;
-            height: 50vh;
-            top: -100%;
-        }
     }
     .hero-shadow-left {
-        $width: 408;
-
         position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: v($width);
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0.09%, rgba(0, 0, 0, 0) 99.88%);
-
-        &::before {
-            position: absolute;
-            content: ' ';
-            background-color: rgba(0, 0, 0, .712);
-            width: 50vw;
-            height: 100vh;
-            right: v($width); // <<<<<<<<<<<<<<< fix like this all
-        }
+        background-color: rgba(0, 0, 0, .712);
+        width: 100%;
+        height: 100vh;
+        right: 100%;
     }
     .hero-shadow-right {
-        $width: 312;
-
         position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: v($width);
-        background: linear-gradient(270deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
-
-        &::before {
-            position: absolute;
-            content: ' ';
-            background-color: rgba(0, 0, 0, 0.6);
-            width: 50vw;
-            height: 100vh;
-            right: -v($width);
-        }
+        background-color: rgba(0, 0, 0, 0.6);
+        width: 100%;
+        height: 100vh;
+        right: -100%;
     }
     .hero-shadow-bottom {
-        $top: 528;
-
         position: absolute;
-        left: 0;
-        right: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        width: 100%;
+        height: calc((100% - 870px) / 2);
         bottom: 0;
-        top: v($top);
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 1.99%, rgba(0, 0, 0, 0.6) 97.93%);
-        
-        &::before {
-            position: absolute;
-            content: ' ';
-            background-color: rgba(0, 0, 0, 0.6);
-            width: 100vw;
-            height: 50vh;
-            bottom: -100%;
-        }
     }
 
     .hero-slide-video {
@@ -150,6 +136,8 @@
 
             position: absolute;
             height: 100%;
+            width: 100%;
+            object-fit: cover;
             top: 50%;
             transform: translateY(-50%);
         }
@@ -171,19 +159,11 @@
 
         .hero-slide {
             display: none;
-
             position: absolute;
             top: 0;
             left: 0;
             bottom: 0;
             right: 0;
-
-            &--visible {
-                display: block;
-                
-                animation: hero-slide-appear 1s;
-                animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95);
-            }
 
             &__head-wrapper {
                 display: inline-block;
@@ -200,6 +180,11 @@
                 color: white;
                 font-size: v(54);
                 line-height: v(64);
+
+                white-space: nowrap;
+                
+                overflow: hidden;
+                max-width: 70vw;
             }
 
             // &__head-outline {
@@ -263,6 +248,11 @@
                 width: 100%;
                 padding-left: v(72);
 
+                transform: translateY(0%);
+
+                transition-property: transform;
+                transition-duration: 0.5s;
+
                 .mouse-help-icon {
                     position: absolute;
                     left: 50%;
@@ -271,7 +261,7 @@
                 }
             }
 
-            &__item {
+            .hero-slide-item {
                 position: relative;
                 width: 33%;
                 display: inline-block;
@@ -284,12 +274,64 @@
 
                 p {
                     margin: 0;
-                    margin-top: v(6);
                     margin-left: v(16);
                     float: left;
+                    height: v(56);
+
                     color: white;
                     font-size: v(16);
                     line-height: v(24);
+
+                    display : flex;
+                    align-items : center;
+                }
+
+                &__number {
+                    color: $accentLight60;
+                    font-weight: 500;
+                    font-size: v(92);
+                    line-height: v(64);
+                }
+            }
+
+            &--visible {
+                display: block;
+
+                .hero-slide__head {
+                    animation: hero-slide-head-appearing 1.5s forwards;
+                }
+                .hero-slide__cta {
+                    animation: hero-slide-element-appearing 1.5s forwards;
+                }
+                .hero-slide__text {
+                    animation: hero-slide-element-appearing 1.5s forwards;
+                }
+                .hero-slide__items {
+                    animation: hero-slide-element-appearing 1.5s forwards;
+                }
+            }
+
+            &--disappearing {
+                .hero-slide__head {
+                    animation: hero-slide-head-disappearing 0.5s forwards;
+                }
+
+                .hero-slide__cta {
+                    animation: hero-slide-element-disappearing 0.5s forwards;
+                }
+                .hero-slide__text {
+                    animation: hero-slide-element-disappearing 0.5s forwards;
+                }
+
+                .hero-slide__items {
+                    transform: translateY(-40%);
+                    animation: hero-slide-element-disappearing 0.5s forwards;
+                }
+
+                &.--up {
+                    .hero-slide__items {
+                        transform: translateY(40%);
+                    }
                 }
             }
         }

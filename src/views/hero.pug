@@ -10,12 +10,13 @@ mixin hero-slide(key, head, text, ctaText, ctaLink, isFirst=false)
             block
 
 mixin hero-slide-item(icons, text, number_)
-    li.hero-slide__item
+    li.hero-slide-item
         each iconSrc in icons
             img(src=iconSrc)
         if number_ !== undefined
-            span.hero-slide-item__number= number_
-        p!= text
+            span.hero-slide-item__number(data-number=number_)
+        p
+            span!= text
 
 mixin hero-video(key, videoSrc, isFirst=false)
     div(id=(key + "-video") class=("hero-slide-video " + (isFirst ? "hero-slide-video--visible" : "")) data-src=(videoSrc))
@@ -34,10 +35,11 @@ section.hero.full#hero
     +hero-video("moderntech", "./assets/moderntech.mp4")
     +hero-video("expteam", "./assets/expteam.mp4")
     .section-content
-        //- .hero-shadow-up
-        //- .hero-shadow-left
-        //- .hero-shadow-right
-        //- .hero-shadow-bottom
+        img.hero-video-backdrop(src="./assets/hero-video-backdrop.svg")
+        .hero-shadow-up
+        .hero-shadow-left
+        .hero-shadow-right
+        .hero-shadow-bottom
         header.top-bar
             img.top-bar__logo(src="./assets/logo.svg")
             +request-estimate-btn

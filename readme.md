@@ -5,6 +5,11 @@ Build for production (with metrics etc):
 BUILD=prod npm run build
 ```
 
+Fast dev (without norems fixes eg):
+```
+BUILD=fast-dev npm start
+```
+
 `master` branch deploy to dev stage  
 `prod` branch deploy to prod stage
 
