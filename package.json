@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/index.pug --out-dir public",
-    "build": "parcel build src/index.pug --out-dir public --public-url . --no-minify --no-content-hash",
+    "start-main": "parcel src/views/main/index.pug --out-dir public",
+    "start": "parcel src/views/main/index.pug src/views/otherTestPage/index.pug --out-dir public",
+    "build-main": "parcel build src/index.pug --out-dir public --public-url . --no-minify --no-content-hash",
     "twill-build": "rm -f public/hot && npm run twill-copy-blocks && cd vendor/area17/twill && npm ci && npm run prod && cp -R public/* ${INIT_CWD}/public",
     "twill-copy-blocks": "npm run twill-clean-blocks && mkdir -p resources/assets/js/blocks/ && cp -R resources/assets/js/blocks/ vendor/area17/twill/frontend/js/components/blocks/customs/",
     "twill-clean-blocks": "rm -rf vendor/area17/twill/frontend/js/components/blocks/customs"

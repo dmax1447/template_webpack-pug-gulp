@@ -1,8 +1,8 @@
 @import "./core/rem.scss";
 @import "./core/anim/animate.scss";
 
-@import "./views/_parts.scss";
-@import "./views/hero.scss";
+@import "./views/parts.scss";
+@import "./views/main/index.scss";
 
 body {
     margin: 0;

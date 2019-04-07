@@ -1,8 +1,8 @@
 import {
     $, $all, disableScroll, enableScroll, smoothScrollTo, sleep, getScroll,
-} from '../core/utils';
+} from '../../core/utils';
 
-import { NumSVGs } from '../assets/nums';
+import { NumSVGs } from '../../assets/nums';
 
 const slides: {
     [slideKey: string]: {

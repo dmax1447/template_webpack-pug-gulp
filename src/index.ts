@@ -6,7 +6,7 @@ import {
 import { initAnimations, runAnimation, pickAnimParams, isAnimPlaying, isAnimStopped } from './core/anim';
 import { initCarousels } from './core/owl-carousel';
 import { remFix } from './core/rem-fix';
-import { initHero } from './views/hero';
+import { initHero } from './views/main/hero';
 
 remFix();
 initAnimations();
