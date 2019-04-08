@@ -1,8 +1,9 @@
+@import "./constants.scss";
+
 @import "./core/rem.scss";
 @import "./core/anim/animate.scss";
 
-@import "./views/parts.scss";
-@import "./views/main/index.scss";
+@import "./parts.scss";
 
 body {
     margin: 0;
