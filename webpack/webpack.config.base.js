@@ -1,5 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 const { getEntries, rootDir } = require('./utils.js');
 
 const entries = getEntries(rootDir('./src/pages/'), 'index', 'ts');
@@ -136,7 +138,11 @@ module.exports = function (isDev = 'dev') {
                 },
             },
         },
-        plugins: [],
+        plugins: [
+            new CopyWebpackPlugin([
+                { from: 'static' }
+            ])
+        ],
     };
 
     for (const pathname in pages) {
