@@ -27,6 +27,6 @@ module.exports = webpackMerge(webpackConfigBase('prod'), {
             filename: 'css/[name].[hash:8].css',
             chunkFilename: 'css/[id].[hash:8].css',
         }),
-        new CleanWebpackPlugin(['dist'], { root: rootDir('./') }),
+        new CleanWebpackPlugin(),
     ],
 });

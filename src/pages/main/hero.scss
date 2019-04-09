@@ -62,36 +62,6 @@
         width: 100%;
     }
 
-    .top-bar {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: v(96);
-        background: none;
-        z-index: 2;
-
-        &__logo {
-            position: absolute;
-            left: v(48);
-            top: v(16);
-            width: v(72);
-            height: v(64);
-        }
-
-        &__menu {
-            float: right;
-            margin-top: v(24);
-            margin-right: v(16);
-        }
-    }
-
-    .request-estimate-btn {
-        float: right;
-        margin-top: v(20);
-        margin-right: v(32);
-    }
-
     .hero-backdrop {
         position: absolute;
         left: 0;
@@ -105,14 +75,16 @@
         position: absolute;
         background-color: rgba(0, 0, 0, 0.61);
         width: 100%;
-        height: 100vh;
+        top: 0;
+        bottom: 0;
         right: 100%;
     }
     .hero-shadow-right {
         position: absolute;
         background-color: rgba(0, 0, 0, 0.61);
         width: 100%;
-        height: 100vh;
+        top: 0;
+        bottom: 0;
         right: -100%;
     }
 

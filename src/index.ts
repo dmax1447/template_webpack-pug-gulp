@@ -12,8 +12,10 @@ import { initCarousels } from './core/owl-carousel';
 import { remFix } from './core/rem-fix';
 // import { initHero } from './views/main/hero';
 
-remFix();
-initAnimations();
+setTimeout(() => {
+    remFix();
+    initAnimations();
+}, 1000);
 
 window.onload = () => {
     // init smoothscroll

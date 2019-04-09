@@ -2,7 +2,7 @@
 /public
 /.cache
 /.idea
-
+/dist
 
 !public/assets
 !public/.gitkeep

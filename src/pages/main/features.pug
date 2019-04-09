@@ -1,0 +1,73 @@
+-
+    weHelpItems = [
+        'autoscaners',
+        'Dalena-logo',
+        'format',
+        'g10',
+        'hakamada',
+        'iCartool',
+        'launch',
+        'lawinrussia',
+        'Orangemodels',
+        'squadrille',
+        'tex.su',
+        'voenka',
+    ];
+
+section.features#features
+    .section-content
+        header.top-bar
+            img.top-bar__logo(src="/assets/logo.svg")
+            +request-estimate-btn
+            div.top-bar__menu.top-bar__menu--closed
+                +nav-menu
+        +side-header("помогаем")
+        .features__we-help-items
+            for item in weHelpItems
+                img.features__we-help-item(src=("/assets/main-features/" + item + ".svg"))
+        +side-header("предлагаем")
+        .features__we-offer-items
+            .features__we-offer-item
+                img(src=("/assets/rocket-sticker.svg"))
+                h2 Стартапам
+                ul
+                    li
+                        i(class="fal fa-seedling")
+                        span Превратим вашу идею в прототип, MVP и коммерческую версию
+                    li
+                        i(class="fal fa-mobile")
+                        span Cоздадим любое веб- и мобильное приложение для ваших целей
+                    li
+                        i(class="fal fa-comments-alt")
+                        span Разъясним и подскажем на каждом этапе создания вашего продукта
+            .features__we-offer-item
+                img(src=("/assets/share-sticker.svg"))
+                h2 Агентствам
+                ul
+                    li
+                        i(class="fal fa-seedling")
+                        span Мы — продуктовые ребята.  Нам понятен язык бизнеса и метрик
+                    li
+                        i(class="fal fa-mobile")
+                        span Лучше всего проектируем и кодим сложные дэшборды и админки
+                    li
+                        i(class="fal fa-comments-alt")
+                        span Нам можно отдать часть работ, например только фронт или только бэк
+            .features__we-offer-item
+                img(src=("/assets/brain-sticker.svg"))
+                h2 Корпорациям
+                ul
+                    li
+                        i(class="fal fa-seedling")
+                        span Поручите нам новый продукт или переход с legacy на современный стек
+                    li
+                        i(class="fal fa-mobile")
+                        span Усильте нами существующую команду, когда нет времени на долгий найм
+                    li
+                        i(class="fal fa-comments-alt")
+                        span Мы поддержим проекты, которые не займут вашу штатную единицу на 100%
+        p.features__we-offer-text.
+            Команд, способных собрать лендинг или сайт на конструкторе — сотни.<br>
+            Сделать сложный технологичный продукт понятным и ярким — единицы.<br>
+            <br>
+            Мы — можем!

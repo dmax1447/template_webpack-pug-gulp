@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { getEntries, rootDir } = require('./utils.js');
 
 const entries = getEntries(rootDir('./src/pages/'), 'index', 'ts');
