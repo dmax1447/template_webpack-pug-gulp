@@ -17,18 +17,18 @@
 section.features#features
     .section-content
         header.top-bar
-            img.top-bar__logo(src="/assets/logo.svg")
+            img.top-bar__logo(src="assets/logo.svg")
             +request-estimate-btn
             div.top-bar__menu.top-bar__menu--closed
                 +nav-menu
         +side-header("помогаем")
         .features__we-help-items
             for item in weHelpItems
-                img.features__we-help-item(src=("/assets/main-features/" + item + ".svg"))
+                img.features__we-help-item(src=("assets/main-features/" + item + ".svg"))
         +side-header("предлагаем")
         .features__we-offer-items
             .features__we-offer-item
-                img(src=("/assets/rocket-sticker.svg"))
+                img(src=("assets/rocket-sticker.svg"))
                 h2 Стартапам
                 ul
                     li
@@ -41,7 +41,7 @@ section.features#features
                         i(class="fal fa-comments-alt")
                         span Разъясним и подскажем на каждом этапе создания вашего продукта
             .features__we-offer-item
-                img(src=("/assets/share-sticker.svg"))
+                img(src=("assets/share-sticker.svg"))
                 h2 Агентствам
                 ul
                     li
@@ -54,7 +54,7 @@ section.features#features
                         i(class="fal fa-comments-alt")
                         span Нам можно отдать часть работ, например только фронт или только бэк
             .features__we-offer-item
-                img(src=("/assets/brain-sticker.svg"))
+                img(src=("assets/brain-sticker.svg"))
                 h2 Корпорациям
                 ul
                     li

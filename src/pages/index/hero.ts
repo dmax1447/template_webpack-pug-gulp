@@ -198,7 +198,7 @@ export function initHero() {
             const ni = parseInt(numberStr[i], 10);
             if (ni !== NaN) {
                 const numberImg = document.createElement('img');
-                numberImg.src = `/assets/Num${ni}.svg`;
+                numberImg.src = `assets/Num${ni}.svg`;
                 numEl.appendChild(numberImg);
             }
         }

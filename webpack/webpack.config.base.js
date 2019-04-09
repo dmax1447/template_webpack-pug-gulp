@@ -17,7 +17,7 @@ module.exports = function (isDev = 'dev') {
             {
                 loader: 'html-loader',
                 options: {
-                    attrs: ['img:src', 'link:href'] // false
+                    attrs: false, // ['img:src', 'link:href', 'source:src'] // false
                 }
             },
             'pug-html-loader',
@@ -28,7 +28,13 @@ module.exports = function (isDev = 'dev') {
         test: /\.(sa|sc|c)ss$/,
         use: [
             isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-            'css-loader',
+            {
+                loader: 'css-loader',
+                options: {
+                    url: false,
+                    importLoaders: 1,
+                }
+            },
             'postcss-loader',
             'sass-loader',
         ],
@@ -47,11 +53,11 @@ module.exports = function (isDev = 'dev') {
             path: rootDir('./public'),
             filename: 'js/[name].[hash:8].js',
             chunkFilename: 'js/[name].chunk.[chunkhash:8].js',
-            publicPath: '/',
+            publicPath: '',
         },
         resolve: {
             alias: {
-                src: rootDir('./src'),
+                src: rootDir('./src')
             },
             extensions: ['.ts', '.js']
         },

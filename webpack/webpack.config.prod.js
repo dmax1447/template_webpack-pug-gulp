@@ -4,6 +4,7 @@ const webpackConfigBase = require('./webpack.config.base.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+
 const { rootDir } = require('./utils.js');
 
 module.exports = webpackMerge(webpackConfigBase('prod'), {
@@ -12,7 +13,15 @@ module.exports = webpackMerge(webpackConfigBase('prod'), {
             {
                 test: /\.css$/,
                 use: [
-                    MiniCssExtractPlugin.loader, { loader: 'css-loader', options: { importLoaders: 1 } }, 'postcss-loader',
+                    MiniCssExtractPlugin.loader, {
+                        loader: 'css-loader',
+                        options: {
+                            url: false,
+                            importLoaders: 1,
+                            context: 'govno/',
+                        }
+                    },
+                    'postcss-loader',
                 ],
             },
         ],
