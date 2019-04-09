@@ -4,16 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-main": "parcel src/views/main/index.pug --out-dir public",
-    "start": "parcel src/views/main/index.pug src/views/otherTestPage/index.pug --out-dir public",
-    "build-main": "parcel build src/index.pug --out-dir public --public-url . --no-minify --no-content-hash",
     "twill-build": "rm -f public/hot && npm run twill-copy-blocks && cd vendor/area17/twill && npm ci && npm run prod && cp -R public/* ${INIT_CWD}/public",
     "twill-copy-blocks": "npm run twill-clean-blocks && mkdir -p resources/assets/js/blocks/ && cp -R resources/assets/js/blocks/ vendor/area17/twill/frontend/js/components/blocks/customs/",
     "twill-clean-blocks": "rm -rf vendor/area17/twill/frontend/js/components/blocks/customs",
-    "dev": "webpack-dev-server --mode=development --open",
-    "prod": "webpack --mode production",
-    "build1": "webpack --config ./webpack/webpack.config.prod.js --mode production",
-    "start1": "webpack-dev-server --open --config ./webpack/webpack.config.dev.js --mode development"
+    "build": "webpack --config ./webpack/webpack.config.prod.js --mode production",
+    "dev": "webpack-dev-server --open --config ./webpack/webpack.config.dev.js --mode development"
   },
   "author": "morglod",
   "license": "ISC",

@@ -42,7 +42,7 @@ module.exports = function (isDev = 'dev') {
         entry: Object.assign(entries, { app: rootDir('./src/index.ts') }),
         output: {
             pathinfo: false,
-            path: rootDir('./dist'),
+            path: rootDir('./public'),
             filename: 'js/[name].[hash:8].js',
             chunkFilename: 'js/[name].chunk.[chunkhash:8].js',
             publicPath: '/',
