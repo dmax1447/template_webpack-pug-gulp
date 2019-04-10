@@ -9,6 +9,10 @@ return [
         'title' => 'Страницы',
         'module' => true
     ],
+    'feedback' => [
+        'title' => 'Фидбэк',
+        'module' => true
+    ],
     'settings' => [
         'title' => 'Настройки',
         'route' => 'admin.settings',

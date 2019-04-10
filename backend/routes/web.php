@@ -15,3 +15,9 @@ Route::get('/build', function () {
     Artisan::call('bereza:build');
     return view('welcome');
 });
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+Route::post('/contact', 'FeedbackController@index');

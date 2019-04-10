@@ -46,7 +46,7 @@ class BuildSite extends Command
             $blocks[$locale] = $this->buildBlocks($locale);
             \Storage::disk('local')->put('build/blocks.' . $locale . '.json', json_encode($blocks[$locale], JSON_UNESCAPED_UNICODE));
         }
-        dump($blocks);
+        //dump($blocks);
     }
 
     protected function buildSlides($locale) {

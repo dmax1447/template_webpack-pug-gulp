@@ -226,4 +226,9 @@ return [
 
     ],
 
+    'contact' => [
+        'subject' => 'Заполнена форма связи',
+        'to' => 'igor.sazhnev@gmail.com',
+        'success' => 'Спасибо, мы уже звоним Вам!'
+    ]
 ];
