@@ -16,10 +16,4 @@ class Feedback extends Model
     protected $casts = [
         'content' => 'array'
     ];
-
-    public static function bootSoftDeletes()
-    {
-        //static::addGlobalScope(new SoftDeletingScope);
-    }
-
 }

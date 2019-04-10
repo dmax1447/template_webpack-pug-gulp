@@ -14,4 +14,8 @@ class FeedbackRepository extends ModuleRepository
     {
         $this->model = $model;
     }
+
+    public function getCountForTrash() {
+        return 0;
+    }
 }
