@@ -34,11 +34,11 @@ const DEFAULT_IRATE = 0.5;
 
 export function pickAnimParams(el: HTMLElement): AnimParams {
     return {
-        name: el.getAttribute('--anim'),
-        speed: el.getAttribute('--anim-speed'),
-        delay: el.getAttribute('--anim-delay'),
-        timingFunction: el.getAttribute('--anim-timing-function'),
-        irate: parseFloat(el.getAttribute('--anim-irate')) || DEFAULT_IRATE,
+        name: el.getAttribute('--anim')!,
+        speed: el.getAttribute('--anim-speed')!,
+        delay: el.getAttribute('--anim-delay')!,
+        timingFunction: el.getAttribute('--anim-timing-function')!,
+        irate: parseFloat(el.getAttribute('--anim-irate') || '0') || DEFAULT_IRATE,
     };
 }
 
@@ -54,7 +54,7 @@ export function cleanupAnimation(el: HTMLElement) {
     el.classList.toggle('anim--is-waiting', false);
     el.classList.toggle('anim--is-playing', false);
     el.classList.toggle('anim--is-stopped', false);
-    el.style.animation = undefined;
+    el.style.animation = '';
 
     if (isAnimatedElement(el)) delete el["--anim"];
 }
@@ -63,11 +63,11 @@ export function setAnimationStyle(el: HTMLElement, animParams: AnimParams, playS
     if (playState === 'running') {
         setTimeout(() => {
             el.style.animation = `anim-${animParams.name} ${animParams.speed} ${playState}`;
-            el.style.animationTimingFunction = animParams.timingFunction;
-        }, parseFloat(animParams.delay) * 1000);
+            el.style.animationTimingFunction = animParams.timingFunction!;
+        }, parseFloat(animParams.delay || '0') * 1000);
     } else {
         el.style.animation = `anim-${animParams.name} ${animParams.speed} ${playState}`;
-        el.style.animationTimingFunction = animParams.timingFunction;
+        el.style.animationTimingFunction = animParams.timingFunction!;
     }
 }
 
@@ -89,7 +89,7 @@ export function afterAnimation(el: AnimatedElement) {
     el.classList.toggle('anim--is-stopped', true);
     el.classList.toggle('anim--is-playing', false);
     el.classList.toggle('anim', false);
-    el.style.animation = undefined;
+    el.style.animation = '';
     el['--anim'].timeout = undefined;
 }
 
@@ -143,7 +143,7 @@ export function updateAnimations(els: HTMLElement[]) {
 
         if (isElementInViewport(el)) {
             prepareAnimation(el, animParams);
-            if (animParams.irate && animParams.irate > intersectionRate(el["--anim"].initialRect, wndRect)) {
+            if (animParams.irate && animParams.irate > intersectionRate((el as any)["--anim"].initialRect, wndRect)) {
                 continue;
             }
             runAnimation(el, animParams);

@@ -31,33 +31,33 @@ mixin hero-video-progress(key, text, isFirst=false)
             .hero-video-progress__bar-fill
 
 section.hero.full#hero
-    +hero-video("rapiddev", "./assets/rapiddev.mp4", "first video")
-    +hero-video("moderntech", "./assets/moderntech.mp4")
-    +hero-video("expteam", "./assets/expteam.mp4")
+    +hero-video("rapiddev", "assets/rapiddev.mp4", "first video")
+    +hero-video("moderntech", "assets/moderntech.mp4")
+    +hero-video("expteam", "assets/expteam.mp4")
     .section-content
-        //- img.hero-video-backdrop(src="./assets/hero-video-backdrop.svg")
+        //- img.hero-video-backdrop(src=".assets/hero-video-backdrop.svg")
         .hero-backdrop
         //- .hero-shadow-up
         .hero-shadow-left
         .hero-shadow-right
         //- .hero-shadow-bottom
         header.top-bar
-            img.top-bar__logo(src="./assets/logo.svg")
-            +request-estimate-btn
+            img.top-bar__logo(src="assets/logo-white.svg")
+            +request-estimate-btn('dark')
             div.top-bar__menu.top-bar__menu--closed
-                +nav-menu
+                +nav-menu('dark')
             //- i.far.fa-bars.top-bar__mobile-menu(role="button")
             //- i.fal.fa-times.top-bar__mobile-menu-close(role="button")
         .hero-slide-wrapper
             +hero-slide("rapiddev", "Rapid<br>web and mobile<br>development", "Estimate in few hours<br>Prototype in few weeks<br>MVP in few months", "See cases", "#cases", "first")
-                +hero-slide-item([ "./assets/hero-design-icon.svg" ], "User research & System analysis<br>UI/UX Prototyping & Design")
-                +hero-slide-item([ "./assets/hero-dev-icon.svg" ], "Cross-platform Front-end,<br>API & Back-end development")
-                +hero-slide-item([ "./assets/hero-ecom-icon.svg" ], "E-commerce & Online-media<br>development & support")
+                +hero-slide-item([ "assets/hero-design-icon.svg" ], "User research & System analysis<br>UI/UX Prototyping & Design")
+                +hero-slide-item([ "assets/hero-dev-icon.svg" ], "Cross-platform Front-end,<br>API & Back-end development")
+                +hero-slide-item([ "assets/hero-ecom-icon.svg" ], "E-commerce & Online-media<br>development & support")
                 +mouse-help-icon
             +hero-slide("moderntech", "Proven, modern<br>technology stack<br>and approach", "JavaScript-powered Development<br>Continuos Integration and Continuos Delivery<br>Agile approach", "Discover our Tech & Process", "#tech")
-                +hero-slide-item([ "./assets/hero-bullfinch-icon.svg", "./assets/hero-figma-icon.svg" ], "Our own Design Language<br>with CI to Front-end")
-                +hero-slide-item([ "./assets/hero-react-icon.svg", "./assets/hero-vue-icon.svg", "./assets/hero-nodejs-icon.svg" ], "Full JavaScript Stack for<br>New Products")
-                +hero-slide-item([ "./assets/hero-laravel-icon.svg", "./assets/hero-bitrix-icon.svg" ], "PHP-driven systems support<br>and development")
+                +hero-slide-item([ "assets/hero-bullfinch-icon.svg", "assets/hero-figma-icon.svg" ], "Our own Design Language<br>with CI to Front-end")
+                +hero-slide-item([ "assets/hero-react-icon.svg", "assets/hero-vue-icon.svg", "assets/hero-nodejs-icon.svg" ], "Full JavaScript Stack for<br>New Products")
+                +hero-slide-item([ "assets/hero-laravel-icon.svg", "assets/hero-bitrix-icon.svg" ], "PHP-driven systems support<br>and development")
             +hero-slide("expteam", "Experienced,<br>versatile and<br>dedicated team", "UI/UX Designers<br>Front-end and Back-end Developers<br>QA and DevOps", "Meet the Team", "#team")
                 +hero-slide-item([], "Developers in the Team", 8)
                 +hero-slide-item([], "Languages spoken", 5)

@@ -1,8 +1,6 @@
 import {
     $, $all, disableScroll, enableScroll, smoothScrollTo, sleep, getScroll,
-} from '../core/utils';
-
-import { NumSVGs } from '../assets/nums';
+} from '../../core/utils';
 
 const slides: {
     [slideKey: string]: {
@@ -43,7 +41,7 @@ function resetProgress(currentActiveKey: string) {
     } = slides[currentActiveKey];
 
     window.clearInterval(videoProgressBarUpdater);
-    const video = videoGroupEl.querySelector('video');
+    const video = videoGroupEl.querySelector('video')!;
     const barFill = progressBarEl.querySelector('.hero-video-progress__bar-fill') as HTMLDivElement;
     progressBarEl.classList.toggle('hero-video-progress--active', true);
     video.currentTime = 0;
@@ -59,12 +57,12 @@ function preloadSlideVideo(slideKey: string) {
     } = slides[slideKey];
 
     const src = videoGroupEl.getAttribute('data-src');
-    const videoEl = videoGroupEl.querySelector('video');
+    const videoEl = videoGroupEl.querySelector('video')!;
     const videoSourceEl = videoGroupEl.querySelector('source');
 
     if (!videoSourceEl) {
-        const sourceEl = document.createElement('source');
-        sourceEl.src = src;
+        const sourceEl = document.createElement('source')!;
+        sourceEl.src = src!;
         sourceEl.type = 'video/mp4';
         videoEl.appendChild(sourceEl);
     }
@@ -78,7 +76,7 @@ function preloadSlideVideo(slideKey: string) {
     } catch {}
 }
 
-async function animateSlideDisappearing(slideKey, fadeDirection: 'up'|'down' = 'down') {
+async function animateSlideDisappearing(slideKey: string, fadeDirection: 'up'|'down' = 'down') {
     const {
         slideEl,
     } = slides[slideKey];
@@ -119,7 +117,7 @@ async function changeSlide(slideKey: string, noTimeout: boolean|'no timeout' = f
         videoGroupEl.classList.toggle('hero-slide-video--visible', false);
         slideEl.classList.toggle('hero-slide--visible', false);
 
-        videoGroupEl.querySelector('video').pause();
+        videoGroupEl.querySelector('video')!.pause();
     }
 
     const {
@@ -174,7 +172,7 @@ export function initHero() {
         if (!slides[key]) slides[key] = {} as any;
         slides[key]["videoGroupEl"] = slideVideoEl;
 
-        const video = slideVideoEl.querySelector('video');
+        const video = slideVideoEl.querySelector('video')!;
         video.onended = () => {
             nextSlide();
         };
@@ -200,7 +198,7 @@ export function initHero() {
             const ni = parseInt(numberStr[i], 10);
             if (ni !== NaN) {
                 const numberImg = document.createElement('img');
-                numberImg.src = NumSVGs[ni];
+                numberImg.src = `assets/Num${ni}.svg`;
                 numEl.appendChild(numberImg);
             }
         }
