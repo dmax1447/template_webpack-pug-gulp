@@ -176,4 +176,14 @@ window.addEventListener('load', () => {
     }
 
     initHero();
+
+    // fix safari wheel animation
+
+    $q('.mouse-help-icon__wheel').style.animation = 'none';
+    $q('.mouse-help-icon__wheel').style.webkitAnimation = 'none';
+
+    setTimeout(() => {
+        $q('.mouse-help-icon__wheel').style.animation = '';
+        $q('.mouse-help-icon__wheel').style.webkitAnimation = '';
+    }, 100);
 });
