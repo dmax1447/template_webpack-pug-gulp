@@ -228,7 +228,7 @@ return [
 
     'contact' => [
         'subject' => 'Заполнена форма связи',
-        'to' => 'igor.sazhnev@gmail.com',
+        'to' => env('MAIL_TO_ADDRESS', 'is@berezadev.com'),
         'success' => 'Спасибо, мы уже звоним Вам!'
     ]
 ];
