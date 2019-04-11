@@ -19,22 +19,22 @@ mixin request-estimate-btn(dark=false)
 mixin mouse-help-icon
     .mouse-help-icon
         .mouse-help-icon__wheel
-        .mouse-help-icon__label Скрольте вниз
+        //- .mouse-help-icon__label Скрольте вниз
 
 mixin side-header(text, id, darkBackground=false)
     h3(id=id, class=("side-header " + (darkBackground ? 'side-header--dark-bg' : '')))!= text
 
-mixin input-w-top-label(type, label, placeholder, name, pattern, required)
+mixin input-w-top-label(type, label, placeholder, name, ...restAttrs)
     .input-w-top-label
-        input(type=type, placeholder=placeholder, pattern=pattern, name=name, required=required)
+        input(type=type, placeholder=placeholder, name=name)&attributes(restAttrs)
         .input-w-top-label__lg
             .input-w-top-label__lg-left
             label= label
             .input-w-top-label__lg-right
 
-mixin textarea-w-top-label(type, label, placeholder, name, pattern, required)
+mixin textarea-w-top-label(type, label, placeholder, name, ...restAttrs)
     .textarea-w-top-label
-        textarea(type=type, placeholder=placeholder, pattern=pattern, name=name, required=required)
+        textarea(type=type, placeholder=placeholder, name=name)&attributes(restAttrs)
         .textarea-w-top-label__lg
             .textarea-w-top-label__lg-left
             label= label
@@ -43,14 +43,14 @@ mixin textarea-w-top-label(type, label, placeholder, name, pattern, required)
 mixin _feedback-form(dark=false, centered=false, headerText="Свяжитесь с нами")
     form(class=("feedback-form " + (dark ? 'feedback-form--dark ' : '') + (centered === true ? 'feedback-form--centered ' : '')), action="/contact", method="post")
         h4= headerText
-        +input-w-top-label("text", "Ваше имя", "", "name", "", "required")
-        +input-w-top-label("email", "e-mail", "yourmail@company.com", "email", "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$", "required")
-        +input-w-top-label("tel", "телефон", "+9 (999) 999-99-99", "phone", "", "required")
-        +textarea-w-top-label("text", "что-то, что нам нужно знать заранее", "Информация о проекте", "message", "", "required")
+        +input-w-top-label("text", "Ваше имя", "", "name", required)
+        +input-w-top-label("email", "e-mail", "yourmail@company.com", "email", pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$", required)
+        +input-w-top-label("tel", "телефон", "+9 (999) 999-99-99", "phone", required)
+        +textarea-w-top-label("text", "что-то, что нам нужно знать заранее", "Информация о проекте", "message", required)
         input(type="submit", value="Отправить")
-        p.
-            Отправляя форму, вы разрешаете обработку персональных данных<br>
-            и соглашаетесь c <a href="/politic-confident.pdf">политикой конфиденциальности</a>.
+        p
+            //- Отправляя форму, вы разрешаете обработку персональных данных<br>
+            //- и соглашаетесь c <a href="/politic-confident.pdf">политикой конфиденциальности</a>.
 
 mixin feedback-form(dark=false, section=false, centered=false, headerText="Свяжитесь с нами")
     if section
@@ -67,4 +67,7 @@ mixin footer
         .section-content
             p © 2019. ООО «Береза-Развитие».
             a(href="mailto:job@berezadev.com?subject=Стажировка") Стажировка
-            a(href="/politic-confident.pdf") Политика конфиденциальности
+            //- a(href="/politic-confident.pdf") Политика конфиденциальности
+
+mixin menu-placeholder(id)
+    .menu-placeholder(id=id)

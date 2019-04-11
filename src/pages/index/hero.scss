@@ -124,6 +124,13 @@
         bottom: 0;
         right: 0;
 
+        .mouse-help-icon {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            bottom: v(20);
+        }
+
         .hero-slide {
             display: none;
             position: absolute;
@@ -219,13 +226,6 @@
 
                 transition-property: transform;
                 transition-duration: 0.5s;
-
-                .mouse-help-icon {
-                    position: absolute;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    top: v(110);
-                }
             }
 
             .hero-slide-item {
@@ -233,10 +233,42 @@
                 width: 33%;
                 display: inline-block;
 
-                img {
+                &__icon {
                     float: left;
                     width: v(56);
                     height: v(56);
+                }
+
+                &__photo {
+                    position: relative;
+                    display: inline-block;
+                    width: v(32);
+                    height: v(40);
+                    float: left;
+
+                    & > img {
+                        position: absolute;
+                        width: v(40);
+                        height: v(40);
+                        border-radius: 50%;
+                        z-index: 2;
+                    }
+
+                    &-backdrop {
+                        position: absolute;
+                        display: block;
+                        top: v(-8);
+                        left: v(-8);
+                        bottom: v(-8);
+                        right: v(-16);
+                        background-color: white;
+                        z-index: 1;
+                        border-radius: 50%;
+                    }
+
+                    &:last-of-type {
+                        margin-right: v(16);
+                    }
                 }
 
                 p {
@@ -248,17 +280,33 @@
                     color: white;
                     font-size: v(16);
                     line-height: v(24);
+                    // line-height: v(64);
 
                     display : flex;
                     align-items : center;
                 }
 
                 &__number {
+                    float: left;
                     color: $accentLight60;
                     font-weight: 500;
                     font-size: v(92);
-                    line-height: v(64);
+                    line-height: 0;
                 }
+            }
+
+            // TODO: fix this shit, wrong line-height
+            
+            .hero-slide-item__photo + .hero-slide-item__number {
+                margin-left: v(8);
+
+                & > img {
+                    height: v(52);
+                    transform: unquote("translateY("+ v(-7) +")");
+                }
+            }
+            .hero-slide-item__photo ~ p {
+                transform: unquote("translateY("+ v(-8) +")");
             }
 
             &--visible {
@@ -318,7 +366,7 @@
                 margin: 0;
                 font-size: v(12);
                 line-height: v(24);
-                color: #CCCCCC;
+                color: #9e9e9e; // #CCCCCC;
                 font-family: 'Source Sans Pro';
                 margin-right: 8px;
                 text-align: right;

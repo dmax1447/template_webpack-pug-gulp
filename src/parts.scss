@@ -567,7 +567,7 @@ p.p-small {
 .feedback {
     &--dark {
         position: relative;
-        background-image: url("assets/feedback-bg.jpg");
+        background-image: url("../assets/feedback-bg.jpg");
         background-size: cover;
 
         &::before {
@@ -684,4 +684,8 @@ p.p-small {
         line-height: v(48);
         font-family: 'Source Sans Pro';
     }
+}
+
+.menu-placeholder {
+    height: v(96);
 }

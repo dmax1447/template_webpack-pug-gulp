@@ -3,18 +3,20 @@ mixin hero-slide(key, head, text, ctaText, ctaLink, isFirst=false)
         .hero-slide__head-wrapper
             h1.hero-slide__head!= head
         p.hero-slide__text!= text
-        a.hero-slide__cta(href=ctaLink)
-            i.fas.fa-arrow-right
-            span!= ctaText
+        //- a.hero-slide__cta(href=ctaLink)
+        //-     i.fas.fa-arrow-right
+        //-     span!= ctaText
         ul.hero-slide__items
             block
 
 mixin hero-slide-item(icons, text, number_)
     li.hero-slide-item
+        if block
+            block
         each iconSrc in icons
-            img(src=iconSrc)
+            img.hero-slide-item__icon(src=iconSrc)
         if number_ !== undefined
-            span.hero-slide-item__number(data-number=number_)
+            .hero-slide-item__number(data-number=number_)
         p
             span!= text
 
@@ -30,10 +32,15 @@ mixin hero-video-progress(key, text, isFirst=false)
         .hero-video-progress__bar
             .hero-video-progress__bar-fill
 
+mixin hero-item-photo(src, alt)
+    .hero-slide-item__photo
+        img(src=src, alt=alt)
+        .hero-slide-item__photo-backdrop
+
 section.hero.full#hero
-    +hero-video("rapiddev", "assets/rapiddev.mp4", "first video")
-    +hero-video("moderntech", "assets/moderntech.mp4")
-    +hero-video("expteam", "assets/expteam.mp4")
+    +hero-video("rapiddev", "assets/bereza-slide-01.mp4", "first video")
+    +hero-video("moderntech", "assets/bereza-slide-02.mp4")
+    +hero-video("expteam", "assets/bereza-slide-03.mp4")
     .section-content
         //- img.hero-video-backdrop(src=".assets/hero-video-backdrop.svg")
         .hero-backdrop
@@ -50,19 +57,28 @@ section.hero.full#hero
             //- i.far.fa-bars.top-bar__mobile-menu(role="button")
             //- i.fal.fa-times.top-bar__mobile-menu-close(role="button")
         .hero-slide-wrapper
-            +hero-slide("rapiddev", "Скоростная<br>web и mobile<br>разработка", "Смета за несколько часов<br>Прототип за несколько недель<br>MVP за несколько месяцев", "Смотреть кейсы", "#cases", "first")
+            +mouse-help-icon
+            +hero-slide("rapiddev", "Скоростная<br>web и mobile<br>разработка", "Смета за несколько часов<br>Прототип за несколько дней<br>MVP за несколько недель", "Смотреть кейсы", "#cases", "first")
                 +hero-slide-item([ "assets/hero-design-icon.svg" ], "UX исследования и аналитика<br>UI/UX Прототипирование & Дизайн")
                 +hero-slide-item([ "assets/hero-dev-icon.svg" ], "Кросс-платформенная разработка<br>Front-end, Back-end и API")
                 +hero-slide-item([ "assets/hero-ecom-icon.svg" ], "Специализация в разработке<br>E-commerce & Online-media")
-                +mouse-help-icon
-            +hero-slide("moderntech", "Проверенный, современный<br>технологический стек<br>и подходы", "JavaScript, TypeScript, NodeJS<br>Continuos Integration и Continuos Delivery<br>Agile подход", "Процессы и технологии", "#tech")
+            +hero-slide("moderntech", "Проверенный,<br>современный стек<br>и процессы", "JavaScript, TypeScript, NodeJS<br>Continuos Integration и Continuos Delivery<br>Agile подход", "Процессы и технологии", "#tech")
                 +hero-slide-item([ "assets/hero-bullfinch-icon.svg", "assets/hero-figma-icon.svg" ], "Our own Design Language<br>with CI to Front-end")
                 +hero-slide-item([ "assets/hero-react-icon.svg", "assets/hero-vue-icon.svg", "assets/hero-nodejs-icon.svg" ], "Full JavaScript Stack for<br>New Products")
                 +hero-slide-item([ "assets/hero-laravel-icon.svg", "assets/hero-bitrix-icon.svg" ], "PHP-driven systems support<br>and development")
             +hero-slide("expteam", "Опытная,<br>универсальная и<br>передовая команда", "UI/UX Дизайнеры<br>Front-end и Back-end Разработчики<br>QA и DevOps", "Познакомиться с командой", "#team")
                 +hero-slide-item([], "Дизайн и менеджмент", 4)
+                    +hero-item-photo("assets/team/yd-square.jpg")
+                    +hero-item-photo("assets/team/dz-square.jpg")
+                    +hero-item-photo("assets/team/ab-square.jpg")
+                    +hero-item-photo("assets/team/me-square.jpg")
                 +hero-slide-item([], "Front-end & Mobile", 3)
+                    +hero-item-photo("assets/team/vk.jpg")
+                    +hero-item-photo("assets/team/nd.jpg")
+                    +hero-item-photo("assets/team/dg.jpg")
                 +hero-slide-item([], "Back-end & DevOps", 2)
+                    +hero-item-photo("assets/team/is-square.jpg")
+                    +hero-item-photo("assets/team/vs-square.jpg")
         .hero-video-progress-menu
             +hero-video-progress("rapiddev", "создаем", "first")
             +hero-video-progress("moderntech", "используем")

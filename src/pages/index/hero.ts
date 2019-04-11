@@ -218,12 +218,17 @@ export function initHero() {
                 leaveHeroMode();
             }
         }
-    });
+    }, 120);
 
     changeSlide(slideKeys[0]);
 
     if (window.scrollY <= ($q('section.hero').getBoundingClientRect().height / 2)) {
         enterHeroMode();
+        setTimeout(() => {
+            $q('.features .top-bar').style.display = 'block';
+        }, 100);
+    } else {
+        $q('.features .top-bar').style.display = 'block';
     }
 
     $q('section.hero a[href="#feedback"]').addEventListener('click', () => {
@@ -235,9 +240,11 @@ export function enterHeroMode() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     disableScroll();
     isHeroMode = true;
+    $q('.features .top-bar').classList.add('top-bar--hidden');
 }
 
 export function leaveHeroMode() {
     enableScroll();
     isHeroMode = false;
+    $q('.features .top-bar').classList.remove('top-bar--hidden');
 }

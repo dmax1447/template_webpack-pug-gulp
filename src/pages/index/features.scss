@@ -1,8 +1,46 @@
 .features {
     padding-top: v(96);
+
+    .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        height: v(96);
+        background: rgba(255, 255, 255, 0.80);
+        overflow: hidden;
+        opacity: 1;
+
+        transition-duration: 0.3s;
+        transition-property: opacity, height;
+
+
+        &__page-wrapper {
+            position: relative;
+            max-width: v(1224);
+            width: 100%;
+            height: v(96);
+            margin: 0 auto;
+    
+            @include mobile {
+                max-width: v(408);
+            }
+        }
+
+        .request-estimate-btn {
+            margin-top: v(30);
+        }
+
+        &--hidden {
+            opacity: 0;
+            height: 0;
+        }
+    }
 }
 
 .features__we-help-items {
+    margin-top: v(48);
     margin-left: v(48);
     margin-right: v(48);
     
@@ -88,9 +126,12 @@
             i {
                 position: absolute;
                 color: $accentLight60;
-                left: v(-25);
+                left: v(-28);
                 top: v(3);
-                // font-size: 
+                font-size: v(16);
+                width: v(20);
+                height: v(20);
+                text-align: center;
             }
             span {
 
@@ -101,7 +142,7 @@
 
 .features__we-offer-text {
     font-size: v(24);
-    line-height: v(24);
+    line-height: v(30);
     color: $primaryDark80;
     text-align: center;
     margin-bottom: v(72);
