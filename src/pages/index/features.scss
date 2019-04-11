@@ -147,3 +147,48 @@
     text-align: center;
     margin-bottom: v(72);
 }
+
+@include mobile {
+    .features {
+        padding-top: 0;
+
+        .menu-placeholder {
+            height: v(42);
+        }
+
+        &__we-help-items {
+            margin-left: v(24);
+            margin-right: v(24);
+            margin-bottom: v(18);
+        }
+
+        &__we-help-item  {
+            width: v(72);
+            height: v(72);
+            margin: v(2);
+        }
+
+        &__we-offer-items {
+            display: block;
+            margin-top: v(24);
+            margin-left: v(32);
+            margin-right: v(48);
+        }
+
+        &__we-offer-item {
+            flex: none;
+            display: block;
+            margin-right: 0;
+            width: 100%;
+
+            ul {
+                padding-left: v(48);
+            }
+        }
+
+        &__we-offer-text {
+            margin-left: v(48);
+            margin-right: v(48);
+        }
+    }
+}

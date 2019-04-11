@@ -1,7 +1,7 @@
 import './index.scss';
 import { initHero, enterHeroMode, leaveHeroMode, isHeroMode, isLastSlide } from './hero';
 import {
-    $ as $q, $all, getWindowGlobalRect, isGlobalRectInViewport, intersectionRate, smoothScrollTo, getGlobalRect,
+    $ as $q, $all, getWindowGlobalRect, isGlobalRectInViewport, intersectionRate, smoothScrollTo, getGlobalRect, isMobileScreen, getScroll,
 } from '../../core/utils';
 
 const pageScrollAnchors: { selector: string, hash: string, onEnter?: Function, onLeave?: Function }[] = [
@@ -127,35 +127,53 @@ function nextAnchor() {
 }
 
 window.addEventListener('load', () => {
-    // Reset scroll action while user stil strolling
-    let wheelTimer = 0;
+    if (!isMobileScreen()) {
+        // Reset scroll action while user stil strolling
+        let wheelTimer = 0;
+    
+        // If user scrolled a lot, just center current scene on current anchor
+        let timerRestartsCount = -1;
+        let accum = 0;
 
-    // If user scrolled a lot, just center current scene on current anchor
-    let timerRestartsCount = -1;
-    let accum = 0;
+        $('html').mousewheel((e) => {
+            if (isHeroMode && !isLastSlide()) return;
+            const direction = e.deltaY > 0 ? 'up' : 'down';
+    
+            if (direction === 'down') accum++;
+            else accum--;
+    
+            ++timerRestartsCount;
+            window.clearTimeout(wheelTimer);
+    
+            wheelTimer = window.setTimeout(function() {
+                if (Math.abs(accum) <= 3) {
+                    if (direction === 'down') nextAnchor();
+                    else prevAnchor();
+                } else {
+                    centerCurrentAnchor();
+                }
+                
+                timerRestartsCount = -1;
+                accum = 0;
+            }, 200);
+        });
+    }
 
-    $('html').mousewheel((e) => {
-        if (isHeroMode && !isLastSlide()) return;
-        const direction = e.deltaY > 0 ? 'up' : 'down';
+    if (isMobileScreen()) {
+        let { top: prevousY } = getScroll();
 
-        if (direction === 'down') accum++;
-        else accum--;
-
-        ++timerRestartsCount;
-        window.clearTimeout(wheelTimer);
-
-        wheelTimer = window.setTimeout(function() {
-            if (Math.abs(accum) <= 3) {
-                if (direction === 'down') nextAnchor();
-                else prevAnchor();
-            } else {
-                centerCurrentAnchor();
-            }
+        window.addEventListener('scroll', (evt) => {
+            if (isHeroMode) return;
             
-            timerRestartsCount = -1;
-            accum = 0;
-        }, 200);
-    });
+            const { top: newY } = getScroll();
+            const deltaY = newY - prevousY;
+            prevousY = newY;
+
+            if (deltaY < 0 && window.scrollY <= ($q('section.hero').getBoundingClientRect().height / 2)) {
+                enterHeroMode();
+            }
+        });
+    }
 
     initHero();
 });

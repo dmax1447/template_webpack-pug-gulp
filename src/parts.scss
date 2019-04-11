@@ -461,6 +461,12 @@ p.p-small {
     }
 }
 
+@include mobile {
+    .side-header {
+        margin-right: v(48);
+    }
+}
+
 .input-w-top-label, .textarea-w-top-label {
     position: relative;
     display: inline-block;
@@ -564,6 +570,27 @@ p.p-small {
     }
 }
 
+@include mobile {
+    .input-w-top-label, .textarea-w-top-label {
+        // position: relative;
+        // display: inline-block;
+        width: unquote("calc(100% - " + v(60) + ")");
+        margin-left: v(30);
+        margin-right: v(30);
+        box-sizing: border-box;
+
+        // & + & {
+        //     margin-top: v(32);
+        // }
+
+        input, textarea {
+            // position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+}
+
 .feedback {
     &--dark {
         position: relative;
@@ -580,6 +607,12 @@ p.p-small {
             background: black;
             opacity: 0.7;
         }
+    }
+}
+
+@include mobile {
+    .feedback {
+        padding-top: v(24);
     }
 }
 
@@ -650,6 +683,22 @@ p.p-small {
 
         input[type="text"], input[type="tel"], input[type="email"] {
             color: white;
+        }
+    }
+}
+
+@include mobile {
+    .feedback-form {
+        width: 100%;
+
+        & > h4 {
+            font-size: v(28);
+            line-height: v(40);
+            margin-bottom: v(32);
+        }
+
+        &--centered {
+            margin-top: 0;
         }
     }
 }

@@ -19,6 +19,15 @@
     }
 }
 
+@keyframes hero-slide-head-appearing--mobile {
+    0% {
+        max-width: 0;
+    }
+    100% {
+        max-width: 100vw;
+    }
+}
+
 @keyframes hero-slide-element-appearing {
     0% {
         opacity: 0;
@@ -31,6 +40,15 @@
 @keyframes hero-slide-head-disappearing {
     0% {
         max-width: 70vw;
+    }
+    100% {
+        max-width: 0;
+    }
+}
+
+@keyframes hero-slide-head-disappearing--mobile {
+    0% {
+        max-width: 100vw;
     }
     100% {
         max-width: 0;
@@ -404,6 +422,73 @@
                     margin-bottom: 0.8rem;
                 }
             }
+        }
+    }
+
+    @include mobile {
+        .top-bar {
+            &__logo {
+                top: v(16);
+                left: v(24);
+                width: v(72);
+                height: v(64);
+            }
+
+            .request-estimate-btn {
+                margin-top: v(33);
+            }
+        }
+        .hero-slide {
+            &__head-wrapper {
+                margin-top: v(120) !important;
+                margin-left: v(24) !important;
+                width: 100%;
+            }
+
+            &__head {
+                font-size: v(36) !important;
+                line-height: v(42) !important;
+            }
+
+            &--visible {
+                .hero-slide__head {
+                    animation-name: hero-slide-head-appearing--mobile !important;
+                }
+            }
+            &--disappearing {
+                .hero-slide__head {
+                    animation-name: hero-slide-head-disappearing--mobile !important;
+                }
+            }
+
+            &__text {
+                font-size: v(16) !important;
+                line-height: v(24) !important;
+                padding-left: v(24) !important;
+            }
+        }
+        .hero-video-progress-menu {
+            right: v(10);
+
+            // show/hide bar
+            display: none !important;
+
+            p {
+                display: none !important;
+            }
+        }
+        .hero-slide__items {
+            display: block !important;
+            position: relative !important;
+            bottom: initial !important;
+            padding-left: v(24) !important;
+            margin-top: v(72) !important;
+        }
+        .hero-slide-item {
+            display: block !important;
+            position: relative !important;
+            height: v(72) !important;
+            width: 100% !important;
         }
     }
 }

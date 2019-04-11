@@ -123,6 +123,15 @@ window.onload = () => {
     // });
 
     // initCarousels();
+
+    $q('form.feedback-form').onsubmit = (evt) => {
+        evt.preventDefault();
+
+        sendForm('/contact', evt.target! as any, (isOk) => {
+            if (isOk) alert('Мы с вами свяжемся!');
+            else alert('Произошла ошибка');
+        });
+    };
 };
 
 Object.assign(window, {
