@@ -124,6 +124,13 @@
         bottom: 0;
         right: 0;
 
+        .mouse-help-icon {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            bottom: v(20);
+        }
+
         .hero-slide {
             display: none;
             position: absolute;
@@ -219,13 +226,6 @@
 
                 transition-property: transform;
                 transition-duration: 0.5s;
-
-                .mouse-help-icon {
-                    position: absolute;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    top: v(110);
-                }
             }
 
             .hero-slide-item {
@@ -318,7 +318,7 @@
                 margin: 0;
                 font-size: v(12);
                 line-height: v(24);
-                color: #CCCCCC;
+                color: #9e9e9e; // #CCCCCC;
                 font-family: 'Source Sans Pro';
                 margin-right: 8px;
                 text-align: right;

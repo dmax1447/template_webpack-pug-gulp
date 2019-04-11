@@ -21,16 +21,19 @@
 section.features#features
     .section-content
         header.top-bar
-            img.top-bar__logo(src="assets/logo.svg")
-            a(href="#feedback")
-                +request-estimate-btn
-            div.top-bar__menu.top-bar__menu--closed
-                +nav-menu
-        +side-header("помогаем", "we-help")
+            .top-bar__page-wrapper
+                img.top-bar__logo(src="assets/logo.svg")
+                a(href="#feedback")
+                    +request-estimate-btn
+            //- div.top-bar__menu.top-bar__menu--closed
+            //-     +nav-menu
+        +menu-placeholder("we-help")
+        +side-header("помогаем")
         .features__we-help-items
             for item in weHelpItems
                 img(class=("features__we-help-item " + (weHelpFadeItems.indexOf(item) !== -1 ? 'features__we-help-item--fade' : '')), src=("assets/main-features/" + item + ".svg"))
-        +side-header("предлагаем", "we-offer")
+        +menu-placeholder("we-offer")
+        +side-header("предлагаем")
         .features__we-offer-items
             .features__we-offer-item
                 img(src=("assets/rocket-sticker.svg"))

@@ -19,7 +19,7 @@ mixin request-estimate-btn(dark=false)
 mixin mouse-help-icon
     .mouse-help-icon
         .mouse-help-icon__wheel
-        .mouse-help-icon__label Скрольте вниз
+        //- .mouse-help-icon__label Скрольте вниз
 
 mixin side-header(text, id, darkBackground=false)
     h3(id=id, class=("side-header " + (darkBackground ? 'side-header--dark-bg' : '')))!= text
@@ -48,9 +48,9 @@ mixin _feedback-form(dark=false, centered=false, headerText="Свяжитесь 
         +input-w-top-label("tel", "телефон", "+9 (999) 999-99-99", "phone", "", "required")
         +textarea-w-top-label("text", "что-то, что нам нужно знать заранее", "Информация о проекте", "message", "", "required")
         input(type="submit", value="Отправить")
-        p.
-            Отправляя форму, вы разрешаете обработку персональных данных<br>
-            и соглашаетесь c <a href="/politic-confident.pdf">политикой конфиденциальности</a>.
+        p
+            //- Отправляя форму, вы разрешаете обработку персональных данных<br>
+            //- и соглашаетесь c <a href="/politic-confident.pdf">политикой конфиденциальности</a>.
 
 mixin feedback-form(dark=false, section=false, centered=false, headerText="Свяжитесь с нами")
     if section
@@ -67,4 +67,7 @@ mixin footer
         .section-content
             p © 2019. ООО «Береза-Развитие».
             a(href="mailto:job@berezadev.com?subject=Стажировка") Стажировка
-            a(href="/politic-confident.pdf") Политика конфиденциальности
+            //- a(href="/politic-confident.pdf") Политика конфиденциальности
+
+mixin menu-placeholder(id)
+    .menu-placeholder(id=id)

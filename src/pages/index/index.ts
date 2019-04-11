@@ -4,18 +4,28 @@ import {
     $ as $q, $all, getWindowGlobalRect, isGlobalRectInViewport, intersectionRate, smoothScrollTo, getGlobalRect,
 } from '../../core/utils';
 
-const pageScrollAnchors: (string|{ id: string, onEnter?: Function, onLeave?: Function })[] = [
+const pageScrollAnchors: { selector: string, hash: string, onEnter?: Function, onLeave?: Function }[] = [
     {
-        id: "hero",
+        hash: "hero",
+        selector: '#hero',
         onEnter: enterHeroMode,
         onLeave: () => {
             leaveHeroMode();
             setTimeout(() => smoothScrollTo($q('#we-help')), 500);
         },
     },
-    "we-help",
-    "we-offer",
-    "feedback"
+    {
+        hash: 'we-help',
+        selector: '.features__we-help-items'
+    },
+    {
+        hash: 'we-offer',
+        selector: '.features__we-offer-items'
+    },
+    {
+        hash: 'feedback',
+        selector: '#feedback'
+    },
 ];
 
 /** current in-view anchor */
@@ -24,11 +34,12 @@ function getCurrentAnchor() {
     const wndRect = getWindowGlobalRect();
 
     const anchors = pageScrollAnchors.map((x, i) => {
-        const { id, onEnter, onLeave } = typeof x !== 'string' ? x : { id: x, onEnter: undefined, onLeave: undefined};
-        const { top } = getGlobalRect($q(`#${id}`));
+        const { hash, selector, onEnter, onLeave } = x;
+        const { top } = getGlobalRect($q(selector));
         return {
             index: i,
-            id,
+            hash,
+            selector,
             top,
             height: 0,
             inViewportRatio: 0,
@@ -67,12 +78,17 @@ function getCurrentAnchor() {
     return anchors[maxInViewRatioAIndex];
 }
 
+function scrollToSet(hash: string) {
+    // window.location.he
+    smoothScrollTo($q(`#${hash}`));
+}
+
 function centerCurrentAnchor() {
     const anch = getCurrentAnchor();
     if (!anch) return;
 
     if (anch.onEnter) anch.onEnter();
-    smoothScrollTo($q(`#${anch.id}`));
+    scrollToSet(anch.hash);
 }
 
 function prevAnchor() {
@@ -82,15 +98,14 @@ function prevAnchor() {
     const prevIndex = Math.max(0, curA.index - 1);
     if (prevIndex === curA.index) return;
 
-    const x = pageScrollAnchors[prevIndex];
-    const anch = typeof x === 'string' ? { id: x } : x;
+    const anch = pageScrollAnchors[prevIndex];
 
     if (curA.onLeave) curA.onLeave();
 
     if (anch.onEnter) {
         anch.onEnter();
     } else {
-        setTimeout(() => smoothScrollTo($q(`#${anch.id}`)), 300);
+        setTimeout(() => scrollToSet(anch.hash), 300);
     }
 }
 
@@ -101,15 +116,14 @@ function nextAnchor() {
     const nextIndex = (curA.index + 1) % pageScrollAnchors.length;
     if (nextIndex === curA.index) return;
 
-    const x = pageScrollAnchors[nextIndex];
-    const anch = typeof x === 'string' ? { id: x } : x;
+    const anch = pageScrollAnchors[nextIndex];
 
     if (curA.onLeave) curA.onLeave();
 
     if (anch.onEnter) {
         anch.onEnter();
     } else {
-        setTimeout(() => smoothScrollTo($q(`#${anch.id}`)), 300);
+        setTimeout(() => scrollToSet(anch.hash), 300);
     }
 }
 
@@ -119,22 +133,28 @@ window.addEventListener('load', () => {
 
     // If user scrolled a lot, just center current scene on current anchor
     let timerRestartsCount = -1;
+    let accum = 0;
 
     $('html').mousewheel((e) => {
         if (isHeroMode && !isLastSlide()) return;
         const direction = e.deltaY > 0 ? 'up' : 'down';
 
+        if (direction === 'down') accum++;
+        else accum--;
+
         ++timerRestartsCount;
         window.clearTimeout(wheelTimer);
 
         wheelTimer = window.setTimeout(function() {
-            if (timerRestartsCount > 0) {
-                centerCurrentAnchor();
-            } else {
+            if (Math.abs(accum) <= 3) {
                 if (direction === 'down') nextAnchor();
                 else prevAnchor();
+            } else {
+                centerCurrentAnchor();
             }
+            
             timerRestartsCount = -1;
+            accum = 0;
         }, 200);
     });
 

@@ -130,8 +130,15 @@ export function enableScroll() {
     document.body.style.overflow = null;
 }
 
-export function smoothScrollTo(el: HTMLElement) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+export function smoothScrollTo(el: HTMLElement, topOffset?: number) {
+    if (!topOffset) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+        window.scrollTo({
+            top: getGlobalRect(el).top - topOffset,
+            behavior: 'smooth',
+        });
+    }
 }
 
 export function sleep(ms: number) {
