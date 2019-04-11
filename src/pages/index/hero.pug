@@ -43,7 +43,8 @@ section.hero.full#hero
         //- .hero-shadow-bottom
         header.top-bar
             img.top-bar__logo(src="assets/logo-white.svg")
-            +request-estimate-btn('dark')
+            a(href="#feedback")
+                +request-estimate-btn('dark')
             div.top-bar__menu.top-bar__menu--closed
                 +nav-menu('dark')
             //- i.far.fa-bars.top-bar__mobile-menu(role="button")

@@ -1,30 +1,35 @@
 -
     weHelpItems = [
+        'tex.su',
         'autoscaners',
+        'iCartool',
+        'hakamada',
+        'squadrille',
+        'launch',
+        'voenka',
+        'odin-logo',
+        'lawinrussia',
         'Dalena-logo',
         'format',
-        'g10',
-        'hakamada',
-        'iCartool',
-        'launch',
-        'lawinrussia',
         'Orangemodels',
-        'squadrille',
-        'tex.su',
-        'voenka',
+    ];
+
+    weHelpFadeItems = [
+        'hakamada', 'iCartool'
     ];
 
 section.features#features
     .section-content
         header.top-bar
             img.top-bar__logo(src="assets/logo.svg")
-            +request-estimate-btn
+            a(href="#feedback")
+                +request-estimate-btn
             div.top-bar__menu.top-bar__menu--closed
                 +nav-menu
         +side-header("помогаем")
         .features__we-help-items
             for item in weHelpItems
-                img.features__we-help-item(src=("assets/main-features/" + item + ".svg"))
+                img(class=("features__we-help-item " + (weHelpFadeItems.indexOf(item) !== -1 ? 'features__we-help-item--fade' : '')), src=("assets/main-features/" + item + ".svg"))
         +side-header("предлагаем")
         .features__we-offer-items
             .features__we-offer-item

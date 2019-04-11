@@ -212,6 +212,10 @@ export function initHero() {
     if (window.scrollY <= ($('section.hero').getBoundingClientRect().height / 2)) {
         enterHeroMode();
     }
+
+    $('section.hero a[href="#feedback"]').addEventListener('click', () => {
+        leaveHeroMode();
+    });
 }
 
 export function enterHeroMode() {
