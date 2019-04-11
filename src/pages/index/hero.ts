@@ -218,7 +218,7 @@ export function initHero() {
                 leaveHeroMode();
             }
         }
-    });
+    }, 120);
 
     changeSlide(slideKeys[0]);
 
