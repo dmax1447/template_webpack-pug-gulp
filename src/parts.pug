@@ -14,15 +14,15 @@ mixin nav-menu(dark=false)
 mixin request-estimate-btn(dark=false)
     button(class=('request-estimate-btn ' + (dark ? 'request-estimate-btn--dark' : '')))
         i.fas.fa-calculator
-        span Request estimate
+        span Запросить смету
 
 mixin mouse-help-icon
     .mouse-help-icon
         .mouse-help-icon__wheel
-        .mouse-help-icon__label Scroll down
+        .mouse-help-icon__label Скрольте вниз
 
-mixin side-header(text)
-    h3.side-header!= text
+mixin side-header(text, id, darkBackground=false)
+    h3(id=id, class=("side-header " + (darkBackground ? 'side-header--dark-bg' : '')))!= text
 
 mixin input-w-top-label(type, label, placeholder, name, pattern, required)
     .input-w-top-label
