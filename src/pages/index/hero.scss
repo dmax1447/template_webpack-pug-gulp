@@ -177,6 +177,8 @@
                 
                 overflow: hidden;
                 max-width: 70vw;
+
+                text-shadow: 0px 0px 24px rgba(0, 0, 0, 0.25);
             }
 
             // &__head-outline {
@@ -200,6 +202,8 @@
                 color: white;
                 line-height: v(32);
                 font-size: v(24);
+
+                text-shadow: 0px 0px 24px rgba(0, 0, 0, 0.25);
             }
 
             &__cta {
@@ -302,6 +306,8 @@
 
                     display : flex;
                     align-items : center;
+
+                    text-shadow: 0px 0px 24px rgba(0, 0, 0, 0.5);
                 }
 
                 &__number {
