@@ -490,5 +490,16 @@
             height: v(72) !important;
             width: 100% !important;
         }
+
+        .hero-backdrop {
+            left: -50vw;
+            right: -50vw;
+        }
+        .hero-shadow-left {
+            display: none;
+        }
+        .hero-shadow-right {
+            display: none;
+        }
     }
 }
