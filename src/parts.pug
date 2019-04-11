@@ -24,17 +24,17 @@ mixin mouse-help-icon
 mixin side-header(text, id, darkBackground=false)
     h3(id=id, class=("side-header " + (darkBackground ? 'side-header--dark-bg' : '')))!= text
 
-mixin input-w-top-label(type, label, placeholder, name, ...restAttrs)
+mixin input-w-top-label(type, label, placeholder, name)
     .input-w-top-label
-        input(type=type, placeholder=placeholder, name=name)&attributes(restAttrs)
+        input(type=type, placeholder=placeholder, name=name)&attributes(attributes)
         .input-w-top-label__lg
             .input-w-top-label__lg-left
             label= label
             .input-w-top-label__lg-right
 
-mixin textarea-w-top-label(type, label, placeholder, name, ...restAttrs)
+mixin textarea-w-top-label(type, label, placeholder, name)
     .textarea-w-top-label
-        textarea(type=type, placeholder=placeholder, name=name)&attributes(restAttrs)
+        textarea(type=type, placeholder=placeholder, name=name)&attributes(attributes)
         .textarea-w-top-label__lg
             .textarea-w-top-label__lg-left
             label= label
@@ -43,10 +43,10 @@ mixin textarea-w-top-label(type, label, placeholder, name, ...restAttrs)
 mixin _feedback-form(dark=false, centered=false, headerText="Свяжитесь с нами")
     form(class=("feedback-form " + (dark ? 'feedback-form--dark ' : '') + (centered === true ? 'feedback-form--centered ' : '')), action="/contact", method="post")
         h4= headerText
-        +input-w-top-label("text", "Ваше имя", "", "name", required)
-        +input-w-top-label("email", "e-mail", "yourmail@company.com", "email", pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$", required)
-        +input-w-top-label("tel", "телефон", "+9 (999) 999-99-99", "phone", required)
-        +textarea-w-top-label("text", "что-то, что нам нужно знать заранее", "Информация о проекте", "message", required)
+        +input-w-top-label("text", "Ваше имя", "", "name")(required)
+        +input-w-top-label("email", "e-mail", "yourmail@company.com", "email", pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")(required)
+        +input-w-top-label("tel", "телефон", "+9 (999) 999-99-99", "phone")(required)
+        +textarea-w-top-label("text", "что-то, что нам нужно знать заранее", "Информация о проекте", "message")(required)
         input(type="submit", value="Отправить")
         p
             //- Отправляя форму, вы разрешаете обработку персональных данных<br>
