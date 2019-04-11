@@ -223,11 +223,12 @@ export function initHero() {
     changeSlide(slideKeys[0]);
 
     if (window.scrollY <= ($q('section.hero').getBoundingClientRect().height / 2)) {
-        $q('.features .top-bar').style.display = 'none';
         enterHeroMode();
         setTimeout(() => {
             $q('.features .top-bar').style.display = 'block';
         }, 100);
+    } else {
+        $q('.features .top-bar').style.display = 'block';
     }
 
     $q('section.hero a[href="#feedback"]').addEventListener('click', () => {
