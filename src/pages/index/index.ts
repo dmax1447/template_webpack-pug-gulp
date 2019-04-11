@@ -35,13 +35,12 @@ function getCurrentAnchor() {
 
     const anchors = pageScrollAnchors.map((x, i) => {
         const { hash, selector, onEnter, onLeave } = x;
-        const { top } = getGlobalRect($q(selector));
+
         return {
+            rect: getGlobalRect($q(selector)),
             index: i,
             hash,
             selector,
-            top,
-            height: 0,
             inViewportRatio: 0,
             onEnter,
             onLeave,
@@ -53,18 +52,18 @@ function getCurrentAnchor() {
 
     // calculate anchor's height as (anchor[i+1].top - anchor[i].top)
     for (let i = 0; i < anchors.length; ++i) {
-        const nextTop = i === anchors.length - 1 ? totalPageHeight : anchors[i+1].top;
-        anchors[i].height = nextTop - anchors[i].top;
-        const anchorRect = {
-            left: 0,
-            right: 0,
-            top: anchors[i].top,
-            height: anchors[i].height,
-            width: wndRect.width,
-            bottom: totalPageHeight - (anchors[i].top + anchors[i].height),
-        };
+        // const nextTop = i === anchors.length - 1 ? totalPageHeight : anchors[i+1].top;
+        // anchors[i].height = nextTop - anchors[i].top;
+        // const anchorRect = {
+        //     left: 0,
+        //     right: 0,
+        //     top: anchors[i].top,
+        //     height: anchors[i].height,
+        //     width: wndRect.width,
+        //     bottom: totalPageHeight - (anchors[i].top + anchors[i].height),
+        // };
 
-        anchors[i].inViewportRatio = intersectionRate(anchorRect, wndRect);
+        anchors[i].inViewportRatio = intersectionRate(anchors[i].rect, wndRect);
 
         if (maxInViewRatio < anchors[i].inViewportRatio) {
             maxInViewRatio = anchors[i].inViewportRatio;
