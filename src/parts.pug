@@ -4,37 +4,37 @@ mixin nav-menu-item(href, text, class_="")
         span.nav-menu__item-text= text
 
 mixin nav-menu(dark=false)
-    nav(role="navigation", class=("nav-menu " + (dark ? 'nav-menu--dark' : '')))
-        +nav-menu-item("#cases", "Cases", "first-el")
-        +nav-menu-item("#tech", "Technology")
-        +nav-menu-item("#team", "Team")
-        +nav-menu-item("#contacts", "Contacts")
+    //- nav(role="navigation", class=("nav-menu " + (dark ? 'nav-menu--dark' : '')))
+    //-     +nav-menu-item("#cases", "Cases", "first-el")
+    //-     +nav-menu-item("#tech", "Technology")
+    //-     +nav-menu-item("#team", "Team")
+    //-     +nav-menu-item("#contacts", "Contacts")
         //- +nav-menu-item("#estimate-calc", "Reuest estimate")
 
 mixin request-estimate-btn(dark=false)
     button(class=('request-estimate-btn ' + (dark ? 'request-estimate-btn--dark' : '')))
         i.fas.fa-calculator
-        span Request estimate
+        span Запросить смету
 
 mixin mouse-help-icon
     .mouse-help-icon
         .mouse-help-icon__wheel
-        .mouse-help-icon__label Scroll down
+        .mouse-help-icon__label Скрольте вниз
 
-mixin side-header(text)
-    h3.side-header!= text
+mixin side-header(text, id, darkBackground=false)
+    h3(id=id, class=("side-header " + (darkBackground ? 'side-header--dark-bg' : '')))!= text
 
-mixin input-w-top-label(type, label, placeholder, name, pattern)
+mixin input-w-top-label(type, label, placeholder, name, pattern, required)
     .input-w-top-label
-        input(type=type, placeholder=placeholder, pattern=pattern, name=name)
+        input(type=type, placeholder=placeholder, pattern=pattern, name=name, required=required)
         .input-w-top-label__lg
             .input-w-top-label__lg-left
             label= label
             .input-w-top-label__lg-right
 
-mixin textarea-w-top-label(type, label, placeholder, name, pattern)
+mixin textarea-w-top-label(type, label, placeholder, name, pattern, required)
     .textarea-w-top-label
-        textarea(type=type, placeholder=placeholder, pattern=pattern, name=name)
+        textarea(type=type, placeholder=placeholder, pattern=pattern, name=name, required=required)
         .textarea-w-top-label__lg
             .textarea-w-top-label__lg-left
             label= label
@@ -43,10 +43,10 @@ mixin textarea-w-top-label(type, label, placeholder, name, pattern)
 mixin _feedback-form(dark=false, centered=false, headerText="Свяжитесь с нами")
     form(class=("feedback-form " + (dark ? 'feedback-form--dark ' : '') + (centered === true ? 'feedback-form--centered ' : '')))
         h4= headerText
-        +input-w-top-label("text", "Ваше имя", "", "name", "")
-        +input-w-top-label("email", "e-mail", "yourmail@company.com", "email", "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
-        +input-w-top-label("tel", "телефон", "+9 (999) 999-99-99", "phone", "")
-        +textarea-w-top-label("text", "что-то, что нам нужно знать заранее", "Информация о проекте", "name", "")
+        +input-w-top-label("text", "Ваше имя", "", "name", "", "required")
+        +input-w-top-label("email", "e-mail", "yourmail@company.com", "email", "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$", "required")
+        +input-w-top-label("tel", "телефон", "+9 (999) 999-99-99", "phone", "", "required")
+        +textarea-w-top-label("text", "что-то, что нам нужно знать заранее", "Информация о проекте", "message", "", "required")
         input(type="submit", value="Отправить")
         p.
             Отправляя форму, вы разрешаете обработку персональных данных<br>

@@ -5,17 +5,12 @@
 import smoothscroll from 'smoothscroll-polyfill';
 
 import {
-    $, $all,
+    $ as $q, $all,
 } from './core/utils';
 import { initAnimations, runAnimation, pickAnimParams, isAnimPlaying, isAnimStopped } from './core/anim';
 import { initCarousels } from './core/owl-carousel';
 import { remFix } from './core/rem-fix';
 // import { initHero } from './views/main/hero';
-
-setTimeout(() => {
-    remFix();
-    initAnimations();
-}, 1000);
 
 window.onload = () => {
     // init smoothscroll
@@ -26,22 +21,24 @@ window.onload = () => {
     // initHero();
 
     // setup nav with smoothscroll
-    // $all<HTMLAnchorElement>('nav > a, a.nav-a').forEach(el => {
-    //     el.onclick = evt => {
-    //         evt.preventDefault();
+    $all<HTMLAnchorElement>('a[href]').forEach(el => {
+        if (!el.hash) return;
+        
+        el.onclick = evt => {
+            evt.preventDefault();
 
-    //         skipScrollEvents = true;
-    //         setTimeout(() => {
-    //             skipScrollEvents = false;
-    //             updateScrollStates();
-    //         }, 1000);
+            skipScrollEvents = true;
+            setTimeout(() => {
+                skipScrollEvents = false;
+                // updateScrollStates();
+            }, 1000);
 
-    //         document.querySelector(el.hash).scrollIntoView({
-    //             block: 'start',
-    //             behavior: 'smooth' 
-    //         });
-    //     };
-    // });
+            document.querySelector(el.hash)!.scrollIntoView({
+                block: 'start',
+                behavior: 'smooth' 
+            });
+        };
+    });
 
     // // setup hero
     // $('.top-bar__mobile-menu').onclick = () => {

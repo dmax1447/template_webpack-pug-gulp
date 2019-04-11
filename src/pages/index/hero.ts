@@ -1,5 +1,5 @@
 import {
-    $, $all, disableScroll, enableScroll, smoothScrollTo, sleep, getScroll,
+    $ as $q, $all, disableScroll, enableScroll, smoothScrollTo, sleep, getScroll, listenSwipe, isMobileScreen,
 } from '../../core/utils';
 
 const slides: {
@@ -18,7 +18,11 @@ let currentSlideKey: string;
 let videoProgressBarUpdater = 0;
 
 let lastTimeSlideChanged = 0;
-let isHeroMode = false;
+export let isHeroMode = false;
+
+export function isLastSlide() {
+    return slideKeys.indexOf(currentSlideKey) === slideKeys.length - 1;
+}
 
 function resetProgress(currentActiveKey: string) {
     // reset
@@ -145,9 +149,9 @@ function nextSlide() {
     changeSlide(slideKeys[i]);
 }
 
-function onWheel(evt: WheelEvent) {
+function onWheel(evt: JQueryMousewheel.JQueryMousewheelEventObject) {
     if (isHeroMode) {
-        if (evt.deltaY > 0) {
+        if (evt.deltaY < 0) {
             if (slideKeys.indexOf(currentSlideKey) === slideKeys.length - 1) {
                 leaveHeroMode();
                 return;
@@ -155,13 +159,6 @@ function onWheel(evt: WheelEvent) {
             nextSlide();
         } else {
             prevSlide();
-        }
-    } else {
-        if (evt.deltaY < 0) {
-            const { top } = getScroll();
-            if (top <= $('section.hero').getBoundingClientRect().height / 2) {
-                enterHeroMode();
-            }
         }
     }
 }
@@ -205,13 +202,33 @@ export function initHero() {
     });
 
     slideKeys = Object.keys(slides);
-    window.addEventListener('wheel', onWheel);
+    $('html').mousewheel(onWheel);
+
+    listenSwipe($q('section.hero'), (direction) => {
+        if (!isHeroMode) return;
+
+        if (direction === 'down') prevSlide();
+        else {
+            if (slideKeys.indexOf(currentSlideKey) === slideKeys.length - 1) {
+                leaveHeroMode();
+                return;
+            }
+            nextSlide();
+            if (isMobileScreen() && slideKeys.indexOf(currentSlideKey) === slideKeys.length - 2) {
+                leaveHeroMode();
+            }
+        }
+    });
 
     changeSlide(slideKeys[0]);
 
-    if (window.scrollY <= ($('section.hero').getBoundingClientRect().height / 2)) {
+    if (window.scrollY <= ($q('section.hero').getBoundingClientRect().height / 2)) {
         enterHeroMode();
     }
+
+    $q('section.hero a[href="#feedback"]').addEventListener('click', () => {
+        leaveHeroMode();
+    });
 }
 
 export function enterHeroMode() {

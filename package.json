@@ -13,7 +13,9 @@
   "author": "morglod",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.4.3",
     "@types/jquery": "^3.3.29",
+    "@types/jquery-mousewheel": "^3.1.8",
     "@types/node": "^11.13.0",
     "@types/smoothscroll-polyfill": "^0.3.1",
     "acorn": "^6.1.1",

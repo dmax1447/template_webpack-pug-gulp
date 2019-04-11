@@ -455,6 +455,10 @@ p.p-small {
         margin-bottom: v(5);
         background-color: $accentLight60;
     }
+
+    &--dark-bg {
+        color: white;
+    }
 }
 
 .input-w-top-label, .textarea-w-top-label {
