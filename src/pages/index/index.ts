@@ -112,8 +112,8 @@ function nextAnchor() {
     const curA = getCurrentAnchor();
     if (!curA) return;
 
-    const nextIndex = (curA.index + 1) % pageScrollAnchors.length;
-    if (nextIndex === curA.index) return;
+    const nextIndex = curA.index + 1;
+    if (nextIndex === curA.index || pageScrollAnchors.length === nextIndex) return;
 
     const anch = pageScrollAnchors[nextIndex];
 
