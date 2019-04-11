@@ -12,30 +12,17 @@ deploy backend dev:
   - scp -P 2222 -i ./key -r backend/* gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
   - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/dev.berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress; php artisan migrate"
 
-# deploy landman dev:
-#   stage: deploy
-#   only:
-#     - /master/
-#   image: lorisleiva/laravel-docker:latest
-#   cache:
-#     paths:
-#       - vendor/
-#   script:
-#     - scp -P 2222 -i ./key -r landman/* gitlab@omp-frontend.elantum.com:/home/hakamada/www/hakamada-tmn.ru/dev
-#     - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /home/hakamada/www/hakamada-tmn.ru/dev; composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts --no-dev"
-
-
-# deploy landman prod:
-#   stage: deploy
-#   only:
-#     - /prod/
-#   image: lorisleiva/laravel-docker:latest
-#   cache:
-#     paths:
-#       - vendor/
-#   script:
-#     - scp -P 2222 -i ./key -r landman/* gitlab@omp-frontend.elantum.com:/home/hakamada/www/hakamada-tmn.ru
-#     - ssh -p 2222 -v -i ./key gitlab@omp-frontend.elantum.com "cd /home/hakamada/www/hakamada-tmn.ru; composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts --no-dev"
+deploy backend prod:
+  stage: deploy
+  only:
+  - /prod/
+  image: lorisleiva/laravel-docker:latest
+  cache:
+    paths:
+    - vendor/
+  script:
+  - scp -P 2222 -i ./key -r backend/* gitlab@omp-frontend.elantum.com:/var/www/berezadev.com
+  - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-dev; php artisan migrate"
 
 before_script:
   - npm install
@@ -50,20 +37,20 @@ cache:
 
 pages:
   only:
-    - /master/
+  - /master/
   artifacts:
     paths:
-      - public
+    - public
   script:
-    - npm run build
-    # - scp -P 2222 -v -i ./key -r public/* gitlab@omp-frontend.elantum.com:/home/hakamada/www/hakamada-tmn.ru/dev/public
+  - npm run build
+  - scp -P 2222 -v -i ./key -r public/* gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com/public
 
-# prod:
-#   only:
-#     - /prod/
-#   artifacts:
-#     paths:
-#       - public
-#   script:
-#     - BUILD=prod npm run build
-#     - scp -P 2222 -v -i ./key -r public/* gitlab@omp-frontend.elantum.com:/home/hakamada/www/hakamada-tmn.ru/public
+prod:
+  only:
+  - /prod/
+  artifacts:
+    paths:
+    - public
+  script:
+  - BUILD=prod npm run build
+  - scp -P 2222 -v -i ./key -r public/* gitlab@omp-frontend.elantum.com:/var/www/berezadev.com/public
