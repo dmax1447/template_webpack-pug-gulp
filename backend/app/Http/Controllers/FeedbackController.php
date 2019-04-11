@@ -9,9 +9,9 @@ use App\Jobs\SendRequestResultEmail;
 class FeedbackController extends Controller {
     public function index(Request $request) {
         $validator = $this->buildValidator();
-        $this->validate($request, $validator);
+        //$this->validate($request, $validator);
         if ($request->input('work')) {
-            return ['success' => true, 'message' => config('contact.success')];
+            //return ['success' => true, 'message' => config('contact.success')];
         }
         $result = $this->store($request);
         $this->dispatch(new SendRequestResultEmail($result));
