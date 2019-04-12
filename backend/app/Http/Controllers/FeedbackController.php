@@ -9,7 +9,7 @@ use App\Jobs\SendRequestResultEmail;
 class FeedbackController extends Controller {
     public function index(Request $request) {
         $validator = $this->buildValidator();
-        //$this->validate($request, $validator);
+        $this->validate($request, $validator);
         if ($request->input('work')) {
             //return ['success' => true, 'message' => config('contact.success')];
         }
@@ -21,8 +21,8 @@ class FeedbackController extends Controller {
 
     protected function buildValidator() {
         $validator = [];
-        $validator['name'] = 'required|string|min:3';
-        $validator['phone'] = 'required|string|min:7';
+        $validator['name'] = 'required';
+        $validator['phone'] = 'required';
         $validator['email'] = 'required|email';
         return $validator;
     }
