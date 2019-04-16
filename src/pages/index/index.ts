@@ -132,7 +132,7 @@ function nextAnchor() {
     }
 }
 
-window.addEventListener('load', () => {
+const setup = () => {
     if (!isMobileScreen()) {
         let changing = false;
         $('html').mousewheel((e) => {
@@ -184,4 +184,14 @@ window.addEventListener('load', () => {
         $q('.mouse-help-icon__wheel').style.animation = '';
         $q('.mouse-help-icon__wheel').style.webkitAnimation = '';
     }, 100);
+};
+
+window.addEventListener('load', setup);
+
+let resizeTimeout: any;
+window.addEventListener('resize', () => {
+    if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+    }
+    resizeTimeout = setTimeout(setup, 1000);
 });
