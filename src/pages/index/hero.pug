@@ -32,9 +32,9 @@ mixin hero-video-progress(key, text, isFirst=false)
         .hero-video-progress__bar
             .hero-video-progress__bar-fill
 
-mixin hero-item-photo(src, alt)
+mixin hero-item-photo(src, ind=1, alt="Фото")
     .hero-slide-item__photo
-        img(src=src, alt=alt)
+        img(src=src, alt=alt, style=("z-index:"+(ind + 5)))
         .hero-slide-item__photo-backdrop
 
 section.hero.full#hero
@@ -42,12 +42,6 @@ section.hero.full#hero
     +hero-video("moderntech", "assets/bereza-slide-02.mp4")
     +hero-video("expteam", "assets/bereza-slide-03.mp4")
     .section-content
-        //- img.hero-video-backdrop(src=".assets/hero-video-backdrop.svg")
-        .hero-backdrop
-        //- .hero-shadow-up
-        .hero-shadow-left
-        .hero-shadow-right
-        //- .hero-shadow-bottom
         header.top-bar
             img.top-bar__logo(src="assets/logo-white.svg")
             a(href="#feedback")
@@ -60,25 +54,25 @@ section.hero.full#hero
             +mouse-help-icon
             +hero-slide("rapiddev", "Скоростная<br>web и mobile<br>разработка", "Смета за несколько часов<br>Прототип за несколько дней<br>MVP за несколько недель", "Смотреть кейсы", "#cases", "first")
                 +hero-slide-item([ "assets/hero-design-icon.svg" ], "UX исследования и аналитика<br>UI/UX Прототипирование & Дизайн")
-                +hero-slide-item([ "assets/hero-dev-icon.svg" ], "Кросс-платформенная разработка<br>Front-end, Back-end и API")
+                +hero-slide-item([ "assets/hero-dev-icon.svg" ], "Кроссплатформенная разработка<br>Front-end, Back-end и API")
                 +hero-slide-item([ "assets/hero-ecom-icon.svg" ], "Специализация в разработке<br>E-commerce & Online-media")
             +hero-slide("moderntech", "Проверенный,<br>современный стек<br>и процессы", "JavaScript, TypeScript, NodeJS<br>Continuos Integration и Continuos Delivery<br>Agile подход", "Процессы и технологии", "#tech")
                 +hero-slide-item([ "assets/hero-bullfinch-icon.svg", "assets/hero-figma-icon.svg" ], "Уникальный подход к доставке<br>дизайна во Front-end")
-                +hero-slide-item([ "assets/hero-react-icon.svg", "assets/hero-vue-icon.svg", "assets/hero-nodejs-icon.svg" ], "JavaScript/TypeScript стек<br>для новый продуктов")
+                +hero-slide-item([ "assets/hero-react-icon.svg", "assets/hero-nodejs-icon.svg" ], "JavaScript/TypeScript стек<br>для новых продуктов")
                 +hero-slide-item([ "assets/hero-laravel-icon.svg", "assets/hero-bitrix-icon.svg" ], "Поддержка и разработка<br>систем на PHP")
             +hero-slide("expteam", "Опытная,<br>универсальная и<br>передовая команда", "UI/UX Дизайнеры<br>Front-end и Back-end Разработчики<br>QA и DevOps", "Познакомиться с командой", "#team")
                 +hero-slide-item([], "Дизайн и менеджмент", 4)
-                    +hero-item-photo("assets/team/yd-square.jpg")
-                    +hero-item-photo("assets/team/dz-square.jpg")
-                    +hero-item-photo("assets/team/ab-square.jpg")
-                    +hero-item-photo("assets/team/me-square.jpg")
+                    +hero-item-photo("assets/team/yd-square.jpg", 4)
+                    +hero-item-photo("assets/team/dz-square.jpg", 3)
+                    +hero-item-photo("assets/team/ab-square.jpg", 2)
+                    +hero-item-photo("assets/team/me-square.jpg", 1)
                 +hero-slide-item([], "Front-end & Mobile", 3)
-                    +hero-item-photo("assets/team/vk.jpg")
-                    +hero-item-photo("assets/team/nd.jpg")
-                    +hero-item-photo("assets/team/dg.jpg")
+                    +hero-item-photo("assets/team/vk.jpg", 3)
+                    +hero-item-photo("assets/team/nd.jpg", 2)
+                    +hero-item-photo("assets/team/dg.jpg", 1)
                 +hero-slide-item([], "Back-end & DevOps", 2)
-                    +hero-item-photo("assets/team/is-square.jpg")
-                    +hero-item-photo("assets/team/vs-square.jpg")
+                    +hero-item-photo("assets/team/is-square.jpg", 2)
+                    +hero-item-photo("assets/team/vs-square.jpg", 1)
         .hero-video-progress-menu
             +hero-video-progress("rapiddev", "создаем", "first")
             +hero-video-progress("moderntech", "используем")

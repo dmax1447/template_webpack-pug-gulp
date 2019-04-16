@@ -214,7 +214,7 @@ export function initHero() {
                 return;
             }
             nextSlide();
-            if (isMobileScreen() && slideKeys.indexOf(currentSlideKey) === slideKeys.length - 2) {
+            if (isMobileScreen() && slideKeys.indexOf(currentSlideKey) === slideKeys.length - 1) {
                 leaveHeroMode();
             }
         }
@@ -244,7 +244,9 @@ export function enterHeroMode() {
 }
 
 export function leaveHeroMode() {
-    enableScroll();
+    if (isMobileScreen()) {
+        enableScroll();
+    }
     isHeroMode = false;
     $q('.features .top-bar').classList.remove('top-bar--hidden');
 }

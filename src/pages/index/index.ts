@@ -1,7 +1,7 @@
 import './index.scss';
 import { initHero, enterHeroMode, leaveHeroMode, isHeroMode, isLastSlide } from './hero';
 import {
-    $ as $q, $all, getWindowGlobalRect, isGlobalRectInViewport, intersectionRate, smoothScrollTo, getGlobalRect, isMobileScreen, getScroll,
+    $ as $q, $all, getWindowGlobalRect, isGlobalRectInViewport, intersectionRate, smoothScrollTo, getGlobalRect, isMobileScreen, getScroll, disableScroll, sleep,
 } from '../../core/utils';
 
 const pageScrollAnchors: { selector: string, hash: string, onEnter?: Function, onLeave?: Function }[] = [
@@ -12,6 +12,7 @@ const pageScrollAnchors: { selector: string, hash: string, onEnter?: Function, o
         onLeave: () => {
             leaveHeroMode();
             setTimeout(() => smoothScrollTo($q('#we-help')), 500);
+            return sleep(500);
         },
     },
     {
@@ -28,8 +29,10 @@ const pageScrollAnchors: { selector: string, hash: string, onEnter?: Function, o
     },
 ];
 
-/** current in-view anchor */
-function getCurrentAnchor() {
+let currentAnchorIndex = 0;
+
+/** current in-view anchor; returns [ anchor, index ] or undefined */
+function getCurrentAnchor(): [ (typeof pageScrollAnchors[0]), number ]|undefined {
     const totalPageHeight = window.outerHeight;
     const wndRect = getWindowGlobalRect();
 
@@ -50,19 +53,7 @@ function getCurrentAnchor() {
     let maxInViewRatio = 0;
     let maxInViewRatioAIndex = undefined;
 
-    // calculate anchor's height as (anchor[i+1].top - anchor[i].top)
     for (let i = 0; i < anchors.length; ++i) {
-        // const nextTop = i === anchors.length - 1 ? totalPageHeight : anchors[i+1].top;
-        // anchors[i].height = nextTop - anchors[i].top;
-        // const anchorRect = {
-        //     left: 0,
-        //     right: 0,
-        //     top: anchors[i].top,
-        //     height: anchors[i].height,
-        //     width: wndRect.width,
-        //     bottom: totalPageHeight - (anchors[i].top + anchors[i].height),
-        // };
-
         anchors[i].inViewportRatio = intersectionRate(anchors[i].rect, wndRect);
 
         if (maxInViewRatio < anchors[i].inViewportRatio) {
@@ -71,40 +62,53 @@ function getCurrentAnchor() {
         }
     }
 
-    console.log(maxInViewRatioAIndex, anchors);
-
     if (maxInViewRatioAIndex === undefined) return undefined;
-    return anchors[maxInViewRatioAIndex];
+    return [ anchors[maxInViewRatioAIndex], maxInViewRatioAIndex ];
 }
 
-function scrollToSet(hash: string) {
-    // window.location.he
-    smoothScrollTo($q(`#${hash}`));
+async function setCurrentAnchor(index: number) {
+    const anch = pageScrollAnchors[index];
+
+    if (currentAnchorIndex !== index) {
+        const prevousAnch = pageScrollAnchors[currentAnchorIndex];
+        if (prevousAnch.onLeave) {
+            await prevousAnch.onLeave();
+        }
+        if (anch.onEnter) {
+            await anch.onEnter();
+        }
+    }
+
+    smoothScrollTo($q(`#${anch.hash}`));
+    currentAnchorIndex = index;
 }
 
 function centerCurrentAnchor() {
     const anch = getCurrentAnchor();
     if (!anch) return;
 
-    if (anch.onEnter) anch.onEnter();
-    scrollToSet(anch.hash);
+    if (anch[0].onEnter) anch[0].onEnter();
+    setCurrentAnchor(anch[1]);
 }
 
 function prevAnchor() {
     const curA = getCurrentAnchor();
     if (!curA) return;
 
-    const prevIndex = Math.max(0, curA.index - 1);
-    if (prevIndex === curA.index) return;
+    const prevIndex = Math.max(0, curA[1] - 1);
+    if (prevIndex === curA[1]) return;
 
     const anch = pageScrollAnchors[prevIndex];
 
-    if (curA.onLeave) curA.onLeave();
+    if (curA[0].onLeave) curA[0].onLeave();
 
+    currentAnchorIndex = prevIndex;
     if (anch.onEnter) {
         anch.onEnter();
     } else {
-        setTimeout(() => scrollToSet(anch.hash), 300);
+        setTimeout(() => {
+            setCurrentAnchor(prevIndex);
+        }, 300);
     }
 }
 
@@ -112,50 +116,34 @@ function nextAnchor() {
     const curA = getCurrentAnchor();
     if (!curA) return;
 
-    const nextIndex = curA.index + 1;
-    if (nextIndex === curA.index || pageScrollAnchors.length === nextIndex) return;
+    const nextIndex = curA[1] + 1;
+    if (nextIndex === curA[1] || pageScrollAnchors.length === nextIndex) return;
 
     const anch = pageScrollAnchors[nextIndex];
 
-    if (curA.onLeave) curA.onLeave();
+    if (curA[0].onLeave) curA[0].onLeave();
 
     if (anch.onEnter) {
         anch.onEnter();
     } else {
-        setTimeout(() => scrollToSet(anch.hash), 300);
+        setTimeout(() => {
+            setCurrentAnchor(nextIndex);
+        }, 300);
     }
 }
 
 window.addEventListener('load', () => {
     if (!isMobileScreen()) {
-        // Reset scroll action while user stil strolling
-        let wheelTimer = 0;
-    
-        // If user scrolled a lot, just center current scene on current anchor
-        let timerRestartsCount = -1;
-        let accum = 0;
-
+        let changing = false;
         $('html').mousewheel((e) => {
-            if (isHeroMode && !isLastSlide()) return;
+            if (isHeroMode && !isLastSlide() || changing) return;
             const direction = e.deltaY > 0 ? 'up' : 'down';
-    
-            if (direction === 'down') accum++;
-            else accum--;
-    
-            ++timerRestartsCount;
-            window.clearTimeout(wheelTimer);
-    
-            wheelTimer = window.setTimeout(function() {
-                if (Math.abs(accum) <= 3) {
-                    if (direction === 'down') nextAnchor();
-                    else prevAnchor();
-                } else {
-                    centerCurrentAnchor();
-                }
-                
-                timerRestartsCount = -1;
-                accum = 0;
-            }, 200);
+            
+            if (direction === 'down') nextAnchor();
+            else prevAnchor();
+
+            changing = true;
+            setTimeout(() => changing = false, 300);
         });
     }
 
@@ -176,8 +164,18 @@ window.addEventListener('load', () => {
     }
 
     initHero();
+    disableScroll();
 
-    // fix safari wheel animation
+    if (isHeroMode) currentAnchorIndex = 0;
+    else {
+        const curAnch = getCurrentAnchor();
+        if (!curAnch) {
+            currentAnchorIndex = 0;
+            enterHeroMode();
+        }
+    }
+
+    // fix for safari wheel animation
 
     $q('.mouse-help-icon__wheel').style.animation = 'none';
     $q('.mouse-help-icon__wheel').style.webkitAnimation = 'none';

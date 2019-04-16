@@ -43,7 +43,7 @@ mixin textarea-w-top-label(type, label, placeholder, name)
 mixin _feedback-form(dark=false, centered=false, headerText="Свяжитесь с нами")
     form(class=("feedback-form " + (dark ? 'feedback-form--dark ' : '') + (centered === true ? 'feedback-form--centered ' : '')), action="/contact", method="post")
         h4= headerText
-        +input-w-top-label("text", "Ваше имя", "", "name")(required)
+        +input-w-top-label("text", "Ваше имя", "Имя и фамилия", "name")(required)
         +input-w-top-label("email", "e-mail", "yourmail@company.com", "email", pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")(required)
         +input-w-top-label("tel", "телефон", "+9 (999) 999-99-99", "phone")(required)
         +textarea-w-top-label("text", "что-то, что нам нужно знать заранее", "Информация о проекте", "message")(required)
