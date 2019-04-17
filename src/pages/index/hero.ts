@@ -80,19 +80,23 @@ function preloadSlideVideo(slideKey: string) {
     } catch {}
 }
 
-async function animateSlideDisappearing(slideKey: string, fadeDirection: 'up'|'down' = 'down') {
+async function animateSlideDisappearing(slideKey: string, fadeDirection: 'prev'|'next' = 'next') {
     const {
         slideEl,
     } = slides[slideKey];
 
-    slideEl.classList.toggle('--up', fadeDirection === 'up');
+    slideEl.classList.toggle('--next', fadeDirection === 'next');
     slideEl.classList.add('hero-slide--disappearing');
     await sleep(SLIDE_DISAPPEARING_TIME);
     slideEl.classList.remove('hero-slide--visible');
     slideEl.classList.remove('hero-slide--disappearing');
 }
 
-async function changeSlide(slideKey: string, noTimeout: boolean|'no timeout' = false) {
+async function changeSlide(
+    slideKey: string,
+    noTimeout: boolean|'no timeout' = false,
+    animationDirection: 'prev'|'next'|'byIndex'
+) {
     const _now = Date.now();
     if (!noTimeout && lastTimeSlideChanged + MIN_TIME_BEFORE_SLIDE_CHANGE > _now) {
         console.log('skipping changeSlide, because it changed less then MIN_TIME_BEFORE_SLIDE_CHANGE ago', { lastTimeSlideChanged, MIN_TIME_BEFORE_SLIDE_CHANGE, now: _now });
@@ -107,8 +111,10 @@ async function changeSlide(slideKey: string, noTimeout: boolean|'no timeout' = f
     const _curSlideIndex = slideKeys.indexOf(currentSlideKey);
     const _newSlideIndex = slideKeys.indexOf(slideKey);
 
+    animationDirection = animationDirection === 'byIndex' ? (_newSlideIndex > _curSlideIndex ? 'next' : 'prev') : animationDirection;
+
     if (currentSlideKey) {
-        await animateSlideDisappearing(currentSlideKey, _newSlideIndex > _curSlideIndex ? 'down' : 'up');
+        await animateSlideDisappearing(currentSlideKey, animationDirection);
     }
 
     resetProgress(slideKey);
@@ -138,15 +144,30 @@ async function changeSlide(slideKey: string, noTimeout: boolean|'no timeout' = f
     lastTimeSlideChanged = Date.now();
 }
 
-function prevSlide() {
-    const i = slideKeys.indexOf(currentSlideKey) - 1;
-    if (i >= 0) changeSlide(slideKeys[i]);
+function prevSlide(wrap: false|'wrap' = false) {
+    let i = slideKeys.indexOf(currentSlideKey) - 1;
+    if (wrap && i < 0) i = slideKeys.length - 1;
+    if (i >= 0) {
+        changeSlide(
+            slideKeys[i],
+            // start timeout before next change
+            isMobileScreen() ? 'no timeout' : false,
+            // fade animation
+            isMobileScreen() ? 'prev' : 'byIndex',
+        );
+    }
 }
 
 function nextSlide() {
     let i = slideKeys.indexOf(currentSlideKey);
     i = (i + 1) % slideKeys.length;
-    changeSlide(slideKeys[i]);
+    changeSlide(
+        slideKeys[i],
+        // start timeout before next change
+        isMobileScreen() ? 'no timeout' : false,
+        // fade animation
+        isMobileScreen() ? 'next' : 'byIndex',
+    );
 }
 
 function onWheel(evt: JQueryMousewheel.JQueryMousewheelEventObject) {
@@ -180,7 +201,7 @@ export function initHero() {
         if (!slides[key]) slides[key] = {} as any;
         slides[key]["progressBarEl"] = videoProgressEl;
 
-        videoProgressEl.onclick = () => changeSlide(key, 'no timeout');
+        videoProgressEl.onclick = () => changeSlide(key, 'no timeout', 'byIndex');
     });
 
     $all('.hero-slide').forEach(slideEl => {
@@ -199,28 +220,21 @@ export function initHero() {
                 numEl.appendChild(numberImg);
             }
         }
+        numEl.removeAttribute('data-number');
     });
 
     slideKeys = Object.keys(slides);
-    $('html').mousewheel(onWheel);
 
-    listenSwipe($q('section.hero'), (direction) => {
-        if (!isHeroMode) return;
+    if (isMobileScreen()) {
+        listenSwipe($q('section.hero'), (direction) => {
+            if (direction === 'left') prevSlide('wrap');
+            else if (direction === 'right') nextSlide();
+        }, 30);
+    } else {
+        $('html').mousewheel(onWheel);
+    }
 
-        if (direction === 'down') prevSlide();
-        else {
-            if (slideKeys.indexOf(currentSlideKey) === slideKeys.length - 1) {
-                leaveHeroMode();
-                return;
-            }
-            nextSlide();
-            if (isMobileScreen() && slideKeys.indexOf(currentSlideKey) === slideKeys.length - 1) {
-                leaveHeroMode();
-            }
-        }
-    }, 120);
-
-    changeSlide(slideKeys[0]);
+    changeSlide(slideKeys[0], undefined, 'byIndex');
 
     if (window.scrollY <= ($q('section.hero').getBoundingClientRect().height / 2)) {
         enterHeroMode();
@@ -237,16 +251,18 @@ export function initHero() {
 }
 
 export function enterHeroMode() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    disableScroll();
-    isHeroMode = true;
+    if (!isMobileScreen()) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // disableScroll();
+        isHeroMode = true;
+    }
     $q('.features .top-bar').classList.add('top-bar--hidden');
 }
 
 export function leaveHeroMode() {
-    if (isMobileScreen()) {
-        enableScroll();
+    if (!isMobileScreen()) {
+        // enableScroll();
+        isHeroMode = false;
     }
-    isHeroMode = false;
     $q('.features .top-bar').classList.remove('top-bar--hidden');
 }

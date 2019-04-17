@@ -80,6 +80,20 @@
     100% { opacity: 0.7; }
 }
 
+@keyframes anim-slide-in-back {
+    0% {
+        opacity: 0;
+        transform: scale(3, 3);
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1, 1);
+    }
+}
+
 .anim {
     opacity: 0;
     &--is-waiting { opacity: 1; }
