@@ -11,6 +11,11 @@ deploy backend dev:
   script:
   - scp -P 2222 -i ./key -r backend/* gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
   - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/dev.berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress; php artisan migrate"
+  - scp -P 2222 -i ./key -r src gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
+  - scp -P 2222 -i ./key -r static gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
+  - scp -P 2222 -i ./key -r webpack gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
+  - scp -P 2222 -i ./key *.json gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
+  - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/dev.berezadev.com; npm i; npm run build"
 
 deploy backend prod:
   stage: deploy
