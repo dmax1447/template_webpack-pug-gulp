@@ -40,13 +40,18 @@ class BuildSite extends Command
     public function handle() {
         $slides = [];
         $blocks = [];
+        $this->info("Collecting data");
         foreach ((array) config('translatable.locales') as $locale) {
             $slides[$locale] = $this->buildSlides($locale);
             \Storage::disk('local')->put('build/hero.' . $locale . '.json', json_encode($slides[$locale], JSON_UNESCAPED_UNICODE));
             $blocks[$locale] = $this->buildBlocks($locale);
             \Storage::disk('local')->put('build/blocks.' . $locale . '.json', json_encode($blocks[$locale], JSON_UNESCAPED_UNICODE));
         }
-        //dump($blocks);
+        
+        $this->info("Compiling pages");
+        exec("cd ". app_path(). " && npm run build 2>&1", $out, $err);
+        $this->info(join("\n", $out));
+        // dump($slides);
     }
 
     protected function buildSlides($locale) {
@@ -67,7 +72,7 @@ class BuildSite extends Command
                 'icons' => []
             ];
             foreach ($slide->blocks as $block) {
-                $i = ['title' => $block->translatedInput('title'), 'icons' => $block->images('icons', 'desktop')];
+                $i = ['title' => $block->translatedInput('title'), 'icons' => $block->images('icons', 'desktop'), 'number' => $block->input('number')];
                 $s['icons'][]= $i;
             }
             $data[] = $s;
