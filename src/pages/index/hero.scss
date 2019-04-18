@@ -349,11 +349,19 @@
                 .hero-slide__items {
                     transform: translateY(-40%);
                     animation: hero-slide-element-disappearing 0.5s forwards;
+
+                    @include mobile {
+                        transform: translateX(-40%);
+                    }
                 }
 
-                &.--up {
+                &.--next {
                     .hero-slide__items {
                         transform: translateY(40%);
+
+                        @include mobile {
+                            transform: translateX(40%);
+                        }
                     }
                 }
             }
@@ -416,6 +424,15 @@
     }
 
     @include mobile {
+        & > .section-content {
+            min-height: 170rem;
+            height: auto;
+        }
+
+        .mouse-help-icon {
+            display: none;
+        }
+
         .top-bar {
             &__logo {
                 top: v(16);
@@ -428,6 +445,7 @@
                 margin-top: v(33);
             }
         }
+
         .hero-slide {
             &__head-wrapper {
                 margin-top: v(120) !important;

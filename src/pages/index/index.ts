@@ -145,6 +145,7 @@ const setup = () => {
             changing = true;
             setTimeout(() => changing = false, 300);
         });
+        disableScroll();
     }
 
     if (isMobileScreen()) {
@@ -164,7 +165,6 @@ const setup = () => {
     }
 
     initHero();
-    disableScroll();
 
     if (isHeroMode) currentAnchorIndex = 0;
     else {
