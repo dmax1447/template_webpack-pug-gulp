@@ -48,9 +48,10 @@ class BuildSite extends Command
             \Storage::disk('local')->put('build/blocks.' . $locale . '.json', json_encode($blocks[$locale], JSON_UNESCAPED_UNICODE));
         }
 
-        $this->info("Compiling pages");
-        exec("cd ". app_path(). " && npm run build 2>&1", $out, $err);
+        $this->info("Compiling pages at " . base_path());
+        exec('cd '. base_path(). ' && export PATH=/usr/local/bin:/usr/bin:/bin && npm --scripts-prepend-node-path=auto run build 2>&1', $out, $err);
         $this->info(join("\n", $out));
+        // dump(join("\n", $out));
         // dump($slides);
     }
 

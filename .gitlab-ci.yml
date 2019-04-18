@@ -16,7 +16,7 @@ deploy backend dev:
 #  - scp -P 2222 -i ./key -r webpack gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
   - scp -P 2222 -i ./key *.json .postcssrc gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
 #  - scp -P 2222 -i ./key .postcssrc gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
-  - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/dev.berezadev.com; npm i; npm run build"
+  - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/dev.berezadev.com; npm i; sudo -u www-data php artisan bereza:build"
 
 deploy backend prod:
   stage: deploy
@@ -49,7 +49,7 @@ pages:
     - public
   script:
   - npm run build
-  - scp -P 2222 -v -i ./key -r public/* gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com/public
+#  - scp -P 2222 -v -i ./key -r public/* gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com/public
 
 prod:
   only:
