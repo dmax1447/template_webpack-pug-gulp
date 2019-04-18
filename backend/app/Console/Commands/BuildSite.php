@@ -47,7 +47,7 @@ class BuildSite extends Command
             $blocks[$locale] = $this->buildBlocks($locale);
             \Storage::disk('local')->put('build/blocks.' . $locale . '.json', json_encode($blocks[$locale], JSON_UNESCAPED_UNICODE));
         }
-        
+
         $this->info("Compiling pages");
         exec("cd ". app_path(). " && npm run build 2>&1", $out, $err);
         $this->info(join("\n", $out));

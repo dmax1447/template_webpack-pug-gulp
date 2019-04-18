@@ -14,6 +14,6 @@
 @formField('medias', [
     'name' => 'icons',
     'label' => 'Иконки',
-    'max' => 3,
+    'max' => 5,
     'note' => 'SVG иконки'
 ])
