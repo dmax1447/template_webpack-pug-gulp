@@ -62,7 +62,7 @@ module.exports = function (isDev = 'dev') {
         ),
         output: {
             pathinfo: false,
-            path: rootDir('./public'),
+            path: rootDir('./dist'),
             filename: 'js/[name].[hash:8].js',
             chunkFilename: 'js/[name].chunk.[chunkhash:8].js',
             publicPath: '',

@@ -5,9 +5,15 @@
     'maxlength' => 200
 ])
 
+@formField('input', [
+    'name' => 'number',
+    'label' => 'Цифра',
+    'maxlength' => 10
+])
+
 @formField('medias', [
     'name' => 'icons',
     'label' => 'Иконки',
-    'max' => 3,
+    'max' => 5,
     'note' => 'SVG иконки'
 ])
