@@ -1,0 +1,16 @@
+
+mixin input-w-top-label(type, label, placeholder, name)
+    .input-w-top-label
+        input(type=type, placeholder=placeholder, name=name)&attributes(attributes)
+        .input-w-top-label__lg
+            .input-w-top-label__lg-left
+            label= label
+            .input-w-top-label__lg-right
+
+mixin textarea-w-top-label(type, label, placeholder, name)
+    .textarea-w-top-label
+        textarea(type=type, placeholder=placeholder, name=name)&attributes(attributes)
+        .textarea-w-top-label__lg
+            .textarea-w-top-label__lg-left
+            label= label
+            .textarea-w-top-label__lg-right

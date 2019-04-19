@@ -1,0 +1,63 @@
+
+.nav-menu {
+    display: inline-block;
+
+    a {
+        position: relative;
+        display: inline-block;
+        font-size: v(16);
+        font-weight: 300;
+        font-family: Ubuntu;
+        line-height: v(24);
+        text-align: center;
+
+        padding-left: v(21);
+        padding-right: v(21);
+
+        .nav-menu__item-placeholder {
+            opacity: 0;
+        }
+
+        .nav-menu__item-text {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            text-align: inherit;
+            color: black;
+            height: v(48);
+
+            transition-duration: 0.01s;
+            transition-property: color;
+        }
+
+        &:hover {
+            & > .nav-menu__item-text {
+                color: $accentLight40;
+            }
+        }
+
+        @include mobile {
+            .nav-menu__item-placeholder {
+                opacity: 1;
+            }
+            .nav-menu__item-text {
+                display: none;
+            }
+        }
+    }
+
+    &--dark {
+        a {
+            .nav-menu__item-text {
+                color: white;
+            }
+
+            &:hover {
+                & > .nav-menu__item-text {
+                    color: $accentLight40;
+                }
+            }
+        }
+    }
+}

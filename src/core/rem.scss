@@ -53,6 +53,14 @@ body {
     }
 }
 
+// Convert pixel units to rems based on base pixel.
+//
+// eg:
+// width: v(40, 4)
+// means we used 10 base pixels
+//
+// on the most berёza ui templates, base pixel equals `4`
+//
 @function v($px, $basePix: 4, $minusPx: 0) {
     @if $minusPx == 0 {
         @if variable-exists(noRems) {
@@ -66,19 +74,13 @@ body {
     @return unquote('calc(' + ($px / $basePix) + 'rem - ' + $minusPx + 'px)');
 }
 
-@function vm($px, $basePix: 5, $minusPx: 0) {
-    @if $minusPx == 0 {
-        @if variable-exists(noRems) {
-            @return ($px - $minusPx) + px;
-        }
-        @return ($px / $basePix) + rem;
-    }
-    @if variable-exists(noRems) {
-        @return $px + px;
-    }
-    @return unquote('calc(' + ($px / $basePix) + 'rem - ' + $minusPx + 'px)');
-}
-
+// Detect mobile screen
+// used as
+//
+// @include mobile {
+//     ... mobile screen rules ...
+// }
+//
 @mixin mobile {
 	@media (max-width: 571px) {
 		@content;

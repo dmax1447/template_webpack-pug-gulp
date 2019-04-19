@@ -4,9 +4,54 @@
 @import "./core/anim/styles.scss";
 @import "./core/lazy/styles.scss";
 
-@import "./parts.scss";
-
 body {
     margin: 0;
     font-family: 'Source Sans Pro';
 }
+
+section {
+    position: relative;
+    max-width: v(1224);
+    margin: 0 auto;
+}
+
+section, footer.full {
+    overflow: hidden;
+}
+
+section.full, footer.full {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+
+    & > .section-content {
+        position: relative;
+        max-width: v(1224);
+        margin: 0 auto;
+
+        @include mobile {
+            max-width: v(408);
+        }
+    }
+}
+
+.nobr {
+    white-space: nowrap;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.mobile-br {
+    display: none;
+}
+
+@include mobile {
+    .mobile-br {
+        display: block;
+    }
+}
+
+@import "./parts/all.scss";

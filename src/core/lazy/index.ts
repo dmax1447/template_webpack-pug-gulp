@@ -1,14 +1,14 @@
-import { $all } from "./utils";
+import { $all } from "../utils";
 
 export const LAZY_ATTR_NAME = '-lazy-attr';
 export const LAZY_ATTR_VALUE = '-lazy-value';
 export const LAZY_SRC = '-lazy-src';
 export const LAZY_HREF = '-lazy-href';
 /** fade in time */
-export const LAZY_ATTR_DELAY = '-lazy-delay';
+export const LAZY_ATTR_FADE = '-lazy-fade';
 /** timeout before loading starts, in seconds */
-export const LAZY_ATTR_TIMEOUT = '-lazy-timeout';
-export const LAZY_DEFAULT_DELAY = '1s';
+export const LAZY_ATTR_DELAY = '-lazy-delay';
+export const LAZY_DEFAULT_FADE = '1s';
 
 export function loadAllLazied() {
     function lazyLoad(target: HTMLElement, attrName: string, attrValue: string) {
@@ -51,7 +51,7 @@ export function loadAllLazied() {
             if (el.tagName.toLowerCase() === 'img' && name === 'src') {
                 const initialTransition = window.getComputedStyle(el).transition;
                 const initialStyleTransition = el.style.transition;
-                const lazyDelay = el.getAttribute(LAZY_ATTR_DELAY) || LAZY_DEFAULT_DELAY;
+                const lazyDelay = el.getAttribute(LAZY_ATTR_FADE) || LAZY_DEFAULT_FADE;
                 const patchedTransition = el.style.transition = initialTransition + ', opacity ' + lazyDelay;
 
                 const onload = () => {
@@ -67,14 +67,14 @@ export function loadAllLazied() {
                 el.classList.add('lazy-loading');
             }
 
-            const timeoutSecStr = el.getAttribute(LAZY_ATTR_TIMEOUT);
+            const timeoutSecStr = el.getAttribute(LAZY_ATTR_DELAY);
             if (timeoutSecStr) {
                 const timeoutSec = parseFloat(timeoutSecStr);
                 if (timeoutSec !== NaN && timeoutSec > 0) {
                     setTimeout(lazyLoad, timeoutSec, el, name, val);
                     return;
                 } else {
-                    console.warn('unknown -lazy-timeout format. should be float number that represent seconds', timeoutSecStr);
+                    console.warn('unknown -lazy-delay format. should be float number that represent seconds', timeoutSecStr);
                 }
             }
             lazyLoad(el, name, val);

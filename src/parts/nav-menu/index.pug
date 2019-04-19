@@ -1,0 +1,12 @@
+mixin nav-menu-item(href, text, class_="")
+    a(href=href, class=class_)
+        span.nav-menu__item-placeholder= text
+        span.nav-menu__item-text= text
+
+mixin nav-menu(dark=false)
+    //- nav(role="navigation", class=("nav-menu " + (dark ? 'nav-menu--dark' : '')))
+    //-     +nav-menu-item("#cases", "Cases", "first-el")
+    //-     +nav-menu-item("#tech", "Technology")
+    //-     +nav-menu-item("#team", "Team")
+    //-     +nav-menu-item("#contacts", "Contacts")
+        //- +nav-menu-item("#estimate-calc", "Reuest estimate")

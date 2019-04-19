@@ -1,0 +1,32 @@
+
+.footer {
+    background-color: black;
+    height: v(96);
+
+    .section-content {
+        padding-left: v(48);
+        padding-right: v(48);
+    }
+
+    p {
+        display: inline-block;
+        margin-top: v(24);
+
+        color: white;
+        font-size: v(16);
+        line-height: v(48);
+        font-family: 'Source Sans Pro';
+        font-weight: 400;
+    }
+
+    a {
+        margin-top: v(24);
+        margin-left: v(24);
+        float: right;
+        color: $accentLight60;
+        cursor: pointer;
+        font-size: v(12);
+        line-height: v(48);
+        font-family: 'Source Sans Pro';
+    }
+}

@@ -1,0 +1,51 @@
+
+.request-estimate-btn {
+    height: v(32);
+    line-height: v(25);
+    border-radius: v(16);
+    border: v(2) solid $accentLight60;
+    box-sizing: border-box;
+    color: $accentLight60;
+    background-color: $accentLight10;
+    padding-left: v(11);
+    padding-right: v(16);
+    // padding-top: v(8);
+    // padding-bottom: v(8);
+    background: none;
+    font-family: Ubuntu;
+    cursor: pointer;
+
+    i {
+        width: v(16);
+        height: v(16);
+        // line-height: 0;
+        font-size: v(13);
+    }
+
+    span {
+        display: inline-block;
+        margin-left: v(4);
+        height: v(16);
+        font-weight: 500;
+        font-size: v(12);
+        padding-left: v(2);
+        padding-right: v(2);
+        transform: unquote("translateY(-"+ v(0.5) +")");
+    }
+
+    &:hover {
+        border-color: $accentLight80;
+        background-color: rgba(0, 0, 0, 0.027);
+    }
+
+    &--dark {
+        border-color: $accentLight80;
+        color: $accentLight60;
+        background-color: none;
+
+        &:hover {
+            border-color: $accentLight60;
+            background-color: black;
+        }
+    }
+}

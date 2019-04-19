@@ -1,0 +1,21 @@
+mixin _feedback-form(dark=false, centered=false, headerText="Свяжитесь с нами")
+    form(class=("feedback-form " + (dark ? 'feedback-form--dark ' : '') + (centered === true ? 'feedback-form--centered ' : '')), action="/contact", method="post")
+        h4= headerText
+        +input-w-top-label("text", "Ваше имя", "Имя и фамилия", "name")(required)
+        +input-w-top-label("email", "e-mail", "yourmail@company.com", "email", pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")(required)
+        +input-w-top-label("tel", "телефон", "+9 (999) 999-99-99", "phone")(required)
+        +textarea-w-top-label("text", "что-то, что нам нужно знать заранее", "Информация о проекте", "message")(required)
+        input(type="submit", value="Отправить")
+        p
+            //- Отправляя форму, вы разрешаете обработку персональных данных<br>
+            //- и соглашаетесь c <a href="/politic-confident.pdf">политикой конфиденциальности</a>.
+
+mixin feedback-form(dark=false, section=false, centered=false, headerText="Свяжитесь с нами")
+    if section
+        section#feedback(class=("full feedback " + (dark ? 'feedback--dark' : '')))
+            .section-content
+                if block
+                    block
+                +_feedback-form(dark, true, headerText)
+    else
+        +_feedback-form(dark, centered, headerText)

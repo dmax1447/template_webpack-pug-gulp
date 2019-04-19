@@ -7,7 +7,9 @@
     "twill-build": "rm -f public/hot && npm run twill-copy-blocks && cd vendor/area17/twill && npm ci && npm run prod && cp -R public/* ${INIT_CWD}/public",
     "twill-copy-blocks": "npm run twill-clean-blocks && mkdir -p resources/assets/js/blocks/ && cp -R resources/assets/js/blocks/ vendor/area17/twill/frontend/js/components/blocks/customs/",
     "twill-clean-blocks": "rm -rf vendor/area17/twill/frontend/js/components/blocks/customs",
-    "build": "webpack --config ./webpack/webpack.config.prod.js --mode production && cp -R dist/* public/",
+    "build-on-vps": "npm run build && cp -R dist/* public/",
+
+    "build": "webpack --config ./webpack/webpack.config.prod.js --mode production",
     "start": "webpack-dev-server --open --config ./webpack/webpack.config.dev.js --mode development"
   },
   "author": "morglod",

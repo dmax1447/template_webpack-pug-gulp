@@ -7,6 +7,7 @@ const { getEntries, rootDir } = require('./utils.js');
 
 const entries = getEntries(rootDir('./src/pages/'), 'index', 'ts');
 const pages = getEntries(rootDir('./src/pages/'), 'index', 'pug');
+const outputPath = process.env.BUILD_OUTPUT || './dist';
 
 /** isDev should be 'dev' or 'prod' */
 module.exports = function (isDev = 'dev') {
@@ -62,7 +63,7 @@ module.exports = function (isDev = 'dev') {
         ),
         output: {
             pathinfo: false,
-            path: rootDir('./dist'),
+            path: rootDir(outputPath),
             filename: 'js/[name].[hash:8].js',
             chunkFilename: 'js/[name].chunk.[chunkhash:8].js',
             publicPath: '',

@@ -31,10 +31,10 @@ mixin hero-video(key, videoSrc, backgroundStylePlaceholder, isFirst=false)
         if !!isFirst
             img(src=(videoSrc + ".jpg"))
         else
-            img(-lazy-src=(videoSrc + ".jpg"), -lazy-delay="0.5s", -lazy-timeout="1s")
+            img(-lazy-src=(videoSrc + ".jpg"), -lazy-fade="0.5s", -lazy-delay="1s")
         video(playsinline autoplay muted)
             if !!isFirst
-                source(-lazy-src=videoSrc, type="video/mp4", -lazy-delay="0.5s", -lazy-timeout="2s")
+                source(-lazy-src=videoSrc, type="video/mp4", -lazy-fade="0.5s", -lazy-delay="2s")
 
 mixin hero-video-progress(key, text, isFirst=false)
     div(id=(key + "-progressbar") class=("hero-video-progress " + (isFirst ? "hero-video-progress--active" : "")))

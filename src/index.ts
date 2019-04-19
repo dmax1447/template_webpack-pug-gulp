@@ -7,18 +7,17 @@ import smoothscroll from 'smoothscroll-polyfill';
 import {
     $ as $q, $all, sendForm,
 } from './core/utils';
-import { initAnimations, runAnimation, pickAnimParams, isAnimPlaying, isAnimStopped } from './core/anim';
+import { initAnimations } from './core/anim';
 import { initCarousels } from './core/owl-carousel';
 import { remFix } from './core/rem-fix';
 import { loadAllLazied } from './core/lazy';
 
+remFix();
 initAnimations();
 
 window.onload = () => {
     // init smoothscroll
     smoothscroll.polyfill();
-
-    let skipScrollEvents = false;
 
     // setup nav with smoothscroll
     $all<HTMLAnchorElement>('a[href]').forEach(el => {
@@ -26,12 +25,6 @@ window.onload = () => {
         
         el.onclick = evt => {
             evt.preventDefault();
-
-            skipScrollEvents = true;
-            setTimeout(() => {
-                skipScrollEvents = false;
-                // updateScrollStates();
-            }, 1000);
 
             document.querySelector(el.hash)!.scrollIntoView({
                 block: 'start',

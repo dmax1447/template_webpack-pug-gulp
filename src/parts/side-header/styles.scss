@@ -1,0 +1,30 @@
+
+.side-header {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: normal;
+    font-size: v(16);
+    line-height: v(24);
+    text-align: right;
+    color: #000000;
+
+    &::after {
+        margin-left: v(8);
+        display: inline-block;
+        content: ' ';
+        width: v(48);
+        height: v(2);
+        margin-bottom: v(5);
+        background-color: $accentLight60;
+    }
+
+    &--dark-bg {
+        color: white;
+    }
+}
+
+@include mobile {
+    .side-header {
+        margin-right: v(48);
+    }
+}

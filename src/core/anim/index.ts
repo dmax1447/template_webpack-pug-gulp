@@ -32,6 +32,7 @@ export type AnimParams = {
 
 const DEFAULT_IRATE = 0.5;
 
+/** pick anim params from element's attributes */
 export function pickAnimParams(el: HTMLElement): AnimParams {
     return {
         name: el.getAttribute('--anim')!,
@@ -93,6 +94,7 @@ export function afterAnimation(el: AnimatedElement) {
     el['--anim'].timeout = undefined;
 }
 
+/** force run animation; You could get animParams with `pickAnimParams` method.  */
 export function runAnimation(el: HTMLElement, animParams: AnimParams) {
     if (isAnimPlaying(el) || isAnimStopped(el)) {
         console.warn('reset animation before playing');
@@ -153,6 +155,16 @@ export function updateAnimations(els: HTMLElement[]) {
     }
 }
 
+/**
+ * Prepare animations & setup handlers.  
+ * Run it once immediately after dom loaded (before `window.onload` fired).
+ * 
+ * Eg:
+ * ```js
+ * initAnimations();
+ * window.onload = () => {};
+ * ```
+ */
 export function initAnimations() {
     let animatedElements: HTMLElement[] = [];
     

@@ -49,7 +49,7 @@ class BuildSite extends Command
         }
 
         $this->info("Compiling pages at " . base_path());
-        exec('cd '. base_path(). ' && export PATH=/usr/local/bin:/usr/bin:/bin && npm --scripts-prepend-node-path=auto run build 2>&1', $out, $err);
+        exec('cd '. base_path(). ' && export PATH=/usr/local/bin:/usr/bin:/bin && npm --scripts-prepend-node-path=auto run build-on-vps 2>&1', $out, $err);
         $this->info(join("\n", $out));
         // dump(join("\n", $out));
         // dump($slides);
