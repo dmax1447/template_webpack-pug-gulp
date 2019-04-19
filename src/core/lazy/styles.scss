@@ -3,6 +3,7 @@
     transition: opacity 0.5s;
 }
 
-[-lazy-src] {
+img[-lazy-src],
+video > source[-lazy-src] {
     opacity: 0;
 }

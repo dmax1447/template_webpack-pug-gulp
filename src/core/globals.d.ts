@@ -1,4 +1,5 @@
 interface Window {
+    /** yandex metric */
     ym<CallbackCtx = any>(
         yandexCounter: string|number,
         reachGoal: 'reachGoal',

@@ -5,7 +5,7 @@
 import smoothscroll from 'smoothscroll-polyfill';
 
 import {
-    $ as $q, $all,
+    $ as $q, $all, sendForm,
 } from './core/utils';
 import { initAnimations, runAnimation, pickAnimParams, isAnimPlaying, isAnimStopped } from './core/anim';
 import { initCarousels } from './core/owl-carousel';
@@ -53,31 +53,3 @@ window.onload = () => {
 
     loadAllLazied();
 };
-
-function sendForm(url: string, form: HTMLFormElement, after: (isOk: boolean) => void) {
-    formSubmitXHR(url, JSON.stringify(getFormData(form)), xhr => {
-        if (xhr.status === 200) after(true);
-        else after(false);
-    });
-}
-
-function formSubmitXHR(url: string, body: string, then: (xhr: XMLHttpRequest) => void) {
-    const xhr = new XMLHttpRequest();
-  
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader('Accept', 'application/json');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-  
-    xhr.onreadystatechange = function(this: XMLHttpRequest) {
-      if (this.readyState != 4) return;
-      then(xhr);
-    };
-  
-    xhr.send(body);
-}
-
-function getFormData<T = { [field: string]: string }>(form: HTMLFormElement): T {
-    const fieldNodes = form.querySelectorAll('input, textarea');
-    const fields: HTMLInputElement[] = Array.prototype.slice.call(fieldNodes);
-    return fields.reduce((sum, field) => field.name ? Object.assign(sum, { [field.name]: field.value }) : sum, {} as T);
-}
