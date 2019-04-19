@@ -34,7 +34,10 @@ const pageScrollAnchors: { selector: string, hash: string, onEnter?: Function, o
     },
 ];
 
+const MIN_TIME_BEFORE_ANCHOR_CHANGE = 300;
+
 let currentAnchorIndex = 0;
+let lastTimeAnchorChanged = 0;
 
 /** current in-view anchor; returns [ anchor, index ] or undefined */
 function getCurrentAnchor(): [ (typeof pageScrollAnchors[0]), number ]|undefined {
@@ -72,6 +75,9 @@ function getCurrentAnchor(): [ (typeof pageScrollAnchors[0]), number ]|undefined
 }
 
 async function setCurrentAnchor(index: number) {
+    const now = Date.now();
+    if (now !== 0 && (now - MIN_TIME_BEFORE_ANCHOR_CHANGE) < lastTimeAnchorChanged) return;
+
     const anch = pageScrollAnchors[index];
 
     if (currentAnchorIndex !== index) {
@@ -86,6 +92,7 @@ async function setCurrentAnchor(index: number) {
 
     smoothScrollTo($q(`#${anch.hash}`));
     currentAnchorIndex = index;
+    lastTimeAnchorChanged = now;
 }
 
 function centerCurrentAnchor() {
