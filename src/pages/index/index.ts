@@ -9,6 +9,9 @@ import {
     $ as $q, $all, getWindowGlobalRect, isGlobalRectInViewport, intersectionRate, smoothScrollTo, getGlobalRect, isMobileScreen, getScroll, disableScroll, sleep,
 } from '../../core/utils';
 
+const Lethargy = require("exports-loader?this.Lethargy!lethargy/lethargy");
+const lethargy = new Lethargy();
+
 const pageScrollAnchors: { selector: string, hash: string, onEnter?: Function, onLeave?: Function }[] = [
     {
         hash: "hero",
@@ -148,6 +151,8 @@ const setup = () => {
     if (!isMobileScreen()) {
         let changing = false;
         $('html').mousewheel((e) => {
+            if(lethargy.check(e) === false) return;
+            
             if (isHeroMode && !isLastSlide() || changing) return;
             const direction = e.deltaY > 0 ? 'up' : 'down';
             
