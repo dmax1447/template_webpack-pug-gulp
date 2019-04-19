@@ -1,5 +1,16 @@
 image: node
 
+before_script:
+  - npm install
+  - mkdir -p ~/.ssh
+  - echo "$elantum_private_key" > ./key
+  - chmod 700 ./key
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+cache:
+  paths:
+    - node_modules/
+
 deploy backend dev:
   stage: deploy
   only:
@@ -30,17 +41,6 @@ deploy backend prod:
   - scp -P 2222 -i ./key -r backend/* gitlab@omp-frontend.elantum.com:/var/www/berezadev.com
   - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-dev; php artisan migrate"
 
-before_script:
-  - npm install
-  - mkdir -p ~/.ssh
-  - echo "$elantum_private_key" > ./key
-  - chmod 700 ./key
-  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-
-cache:
-  paths:
-    - node_modules/
-
 pages:
   only:
   - /master/
@@ -58,4 +58,4 @@ prod:
     - public
   script:
   - BUILD=prod npm run build
-  - scp -P 2222 -v -i ./key -r public/* gitlab@omp-frontend.elantum.com:/var/www/berezadev.com/public
+  - scp -P 2222 -v -i ./key -r dist/* gitlab@omp-frontend.elantum.com:/var/www/berezadev.com/public
