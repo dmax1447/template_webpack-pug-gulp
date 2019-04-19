@@ -6,7 +6,7 @@ if (process.env.BUILD === 'prod') {
 
 import { initHero, enterHeroMode, leaveHeroMode, isHeroMode, isLastSlide } from './hero';
 import {
-    $ as $q, $all, getWindowGlobalRect, isGlobalRectInViewport, intersectionRate, smoothScrollTo, getGlobalRect, isMobileScreen, getScroll, disableScroll, sleep,
+    $ as $q, $all, getWindowGlobalRect, isGlobalRectInViewport, intersectionRate, smoothScrollTo, getGlobalRect, isMobileScreen, getScroll, disableScroll, sleep, enableScroll,
 } from '../../core/utils';
 
 const Lethargy = require("exports-loader?this.Lethargy!lethargy/lethargy");
@@ -147,38 +147,46 @@ function nextAnchor() {
     }
 }
 
-const setup = () => {
-    if (!isMobileScreen()) {
-        let changing = false;
-        $('html').mousewheel((e) => {
-            if(lethargy.check(e) === false) return;
-            
-            if (isHeroMode && !isLastSlide() || changing) return;
-            const direction = e.deltaY > 0 ? 'up' : 'down';
-            
-            if (direction === 'down') nextAnchor();
-            else prevAnchor();
+let changing = false;
+const onMouseWheel = (e: JQueryMousewheel.JQueryMousewheelEventObject) => {
+    if(lethargy.check(e) === false) return;
+    
+    if (isHeroMode && !isLastSlide() || changing) return;
+    const direction = e.deltaY > 0 ? 'up' : 'down';
+    
+    if (direction === 'down') nextAnchor();
+    else prevAnchor();
 
-            changing = true;
-            setTimeout(() => changing = false, 300);
-        });
+    changing = true;
+    setTimeout(() => changing = false, 300);
+};
+
+let { top: prevousYScroll } = getScroll();
+const onScroll = () => {
+    if (isHeroMode) return;
+    
+    const { top: newY } = getScroll();
+    const deltaY = newY - prevousYScroll;
+    prevousYScroll = newY;
+
+    if (deltaY < 0 && window.scrollY <= ($q('section.hero').getBoundingClientRect().height / 2)) {
+        enterHeroMode();
+    }
+};
+
+const setup = () => {
+    $('html').off('mousewheel', onMouseWheel as any);
+
+    if (!isMobileScreen()) {
+        $('html').on('mousewheel', onMouseWheel);
         disableScroll();
+    } else {
+        enableScroll();
     }
 
+    window.removeEventListener('scroll', onScroll);
     if (isMobileScreen()) {
-        let { top: prevousY } = getScroll();
-
-        window.addEventListener('scroll', (evt) => {
-            if (isHeroMode) return;
-            
-            const { top: newY } = getScroll();
-            const deltaY = newY - prevousY;
-            prevousY = newY;
-
-            if (deltaY < 0 && window.scrollY <= ($q('section.hero').getBoundingClientRect().height / 2)) {
-                enterHeroMode();
-            }
-        });
+        window.addEventListener('scroll', onScroll);
     }
 
     initHero();

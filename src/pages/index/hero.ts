@@ -185,6 +185,8 @@ function onWheel(evt: JQueryMousewheel.JQueryMousewheelEventObject) {
     }
 }
 
+let _registeredSwipe: Function|undefined;
+
 export function initHero() {
     $all('.hero-slide-video').forEach((slideVideoEl, i) => {
         const key = slideVideoEl.id.substr(0, slideVideoEl.id.length - "-video".length);
@@ -226,13 +228,17 @@ export function initHero() {
 
     slideKeys = Object.keys(slides);
 
+    $('html').off('mousewheel', onWheel as any);
+    if (_registeredSwipe) _registeredSwipe();
+    _registeredSwipe = undefined;
+
     if (isMobileScreen()) {
-        listenSwipe($q('section.hero'), (direction) => {
+        _registeredSwipe = listenSwipe($q('section.hero'), (direction) => {
             if (direction === 'left') prevSlide('wrap');
             else if (direction === 'right') nextSlide();
         }, 30);
     } else {
-        $('html').mousewheel(onWheel);
+        $('html').on('mousewheel', onWheel);
     }
 
     changeSlide(slideKeys[0], undefined, 'byIndex');
@@ -246,9 +252,8 @@ export function initHero() {
         $q('.features .top-bar').style.display = 'block';
     }
 
-    $q('section.hero a[href="#feedback"]').addEventListener('click', () => {
-        leaveHeroMode();
-    });
+    $q('section.hero a[href="#feedback"]').removeEventListener('click', leaveHeroMode);
+    $q('section.hero a[href="#feedback"]').addEventListener('click', leaveHeroMode);
 }
 
 export function enterHeroMode() {

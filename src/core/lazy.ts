@@ -54,12 +54,15 @@ export function loadAllLazied() {
                 const lazyDelay = el.getAttribute(LAZY_ATTR_DELAY) || LAZY_DEFAULT_DELAY;
                 const patchedTransition = el.style.transition = initialTransition + ', opacity ' + lazyDelay;
 
-                el.addEventListener('load', () => {
+                const onload = () => {
                     el.classList.remove('lazy-loading');
                     if (el.style.transition === patchedTransition) {
                         el.style.transition = initialStyleTransition;
                     }
-                });
+                    el.removeEventListener('load', onload);
+                };
+
+                el.addEventListener('load', onload);
 
                 el.classList.add('lazy-loading');
             }
