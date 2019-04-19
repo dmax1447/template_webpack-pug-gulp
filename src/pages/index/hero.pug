@@ -29,7 +29,7 @@ mixin hero-video(key, videoSrc, backgroundStylePlaceholder, isFirst=false)
     )
         //- placeholder fallback
         if !!isFirst
-            img(-lazy-src=(videoSrc + ".jpg"), -lazy-delay="0.5s")
+            img(src=(videoSrc + ".jpg"))
         else
             img(-lazy-src=(videoSrc + ".jpg"), -lazy-delay="0.5s", -lazy-timeout="1s")
         video(playsinline autoplay muted)
