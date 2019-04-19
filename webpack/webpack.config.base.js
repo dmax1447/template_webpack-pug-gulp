@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const loaderUtils = require('loader-utils');
 
 const { getEntries, rootDir } = require('./utils.js');
 
@@ -18,9 +19,17 @@ module.exports = function (isDev = 'dev') {
                 loader: 'html-loader',
                 options: {
                     attrs: false, // ['img:src', 'link:href', 'source:src'] // false
+                    // attrs: ['link:href']
                 }
             },
-            'pug-html-loader',
+            {
+                loader: 'pug-html-loader',
+                options: {
+                    data: {
+                        loaderUtils: loaderUtils,
+                    }
+                }
+            },
         ]
     };
 
@@ -47,7 +56,10 @@ module.exports = function (isDev = 'dev') {
     };
 
     const config = {
-        entry: Object.assign(entries, { app: rootDir('./src/index.ts') }),
+        entry: Object.assign(
+            entries,
+            { app: rootDir('./src/index.ts'), }
+        ),
         output: {
             pathinfo: false,
             path: rootDir('./public'),

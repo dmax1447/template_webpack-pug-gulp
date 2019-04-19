@@ -22,7 +22,7 @@ section.features#features
     .section-content
         header.top-bar(style="display:none")
             .top-bar__page-wrapper
-                img.top-bar__logo(src="assets/logo.svg")
+                img.top-bar__logo(-lazy-src="assets/logo.svg")
                 a(href="#feedback")
                     +request-estimate-btn
             //- div.top-bar__menu.top-bar__menu--closed
@@ -31,12 +31,12 @@ section.features#features
         +side-header("помогаем")
         .features__we-help-items
             for item in weHelpItems
-                img(class=("features__we-help-item " + (weHelpFadeItems.indexOf(item) !== -1 ? 'features__we-help-item--fade' : '')), src=("assets/main-features/" + item + ".svg"))
+                img(class=("features__we-help-item " + (weHelpFadeItems.indexOf(item) !== -1 ? 'features__we-help-item--fade' : '')), -lazy-src=("assets/main-features/" + item + ".svg"))
         +menu-placeholder("we-offer")
         +side-header("предлагаем")
         .features__we-offer-items
             .features__we-offer-item
-                img.anim(src=("assets/rocket-sticker.svg"), --anim="slide-in-back", --anim-speed="1.2s", --anim-delay="0.5s")
+                img.anim(-lazy-src=("assets/rocket-sticker.svg"), --anim="slide-in-back", --anim-speed="1.2s", --anim-delay="0.5s")
                 div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.4s")
                     h2 Стартапам
                     ul
@@ -50,7 +50,7 @@ section.features#features
                             i(class="far fa-comments-alt")
                             span Разъясним и подскажем на каждом этапе создания вашего продукта
             .features__we-offer-item
-                img.anim(src=("assets/share-sticker.svg"), --anim="slide-in-back", --anim-speed="1.2s", --anim-delay="0.5s")
+                img.anim(-lazy-src=("assets/share-sticker.svg"), --anim="slide-in-back", --anim-speed="1.2s", --anim-delay="0.5s")
                 div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.6s")
                     h2 Агентствам
                     ul
@@ -64,7 +64,7 @@ section.features#features
                             i(class="far fa-chart-pie-alt")
                             span Нам можно отдать часть работ, например только фронт или только бэк
             .features__we-offer-item
-                img.anim(src=("assets/brain-sticker.svg"), --anim="slide-in-back", --anim-speed="1.2s", --anim-delay="0.5s")
+                img.anim(-lazy-src=("assets/brain-sticker.svg"), --anim="slide-in-back", --anim-speed="1.2s", --anim-delay="0.5s")
                 div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.8s")
                     h2 Корпорациям
                     ul

@@ -45,13 +45,13 @@ function resetProgress(currentActiveKey: string) {
     } = slides[currentActiveKey];
 
     window.clearInterval(videoProgressBarUpdater);
-    const video = videoGroupEl.querySelector('video')!;
+    const video = videoGroupEl.querySelector('video');
     const barFill = progressBarEl.querySelector('.hero-video-progress__bar-fill') as HTMLDivElement;
     progressBarEl.classList.toggle('hero-video-progress--active', true);
-    video.currentTime = 0;
+    if (video) video.currentTime = 0;
 
     videoProgressBarUpdater = window.setInterval(() => {
-        barFill.style.width = `${video.currentTime / video.duration * 100}%`;
+        barFill.style.width = video ? `${video.currentTime / video.duration * 100}%` : '100%';
     }, 500);
 }
 
@@ -61,22 +61,22 @@ function preloadSlideVideo(slideKey: string) {
     } = slides[slideKey];
 
     const src = videoGroupEl.getAttribute('data-src');
-    const videoEl = videoGroupEl.querySelector('video')!;
+    const videoEl = videoGroupEl.querySelector('video');
     const videoSourceEl = videoGroupEl.querySelector('source');
 
     if (!videoSourceEl) {
-        const sourceEl = document.createElement('source')!;
+        const sourceEl = document.createElement('source');
         sourceEl.src = src!;
         sourceEl.type = 'video/mp4';
-        videoEl.appendChild(sourceEl);
+        if (videoEl) videoEl.appendChild(sourceEl);
     }
 
-    if (videoEl.seekable.length === 0) {
+    if (videoEl && videoEl.seekable.length === 0) {
         videoEl.load();
     }
 
     try {
-        videoEl.play().catch(() => {});
+        if (videoEl) videoEl.play().catch(() => {});
     } catch {}
 }
 
@@ -127,7 +127,8 @@ async function changeSlide(
         videoGroupEl.classList.toggle('hero-slide-video--visible', false);
         slideEl.classList.toggle('hero-slide--visible', false);
 
-        videoGroupEl.querySelector('video')!.pause();
+        const vid = videoGroupEl.querySelector('video');
+        if (vid) vid.pause();
     }
 
     const {
@@ -185,15 +186,15 @@ function onWheel(evt: JQueryMousewheel.JQueryMousewheelEventObject) {
 }
 
 export function initHero() {
-    $all('.hero-slide-video').forEach(slideVideoEl => {
+    $all('.hero-slide-video').forEach((slideVideoEl, i) => {
         const key = slideVideoEl.id.substr(0, slideVideoEl.id.length - "-video".length);
         if (!slides[key]) slides[key] = {} as any;
         slides[key]["videoGroupEl"] = slideVideoEl;
 
-        const video = slideVideoEl.querySelector('video')!;
-        video.onended = () => {
-            nextSlide();
-        };
+        const video = slideVideoEl.querySelector('video');
+        if (video) {
+            video.onended = () => nextSlide();
+        }
     });
 
     $all('.hero-video-progress').forEach(videoProgressEl => {

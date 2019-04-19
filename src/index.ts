@@ -10,6 +10,7 @@ import {
 import { initAnimations, runAnimation, pickAnimParams, isAnimPlaying, isAnimStopped } from './core/anim';
 import { initCarousels } from './core/owl-carousel';
 import { remFix } from './core/rem-fix';
+import { loadAllLazied } from './core/lazy';
 
 initAnimations();
 
@@ -49,6 +50,8 @@ window.onload = () => {
             else alert('Произошла ошибка');
         });
     };
+
+    loadAllLazied();
 };
 
 function sendForm(url: string, form: HTMLFormElement, after: (isOk: boolean) => void) {

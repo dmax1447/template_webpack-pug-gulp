@@ -27,15 +27,14 @@ html
         meta(name="twitter:card" content="summary_large_image")
 
         link(href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400|Ubuntu:300,500&amp;subset=cyrillic" rel="stylesheet")
-        link(href="assets/css/fontawesome-all.min.css" rel="stylesheet")
-        //- if process.env.NODE_ENV !== 'development'
-        //- link(href="../../core/styles-no-rem.scss" rel="stylesheet" async)
+        noscript
+            link(href="assets/css/fontawesome-all.min.css" rel="stylesheet")
+        link(-lazy-href="assets/css/fontawesome-all.min.css" rel="stylesheet")
+        
         script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
         script(src="assets/js/jquery.mousewheel.min.js")
         noscript
             //- link(href="../../core/no-script.scss" rel="stylesheet")
-        if process.env.NODE_ENV === 'production'
-            // METRICS
         block head
     body
         block body

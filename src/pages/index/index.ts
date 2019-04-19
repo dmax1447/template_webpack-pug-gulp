@@ -1,4 +1,9 @@
 import './index.scss';
+
+if (process.env.BUILD === 'prod') {
+    require('./no-rem.scss');
+}
+
 import { initHero, enterHeroMode, leaveHeroMode, isHeroMode, isLastSlide } from './hero';
 import {
     $ as $q, $all, getWindowGlobalRect, isGlobalRectInViewport, intersectionRate, smoothScrollTo, getGlobalRect, isMobileScreen, getScroll, disableScroll, sleep,

@@ -90,9 +90,8 @@
         background: black;
         display: none;
 
-        video {
+        video, img {
             display: none;
-
             position: absolute;
             height: 100%;
             width: 100%;
@@ -103,7 +102,7 @@
 
         &--visible {
             display: block;
-            video {
+            video, img {
                 display: block;
             }
         }
