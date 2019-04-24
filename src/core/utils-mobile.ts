@@ -9,7 +9,11 @@ export function detectTouch(
     };
 
     const onpointer = (evt: PointerEvent) => {
-        if (evt.pointerType !== 'mouse') {
+        if (evt.pointerType === 'mouse') {
+            // destroy pointer handler coz its too expensive
+            window.removeEventListener('pointerdown', onpointer);
+            window.removeEventListener('pointermove', onpointer);
+        } else {
             ontouch();
         }
     };
