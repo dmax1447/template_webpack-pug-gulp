@@ -34,12 +34,9 @@ export class AnchorNavControls {
         }
     
         window.removeEventListener('scroll', this._onScroll);
-        console.log('anchor nav controls: reset');
         if (isMobileScreen()) {
-            console.log('anchor nav controls: isMobileScreen');
             window.addEventListener('scroll', this._onScroll);
         } else {
-            console.log('anchor nav controls: not isMobileScreen');
         }
 
         window.removeEventListener('keydown', this._onKeyDown);
@@ -73,14 +70,12 @@ export class AnchorNavControls {
         this.prevousYScroll = newY;
 
         if (deltaY < 0 && window.scrollY <= ($q('section.hero').getBoundingClientRect().height / 2)) {
-            console.log('anchor nav controls: this.hero.enterHeroMode');
             this._changing = true;
             await this.hero.enterHeroMode();
             this._changing = false;
         }
 
         if (window.scrollY >= ($q('section.hero').getBoundingClientRect().height / 2)) {
-            console.log('anchor nav controls: this.hero.leaveHeroMode');
             this._changing = true;
             await this.hero.leaveHeroMode();
             this._changing = false;

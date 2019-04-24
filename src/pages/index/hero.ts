@@ -30,7 +30,6 @@ export class Hero {
         prevSlide: (wrap) => this.heroCarousel.prevSlide(wrap),
         nextSlide: (wrap) => {
             if (!wrap && !isMobileScreen() && this.heroCarousel.isLastSlide()) {
-                console.log('isLastSlide', this.heroCarousel.isLastSlide());
                 this.leaveHeroMode();
             } else {
                 this.heroCarousel.nextSlide();

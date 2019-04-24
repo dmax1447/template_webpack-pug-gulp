@@ -29,7 +29,6 @@ const hero = new Hero({
         heroChanging = false;
     },
 });
-console.log(hero);
 
 const anchorNav = new AnchorNav([
     {
@@ -78,7 +77,6 @@ async function resetAnchor() {
 }
 
 function handleWindowResize() {
-    console.log('resize');
     anchorControls.reset();
     hero.reset();
     resetAnchor();

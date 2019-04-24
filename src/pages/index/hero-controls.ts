@@ -23,17 +23,11 @@ export class HeroControls {
     };
 
     register = () => {
-        console.log('hero controls register');
-
         if (isMobileScreen()) {
-            console.log('hero controls register: isMobileScreen, listenSwipe');
             this._registeredSwipe = listenSwipe($q('section.hero'), (direction) => {
-                console.log('hero controls register: swipe: ', direction);
                 if (direction === 'left') this.prevSlide('wrap');
                 else if (direction === 'right') this.nextSlide('wrap');
             }, 30);
-        } else {
-            console.log('hero controls register: not isMobileScreen');
         }
         
         $('html').on('mousewheel', this._onWheel);
@@ -42,9 +36,7 @@ export class HeroControls {
 
     unregister = () => {
         $('html').off('mousewheel', this._onWheel as any);
-        console.log('hero controls unregister');
         if (this._registeredSwipe) {
-            console.log('hero controls unregister swipe');
             this._registeredSwipe();
             this._registeredSwipe = undefined;
         }
