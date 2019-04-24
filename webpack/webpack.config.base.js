@@ -3,11 +3,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const loaderUtils = require('loader-utils');
 
-const { getEntries, rootDir } = require('./utils.js');
+const { getEntries, rootDir, getSiteData } = require('./utils.js');
 
 const entries = getEntries(rootDir('./src/pages/'), 'index', 'ts');
 const pages = getEntries(rootDir('./src/pages/'), 'index', 'pug');
 const outputPath = process.env.BUILD_OUTPUT || './dist';
+const dataPath = (process.env.DATA_OUTPUT || './backend') + '/storage/app/build';
 
 /** isDev should be 'dev' or 'prod' */
 module.exports = function (isDev = 'dev') {
@@ -28,6 +29,10 @@ module.exports = function (isDev = 'dev') {
                 options: {
                     data: {
                         loaderUtils: loaderUtils,
+                        lang: 'ru',
+                        siteData: function (name, lang) {
+                            return getSiteData(lang, dataPath, name);
+                        }
                     }
                 }
             },
