@@ -1,6 +1,6 @@
 
 import {
-    $ as $q, $all, getWindowGlobalRect, isGlobalRectInViewport, intersectionRate, smoothScrollTo, getGlobalRect, isMobileScreen, getScroll, disableScroll, sleep, enableScroll,
+    $ as $q, getWindowGlobalRect, intersectionRate, smoothScrollTo, getGlobalRect,
 } from '../../core/utils';
 
 export type AnchorDef = {

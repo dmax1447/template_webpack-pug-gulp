@@ -227,6 +227,8 @@ export function startDetectingScreenSwipe(
         window.removeEventListener('touchmove', touchMove);
         window.removeEventListener('touchend', touchEnd);
     };
+
+    return destroy;
 }
 
 export function listenSwipe(
@@ -234,18 +236,21 @@ export function listenSwipe(
     onSwipe: (direction: 'up'|'down'|'left'|'right') => void,
     deadZone = 15,
 ): () => void {
+    let lastActionDestroy: Function;
+
     const mouseDown = () => {
-        startDetectingScreenSwipe(onSwipe, undefined, deadZone);
+        lastActionDestroy = startDetectingScreenSwipe(onSwipe, undefined, deadZone);
     };
 
     const touchStart = () => {
-        startDetectingScreenSwipe(onSwipe, undefined, deadZone);
+        lastActionDestroy = startDetectingScreenSwipe(onSwipe, undefined, deadZone);
     };
 
     el.addEventListener('mousedown', mouseDown);
     el.addEventListener('touchstart', touchStart);
 
     const destroy = () => {
+        if (lastActionDestroy) lastActionDestroy();
         el.removeEventListener('mousedown', mouseDown);
         el.removeEventListener('touchstart', touchStart);
     };

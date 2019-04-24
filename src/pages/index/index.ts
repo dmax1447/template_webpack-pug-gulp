@@ -6,16 +6,20 @@ if (process.env.BUILD === 'prod') {
 
 import { Hero } from './hero';
 import {
-    $ as $q, smoothScrollTo, isMobileScreen, getScroll, disableScroll, enableScroll,
+    $ as $q,
 } from '../../core/utils';
 import { AnchorNav } from './anchor-nav';
 import { AnchorNavControls } from './anchor-nav-controls';
 
 const hero = new Hero({
     onEnterHero: () => {},
-    onLeaveHero: () => {
+    onLeaveHero: (nextAnchor) => {
         setTimeout(() => {
-            anchorNav.setCurrentAnchor(1, 'force');
+            if (nextAnchor) {
+                anchorNav.setCurrentAnchor(anchorNav.anchors.findIndex(x => x.hash === nextAnchor), 'force');
+            } else {
+                anchorNav.setCurrentAnchor(1, 'force');
+            }
         }, 500);
     },
 });
@@ -67,7 +71,9 @@ function resetAnchor() {
 }
 
 function handleWindowResize() {
+    console.log('resize');
     anchorControls.reset();
+    hero.reset();
     resetAnchor();
 }
 

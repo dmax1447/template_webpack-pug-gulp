@@ -6,7 +6,7 @@ type SlideElements = {
     slideEl: HTMLDivElement,
 };
 
-const MIN_TIME_BEFORE_SLIDE_CHANGE = 500;
+const MIN_TIME_BEFORE_SLIDE_CHANGE = 60;
 const SLIDE_DISAPPEARING_TIME = 500;
 
 export class HeroCarousel {

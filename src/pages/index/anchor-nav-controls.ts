@@ -5,6 +5,8 @@ import { AnchorNav } from "./anchor-nav";
 const Lethargy = require("exports-loader?this.Lethargy!lethargy/lethargy");
 const lethargy = new Lethargy();
 
+const CHANGING_TIMEOUT = 60;
+
 export class AnchorNavControls {
     prevousYScroll: number = 0;
     hero: Hero;
@@ -34,8 +36,12 @@ export class AnchorNavControls {
         }
     
         window.removeEventListener('scroll', this._onScroll);
+        console.log('anchor nav controls: reset');
         if (isMobileScreen()) {
+            console.log('anchor nav controls: isMobileScreen');
             window.addEventListener('scroll', this._onScroll);
+        } else {
+            console.log('anchor nav controls: not isMobileScreen');
         }
 
         window.removeEventListener('keydown', this._onKeyDown);
@@ -57,19 +63,22 @@ export class AnchorNavControls {
         else this.anchorNav.prevAnchor();
 
         this._changing = true;
-        setTimeout(() => this._changing = false, 300);
+        setTimeout(() => this._changing = false, CHANGING_TIMEOUT);
     };
 
     _onScroll = (evt: Event) => {
-        if (this.hero.isHeroMode) return;
-        if(lethargy.check(evt) === false) return;
-        
         const { top: newY } = getScroll();
         const deltaY = newY - this.prevousYScroll;
         this.prevousYScroll = newY;
 
         if (deltaY < 0 && window.scrollY <= ($q('section.hero').getBoundingClientRect().height / 2)) {
+            console.log('anchor nav controls: this.hero.enterHeroMode');
             this.hero.enterHeroMode();
+        }
+
+        if (window.scrollY >= ($q('section.hero').getBoundingClientRect().height / 2)) {
+            console.log('anchor nav controls: this.hero.leaveHeroMode');
+            this.hero.leaveHeroMode();
         }
     };
 
@@ -80,6 +89,6 @@ export class AnchorNavControls {
         if (evt.key === 'ArrowUp' || evt.code === 'ArrowUp' || evt.key === 'ArrowLeft' || evt.code === 'ArrowLeft')  this.anchorNav.prevAnchor();
         
         this._changing = true;
-        setTimeout(() => this._changing = false, 300);
+        setTimeout(() => this._changing = false, CHANGING_TIMEOUT);
     };
 }

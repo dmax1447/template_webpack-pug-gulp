@@ -25,18 +25,21 @@ export class Hero {
     heroCarousel = new HeroCarousel();
     heroControls = new HeroControls({
         prevSlide: (wrap) => this.heroCarousel.prevSlide(wrap),
-        nextSlide: () => {
-            if (this.heroCarousel.isLastSlide()) this.leaveHeroMode();
-            else this.heroCarousel.nextSlide();
+        nextSlide: (wrap) => {
+            if (!wrap && !isMobileScreen() && this.heroCarousel.isLastSlide()) {
+                this.leaveHeroMode();
+            } else {
+                this.heroCarousel.nextSlide();
+            }
         },
     });
 
     onEnterHero: () => void;
-    onLeaveHero: () => void;
+    onLeaveHero: (nextAnchor?: string) => void;
 
     constructor(params: {
         onEnterHero: () => void,
-        onLeaveHero: () => void,
+        onLeaveHero: (nextAnchor?: string) => void,
     }) {
         this.onEnterHero = params.onEnterHero;
         this.onLeaveHero = params.onLeaveHero;
@@ -57,25 +60,33 @@ export class Hero {
             $q('.features .top-bar').style.display = 'block';
         }, 100);
     
-        $q('section.hero a[href="#feedback"]').removeEventListener('click', this.leaveHeroMode);
-        $q('section.hero a[href="#feedback"]').addEventListener('click', this.leaveHeroMode);
+        $q('section.hero a[href="#feedback"]').addEventListener('click', () => this.leaveHeroMode('feedback'));
+    };
+
+    reset = () => {
+        if (window.scrollY <= ($q('section.hero').getBoundingClientRect().height / 2)) {
+            this.enterHeroMode();
+        } else {
+            this.leaveHeroMode();
+        }
+        this.heroControls.reset();
     };
 
     enterHeroMode = () => {
+        this.heroControls.register();
         if (!isMobileScreen()) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             this.isHeroMode = true;
-            this.heroControls.register();
             this.onEnterHero();
         }
         $q('.features .top-bar').classList.add('top-bar--hidden');
     };
 
-    leaveHeroMode = () => {
+    leaveHeroMode = (nextAnchor?: string) => {
+        this.heroControls.unregister();
         if (!isMobileScreen()) {
             this.isHeroMode = false;
-            this.heroControls.unregister();
-            this.onLeaveHero();
+            this.onLeaveHero(nextAnchor);
         }
         $q('.features .top-bar').classList.remove('top-bar--hidden');
     };
