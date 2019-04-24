@@ -71,20 +71,22 @@ export class AnchorNav {
             }
         }
     
-        smoothScrollTo($q(`#${anch.hash}`));
+        const scrollingTask = smoothScrollTo($q(`#${anch.hash}`));
         this.currentAnchorIndex = index;
         this.lastTimeAnchorChanged = now;
+
+        return scrollingTask;
     };
     
-    centerCurrentAnchor = () => {
+    centerCurrentAnchor = async () => {
         const anch = this.getCurrentAnchor();
         if (!anch) return;
     
-        if (anch[0].onEnter) anch[0].onEnter();
-        this.setCurrentAnchor(anch[1]);
+        if (anch[0].onEnter) await anch[0].onEnter();
+        return this.setCurrentAnchor(anch[1]);
     }
     
-    prevAnchor = () => {
+    prevAnchor = async () => {
         const curA = this.getCurrentAnchor();
         if (!curA) return;
     
@@ -93,19 +95,17 @@ export class AnchorNav {
     
         const anch = this.anchors[prevIndex];
     
-        if (curA[0].onLeave) curA[0].onLeave();
+        if (curA[0].onLeave) await curA[0].onLeave();
     
         this.currentAnchorIndex = prevIndex;
         if (anch.onEnter) {
-            anch.onEnter();
+            await anch.onEnter();
         } else {
-            setTimeout(() => {
-                this.setCurrentAnchor(prevIndex);
-            }, 300);
+            return this.setCurrentAnchor(prevIndex);
         }
     };
     
-    nextAnchor = () => {
+    nextAnchor = async () => {
         const curA = this.getCurrentAnchor();
         if (!curA) return;
     
@@ -114,14 +114,12 @@ export class AnchorNav {
     
         const anch = this.anchors[nextIndex];
     
-        if (curA[0].onLeave) curA[0].onLeave();
+        if (curA[0].onLeave) await curA[0].onLeave();
     
         if (anch.onEnter) {
-            anch.onEnter();
+            await anch.onEnter();
         } else {
-            setTimeout(() => {
-                this.setCurrentAnchor(nextIndex);
-            }, 300);
+            return this.setCurrentAnchor(nextIndex);
         }
     };
 }

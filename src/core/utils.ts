@@ -1,5 +1,6 @@
 export const $ = <T = HTMLDivElement>(x: string) => document.querySelector(x) as any as T;
 export const $all = <T extends Element = HTMLDivElement>(x: string) => document.querySelectorAll<T>(x);
+const DetectMobileBrowser = require("detect-mobile-browser")(false);
 
 export function intersectionRect(rectA: ClientRect, rectB: ClientRect): { x: number, y: number, width: number, height: number }|false {
     const x = Math.max(rectA.left, rectB.left);
@@ -139,6 +140,7 @@ export function smoothScrollTo(el: HTMLElement, topOffset?: number) {
             behavior: 'smooth',
         });
     }
+    return sleep(400);
 }
 
 export function sleep(ms: number) {
@@ -262,8 +264,14 @@ export function listenSwipe(
 //          END SWIPE
 // ----------------------------
 
+let __isMobileHookScreen: boolean|undefined = undefined;
+
 export function isMobileScreen() {
-    return window.innerWidth <= 571;
+    return (__isMobileHookScreen !== undefined && __isMobileHookScreen) || DetectMobileBrowser.isAny() || window.innerWidth <= 571;
+}
+
+export function __unsafe_setIsMobileScreen(hook: boolean) {
+    __isMobileHookScreen = hook;
 }
 
 export function sendForm(url: string, form: HTMLFormElement, after: (isOk: boolean) => void) {
@@ -292,4 +300,33 @@ export function getFormData<T = { [field: string]: string }>(form: HTMLFormEleme
     const fieldNodes = form.querySelectorAll('input, textarea');
     const fields: HTMLInputElement[] = Array.prototype.slice.call(fieldNodes);
     return fields.reduce((sum, field) => field.name ? Object.assign(sum, { [field.name]: field.value }) : sum, {} as T);
+}
+
+export function detectTouch(
+    touchDetected: () => void,
+): () => void {
+    const ontouch = () => {
+        destroy();
+        touchDetected();
+    };
+
+    const onpointer = (evt: PointerEvent) => {
+        if (evt.pointerType !== 'mouse') {
+            ontouch();
+        }
+    };
+
+    window.addEventListener('touchstart', ontouch);
+    window.addEventListener('touchmove', ontouch);
+    window.addEventListener('pointerdown', onpointer);
+    window.addEventListener('pointermove', onpointer);
+
+    const destroy = () => {
+        window.removeEventListener('touchstart', ontouch);
+        window.removeEventListener('touchmove', ontouch);
+        window.removeEventListener('pointerdown', onpointer);
+        window.removeEventListener('pointermove', onpointer);
+    };
+
+    return destroy;
 }

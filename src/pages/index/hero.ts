@@ -20,13 +20,17 @@ function printSVGNumbers() {
 }
 
 export class Hero {
-    isHeroMode: boolean = false;
+    private _isHeroMode: boolean = false;
+    get isHeroMode() {
+        return this._isHeroMode;
+    }
 
     heroCarousel = new HeroCarousel();
     heroControls = new HeroControls({
         prevSlide: (wrap) => this.heroCarousel.prevSlide(wrap),
         nextSlide: (wrap) => {
             if (!wrap && !isMobileScreen() && this.heroCarousel.isLastSlide()) {
+                console.log('isLastSlide', this.heroCarousel.isLastSlide());
                 this.leaveHeroMode();
             } else {
                 this.heroCarousel.nextSlide();
@@ -46,15 +50,9 @@ export class Hero {
     }
 
     init = () => {
-        this.heroCarousel.init();
-    
         printSVGNumbers();
-    
-        if (window.scrollY <= ($q('section.hero').getBoundingClientRect().height / 2)) {
-            this.enterHeroMode();
-        } else {
-            this.leaveHeroMode();
-        }
+        this.heroCarousel.init();
+        this.reset();
     
         setTimeout(() => {
             $q('.features .top-bar').style.display = 'block';
@@ -73,21 +71,23 @@ export class Hero {
     };
 
     enterHeroMode = () => {
+        if (this.isHeroMode) return;
+        console.warn('enterHeroMode');
+        this._isHeroMode = true;
         this.heroControls.register();
         if (!isMobileScreen()) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            this.isHeroMode = true;
-            this.onEnterHero();
         }
+        this.onEnterHero();
         $q('.features .top-bar').classList.add('top-bar--hidden');
     };
 
     leaveHeroMode = (nextAnchor?: string) => {
+        if (!this.isHeroMode) return;
+        console.warn('leaveHeroMode');
+        this._isHeroMode = false;
         this.heroControls.unregister();
-        if (!isMobileScreen()) {
-            this.isHeroMode = false;
-            this.onLeaveHero(nextAnchor);
-        }
+        this.onLeaveHero(nextAnchor);
         $q('.features .top-bar').classList.remove('top-bar--hidden');
     };
 }

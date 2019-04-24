@@ -6,23 +6,30 @@ if (process.env.BUILD === 'prod') {
 
 import { Hero } from './hero';
 import {
-    $ as $q,
+    $ as $q, isMobileScreen, detectTouch, __unsafe_setIsMobileScreen,
 } from '../../core/utils';
 import { AnchorNav } from './anchor-nav';
 import { AnchorNavControls } from './anchor-nav-controls';
 
+let heroChanging = false;
+
 const hero = new Hero({
     onEnterHero: () => {},
-    onLeaveHero: (nextAnchor) => {
-        setTimeout(() => {
-            if (nextAnchor) {
-                anchorNav.setCurrentAnchor(anchorNav.anchors.findIndex(x => x.hash === nextAnchor), 'force');
-            } else {
-                anchorNav.setCurrentAnchor(1, 'force');
+    onLeaveHero: async (nextAnchor) => {
+        if (heroChanging) return;
+
+        heroChanging = true;
+        if (nextAnchor) {
+            await anchorNav.setCurrentAnchor(anchorNav.anchors.findIndex(x => x.hash === nextAnchor), 'force');
+        } else {
+            if (!isMobileScreen()) {
+                await anchorNav.setCurrentAnchor(1, 'force');
             }
-        }, 500);
+        }
+        heroChanging = false;
     },
 });
+console.log(hero);
 
 const anchorNav = new AnchorNav([
     {
@@ -56,18 +63,18 @@ function fixScrollHelpAnimForSafari() {
     }, 100);
 }
 
-function resetAnchor() {
+async function resetAnchor() {
     if (hero.isHeroMode) anchorNav.currentAnchorIndex = 0;
     else {
         const curAnch = anchorNav.getCurrentAnchor();
         if (!curAnch) {
             anchorNav.currentAnchorIndex = 0;
-            anchorNav.setCurrentAnchor(0, 'force');
+            await anchorNav.setCurrentAnchor(0, 'force');
             hero.enterHeroMode();
             return;
         }
     }
-    anchorNav.setCurrentAnchor(anchorNav.currentAnchorIndex, 'force');
+    await anchorNav.setCurrentAnchor(anchorNav.currentAnchorIndex, 'force');
 }
 
 function handleWindowResize() {
@@ -82,6 +89,13 @@ function setup() {
     hero.init();
     anchorControls.init();
     resetAnchor();
+
+    if (!isMobileScreen()) {
+        detectTouch(() => {
+            __unsafe_setIsMobileScreen(true);
+            handleWindowResize();
+        });
+    }
 }
 
 window.addEventListener('load', setup);

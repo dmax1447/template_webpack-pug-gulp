@@ -20,6 +20,7 @@ export class HeroCarousel {
     lastTimeSlideChanged = 0;
 
     isLastSlide = () => {
+        console.log('HeroCarousel.isLastSlide', { slideKeys: this.slideKeys, 'curKey': this.currentSlideKey, index: this.slideKeys.indexOf(this.currentSlideKey) })
         return this.slideKeys.indexOf(this.currentSlideKey) === this.slideKeys.length - 1;
     };
 
