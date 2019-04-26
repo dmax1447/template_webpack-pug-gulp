@@ -1,7 +1,6 @@
 image: node:11
 
 before_script:
-  - npm install
   - mkdir -p ~/.ssh
   - echo "$elantum_private_key" > ./key
   - chmod 700 ./key
@@ -48,6 +47,7 @@ pages:
     paths:
     - public
   script:
+  - npm install
   - BUILD_OUTPUT=public npm run build
 
 prod:
@@ -57,5 +57,6 @@ prod:
     paths:
     - public
   script:
+  - npm install
   - BUILD=prod npm run build
   - scp -P 2222 -v -i ./key -r dist/* gitlab@omp-frontend.elantum.com:/var/www/berezadev.com/public

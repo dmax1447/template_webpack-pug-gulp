@@ -77,7 +77,10 @@ async function resetAnchor() {
 function handleWindowResize() {
     anchorControls.reset();
     hero.reset();
-    resetAnchor();
+
+    if (!isMobileScreen()) {
+        resetAnchor();
+    }
 }
 
 function setup() {
