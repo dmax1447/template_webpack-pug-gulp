@@ -77,6 +77,7 @@ async function resetAnchor() {
 }
 
 function handleWindowResize() {
+    alert('window resize')
     anchorControls.reset();
     hero.reset();
     resetAnchor();
