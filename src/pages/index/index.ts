@@ -94,12 +94,12 @@ function setup() {
             handleWindowResize();
         });
     }
+
+    let resizeTimeout: any;
+    window.addEventListener('resize', () => {
+        if (resizeTimeout) clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(handleWindowResize, 1000);
+    });
 }
 
 window.addEventListener('load', setup);
-
-let resizeTimeout: any;
-window.addEventListener('resize', () => {
-    if (resizeTimeout) clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(handleWindowResize, 1000);
-});

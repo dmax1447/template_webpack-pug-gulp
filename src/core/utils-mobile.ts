@@ -48,7 +48,7 @@ export function __unsafe_setIsMobileScreen(hook: boolean) {
 //           SWIPE
 // ----------------------------
 
-export function startDetectingScreenSwipe(
+function _detectingScreenSwipe(
     onSwipe: (direction: 'up'|'down'|'left'|'right') => void,
     onCancel?: () => void,
     deadZone = 15,
@@ -131,20 +131,22 @@ export function listenSwipe(
     let lastActionDestroy: Function;
 
     const mouseDown = () => {
-        lastActionDestroy = startDetectingScreenSwipe(onSwipe, undefined, deadZone);
+        if (lastActionDestroy) lastActionDestroy();
+        lastActionDestroy = _detectingScreenSwipe(onSwipe, undefined, deadZone);
     };
 
     const touchStart = () => {
-        lastActionDestroy = startDetectingScreenSwipe(onSwipe, undefined, deadZone);
+        if (lastActionDestroy) lastActionDestroy();
+        lastActionDestroy = _detectingScreenSwipe(onSwipe, undefined, deadZone);
     };
 
     el.addEventListener('mousedown', mouseDown);
     el.addEventListener('touchstart', touchStart);
 
     const destroy = () => {
-        if (lastActionDestroy) lastActionDestroy();
         el.removeEventListener('mousedown', mouseDown);
         el.removeEventListener('touchstart', touchStart);
+        if (lastActionDestroy) lastActionDestroy();
     };
 
     return destroy;

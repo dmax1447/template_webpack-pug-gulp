@@ -25,6 +25,7 @@ export class HeroControls {
     register = () => {
         if (isMobileScreen()) {
             this._registeredSwipe = listenSwipe($q('section.hero'), (direction) => {
+                alert('swipe ' + direction);
                 if (direction === 'left') this.prevSlide('wrap');
                 else if (direction === 'right') this.nextSlide('wrap');
             }, 30);
