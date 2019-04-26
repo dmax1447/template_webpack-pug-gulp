@@ -133,6 +133,16 @@ export function enableScroll() {
 }
 
 export function smoothScrollTo(el: HTMLElement, topOffset?: number) {
+    alert('smoothScrollTo ' + el);
+
+    try {
+        (() => {
+            throw new Error('err');
+        })();
+    } catch(err) {
+        alert((err as Error).stack);
+    }
+
     if (!topOffset) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {

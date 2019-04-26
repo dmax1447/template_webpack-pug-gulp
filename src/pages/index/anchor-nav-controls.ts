@@ -50,8 +50,6 @@ export class AnchorNavControls {
 
     _onMouseWheel = async (e: JQueryMousewheel.JQueryMousewheelEventObject) => {
         if(lethargy.check(e) === false) return;
-
-        alert('wheel anc');
         
         if ((this.hero.isHeroMode && !this.hero.heroCarousel.isLastSlide()) || this._changing) {
             return;
@@ -72,7 +70,6 @@ export class AnchorNavControls {
         this.prevousYScroll = newY;
 
         if (!this.hero.isHeroMode && deltaY < 0 && window.scrollY <= ($q('section.hero').getBoundingClientRect().height / 2)) {
-            alert('scroll anc ' + deltaY + ' ' + newY + ' ' + this.prevousYScroll);
             this._changing = true;
             await this.hero.enterHeroMode();
             this._changing = false;
