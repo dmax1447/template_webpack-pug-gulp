@@ -72,7 +72,7 @@ export class AnchorNavControls {
         this.prevousYScroll = newY;
 
         if (!this.hero.isHeroMode && deltaY < 0 && window.scrollY <= ($q('section.hero').getBoundingClientRect().height / 2)) {
-            alert('scroll anc');
+            alert('scroll anc ' + deltaY + ' ' + newY + ' ' + this.prevousYScroll);
             this._changing = true;
             await this.hero.enterHeroMode();
             this._changing = false;
