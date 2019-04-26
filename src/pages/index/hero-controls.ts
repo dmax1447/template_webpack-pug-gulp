@@ -45,7 +45,6 @@ export class HeroControls {
 
     _onWheel = (evt: JQueryMousewheel.JQueryMousewheelEventObject) => {
         if(lethargy.check(evt) === false) return;
-        alert('wheel');
 
         const scrollDown = evt.deltaY < 0;
 
@@ -54,7 +53,6 @@ export class HeroControls {
     };
 
     _onKeyDown = (evt: KeyboardEvent) => {
-        alert('keydown');
         if (evt.key === 'ArrowUp' || evt.code === 'ArrowUp' || evt.key === 'ArrowLeft' || evt.code === 'ArrowLeft')  this.prevSlide();
         if (evt.key === 'ArrowDown' || evt.code === 'ArrowDown' || evt.key === 'ArrowRight' || evt.code === 'ArrowRight') this.nextSlide();
     };

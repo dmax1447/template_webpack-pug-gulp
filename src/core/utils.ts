@@ -1,3 +1,5 @@
+import { isMobileScreen } from './utils-mobile';
+
 export const $ = <T = HTMLDivElement>(x: string) => document.querySelector(x) as any as T;
 export const $all = <T extends Element = HTMLDivElement>(x: string) => document.querySelectorAll<T>(x);
 
@@ -133,16 +135,6 @@ export function enableScroll() {
 }
 
 export function smoothScrollTo(el: HTMLElement, topOffset?: number) {
-    alert('smoothScrollTo ' + el);
-
-    try {
-        (() => {
-            throw new Error('err');
-        })();
-    } catch(err) {
-        alert((err as Error).stack);
-    }
-
     if (!topOffset) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
@@ -191,4 +183,33 @@ export function getFormData<T = { [field: string]: string }>(form: HTMLFormEleme
     const fieldNodes = form.querySelectorAll('input, textarea');
     const fields: HTMLInputElement[] = Array.prototype.slice.call(fieldNodes);
     return fields.reduce((sum, field) => field.name ? Object.assign(sum, { [field.name]: field.value }) : sum, {} as T);
+}
+
+export function listenWindowResize(handler: (evt: UIEvent) => void, resizeTimeoutMS = 500) {
+    let resizeTimeout: any;
+    let oldWidth = window.innerWidth;
+
+    const onResize = (evt: UIEvent) => {
+        if (resizeTimeout) clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(handleResize, resizeTimeoutMS, evt);
+    };
+
+    const handleResize = (evt: UIEvent) => {
+        resizeTimeout = 0;
+        if (isMobileScreen()) {
+            // there is a "feature" on mobile devices because of top bar, when scrolling vertically, 'resize' gets triggered
+            const newWidth = window.innerWidth;
+            if (oldWidth === newWidth) return;
+            oldWidth = newWidth;
+        }
+        handler(evt);
+    };
+
+    window.addEventListener('resize', onResize);
+    const destroy = () => {
+        if (resizeTimeout) clearTimeout(resizeTimeout);
+        window.removeEventListener('resize', onResize);
+    };
+
+    return destroy;
 }

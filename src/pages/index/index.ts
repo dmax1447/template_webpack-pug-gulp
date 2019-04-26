@@ -6,7 +6,7 @@ if (process.env.BUILD === 'prod') {
 
 import { Hero } from './hero';
 import {
-    $ as $q, isMobileScreen, detectTouch, __unsafe_setIsMobileScreen,
+    $ as $q, isMobileScreen, detectTouch, __unsafe_setIsMobileScreen, listenWindowResize,
 } from '../../core/utils';
 import { AnchorNav } from './anchor-nav';
 import { AnchorNavControls } from './anchor-nav-controls';
@@ -63,21 +63,18 @@ function fixScrollHelpAnimForSafari() {
 }
 
 async function resetAnchor() {
-    if (hero.isHeroMode) anchorNav.currentAnchorIndex = 0;
-    else {
-        const curAnch = anchorNav.getCurrentAnchor();
-        if (!curAnch) {
-            anchorNav.currentAnchorIndex = 0;
-            await anchorNav.setCurrentAnchor(0, 'force');
-            hero.enterHeroMode();
-            return;
-        }
+    if (hero.isHeroMode) {
+        anchorNav.currentAnchorIndex = 0;
+    } else if (!anchorNav.getCurrentAnchor()) {
+        anchorNav.currentAnchorIndex = 0;
+        await anchorNav.setCurrentAnchor(0, 'force');
+        hero.enterHeroMode();
+        return;
     }
     await anchorNav.setCurrentAnchor(anchorNav.currentAnchorIndex, 'force');
 }
 
 function handleWindowResize() {
-    alert('window resize')
     anchorControls.reset();
     hero.reset();
     resetAnchor();
@@ -96,11 +93,7 @@ function setup() {
         });
     }
 
-    let resizeTimeout: any;
-    window.addEventListener('resize', () => {
-        if (resizeTimeout) clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(handleWindowResize, 1000);
-    });
+    listenWindowResize(handleWindowResize);
 }
 
 window.addEventListener('load', setup);

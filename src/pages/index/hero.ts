@@ -75,7 +75,6 @@ export class Hero {
         this._isHeroMode = true;
         this.heroControls.register();
         if (!isMobileScreen()) {
-            alert('enterHeroMode scrollTo top:0');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         this.onEnterHero();
