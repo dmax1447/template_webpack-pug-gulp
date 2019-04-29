@@ -1,11 +1,11 @@
-mixin _feedback-form(dark=false, centered=false, headerText="Свяжитесь с нами")
+mixin _feedback-form(dark=false, centered=false, headerText=siteData('blocks.contact_header'))
     form(class=("feedback-form " + (dark ? 'feedback-form--dark ' : '') + (centered === true ? 'feedback-form--centered ' : '')), action="/contact", method="post")
         h4= headerText
-        +input-w-top-label("text", "Ваше имя", "Имя и фамилия", "name")(required)
-        +input-w-top-label("email", "e-mail", "yourmail@company.com", "email", pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")(required)
-        +input-w-top-label("tel", "телефон", "+9 (999) 999-99-99", "phone")(required)
-        +textarea-w-top-label("text", "что-то, что нам нужно знать заранее", "Информация о проекте", "message")(required)
-        input(type="submit", value="Отправить")
+        +input-w-top-label("text", siteData('blocks.contact_name_label'), siteData('blocks.contact_name_placeholder'), "name")(required)
+        +input-w-top-label("email", siteData('blocks.contact_email_label'), "youremail@company.com", "email", pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")(required)
+        +input-w-top-label("tel", siteData('blocks.contact_phone_label'), "+9 (999) 999-99-99", "phone")(required)
+        +textarea-w-top-label("text", siteData('blocks.contact_msg_label'), siteData('blocks.contact_msg_placeholder'), "message")(required)
+        input(type="submit", value=siteData('blocks.contact_btn_label'))
         p
             //- Отправляя форму, вы разрешаете обработку персональных данных<br>
             //- и соглашаетесь c <a href="/politic-confident.pdf">политикой конфиденциальности</a>.

@@ -69,7 +69,6 @@ section.hero.full#hero
         .hero-slide-wrapper
             +mouse-help-icon
             each slide, index in slides
-                - console.log(slide)
                 +hero-slide(slide.id, slide.header, slide.text, slide.cta.text, slide.cta.link, index ? "" : "first")
                     if slide.icons[0] && slide.icons[0].number
                         each icon, index2 in slide.icons

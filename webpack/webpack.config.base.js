@@ -9,6 +9,7 @@ const entries = getEntries(rootDir('./src/pages/'), 'index', 'ts');
 const pages = getEntries(rootDir('./src/pages/'), 'index', 'pug');
 const outputPath = process.env.BUILD_OUTPUT || './dist';
 const dataPath = (process.env.DATA_OUTPUT || './backend') + '/storage/app/build';
+const language = process.env.LANG || 'ru';
 
 /** isDev should be 'dev' or 'prod' */
 module.exports = function (isDev = 'dev') {
@@ -29,9 +30,9 @@ module.exports = function (isDev = 'dev') {
                 options: {
                     data: {
                         loaderUtils: loaderUtils,
-                        lang: 'ru',
+                        lang: language,
                         siteData: function (name, lang) {
-                            return getSiteData(lang, dataPath, name);
+                            return getSiteData(lang ? lang : language, dataPath, name);
                         }
                     }
                 }

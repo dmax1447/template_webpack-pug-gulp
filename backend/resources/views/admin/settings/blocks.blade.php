@@ -69,4 +69,15 @@
     'translated' => true,
     'note' => 'Placeholder',
     ])
+    @formField('input', [
+    'label' => 'Текст на кнопке',
+    'name' => 'contact_btn_label',
+    'textLimit' => '100',
+    'translated' => true,
+    ])
+    @formField('input', [
+    'label' => 'Текст соглашения',
+    'name' => 'contact_agreement',
+    'translated' => true,
+    ])
 @stop

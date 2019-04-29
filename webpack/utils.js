@@ -37,7 +37,7 @@ const dataCache = {};
 
 exports.getSiteData = function(lang, dataPath, name) {
     const [block, field] = name.split(".");
-    console.log(block, field);
+    //console.log(block, field);
     if (!dataCache.hasOwnProperty(block)) {
         dataCache[block] = JSON.parse(fs.readFileSync(`${dataPath}/${block}.${lang}.json`, 'utf8'));
     }

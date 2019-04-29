@@ -28,12 +28,12 @@ section.features#features
             //- div.top-bar__menu.top-bar__menu--closed
             //-     +nav-menu
         +menu-placeholder("we-help")
-        +side-header("помогаем")
+        +side-header(siteData('blocks.label_main_help'))
         .features__we-help-items
             for item in weHelpItems
                 img(class=("features__we-help-item " + (weHelpFadeItems.indexOf(item) !== -1 ? 'features__we-help-item--fade' : '')), -lazy-src=("assets/main-features/" + item + ".svg"))
         +menu-placeholder("we-offer")
-        +side-header("предлагаем")
+        +side-header(siteData('blocks.label_main_offer'))
         .features__we-offer-items
             .features__we-offer-item
                 img.anim(-lazy-src=("assets/rocket-sticker.svg"), --anim="slide-in-back", --anim-speed="1.2s", --anim-delay="0.5s")
