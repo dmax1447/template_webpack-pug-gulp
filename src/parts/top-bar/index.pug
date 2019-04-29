@@ -1,0 +1,18 @@
+mixin top-bar(dark=false, currentPage="", padding=false, noFeedbackBtn=false, noNavMenu=false)
+    if padding
+        .top-bar-padding
+    header.top-bar&attributes(attributes)
+        .top-bar__page-wrapper
+            if currentPage
+                a(href="/")
+                    img.top-bar__logo(-lazy-src=(dark ? "assets/logo-white.svg" : "assets/logo.svg"))
+            else
+                img.top-bar__logo(-lazy-src=(dark ? "assets/logo-white.svg" : "assets/logo.svg"))
+            if !noFeedbackBtn
+                a(href="#feedback")
+                    +request-estimate-btn
+            if !noNavMenu
+                div.top-bar__menu.top-bar__menu--closed
+                    +nav-menu(dark, currentPage)
+            //- i.far.fa-bars.top-bar__mobile-menu(role="button")
+            //- i.fal.fa-times.top-bar__mobile-menu-close(role="button")

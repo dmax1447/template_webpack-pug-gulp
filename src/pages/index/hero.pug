@@ -65,14 +65,7 @@ section.hero.full#hero
         "background: linear-gradient(to bottom, rgb(227,211,123) 0%, rgb(74,59,48) 19%, rgb(0,0,0) 100%);"
     )
     .section-content
-        header.top-bar
-            img.top-bar__logo(src="assets/logo-white.svg")
-            a(href="#feedback")
-                +request-estimate-btn('dark')
-            div.top-bar__menu.top-bar__menu--closed
-                +nav-menu('dark')
-            //- i.far.fa-bars.top-bar__mobile-menu(role="button")
-            //- i.fal.fa-times.top-bar__mobile-menu-close(role="button")
+        +top-bar('dark')
         .hero-slide-wrapper
             +mouse-help-icon
             +hero-slide("rapiddev", "Скоростная<br>web и mobile<br>разработка", "Смета за несколько часов<br>Прототип за несколько дней<br>MVP за несколько недель", "Смотреть кейсы", "#cases", "first")

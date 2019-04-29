@@ -1,0 +1,54 @@
+extends ../../layout.pug
+
+mixin case-thumbnail(tech, name, desc, background, backgroundStyle)
+    .case-thumbnail(style=("background: " + backgroundStyle))
+        img(-lazy-src=(background + ".jpg"))
+        .case-thumbnail__content
+            h6!= tech
+            h2!= name
+            p!= desc
+
+block body
+    section.top.full
+        .section-content
+            +top-bar(false, "cases", "padding")
+    section.cases.full
+        h1 Кейсы
+        .case-thumbnails
+            +case-thumbnail(
+                "webdev + UI/UX + Mobile",
+                "autoscaners.ru",
+                "поддержка и развитие e-commerce<br>инфраструктуры",
+                "/assets/cases/thumbnail-autoscaners",
+                ""
+            )
+            +case-thumbnail(
+                "UI/UX + mobile",
+                "iCartool",
+                "Мобильное приложение для тестирования<br>автомобильных аккумуляторов",
+                "/assets/cases/thumbnail-icartool",
+                ""
+            )
+            +case-thumbnail(
+                "UI/UX + webdev",
+                "Ирина Хакамада",
+                "Разработка и техподдержка тура по Сибири<br>известного мотивационного спикера",
+                "/assets/cases/thumbnail-hakamada",
+                ""
+            )
+            +case-thumbnail(
+                "UI/UX + Webdev",
+                "Launch",
+                "Сайт официального дилера крупнейшего<br>производителя систем автодиагностики",
+                "/assets/cases/thumbnail-launch",
+                ""
+            )
+            +case-thumbnail(
+                "UI/UX + webdev",
+                "OdinMedia",
+                "Сайт и SPA-каталог для международного<br>дистрибьютора медиа-контента",
+                "/assets/cases/thumbnail-odinmedia",
+                ""
+            )
+    +feedback-form(false, 'section')
+    +footer

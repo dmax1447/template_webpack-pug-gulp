@@ -1,12 +1,19 @@
-mixin nav-menu-item(href, text, class_="")
-    a(href=href, class=class_)
-        span.nav-menu__item-placeholder= text
-        span.nav-menu__item-text= text
+mixin nav-menu-item(href, text, class_="", isCurrent=false)
+    if isCurrent
+        span(class=("nav-menu__item " + class_))
+            span.nav-menu__item-placeholder= text
+            span.nav-menu__item-text= text
+    else
+        a(href=href, class=("nav-menu__item " + class_))
+            span.nav-menu__item-placeholder= text
+            span.nav-menu__item-text= text
 
-mixin nav-menu(dark=false)
-    //- nav(role="navigation", class=("nav-menu " + (dark ? 'nav-menu--dark' : '')))
-    //-     +nav-menu-item("#cases", "Cases", "first-el")
-    //-     +nav-menu-item("#tech", "Technology")
-    //-     +nav-menu-item("#team", "Team")
-    //-     +nav-menu-item("#contacts", "Contacts")
-        //- +nav-menu-item("#estimate-calc", "Reuest estimate")
+mixin nav-menu(dark=false, currentPage="")
+    nav(
+        role="navigation",
+        class=("nav-menu " + (dark ? 'nav-menu--dark' : ''))
+    )
+        +nav-menu-item("/cases",    "Кейсы",        "first-el", currentPage === 'cases')
+        //- +nav-menu-item("/tech",     "Technology",   undefined,  currentPage === 'tech')
+        //- +nav-menu-item("/team",     "Team",         undefined,  currentPage === 'team')
+        //- +nav-menu-item("/contacts", "Contacts",     undefined,  currentPage === 'contacts')

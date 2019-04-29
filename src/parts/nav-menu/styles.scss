@@ -2,7 +2,7 @@
 .nav-menu {
     display: inline-block;
 
-    a {
+    a, .nav-menu__item {
         position: relative;
         display: inline-block;
         font-size: v(16);
@@ -26,6 +26,7 @@
             text-align: inherit;
             color: black;
             height: v(48);
+            line-height: v(41);
 
             transition-duration: 0.01s;
             transition-property: color;
@@ -48,7 +49,7 @@
     }
 
     &--dark {
-        a {
+        a, .nav-menu__item {
             .nav-menu__item-text {
                 color: white;
             }

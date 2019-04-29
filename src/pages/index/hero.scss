@@ -432,19 +432,6 @@
             display: none;
         }
 
-        .top-bar {
-            &__logo {
-                top: v(16);
-                left: v(24);
-                width: v(72);
-                height: v(64);
-            }
-
-            .request-estimate-btn {
-                margin-top: v(33);
-            }
-        }
-
         .hero-slide {
             &__head-wrapper {
                 margin-top: v(120) !important;
