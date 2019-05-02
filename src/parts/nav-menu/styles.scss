@@ -38,6 +38,26 @@
             }
         }
 
+        &--current {
+            cursor: initial;
+
+            &:hover {
+                & > .nav-menu__item-text {
+                    color: black;
+                }
+            }
+
+            &::after {
+                position: absolute;
+                content: ' ';
+                width: 80%;
+                left: 10%;
+                height: v(2);
+                background-color: $accentLight60;
+                top: v(40);
+            }
+        }
+
         @include mobile {
             .nav-menu__item-placeholder {
                 opacity: 1;
@@ -57,6 +77,14 @@
             &:hover {
                 & > .nav-menu__item-text {
                     color: $accentLight40;
+                }
+            }
+
+            &--current {
+                &:hover {
+                    & > .nav-menu__item-text {
+                        color: black;
+                    }
                 }
             }
         }

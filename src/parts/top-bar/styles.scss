@@ -12,6 +12,11 @@
     transition-duration: 0.3s;
     transition-property: opacity, height;
 
+    &--sticky {
+        position: fixed;
+        background: white;
+    }
+
     &__page-wrapper {
         position: relative;
         max-width: v(1224);

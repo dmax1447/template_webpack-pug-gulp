@@ -1,6 +1,6 @@
 @import "../../styles.scss";
 
-section.cases > h1 {
+section.cases > .section-content > h1 {
     width: 100%;
     text-align: center;
 
@@ -15,6 +15,7 @@ section.cases > h1 {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: stretch;
+    background-color: black;
 }
 
 .case-thumbnail {
@@ -26,7 +27,6 @@ section.cases > h1 {
 
     overflow: hidden;
     cursor: pointer;
-    background: black;
 
     & > img {
         position: absolute;

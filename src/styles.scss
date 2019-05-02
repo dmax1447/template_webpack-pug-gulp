@@ -11,8 +11,9 @@ body {
 
 section {
     position: relative;
-    max-width: v(1224);
-    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
 
     & > .section-content {
         position: relative;
@@ -22,27 +23,21 @@ section {
         @include mobile {
             max-width: v(408);
         }
+    }
 
-        &.full {
-            position: relative;
+    &.full > .section-content {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+
+        @include mobile {
             max-width: 100%;
-            margin: 0;
-
-            @include mobile {
-                max-width: 100%;
-            }
         }
     }
 }
 
 section, footer.full {
     overflow: hidden;
-}
-
-section.full, footer.full {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
 }
 
 .nobr {

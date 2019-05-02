@@ -47,7 +47,7 @@ mixin hero-item-photo(src, ind=1, alt="Фото")
         img(-lazy-src=src, alt=alt, style=("z-index:"+(ind + 5)))
         .hero-slide-item__photo-backdrop
 
-section.hero.full#hero
+section.hero#hero
     +hero-video(
         "rapiddev",
         "assets/bereza-slide-01.mp4",
@@ -65,7 +65,7 @@ section.hero.full#hero
         "background: linear-gradient(to bottom, rgb(227,211,123) 0%, rgb(74,59,48) 19%, rgb(0,0,0) 100%);"
     )
     .section-content
-        +top-bar('dark')
+        +top-bar([ 'dark' ])
         .hero-slide-wrapper
             +mouse-help-icon
             +hero-slide("rapiddev", "Скоростная<br>web и mobile<br>разработка", "Смета за несколько часов<br>Прототип за несколько дней<br>MVP за несколько недель", "Смотреть кейсы", "#cases", "first")
