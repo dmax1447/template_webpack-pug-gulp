@@ -20,13 +20,7 @@
 
 section.features#features
     .section-content
-        header.top-bar(style="display:none")
-            .top-bar__page-wrapper
-                img.top-bar__logo(-lazy-src="assets/logo.svg")
-                a(href="#feedback")
-                    +request-estimate-btn
-            //- div.top-bar__menu.top-bar__menu--closed
-            //-     +nav-menu
+        +top-bar([ "sticky" ])(style="display:none")
         +menu-placeholder("we-help")
         +side-header(siteData('blocks.label_main_help'))
         .features__we-help-items

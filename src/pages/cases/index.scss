@@ -1,0 +1,90 @@
+@import "../../styles.scss";
+
+section.cases > .section-content > h1 {
+    width: 100%;
+    text-align: center;
+
+    font-family: Ubuntu;
+    font-size: v(36);
+    font-weight: 400;
+    line-height: v(48);
+}
+
+.case-thumbnails {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    background-color: black;
+}
+
+.case-thumbnail {
+    position: relative;
+    flex: 1;
+
+    min-width: v(408);
+    height: v(360);
+
+    overflow: hidden;
+    cursor: pointer;
+
+    & > img {
+        position: absolute;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        z-index: 0;
+
+        transform: scale(1,1);
+        transition-duration: 3s;
+        transition-property: transform, opacity;
+        opacity: 0.4;
+    }
+
+    &__content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+
+        color: white;
+
+        box-sizing: border-box;
+        padding-top: v(24);
+        padding-left: v(48);
+        padding-bottom: v(24);
+        padding-right: v(48);
+    }
+
+    h6 {
+        font-family: Ubuntu;
+        font-size: v(12);
+        line-height: v(24);
+        // font-weight: bold;
+        margin: 0;
+    }
+
+    h2 {
+        font-family: Ubuntu;
+        font-size: v(36);
+        line-height: v(48);
+        font-weight: 500;
+        margin: 0;
+    }
+
+    p {
+        font-family: 'Source Sans Pro';
+        font-size: v(16);
+        line-height: v(24);
+        margin: 0;
+    }
+
+    &:hover {
+        & > img {
+            transform: scale(1.1,1.1);
+            opacity: 0.6;
+        }
+    }
+}

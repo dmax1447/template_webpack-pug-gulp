@@ -35,14 +35,16 @@ window.onload = () => {
 
     // initCarousels();
 
-    $q('form.feedback-form').onsubmit = (evt) => {
-        evt.preventDefault();
-
-        sendForm('/contact', evt.target! as any, (isOk) => {
-            if (isOk) alert('Мы с вами свяжемся!');
-            else alert('Произошла ошибка');
-        });
-    };
+    $all('form.feedback-form').forEach(f => {
+        f.onsubmit = (evt) => {
+            evt.preventDefault();
+    
+            sendForm('/contact', evt.target! as any, (isOk) => {
+                if (isOk) alert('Мы с вами свяжемся!');
+                else alert('Произошла ошибка');
+            });
+        };
+    });
 
     loadAllLazied();
 };

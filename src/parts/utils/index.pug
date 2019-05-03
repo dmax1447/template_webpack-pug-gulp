@@ -1,0 +1,26 @@
+-
+    // Filter out `false` class names
+    // 
+    // eg:
+    //
+    //  div(class=classNames([ "top-bar", isDark && "top-bar--dark", hasPadding && "top-bar--padding" ]))
+    //
+    // or
+    //
+    // div(class=classNames("top-bar", isDark && "top-bar--dark", hasPadding && "top-bar--padding"))
+    //
+    function classNames() {
+        if (arguments.length === 0) return "";
+        if (arguments.length === 1) {
+            if (typeof arguments[0] === 'string') return arguments[0];
+            else return _classNames(arguments[0]);
+        }
+        return _classNames(arguments);
+    }
+    function _classNames(array) {
+        if (!Array.isArray(array)) array = Array.from(array);
+        return array.filter(x => x !== false).join(" ")
+    }
+
+    // Monkey patch for `flags.has('dark')`
+    Array.prototype.has = Array.prototype.includes;
