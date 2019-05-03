@@ -1,10 +1,10 @@
-mixin _feedback-form(dark=false, centered=false, headerText=siteData('blocks.contact_header'))
+mixin _feedback-form(dark=false, centered=false, headerText="Свяжитесь с нами")
     form(class=("feedback-form " + (dark ? 'feedback-form--dark ' : '') + (centered === true ? 'feedback-form--centered ' : '')), action="/contact", method="post")
         h4= headerText
-        +input-w-top-label("text", siteData('blocks.contact_name_label'), siteData('blocks.contact_name_placeholder'), "name")(required)
-        +input-w-top-label("email", siteData('blocks.contact_email_label'), "youremail@company.com", "email", pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")(required)
-        +input-w-top-label("tel", siteData('blocks.contact_phone_label'), "+9 (999) 999-99-99", "phone")(required)
-        +textarea-w-top-label("text", siteData('blocks.contact_msg_label'), siteData('blocks.contact_msg_placeholder'), "message")(required)
+        +input-w-top-label([ 'required' ], { type: "text", label: siteData('blocks.contact_name_label'), placeholder: siteData('blocks.contact_name_placeholder'), name: "name" })
+        +input-w-top-label([ 'required' ], { type: "email", label: siteData('blocks.contact_email_label'), placeholder: "yourmail@company.com", name: "email", pattern: "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$" })
+        +input-w-top-label([ 'required' ], { type: "tel", label: siteData('blocks.contact_phone_label'), placeholder: "+9 (999) 999-99-99", name: "phone" })
+        +textarea-w-top-label([ 'required' ], { type: "text", label: siteData('blocks.contact_msg_label'), placeholder: siteData('blocks.contact_msg_placeholder'), name: "message" })
         input(type="submit", value=siteData('blocks.contact_btn_label'))
         p
             //- Отправляя форму, вы разрешаете обработку персональных данных<br>
@@ -13,7 +13,7 @@ mixin _feedback-form(dark=false, centered=false, headerText=siteData('blocks.con
 //- flags = dark, section, centered
 //- params = headerText
 //- has block content
-mixin feedback-form(flags=[], params={ headerText: "Свяжитесь с нами" })
+mixin feedback-form(flags=[], params={ headerText: siteData('blocks.contact_header') })
     if flags.has('section')
         section#feedback(class=classNames("feedback", flags.has('dark') && 'feedback--dark'))
             .section-content
