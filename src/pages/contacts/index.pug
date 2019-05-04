@@ -1,0 +1,27 @@
+extends ../../layout.pug
+
+block body
+    section.top
+        .section-content
+            +top-bar([ 'sticky', 'padding' ], { currentPage: "/contacts" })
+    section.contacts
+        .section-content
+            h1 Контакты
+            .contacts__info
+                h5 Наш адрес:
+                p.
+                    Россия, Москва, м. Технопарк,<br>
+                    ул. Автозаводская 23А, офис 310
+                h5 Телефон:
+                p +7 (963) 966-88-33
+                h5 Мы в соцсетях:
+                a.socials-link(href="https://www.facebook.com/berezadev/", target="_blank")
+                    i.fab.fa-facebook-square
+                    span facebook.com/berezadev/
+                a.socials-link(href="https://www.instagram.com/berezadev/", target="_blank")
+                    i.fab.fa-instagram
+                    span instagram.com/berezadev/
+            .contacts__map
+                img(-lazy-src="/assets/contacts-map.jpg")
+    +feedback-form([ 'section' ])
+    +footer

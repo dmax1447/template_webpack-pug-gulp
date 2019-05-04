@@ -1,0 +1,55 @@
+@import "../../styles.scss";
+
+.section-content {
+    & > h1 {
+        font-family: Ubuntu;
+        font-weight: 500;
+        font-size: v(36);
+        line-height: v(48);
+        text-align: center;
+    }
+
+    &__info {
+        h2 {
+            margin: 0;
+            margin-bottom: v(24);
+            font-family: 'Ubuntu';
+            font-weight: 500;
+            font-size: v(36);
+            line-height: v(48);
+        }
+    
+        h5 {
+            font-family: 'Ubuntu';
+            font-style: normal;
+            font-weight: 500;
+            font-size: v(20);
+            line-height: v(28);
+        }
+    
+        p {
+            font-family: 'Source Sans Pro';
+            font-style: normal;
+            font-weight: normal;
+            font-size: v(16);
+            line-height: v(24);
+            margin-bottom: v(24);
+    
+            max-width: v(360);
+        }
+    }
+
+    a.site-link {
+        i {
+            width: v(24);
+            height: v(24);
+            font-size: v(16);
+            line-height: v(24);
+        }
+        i, span {
+            font-size: v(16);
+            line-height: v(24);
+            color: $accentLight60;
+        }
+    }
+}

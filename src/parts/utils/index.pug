@@ -22,5 +22,17 @@
         return array.filter(x => x !== false).join(" ")
     }
 
+    // Bad practic bacause of WTF is going on
+    //
+    // bemClass('btn', { --dark: isDarkFlag }) -> 'btn--dark'
+    function bemClass(baseClassName, optClassMap, additionalClasses) {
+        let output = [ baseClassName ];
+        for (const [ classPart, opt ] of Object.entries(optClassMap)) {
+            if (opt) output.push(`${baseClassName}${classPart}`);
+        }
+        output.push(classNames(additionalClasses));
+        return output.join(' ');
+    }
+
     // Monkey patch for `flags.has('dark')`
     Array.prototype.has = Array.prototype.includes;

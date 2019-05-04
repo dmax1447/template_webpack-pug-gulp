@@ -1,0 +1,5 @@
+mixin link(text, href, icon)
+    a.link(href=href)&attributes(attributes)
+        if icon
+            i(class=classNames(icon, 'link__icon'))
+        span.link__text!= text

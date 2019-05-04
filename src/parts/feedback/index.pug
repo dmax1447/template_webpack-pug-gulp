@@ -1,10 +1,10 @@
 mixin _feedback-form(dark=false, centered=false, headerText="Свяжитесь с нами")
     form(class=("feedback-form " + (dark ? 'feedback-form--dark ' : '') + (centered === true ? 'feedback-form--centered ' : '')), action="/contact", method="post")
         h4= headerText
-        +input-w-top-label([ 'required' ], { type: "text", label: "Ваше имя", placeholder: "Имя и фамилия", name: "name" })
-        +input-w-top-label([ 'required' ], { type: "email", label: "e-mail", placeholder: "yourmail@company.com", name: "email", pattern: "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$" })
-        +input-w-top-label([ 'required' ], { type: "tel", label: "телефон", placeholder: "+9 (999) 999-99-99", name: "phone" })
-        +textarea-w-top-label([ 'required' ], { type: "text", label: "что-то, что нам нужно знать заранее", placeholder: "Информация о проекте", name: "message" })
+        +input-w-top-label([ 'required', dark && 'dark' ], { type: "text", label: "Ваше имя", placeholder: "Имя и фамилия", name: "name" })
+        +input-w-top-label([ 'required', dark && 'dark' ], { type: "email", label: "e-mail", placeholder: "yourmail@company.com", name: "email", pattern: "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$" })
+        +input-w-top-label([ 'required', dark && 'dark' ], { type: "tel", label: "телефон", placeholder: "+9 (999) 999-99-99", name: "phone" })
+        +textarea-w-top-label([ 'required', dark && 'dark' ], { type: "text", label: "что-то, что нам нужно знать заранее", placeholder: "Информация о проекте", name: "message" })
         input(type="submit", value="Отправить")
         p
             //- Отправляя форму, вы разрешаете обработку персональных данных<br>

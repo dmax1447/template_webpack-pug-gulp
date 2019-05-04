@@ -39,8 +39,6 @@
         }
 
         &--current {
-            cursor: initial;
-
             &:hover {
                 & > .nav-menu__item-text {
                     color: black;
