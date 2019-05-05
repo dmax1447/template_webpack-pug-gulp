@@ -1,4 +1,4 @@
-import { $ as $q, isMobileScreen, listenSwipe } from "../../core/utils";
+import { $q, isMobileScreen, listenSwipe } from "../../core/utils";
 
 const Lethargy = require("exports-loader?this.Lethargy!lethargy/lethargy");
 const lethargy = new Lethargy();

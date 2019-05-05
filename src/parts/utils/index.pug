@@ -36,3 +36,18 @@
 
     // Monkey patch for `flags.has('dark')`
     Array.prototype.has = Array.prototype.includes;
+
+//- Load css lazily with noscript fallback
+//- eg:
+//-
+//- +linkLazyCSS("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400|Ubuntu:300,500&amp;subset=cyrillic")
+//- +linkLazyCSS("assets/css/fontawesome-all.min.css")
+mixin linkLazyCSS(href)
+    link(
+        href=href,
+        rel="stylesheet",
+        media="none",
+        onload="if(media!='all')media='all'"
+    )&attributes(attributes)
+    noscript
+        link(href=href, rel="stylesheet")&attributes(attributes)

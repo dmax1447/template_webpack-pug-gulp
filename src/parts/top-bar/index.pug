@@ -1,4 +1,4 @@
-//- flags = dark, sticky, padding, noFeedbackBtn, noNavMenu
+//- flags = dark, sticky, padding, noFeedbackBtn, noNavMenu, hideMainLink
 //- params = currentPage
 mixin top-bar(flags=[], params={ currentPage: '' })
     if flags.has('padding')
@@ -15,6 +15,6 @@ mixin top-bar(flags=[], params={ currentPage: '' })
                     +request-estimate-btn
             if !flags.has('noNavMenu')
                 div.top-bar__menu.top-bar__menu--closed
-                    +nav-menu([ flags.has('dark') && 'dark' ], { currentPage: params.currentPage })
+                    +nav-menu([ flags.has('dark') && 'dark', flags.has('hideMainLink') && 'hideMainLink' ], { currentPage: params.currentPage })
             //- i.far.fa-bars.top-bar__mobile-menu(role="button")
             //- i.fal.fa-times.top-bar__mobile-menu-close(role="button")

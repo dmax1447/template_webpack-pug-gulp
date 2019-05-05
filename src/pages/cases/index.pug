@@ -3,6 +3,8 @@ extends ../../layout.pug
 mixin case-thumbnail(key, tech, name, desc, background, backgroundStyle)
     a.case-thumbnail(href=("/case-" + key), style=("background: " + backgroundStyle))
         img(-lazy-src=(background + ".jpg"))
+        video(playsinline autoplay muted loop)
+            source(-data-src=(background + ".mp4"), type="video/mp4")
         .case-thumbnail__content
             h6!= tech
             h2!= name

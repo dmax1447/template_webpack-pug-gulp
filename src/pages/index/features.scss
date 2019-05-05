@@ -66,7 +66,7 @@
     }
     h2 {
         color: $primaryDark100;
-        font-family: Ubuntu;
+        font-family: $headerFont;
         line-height: v(48);
         font-size: v(36);
         text-align: center;
@@ -80,7 +80,7 @@
 
         li {
             position: relative;
-            font-family: 'Source Sans Pro';
+            font-family: $textFont;
             color: $primaryDark80;
             line-height: v(24);
             font-size: v(16);

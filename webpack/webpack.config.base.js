@@ -13,16 +13,18 @@ const outputPath = process.env.BUILD_OUTPUT || './dist';
 module.exports = function (isDev = 'dev') {
     isDev = isDev !== 'prod';
 
+    const htmlLoader = {
+        loader: 'html-loader',
+        options: {
+            minimize: true,
+            attrs: false,
+        },
+    };
+
     const pug = {
         test: /\.pug$/,
         use: [
-            {
-                loader: 'html-loader',
-                options: {
-                    attrs: false, // ['img:src', 'link:href', 'source:src'] // false
-                    // attrs: ['link:href']
-                }
-            },
+            htmlLoader,
             {
                 loader: 'pug-html-loader',
                 options: {
@@ -86,14 +88,7 @@ module.exports = function (isDev = 'dev') {
                 },
                 {
                     test: /\.html$/,
-                    use: [
-                        {
-                            loader: 'html-loader',
-                            options: {
-                                minimize: true,
-                            },
-                        },
-                    ],
+                    use: [ htmlLoader ],
                 },
                 {
                     test: /\.(png|jpg|gif)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -165,12 +160,12 @@ module.exports = function (isDev = 'dev') {
     };
 
     for (const pathname in pages) {
+        console.log(`pathname="${pathname}" pages[pathname]="${pages[pathname]}"`);
         // Configured to generate the html file, define paths, etc.
         const conf = {
             filename: `${pathname}.html`, // html output pathname
             template: `${pages[pathname]}`, // Template path
-            inject: true,
-            // favicon: rootDir('./src/assets/favicon.ico'),
+            inject: 'head',
             chunks: ['commons', 'vendors', 'app', pathname],
             chunksSortMode: 'manual',
         };

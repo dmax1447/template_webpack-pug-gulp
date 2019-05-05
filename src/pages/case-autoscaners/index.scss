@@ -37,14 +37,14 @@
         h2 {
             margin: 0;
             margin-bottom: v(24);
-            font-family: 'Ubuntu';
+            font-family: $headerFont;
             font-weight: 500;
             font-size: v(36);
             line-height: v(48);
         }
 
         h5 {
-            font-family: 'Ubuntu';
+            font-family: $headerFont;
             font-style: normal;
             font-weight: 500;
             font-size: v(20);
@@ -52,7 +52,7 @@
         }
 
         p {
-            font-family: 'Source Sans Pro';
+            font-family: $textFont;
             font-style: normal;
             font-weight: normal;
             font-size: v(16);

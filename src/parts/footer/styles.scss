@@ -15,7 +15,7 @@
         color: white;
         font-size: v(16);
         line-height: v(48);
-        font-family: 'Source Sans Pro';
+        font-family: $textFont;
         font-weight: 400;
     }
 
@@ -27,6 +27,6 @@
         cursor: pointer;
         font-size: v(12);
         line-height: v(48);
-        font-family: 'Source Sans Pro';
+        font-family: $textFont;
     }
 }

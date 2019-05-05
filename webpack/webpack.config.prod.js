@@ -18,7 +18,6 @@ module.exports = webpackMerge(webpackConfigBase('prod'), {
                         options: {
                             url: false,
                             importLoaders: 1,
-                            context: 'govno/',
                         }
                     },
                     'postcss-loader',
