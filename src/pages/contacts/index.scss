@@ -2,7 +2,8 @@
 
 .section-content {
     & > h1 {
-        font-family: $headerFont;
+        @include headerFont;
+
         font-weight: 500;
         font-size: v(36);
         line-height: v(48);
@@ -12,8 +13,9 @@
     .contacts {
         &__info {
             h5 {
+                @include headerFont;
+
                 margin: 0;
-                font-family: $headerFont;
                 font-style: normal;
                 font-weight: 500;
                 font-size: v(20);
@@ -21,8 +23,9 @@
             }
 
             p {
+                @include textFont;
+                
                 margin: 0;
-                font-family: $textFont;
                 font-style: normal;
                 font-weight: normal;
                 font-size: v(16);
@@ -33,6 +36,10 @@
             }
 
             margin-bottom: v(160);
+
+            @include mobile {
+                margin-bottom: v(24);
+            }
         }
 
         &__map {
@@ -40,6 +47,20 @@
             right: v(48);
             height: v(456);
             top: v(112);
+
+            @include mobile {
+                position: relative;
+                display: block;
+                right: initial;
+                top: initial;
+                width: 100%;
+                height: initial;
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
         }
     }
 

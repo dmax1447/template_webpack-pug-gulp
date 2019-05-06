@@ -10,17 +10,24 @@ window.addEventListener('load', () => {
         let loaded = false;
 
         const mouseEnter = () => {
+            const videoEl = el.querySelector('video')!;
             if (!loaded) {
-                const sourceEl = el.querySelector('video > source')! as HTMLSourceElement;
+                const sourceEl = videoEl.querySelector('source')!;
                 sourceEl.src = sourceEl.getAttribute('-data-src')!;
-                const videoEl = el.querySelector('video')!;
                 videoEl.load();
                 loaded = true;
-                videoEl.play().catch();
             }
+            videoEl.currentTime = 0;
+            videoEl.play().catch();
+        };
+
+        const mouseLeave = () => {
+            const videoEl = el.querySelector('video')!;
+            videoEl.pause();
         };
 
         el.addEventListener('mouseenter', mouseEnter);
+        el.addEventListener('mouseleave', mouseLeave);
         el.addEventListener('click', mouseEnter);
     });
 });

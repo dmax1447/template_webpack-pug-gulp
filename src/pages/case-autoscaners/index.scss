@@ -32,19 +32,19 @@
     &__about {
         padding-left: v(48);
         padding-right: v(48);
-        margin-bottom: v(100);
+        margin-bottom: v(120);
 
         h2 {
+            @include headerFont;
             margin: 0;
             margin-bottom: v(24);
-            font-family: $headerFont;
             font-weight: 500;
             font-size: v(36);
             line-height: v(48);
         }
 
         h5 {
-            font-family: $headerFont;
+            @include headerFont;
             font-style: normal;
             font-weight: 500;
             font-size: v(20);
@@ -52,7 +52,8 @@
         }
 
         p {
-            font-family: $textFont;
+            @include textFont;
+            
             font-style: normal;
             font-weight: normal;
             font-size: v(16);
@@ -63,13 +64,29 @@
         }
     }
 
-    &__gallery {
+    .devices-gallery {
         position: absolute;
         top: v(112);
         right: v(48);
+    }
 
-        & > img {
-            height: v(420);
+    @include mobile {
+        .devices-gallery {
+            display: none;
         }
+        .case__about {
+            padding-top: v(40);
+        }
+
+        // .case__about {
+        //     padding-top: v(528);
+        // }
+
+        // .devices-gallery {
+        //     position: absolute;
+        //     top: v(100);
+        //     left: v(24);
+        //     right: v(24);
+        // }
     }
 }

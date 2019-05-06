@@ -28,10 +28,11 @@
     width: v(504);
 
     & > h4 {
+        @include headerFont;
+        
         font-size: v(24);
         line-height: v(72);
         margin: 0;
-        font-family: $headerFont;
         font-weight: 500;
         color: $primaryDark90;
         text-align: center;

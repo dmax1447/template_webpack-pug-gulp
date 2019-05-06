@@ -3,11 +3,12 @@
     display: inline-block;
 
     a, .nav-menu__item {
+        @include headerFont;
+        
         position: relative;
         display: inline-block;
         font-size: v(16);
         font-weight: 300;
-        font-family: $headerFont;
         line-height: v(24);
         text-align: center;
 

@@ -9,5 +9,12 @@ $primaryDark80: #4C4C4C;
 $primaryDark90: #333333;
 $primaryDark100: #262626;
 
-$headerFont: 'Ubuntu', Cantarell, 'Helvetica Neue', sans-serif;
-$textFont: 'Source Sans Pro', Geneva, Arial, sans-serif;
+@mixin headerFont {
+    font-family: 'Ubuntu', Cantarell, 'Helvetica Neue', sans-serif;
+    font-display: swap;
+}
+
+@mixin textFont {
+    font-family: 'Source Sans Pro', Geneva, Arial, sans-serif;
+    font-display: swap;
+}

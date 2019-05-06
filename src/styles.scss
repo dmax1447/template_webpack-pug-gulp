@@ -6,7 +6,11 @@
 
 body {
     margin: 0;
-    font-family: $textFont;
+    @include textFont;
+}
+
+a {
+    color: black;
 }
 
 section {

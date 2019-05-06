@@ -23,6 +23,7 @@ module.exports = function (isDev = 'dev') {
 
     const pug = {
         test: /\.pug$/,
+        // test: /(src\/pages\/.+\/.+\.pug$)|(src\\pages\\.+\\.+\.pug$)/,
         use: [
             htmlLoader,
             {
@@ -155,7 +156,7 @@ module.exports = function (isDev = 'dev') {
         plugins: [
             new CopyWebpackPlugin([
                 { from: 'static' }
-            ])
+            ]),
         ],
     };
 

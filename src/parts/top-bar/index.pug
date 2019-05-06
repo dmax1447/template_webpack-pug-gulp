@@ -12,7 +12,7 @@ mixin top-bar(flags=[], params={ currentPage: '' })
                 img.top-bar__logo(-lazy-src=(flags.has('dark') ? "assets/logo-white.svg" : "assets/logo.svg"))
             if !flags.has('noFeedbackBtn')
                 a(href="#feedback")
-                    +request-estimate-btn
+                    +request-estimate-btn([ flags.has('dark') && 'dark' ])
             if !flags.has('noNavMenu')
                 div.top-bar__menu.top-bar__menu--closed
                     +nav-menu([ flags.has('dark') && 'dark', flags.has('hideMainLink') && 'hideMainLink' ], { currentPage: params.currentPage })
