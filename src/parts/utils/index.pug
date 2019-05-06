@@ -22,5 +22,32 @@
         return array.filter(x => x !== false).join(" ")
     }
 
+    // Bad practic bacause of WTF is going on
+    //
+    // bemClass('btn', { --dark: isDarkFlag }) -> 'btn--dark'
+    function bemClass(baseClassName, optClassMap, additionalClasses) {
+        let output = [ baseClassName ];
+        for (const [ classPart, opt ] of Object.entries(optClassMap)) {
+            if (opt) output.push(`${baseClassName}${classPart}`);
+        }
+        output.push(classNames(additionalClasses));
+        return output.join(' ');
+    }
+
     // Monkey patch for `flags.has('dark')`
     Array.prototype.has = Array.prototype.includes;
+
+//- Load css lazily with noscript fallback
+//- eg:
+//-
+//- +linkLazyCSS("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400|Ubuntu:300,500&amp;subset=cyrillic")
+//- +linkLazyCSS("assets/css/fontawesome-all.min.css")
+mixin linkLazyCSS(href)
+    link(
+        href=href,
+        rel="stylesheet",
+        media="none",
+        onload="if(media!='all')media='all'"
+    )&attributes(attributes)
+    noscript
+        link(href=href, rel="stylesheet")&attributes(attributes)

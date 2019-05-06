@@ -1,4 +1,4 @@
-import { $ as $q, getScroll, isMobileScreen, disableScroll, enableScroll } from "../../core/utils";
+import { $q, getScroll, isMobileScreen, disableScroll, enableScroll } from "../../core/utils";
 import { Hero } from "./hero";
 import { AnchorNav } from "./anchor-nav";
 

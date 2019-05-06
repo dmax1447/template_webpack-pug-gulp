@@ -1,0 +1,65 @@
+
+.devices-gallery {
+    position: relative;
+    width: v(744);
+    height: v(420);
+
+    .gallery-item {
+        position: relative;
+        width: v(744);
+        height: v(450);
+
+        &__device {
+            width: v(744) !important;
+        }
+
+        &__screen {
+            position: absolute;
+            overflow: hidden;
+
+            img {
+                object-fit: cover;
+                height: 100%;
+            }
+
+            &--pc {
+                top: v(25);
+                left: v(96);
+                bottom: v(66);
+                right: v(96);
+            }
+
+            &--mobile1 {
+                top: v(75);
+                left: v(158);
+                right: v(398);
+                height: v(318);
+            }
+
+            &--mobile2 {
+                top: v(75);
+                left: v(398);
+                right: v(158);
+                height: v(318);
+            }
+
+            &--mobile1, &--mobile2 {
+                img {
+                    object-fit: contain;
+                    height: auto;
+                }
+            }
+        }
+    }
+}
+
+@include mobile {
+    .devices-gallery, .gallery-item {
+        width: v(360);
+        height: v(216);
+    }
+    .gallery-item__device {
+        width: v(360) !important;
+        height: v(216);
+    }
+}

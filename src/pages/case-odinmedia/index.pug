@@ -1,59 +1,30 @@
 extends ../../layout.pug
 
-mixin case-thumbnail(key, tech, name, desc, background, backgroundStyle)
-    .case-thumbnail(style=("background: " + backgroundStyle))
-        img(-lazy-src=(background + ".jpg"))
-        .case-thumbnail__content
-            h6!= tech
-            h2!= name
-            p!= desc
-
 block body
     section.top
         .section-content
-            +top-bar([ 'sticky', 'padding' ], { currentPage: "/case-odinmedia" })
-    section.cases
-        h1 Кейсы
-        .case-thumbnails
-            +case-thumbnail(
-                "autoscaners",
-                "webdev + UI/UX + Mobile",
-                "autoscaners.ru",
-                "поддержка и развитие e-commerce<br>инфраструктуры",
-                "/assets/cases/thumbnail-autoscaners",
-                ""
-            )
-            +case-thumbnail(
-                "icartool",
-                "UI/UX + mobile",
-                "iCartool",
-                "Мобильное приложение для тестирования<br>автомобильных аккумуляторов",
-                "/assets/cases/thumbnail-icartool",
-                ""
-            )
-            +case-thumbnail(
-                "hakamadamk",
-                "UI/UX + webdev",
-                "Ирина Хакамада",
-                "Разработка и техподдержка тура по Сибири<br>известного мотивационного спикера",
-                "/assets/cases/thumbnail-hakamada",
-                ""
-            )
-            +case-thumbnail(
-                "launch",
-                "UI/UX + Webdev",
-                "Launch",
-                "Сайт официального дилера крупнейшего<br>производителя систем автодиагностики",
-                "/assets/cases/thumbnail-launch",
-                ""
-            )
-            +case-thumbnail(
-                "odinmedia",
-                "UI/UX + webdev",
-                "OdinMedia",
-                "Сайт и SPA-каталог для международного<br>дистрибьютора медиа-контента",
-                "/assets/cases/thumbnail-odinmedia",
-                ""
+            +top-bar([ 'sticky', 'padding' ], { currentPage: "/cases" })
+    section.case
+        .section-content
+            .case__about
+                a.back-to-cases(href="/cases")
+                    i.far.fa-arrow-left
+                    span назад к кейсам
+                h2 Odin Media
+                h5 Сайт–медиакаталог для компании<br>кино- и теледистрибьютора.
+                p.
+                    Один Медиа входит в холдинг Формат ТВ. Компания управляет правами на телеконтент (телепрограммы, форматы, сериалы). Главная специализация  — документальные фильмы, в первую очередь научпоп и исторические.<br>
+                    <br>
+                    Работа началась с проекта, который, как обычно, нужен был «вчера». Ребята только образовались внутри телехолдинга, летели в Канны на медиарынок MIPTV, и им нужно было как-то презентовать свою подборку прав. Мы быстро создали лендинг с инфо о компании, обложками их основных телепроектов и помогли с печатными материалами для презентации.<br>
+                    <br>
+                    На запуск потратили менее двух недель. В последствии переделали сайт в полноценное SPA.
+                a.site-link(href="https://odinmedia.tv/", target="_blank")
+                    i.far.fa-external-link-square
+                    span перейти на сайт
+            +devices-gallery(
+                "/assets/cases/odinmedia-pc.jpg",
+                "/assets/cases/odinmedia-mobile.jpg",
+                "/assets/cases/odinmedia-mobile2.jpg"
             )
     +feedback-form([ 'section' ])
     +footer

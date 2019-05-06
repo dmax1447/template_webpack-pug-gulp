@@ -1,0 +1,13 @@
+mixin devices-gallery(pc, mobile1, mobile2)
+    .devices-gallery
+        .owl-carousel
+            .gallery-item
+                img.gallery-item__device(src="/assets/cases/pc.svg")
+                .gallery-item__screen.gallery-item__screen--pc
+                    img(-lazy-src=pc)
+            .gallery-item
+                img.gallery-item__device(src="/assets/cases/mobile.svg")
+                .gallery-item__screen.gallery-item__screen--mobile1
+                    img(-lazy-src=mobile1)
+                .gallery-item__screen.gallery-item__screen--mobile2
+                    img(-lazy-src=mobile2)

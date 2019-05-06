@@ -5,7 +5,7 @@
 import smoothscroll from 'smoothscroll-polyfill';
 
 import {
-    $ as $q, $all, sendForm,
+    $q, $all, sendForm,
 } from './core/utils';
 import { initAnimations } from './core/anim';
 import { initCarousels } from './core/owl-carousel';

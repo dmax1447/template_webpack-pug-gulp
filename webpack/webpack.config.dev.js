@@ -11,7 +11,9 @@ const webpackConfigDev = webpackMerge(webpackConfigBase('dev'), {
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader', { loader: 'css-loader', options: { importLoaders: 1 } }, 'postcss-loader',
+                    'style-loader',
+                    { loader: 'css-loader', options: { url: false, importLoaders: 1 } },
+                    'postcss-loader',
                 ],
             },
         ],

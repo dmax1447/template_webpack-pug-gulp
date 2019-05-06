@@ -1,4 +1,4 @@
-//- flags = dark, sticky, padding, noFeedbackBtn, noNavMenu
+//- flags = dark, sticky, padding, noFeedbackBtn, noNavMenu, hideMainLink
 //- params = currentPage
 mixin top-bar(flags=[], params={ currentPage: '' })
     if flags.has('padding')
@@ -12,9 +12,9 @@ mixin top-bar(flags=[], params={ currentPage: '' })
                 img.top-bar__logo(-lazy-src=(flags.has('dark') ? "assets/logo-white.svg" : "assets/logo.svg"))
             if !flags.has('noFeedbackBtn')
                 a(href="#feedback")
-                    +request-estimate-btn
+                    +request-estimate-btn([ flags.has('dark') && 'dark' ])
             if !flags.has('noNavMenu')
                 div.top-bar__menu.top-bar__menu--closed
-                    +nav-menu([ flags.has('dark') && 'dark' ], { currentPage: params.currentPage })
+                    +nav-menu([ flags.has('dark') && 'dark', flags.has('hideMainLink') && 'hideMainLink' ], { currentPage: params.currentPage })
             //- i.far.fa-bars.top-bar__mobile-menu(role="button")
             //- i.fal.fa-times.top-bar__mobile-menu-close(role="button")

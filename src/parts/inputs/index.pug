@@ -1,18 +1,18 @@
 
-//- flags = required
+//- flags = required, dark
 //- params = type, label, placeholder, name, pattern
 mixin input-w-top-label(flags=[], params={ type: 'text', label: '', placeholder: '', name: '', pattern: undefined })
-    .input-w-top-label
+    div(class=classNames('input-w-top-label', flags.has('dark') && 'input-w-top-label--dark'))
         input(type=params.type, placeholder=params.placeholder, name=params.name, pattern=params.pattern, required=flags.has('required'))&attributes(attributes)
         .input-w-top-label__lg
             .input-w-top-label__lg-left
             label= params.label
             .input-w-top-label__lg-right
 
-//- flags = required
+//- flags = required, dark
 //- params = type, label, placeholder, name, pattern
 mixin textarea-w-top-label(flags=[], params={ type: 'text', label: '', placeholder: '', name: '', pattern: undefined })
-    .textarea-w-top-label
+    div(class=classNames('textarea-w-top-label', flags.has('dark') && 'textarea-w-top-label--dark'))
         textarea(type=params.type, placeholder=params.placeholder, name=params.name, pattern=params.pattern, required=flags.has('required'))&attributes(attributes)
         .textarea-w-top-label__lg
             .textarea-w-top-label__lg-left

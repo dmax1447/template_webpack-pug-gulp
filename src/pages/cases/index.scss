@@ -1,10 +1,12 @@
 @import "../../styles.scss";
 
+$hoverTransitionDuration: 1.5s;
+
 section.cases > .section-content > h1 {
+    @include headerFont;
+
     width: 100%;
     text-align: center;
-
-    font-family: Ubuntu;
     font-size: v(36);
     font-weight: 400;
     line-height: v(48);
@@ -36,9 +38,20 @@ section.cases > .section-content > h1 {
         z-index: 0;
 
         transform: scale(1,1);
-        transition-duration: 3s;
-        transition-property: transform, opacity;
-        opacity: 0.4;
+        transition-duration: $hoverTransitionDuration;
+        transition-property: transform;
+    }
+
+    & > video {
+        position: absolute;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+
+        z-index: 1;
+        opacity: 0;
+        transition-duration: $hoverTransitionDuration;
+        transition-property: opacity;
     }
 
     &__content {
@@ -47,7 +60,7 @@ section.cases > .section-content > h1 {
         top: 0;
         bottom: 0;
         right: 0;
-        z-index: 1;
+        z-index: 2;
 
         color: white;
 
@@ -56,18 +69,23 @@ section.cases > .section-content > h1 {
         padding-left: v(48);
         padding-bottom: v(24);
         padding-right: v(48);
+
+        background-color: rgba(0,0,0,0.6);
+        transition-duration: $hoverTransitionDuration;
+        transition-property: background-color;
     }
 
     h6 {
-        font-family: Ubuntu;
+        @include headerFont;
+
         font-size: v(12);
         line-height: v(24);
-        // font-weight: bold;
         margin: 0;
     }
 
     h2 {
-        font-family: Ubuntu;
+        @include headerFont;
+
         font-size: v(36);
         line-height: v(48);
         font-weight: 500;
@@ -75,16 +93,23 @@ section.cases > .section-content > h1 {
     }
 
     p {
-        font-family: 'Source Sans Pro';
+        @include textFont;
+
         font-size: v(16);
         line-height: v(24);
         margin: 0;
     }
 
     &:hover {
+        .case-thumbnail__content {
+            color: $accentLight40;
+            background-color: rgba(0,0,0,0.4);
+        }
         & > img {
             transform: scale(1.1,1.1);
-            opacity: 0.6;
+        }
+        & > video {
+            opacity: 1;
         }
     }
 }

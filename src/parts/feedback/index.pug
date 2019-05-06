@@ -1,10 +1,10 @@
 mixin _feedback-form(dark=false, centered=false, headerText="Свяжитесь с нами")
     form(class=("feedback-form " + (dark ? 'feedback-form--dark ' : '') + (centered === true ? 'feedback-form--centered ' : '')), action="/contact", method="post")
         h4= headerText
-        +input-w-top-label([ 'required' ], { type: "text", label: siteData('blocks.contact_name_label'), placeholder: siteData('blocks.contact_name_placeholder'), name: "name" })
-        +input-w-top-label([ 'required' ], { type: "email", label: siteData('blocks.contact_email_label'), placeholder: "yourmail@company.com", name: "email", pattern: "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$" })
-        +input-w-top-label([ 'required' ], { type: "tel", label: siteData('blocks.contact_phone_label'), placeholder: "+9 (999) 999-99-99", name: "phone" })
-        +textarea-w-top-label([ 'required' ], { type: "text", label: siteData('blocks.contact_msg_label'), placeholder: siteData('blocks.contact_msg_placeholder'), name: "message" })
+        +input-w-top-label([ 'required', dark && 'dark' ], { type: "text", label: siteData('blocks.contact_name_label'), placeholder: siteData('blocks.contact_name_placeholder'), name: "name" })
+        +input-w-top-label([ 'required', dark && 'dark' ], { type: "email", label: siteData('blocks.contact_email_label'), placeholder: "yourmail@company.com", name: "email", pattern: "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$" })
+        +input-w-top-label([ 'required', dark && 'dark' ], { type: "tel", label: siteData('blocks.contact_phone_label'), placeholder: "+9 (999) 999-99-99", name: "phone" })
+        +textarea-w-top-label([ 'required', dark && 'dark' ], { type: "text", label: siteData('blocks.contact_msg_label'), placeholder: siteData('blocks.contact_msg_placeholder'), name: "message" })
         input(type="submit", value=siteData('blocks.contact_btn_label'))
         p
             //- Отправляя форму, вы разрешаете обработку персональных данных<br>

@@ -3,6 +3,8 @@ extends ../../layout.pug
 mixin case-thumbnail(key, tech, name, desc, background, backgroundStyle)
     a.case-thumbnail(href=("/case-" + key), style=("background: " + backgroundStyle))
         img(-lazy-src=(background + ".jpg"))
+        video(playsinline autoplay muted loop)
+            source(-data-src=(background + ".mp4"), type="video/mp4")
         .case-thumbnail__content
             h6!= tech
             h2!= name
@@ -24,30 +26,30 @@ block body
                     "/assets/cases/thumbnail-autoscaners",
                     ""
                 )
-                +case-thumbnail(
-                    "icartool",
-                    "UI/UX + mobile",
-                    "iCartool",
-                    "Мобильное приложение для тестирования<br>автомобильных аккумуляторов",
-                    "/assets/cases/thumbnail-icartool",
-                    ""
-                )
-                +case-thumbnail(
-                    "hakamadamk",
-                    "UI/UX + webdev",
-                    "Ирина Хакамада",
-                    "Разработка и техподдержка тура по Сибири<br>известного мотивационного спикера",
-                    "/assets/cases/thumbnail-hakamada",
-                    ""
-                )
-                +case-thumbnail(
-                    "launch",
-                    "UI/UX + Webdev",
-                    "Launch",
-                    "Сайт официального дилера крупнейшего<br>производителя систем автодиагностики",
-                    "/assets/cases/thumbnail-launch",
-                    ""
-                )
+                //- +case-thumbnail(
+                //-     "icartool",
+                //-     "UI/UX + mobile",
+                //-     "iCartool",
+                //-     "Мобильное приложение для тестирования<br>автомобильных аккумуляторов",
+                //-     "/assets/cases/thumbnail-icartool",
+                //-     ""
+                //- )
+                //- +case-thumbnail(
+                //-     "hakamadamk",
+                //-     "UI/UX + webdev",
+                //-     "Ирина Хакамада",
+                //-     "Разработка и техподдержка тура по Сибири<br>известного мотивационного спикера",
+                //-     "/assets/cases/thumbnail-hakamada",
+                //-     ""
+                //- )
+                //- +case-thumbnail(
+                //-     "launch",
+                //-     "UI/UX + Webdev",
+                //-     "Launch",
+                //-     "Сайт официального дилера крупнейшего<br>производителя систем автодиагностики",
+                //-     "/assets/cases/thumbnail-launch",
+                //-     ""
+                //- )
                 +case-thumbnail(
                     "odinmedia",
                     "UI/UX + webdev",

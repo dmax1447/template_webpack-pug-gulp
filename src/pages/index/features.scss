@@ -65,8 +65,9 @@
         margin: 0 auto;
     }
     h2 {
+        @include headerFont;
+
         color: $primaryDark100;
-        font-family: Ubuntu;
         line-height: v(48);
         font-size: v(36);
         text-align: center;
@@ -79,8 +80,9 @@
         padding-left: v(60);
 
         li {
+            @include textFont;
+            
             position: relative;
-            font-family: 'Source Sans Pro';
             color: $primaryDark80;
             line-height: v(24);
             font-size: v(16);

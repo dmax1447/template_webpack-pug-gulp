@@ -6,7 +6,11 @@
 
 body {
     margin: 0;
-    font-family: 'Source Sans Pro';
+    @include textFont;
+}
+
+a {
+    color: black;
 }
 
 section {

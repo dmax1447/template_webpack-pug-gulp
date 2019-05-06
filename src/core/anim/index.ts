@@ -1,5 +1,5 @@
 import {
-    $, $all, isElementInViewport, getGlobalRect, isGlobalRectInViewport, intersectionRate, getWindowGlobalRect, isElementVisible,
+    $q, $all, isElementInViewport, getGlobalRect, isGlobalRectInViewport, intersectionRate, getWindowGlobalRect, isElementVisible,
 } from '../utils';
 
 export function isAnimWaiting(el: HTMLElement) {

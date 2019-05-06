@@ -58,7 +58,7 @@ section.hero.full#hero
             index ? "" : "first video"
         )
     .section-content
-        +top-bar([ 'dark' ])
+        +top-bar([ 'dark', 'hideMainLink' ])
         .hero-slide-wrapper
             +mouse-help-icon
             each slide, index in slides

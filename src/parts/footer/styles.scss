@@ -9,17 +9,20 @@
     }
 
     p {
+        @include textFont;
+
         display: inline-block;
         margin-top: v(24);
 
         color: white;
         font-size: v(16);
         line-height: v(48);
-        font-family: 'Source Sans Pro';
         font-weight: 400;
     }
 
     a {
+        @include textFont;
+
         margin-top: v(24);
         margin-left: v(24);
         float: right;
@@ -27,6 +30,5 @@
         cursor: pointer;
         font-size: v(12);
         line-height: v(48);
-        font-family: 'Source Sans Pro';
     }
 }

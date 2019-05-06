@@ -1,6 +1,6 @@
 
 import {
-    $ as $q, getWindowGlobalRect, intersectionRate, smoothScrollTo, getGlobalRect,
+    $q, getWindowGlobalRect, intersectionRate, smoothScrollTo, getGlobalRect,
 } from '../../core/utils';
 
 export type AnchorDef = {
