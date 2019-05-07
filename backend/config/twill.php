@@ -17,6 +17,19 @@ return [
                 'icon' => 'image',
                 'component' => 'a17-block-image',
             ],
+            'features_offered' => [
+                'title' => 'Блоки Предлагаем',
+                'icon' => 'text',
+                'component' => 'a17-block-features_offered',
+            ],
+        ],
+        'repeaters' => [
+            'features_offered_item' => [
+                'title' => 'Пункты',
+                'trigger' => 'Добавить пункт',
+                'component' => 'a17-block-features_offered_item',
+                'max' => 10,
+            ],
         ],
         'crops' => [
             'icons' => [
