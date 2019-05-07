@@ -51,3 +51,11 @@ mixin linkLazyCSS(href)
     )&attributes(attributes)
     noscript
         link(href=href, rel="stylesheet")&attributes(attributes)
+
+//- do not base on this mixin, it's only a shorthand for [section & .section-content]
+mixin section(class_)
+    section(class=class_)&attributes(attributes)
+        if block
+            .section-content
+                block
+                

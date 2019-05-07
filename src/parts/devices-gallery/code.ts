@@ -4,9 +4,10 @@ window.addEventListener('load', () => {
     initCarousels({
         nav: false,
         autoHeight: false,
+        // loop: false,
 
         autoplay: true,
-        autoplayTimeout: 4000,
+        autoplayTimeout: 10000,
         autoplaySpeed: 1000,
         autoplayHoverPause: true
     });

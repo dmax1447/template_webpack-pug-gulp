@@ -11,10 +11,8 @@ $primaryDark100: #262626;
 
 @mixin headerFont {
     font-family: 'Ubuntu', Cantarell, 'Helvetica Neue', sans-serif;
-    font-display: swap;
 }
 
 @mixin textFont {
     font-family: 'Source Sans Pro', Geneva, Arial, sans-serif;
-    font-display: swap;
 }

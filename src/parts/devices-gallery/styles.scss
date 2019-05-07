@@ -4,6 +4,16 @@
     width: v(744);
     height: v(420);
 
+    .owl-item {
+        transition-property: opacity;
+        transition-duration: 0.5s;
+        opacity: 0;
+
+        &.active {
+            opacity: 1;
+        }
+    }
+
     .gallery-item {
         position: relative;
         width: v(744);
