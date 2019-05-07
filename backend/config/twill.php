@@ -40,6 +40,14 @@ return [
                     ],
                 ]
             ],
+            'icon' => [
+                'desktop' => [
+                    [
+                        'name' => 'desktop',
+                        'ratio' => 1,
+                    ],
+                ]
+            ],
             'image' => [
                 'desktop' => [
                     [
