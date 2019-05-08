@@ -3,6 +3,16 @@
 $accentBg: #540D11;
 $accentFg: white;
 
+@mixin accentColorSection {
+    color: $accentFg;
+    background: $accentBg;
+
+    ::selection {
+        color: $accentBg;
+        background: $accentFg;
+    }
+}
+
 .case {
     a.back-to-cases {
         i {
@@ -99,8 +109,7 @@ $accentFg: white;
 }
 
 .goal {
-    background-color: $accentBg;
-    color: $accentFg;
+    @include accentColorSection;
 
     .section-content {
         padding-left: v(168);
@@ -165,8 +174,7 @@ $accentFg: white;
 }
 
 .result {
-    background-color: $accentBg;
-    color: $accentFg;
+    @include accentColorSection;
 
     .section-content {
         padding-left: v(168);
@@ -220,7 +228,7 @@ $accentFg: white;
                 box-shadow: 0 v(30) v(30) rgba(0, 0, 0, 0);
 
                 &:hover, &:focus {
-                    transform: translateY(v(40));
+                    transform: translateY(v(10));
                     box-shadow: 0 v(30) v(30) rgba(0, 0, 0, 0.486);
                 }
             }
