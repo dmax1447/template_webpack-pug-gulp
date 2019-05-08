@@ -12,4 +12,21 @@ class ProjectController extends ModuleController
     protected $indexOptions = [
         'reorder' => true,
     ];
+
+    protected $indexColumns = [
+        'project_cover' => [
+            'field' => 'project_cover',
+            'title' => 'Превью',
+            'thumb' => true, // image column
+            'variant' => [
+                'role' => 'project_cover',
+                'crop' => 'desktop',
+            ],
+        ],
+        'title' => [
+            'title' => 'Кейс',
+            'field' => 'title',
+            'sort' => true,
+        ],
+    ];
 }
