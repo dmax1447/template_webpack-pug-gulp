@@ -2,63 +2,114 @@
 .devices-gallery {
     position: relative;
     width: v(744);
-    height: v(420);
+    height: v(456);
 
-    .gallery-item {
-        position: relative;
+    cursor: pointer;
+
+    .devices-gallery__item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .devices-gallery__screen {
+        position: absolute;
+        overflow: hidden;
+    }
+
+    &__pc {
+        position: absolute;
+        left: 0;
+        top: 0;
         width: v(744);
-        height: v(450);
+        height: v(420);
 
-        &__device {
-            width: v(744) !important;
+        & > img {
+            width: v(744);
+            height: v(420);
         }
 
-        &__screen {
-            position: absolute;
-            overflow: hidden;
+        & > .devices-gallery__screen {
+            top: v(25);
+            left: v(96);
+            bottom: v(35);
+            right: v(96);
 
-            img {
+            & > img {
                 object-fit: cover;
                 height: 100%;
+                object-position: left;
             }
+        }
+    }
 
-            &--pc {
-                top: v(25);
-                left: v(96);
-                bottom: v(66);
-                right: v(96);
-            }
+    &__mobile {
+        position: absolute;
 
-            &--mobile1 {
-                top: v(75);
-                left: v(158);
-                right: v(398);
-                height: v(318);
-            }
+        &, & > img {
+            width: v(216);
+            height: v(428);
+        }
 
-            &--mobile2 {
-                top: v(75);
-                left: v(398);
-                right: v(158);
-                height: v(318);
-            }
+        &-address {
+            @include textFont;
 
-            &--mobile1, &--mobile2 {
-                img {
-                    object-fit: contain;
-                    height: auto;
-                }
+            position: absolute;
+            top: v(36.04);
+            left: v(61.5);
+            right: v(61.5);
+            
+            line-height: v(19);
+            font-size: v(10);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: center;
+        }
+
+        // Time egg
+        &-time {
+            position: absolute;
+            top: v(19);
+            left: v(34.67);
+            
+            transform: translateX(-50%);
+            font-size: v(8);
+            text-align: center;
+            font-family: sans-serif;
+        }
+        
+        & > .devices-gallery__screen {
+            top: v(58.75);
+            left: v(14);
+            right: v(14);
+            height: v(318.46);
+            
+            & > img {
+                object-fit: cover;
+                width: 100%;
             }
+        }
+
+        &--1 {
+            left: v(144);
+            top: v(-5);
+        }
+
+        &--2 {
+            right: v(144);
+            top: v(-5);
         }
     }
 }
 
 @include mobile {
-    .devices-gallery, .gallery-item {
+    .devices-gallery, .devices-gallery__item {
         width: v(360);
         height: v(216);
     }
-    .gallery-item__device {
+    .devices-gallery__item__device {
         width: v(360) !important;
         height: v(216);
     }

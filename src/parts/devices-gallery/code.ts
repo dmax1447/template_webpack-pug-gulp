@@ -1,13 +1,9 @@
-import { initCarousels } from '../../core/owl-carousel';
+import { singleCarouselFade } from "../../core/carousel";
+
+// You should include this code manually
 
 window.addEventListener('load', () => {
-    initCarousels({
-        nav: false,
-        autoHeight: false,
-
-        autoplay: true,
-        autoplayTimeout: 4000,
-        autoplaySpeed: 1000,
-        autoplayHoverPause: true
+    document.querySelectorAll<HTMLElement>('.devices-gallery').forEach(el => {
+        singleCarouselFade(el);
     });
 });
