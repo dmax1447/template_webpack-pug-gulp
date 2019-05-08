@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use A17\Twill\Models\Setting;
 use App\Models\HeroSlide;
 use App\Models\Page;
+use App\Models\Project;
 use Illuminate\Console\Command;
 
 class BuildSite extends Command
@@ -50,6 +51,14 @@ class BuildSite extends Command
             $pages = $this->buildPages($locale);
             foreach ($pages as $page) {
                 \Storage::disk('local')->put('build/page_' . $page['slug']. '.' . $locale . '.json', json_encode($page, JSON_UNESCAPED_UNICODE));
+            }
+            $cases = $this->buildCases($locale);
+            $casesAll = collect($cases)->map(function($el) {
+                return collect($el)->only(['slug', 'title', 'tech', 'lead', 'cover', 'cover_video']);
+            });
+            \Storage::disk('local')->put('build/cases.'  . $locale . '.json', json_encode($casesAll, JSON_UNESCAPED_UNICODE));
+            foreach ($cases as $case) {
+                \Storage::disk('local')->put('build/case_' . $case['slug']. '.' . $locale . '.json', json_encode($case, JSON_UNESCAPED_UNICODE));
             }
         }
 
@@ -129,6 +138,27 @@ class BuildSite extends Command
             }
             $data[] = $s;
         }
+        return $data;
+    }
+
+    protected function buildCases($locale) {
+        \App::setLocale($locale);
+        $cases = Project::query()->published()->get();
+        $data = [];
+        foreach ($cases as $case) {
+            $c = [
+                'slug' => $case->project_slug,
+                'title' => $case->title,
+                'url' => $case->url,
+                'tech' => $case->tech,
+                'lead' => $case->lead,
+                'description' => $case->description,
+                'cover' => $case->image('project_cover', 'desktop'),
+                'cover_video' => $case->imageVideo('project_cover'),
+            ];
+            $data[] = $c;
+        }
+        dump($data);
         return $data;
     }
 }
