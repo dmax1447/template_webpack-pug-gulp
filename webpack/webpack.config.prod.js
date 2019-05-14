@@ -4,6 +4,7 @@ const webpackConfigBase = require('./webpack.config.base.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 
 const { rootDir } = require('./utils.js');
 
@@ -18,7 +19,6 @@ module.exports = webpackMerge(webpackConfigBase('prod'), {
                         options: {
                             url: false,
                             importLoaders: 1,
-                            context: 'govno/',
                         }
                     },
                     'postcss-loader',
@@ -28,7 +28,11 @@ module.exports = webpackMerge(webpackConfigBase('prod'), {
     },
     optimization: {
         minimizer: [
-            new OptimizeCSSAssetsPlugin({})
+            new OptimizeCSSAssetsPlugin({}),
+            new TerserPlugin({
+                parallel: true,
+                extractComments: true,
+            })
         ]
     },
     plugins: [

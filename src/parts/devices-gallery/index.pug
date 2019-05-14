@@ -1,0 +1,20 @@
+mixin devices-gallery(pc, mobile1, mobile2, mobileAddress)
+    .devices-gallery
+        .devices-gallery__item
+            .devices-gallery__pc
+                img(-lazy-src="/assets/cases/pc.svg")
+                .devices-gallery__screen
+                    img(-lazy-src=pc)
+        .devices-gallery__item
+            .devices-gallery__mobile.devices-gallery__mobile--1
+                img(-lazy-src="/assets/cases/mobile.svg")
+                if mobileAddress
+                    .devices-gallery__mobile-address!= mobileAddress
+                .devices-gallery__screen
+                    img(-lazy-src=mobile1)
+            .devices-gallery__mobile.devices-gallery__mobile--2
+                img(-lazy-src="/assets/cases/mobile.svg")
+                if mobileAddress
+                    .devices-gallery__mobile-address!= mobileAddress
+                .devices-gallery__screen
+                    img(-lazy-src=mobile2)

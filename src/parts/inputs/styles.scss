@@ -28,11 +28,11 @@
         outline: none;
 
         transition: border-color 0.2s;
-        color: white;
+        color: black;
 
         &:-webkit-autofill {
             background: none !important;
-            -webkit-text-fill-color: white;
+            -webkit-text-fill-color: black;
             transition: background-color 5000s ease-in-out 0s;
         }
     }
@@ -97,6 +97,16 @@
             {
                 border-color: $accentLight30;
                 color: $accentLight30;
+            }
+        }
+    }
+
+    &--dark {
+        input, textarea {
+            color: white;
+            
+            &:-webkit-autofill {
+                -webkit-text-fill-color: white;
             }
         }
     }

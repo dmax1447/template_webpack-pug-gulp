@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use A17\Twill\Models\Setting;
 use App\Models\HeroSlide;
+use App\Models\Page;
 use Illuminate\Console\Command;
 
 class BuildSite extends Command
@@ -46,13 +47,16 @@ class BuildSite extends Command
             \Storage::disk('local')->put('build/hero.' . $locale . '.json', json_encode($slides[$locale], JSON_UNESCAPED_UNICODE));
             $blocks[$locale] = $this->buildBlocks($locale);
             \Storage::disk('local')->put('build/blocks.' . $locale . '.json', json_encode($blocks[$locale], JSON_UNESCAPED_UNICODE));
+            $pages = $this->buildPages($locale);
+            foreach ($pages as $page) {
+                \Storage::disk('local')->put('build/page_' . $page['slug']. '.' . $locale . '.json', json_encode($page, JSON_UNESCAPED_UNICODE));
+            }
         }
 
         $this->info("Compiling pages at " . base_path());
         exec('cd '. base_path(). ' && export PATH=/usr/local/bin:/usr/bin:/bin && npm --scripts-prepend-node-path=auto run build-on-vps 2>&1', $out, $err);
-        $this->info(join("\n", $out));
-        // dump(join("\n", $out));
-        // dump($slides);
+        //$this->info(join("\n", $out));
+        $this->info("Complete");
     }
 
     protected function buildSlides($locale) {
@@ -87,6 +91,43 @@ class BuildSite extends Command
         $data = [];
         foreach ($set as $s) {
             $data[$s->key] = $s->value;
+        }
+        return $data;
+    }
+
+    protected function buildPages($locale) {
+        \App::setLocale($locale);
+        $pages = Page::query()->published()->get();
+        $data = [];
+        foreach ($pages as $p) {
+            //dump($p);
+            $s = [
+                'slug' => $p->getSlug('en'),
+                'title' => $p->title,
+                'content' => $p->content
+            ];
+
+            // для главной features
+            if ($s['slug'] == 'main') {
+                $s['features_offered'] = [];
+                $p->blocks->where('type', 'features_offered')->each(function($feature) use(&$s) {
+                    $f = [
+                        'title' => $feature->translatedInput('title'),
+                        'icon' => $feature->image('icon', 'desktop'),
+                        'items' => []
+                    ];
+
+                    foreach ($feature->children as $fblock) {
+                        $f['items'][] = [
+                            'title' => $fblock->translatedInput('title'),
+                            'fa-icon' => $fblock->input('icon'),
+                        ];
+                    }
+                    $s['features_offered'][] = $f;
+                    //dump($el);
+                });
+            }
+            $data[] = $s;
         }
         return $data;
     }

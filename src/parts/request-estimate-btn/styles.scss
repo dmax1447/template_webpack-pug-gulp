@@ -1,5 +1,7 @@
 
 .request-estimate-btn {
+    @include headerFont;
+    
     height: v(32);
     line-height: v(25);
     border-radius: v(16);
@@ -11,8 +13,6 @@
     padding-right: v(16);
     // padding-top: v(8);
     // padding-bottom: v(8);
-    background: none;
-    font-family: Ubuntu;
     cursor: pointer;
 
     i {
@@ -41,7 +41,7 @@
     &--dark {
         border-color: $accentLight80;
         color: $accentLight60;
-        background-color: none;
+        background-color: transparentize($accentLight10, 0.9);
 
         &:hover {
             border-color: $accentLight60;

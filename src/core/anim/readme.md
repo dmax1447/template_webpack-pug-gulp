@@ -96,9 +96,9 @@ onload = () => {
 
         // show bottom panel
         // if (0.14 < r && r < 0.45) {
-        //     $('.bottom-panel').classList.toggle('bottom-panel--hidden', false);
+        //     $q('.bottom-panel').classList.toggle('bottom-panel--hidden', false);
         // } else {
-        //     $('.bottom-panel').classList.toggle('bottom-panel--hidden', true);
+        //     $q('.bottom-panel').classList.toggle('bottom-panel--hidden', true);
         // }
 
         // fix show hero animation

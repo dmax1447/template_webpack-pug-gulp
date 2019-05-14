@@ -1,4 +1,5 @@
-mixin request-estimate-btn(dark=false)
-    button(class=('request-estimate-btn ' + (dark ? 'request-estimate-btn--dark' : '')))
+//- flags = dark
+mixin request-estimate-btn(flags=[])
+    button(class=classNames('request-estimate-btn', flags.has('dark') && 'request-estimate-btn--dark'))
         i.fas.fa-calculator
         span Запросить смету

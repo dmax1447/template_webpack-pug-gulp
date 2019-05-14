@@ -3,6 +3,6 @@ extends ../../layout.pug
 block body
     include ./hero.pug
     include ./features.pug
-    +feedback-form('dark', 'section')
+    +feedback-form([ 'dark', 'section' ])
         +side-header("общаемся", undefined, "on-dark")
     +footer

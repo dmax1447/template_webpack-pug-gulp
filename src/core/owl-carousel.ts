@@ -1,7 +1,8 @@
-import 'owl.carousel/distassets/owl.carousel.css';
-import 'owl.carousel';
+import './owl-carousel.scss';
 
-export function initCarousels() {
+export function initCarousels(opts?: any) {
+    require('owl.carousel');
+
     ($('.owl-carousel') as any).owlCarousel({
         center: true,
         items: 1,
@@ -18,6 +19,7 @@ export function initCarousels() {
             2000: {
                 items: 1,
             }
-        }
+        },
+        ...opts,
     });
 }

@@ -1,0 +1,99 @@
+@import "../../styles.scss";
+
+.case {
+    a.back-to-cases {
+        i {
+            width: v(24);
+            height: v(24);
+            font-size: v(16);
+            line-height: v(24);
+        }
+        i, span {
+            font-size: v(16);
+            line-height: v(24);
+            color: $accentLight60;
+        }
+    }
+
+    a.site-link {
+        i {
+            width: v(24);
+            height: v(24);
+            font-size: v(16);
+            line-height: v(24);
+        }
+        i, span {
+            font-size: v(16);
+            line-height: v(24);
+            color: $accentLight60;
+        }
+    }
+
+    &__about {
+        padding-left: v(48);
+        padding-right: v(48);
+        margin-bottom: v(120);
+
+        h2 {
+            @include headerFont;
+            margin: 0;
+            margin-bottom: v(24);
+            font-weight: 500;
+            font-size: v(36);
+            line-height: v(48);
+        }
+
+        h5 {
+            @include headerFont;
+            font-style: normal;
+            font-weight: 500;
+            font-size: v(20);
+            line-height: v(28);
+        }
+
+        p {
+            @include textFont;
+            
+            font-style: normal;
+            font-weight: normal;
+            font-size: v(16);
+            line-height: v(24);
+            margin-bottom: v(24);
+
+            max-width: v(360);
+        }
+    }
+
+    .devices-gallery {
+        position: absolute;
+        top: v(112);
+        right: v(48);
+    }
+
+    .devices-gallery__pc .devices-gallery__screen > img {
+        object-position: top;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    @include mobile {
+        .devices-gallery {
+            display: none;
+        }
+        .case__about {
+            padding-top: v(40);
+        }
+
+        // .case__about {
+        //     padding-top: v(528);
+        // }
+
+        // .devices-gallery {
+        //     position: absolute;
+        //     top: v(100);
+        //     left: v(24);
+        //     right: v(24);
+        // }
+    }
+}

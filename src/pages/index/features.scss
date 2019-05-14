@@ -1,42 +1,5 @@
 .features {
     padding-top: v(96);
-
-    .top-bar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 9999;
-        height: v(96);
-        background: white;
-        overflow: hidden;
-        opacity: 1;
-
-        transition-duration: 0.3s;
-        transition-property: opacity, height;
-
-
-        &__page-wrapper {
-            position: relative;
-            max-width: v(1224);
-            width: 100%;
-            height: v(96);
-            margin: 0 auto;
-    
-            @include mobile {
-                max-width: v(408);
-            }
-        }
-
-        .request-estimate-btn {
-            margin-top: v(30);
-        }
-
-        &--hidden {
-            opacity: 0;
-            height: 0;
-        }
-    }
 }
 
 .features__we-help-items {
@@ -102,8 +65,9 @@
         margin: 0 auto;
     }
     h2 {
+        @include headerFont;
+
         color: $primaryDark100;
-        font-family: Ubuntu;
         line-height: v(48);
         font-size: v(36);
         text-align: center;
@@ -116,8 +80,9 @@
         padding-left: v(60);
 
         li {
+            @include textFont;
+            
             position: relative;
-            font-family: 'Source Sans Pro';
             color: $primaryDark80;
             line-height: v(24);
             font-size: v(16);

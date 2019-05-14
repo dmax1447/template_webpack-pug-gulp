@@ -6,7 +6,7 @@ if (process.env.BUILD === 'prod') {
 
 import { Hero } from './hero';
 import {
-    $ as $q, isMobileScreen, detectTouch, __unsafe_setIsMobileScreen, listenWindowResize,
+    $q, isMobileScreen, detectTouch, __unsafe_setIsMobileScreen, listenWindowResize,
 } from '../../core/utils';
 import { AnchorNav } from './anchor-nav';
 import { AnchorNavControls } from './anchor-nav-controls';

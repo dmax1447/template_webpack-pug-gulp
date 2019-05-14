@@ -14,18 +14,15 @@ deploy backend dev:
   stage: deploy
   only:
   - /master/
-  image: lorisleiva/laravel-docker:latest
+  # image: lorisleiva/laravel-docker:latest
   cache:
     paths:
     - vendor/
   script:
   - scp -P 2222 -i ./key -r backend/* gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
-  - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/dev.berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress; php artisan migrate"
+  - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/dev.berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress; php artisan migrate; rm -rf src static webpack"
   - scp -P 2222 -i ./key -r src static webpack gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
-#  - scp -P 2222 -i ./key -r static gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
-#  - scp -P 2222 -i ./key -r webpack gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
   - scp -P 2222 -i ./key *.json .postcssrc gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
-#  - scp -P 2222 -i ./key .postcssrc gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
   - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/dev.berezadev.com; npm i; sudo -u www-data php artisan bereza:build"
 
 deploy backend prod:

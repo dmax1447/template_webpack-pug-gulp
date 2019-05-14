@@ -1,5 +1,5 @@
 import {
-    $ as $q, $all, isMobileScreen,
+    $q, $all, isMobileScreen,
 } from '../../core/utils';
 import { HeroCarousel } from './hero-carousel';
 import { HeroControls } from './hero-controls';

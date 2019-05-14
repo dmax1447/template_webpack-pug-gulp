@@ -11,7 +11,9 @@ const webpackConfigDev = webpackMerge(webpackConfigBase('dev'), {
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader', { loader: 'css-loader', options: { importLoaders: 1 } }, 'postcss-loader',
+                    'style-loader',
+                    { loader: 'css-loader', options: { url: false, importLoaders: 1 } },
+                    'postcss-loader',
                 ],
             },
         ],
@@ -24,6 +26,16 @@ const webpackConfigDev = webpackMerge(webpackConfigBase('dev'), {
         },
         stats: {
             children: false,
+        },
+        proxy: {
+            '*': {
+                bypass: function(req, res, proxyOptions) {
+                    if (!req.url.endsWith('.html') && req.headers.accept.indexOf('text/html') !== -1) {
+                        console.log(`bypass "${req.url}"; redirect to .html. You can change this in webpack\\webpack.config.dev.js`);
+                        return req.url + '.html';
+                    }
+                }
+            }
         },
     },
     plugins: [

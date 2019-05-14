@@ -20,13 +20,7 @@
 
 section.features#features
     .section-content
-        header.top-bar(style="display:none")
-            .top-bar__page-wrapper
-                img.top-bar__logo(-lazy-src="assets/logo.svg")
-                a(href="#feedback")
-                    +request-estimate-btn
-            //- div.top-bar__menu.top-bar__menu--closed
-            //-     +nav-menu
+        +top-bar([ "sticky", 'hideMainLink' ])(style="display:none")
         +menu-placeholder("we-help")
         +side-header("помогаем")
         .features__we-help-items
@@ -36,8 +30,8 @@ section.features#features
         +side-header("предлагаем")
         .features__we-offer-items
             .features__we-offer-item
-                img.anim(-lazy-src=("assets/rocket-sticker.svg"), --anim="slide-in-back", --anim-speed="1.2s", --anim-delay="0.5s")
-                div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.4s")
+                img.anim(-lazy-src=("assets/rocket-sticker.svg"), --anim="slide-in-back", --anim-speed="0.8s", --anim-delay="0.5s", --anim-irate="0.1")
+                div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.4s", --anim-irate="0.1")
                     h2 Стартапам
                     ul
                         li
@@ -50,8 +44,8 @@ section.features#features
                             i(class="far fa-comments-alt")
                             span Разъясним и подскажем на каждом этапе создания вашего продукта
             .features__we-offer-item
-                img.anim(-lazy-src=("assets/share-sticker.svg"), --anim="slide-in-back", --anim-speed="1.2s", --anim-delay="0.5s")
-                div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.6s")
+                img.anim(-lazy-src=("assets/share-sticker.svg"), --anim="slide-in-back", --anim-speed="0.8s", --anim-delay="0.5s", --anim-irate="0.1")
+                div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.6s", --anim-irate="0.1")
                     h2 Агентствам
                     ul
                         li
@@ -64,8 +58,8 @@ section.features#features
                             i(class="far fa-chart-pie-alt")
                             span Нам можно отдать часть работ, например только фронт или только бэк
             .features__we-offer-item
-                img.anim(-lazy-src=("assets/brain-sticker.svg"), --anim="slide-in-back", --anim-speed="1.2s", --anim-delay="0.5s")
-                div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.8s")
+                img.anim(-lazy-src=("assets/brain-sticker.svg"), --anim="slide-in-back", --anim-speed="0.8s", --anim-delay="0.5s", --anim-irate="0.1")
+                div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.8s", --anim-irate="0.1")
                     h2 Корпорациям
                     ul
                         li
@@ -77,7 +71,7 @@ section.features#features
                         li
                             i(class="far fa-user-friends")
                             span Мы поддержим проекты, которые не займут вашу штатную единицу на 100%
-        p.features__we-offer-text.
+        p.features__we-offer-text.anim(--anim="slide-in-up", --anim-speed="1s", --anim-irate="0.1").
             Команд, способных собрать лендинг или сайт на конструкторе — сотни.<br>
             Сделать сложный технологичный продукт понятным и ярким — единицы.<br>
             <br>

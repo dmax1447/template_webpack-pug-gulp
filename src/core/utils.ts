@@ -1,6 +1,6 @@
 import { isMobileScreen } from './utils-mobile';
 
-export const $ = <T = HTMLDivElement>(x: string) => document.querySelector(x) as any as T;
+export const $q = <T = HTMLDivElement>(x: string) => document.querySelector(x) as any as T;
 export const $all = <T extends Element = HTMLDivElement>(x: string) => document.querySelectorAll<T>(x);
 
 export * from './utils-mobile';

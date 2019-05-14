@@ -1,0 +1,20 @@
+//- flags = dark, sticky, padding, noFeedbackBtn, noNavMenu, hideMainLink
+//- params = currentPage
+mixin top-bar(flags=[], params={ currentPage: '' })
+    if flags.has('padding')
+        .top-bar-padding
+    header(class=classNames("top-bar", flags.has('sticky') && "top-bar--sticky"))&attributes(attributes)
+        .top-bar__page-wrapper
+            if params.currentPage
+                a(href="/")
+                    img.top-bar__logo(-lazy-src=(flags.has('dark') ? "assets/logo-white.svg" : "assets/logo.svg"))
+            else
+                img.top-bar__logo(-lazy-src=(flags.has('dark') ? "assets/logo-white.svg" : "assets/logo.svg"))
+            if !flags.has('noFeedbackBtn')
+                a(href="#feedback")
+                    +request-estimate-btn([ flags.has('dark') && 'dark' ])
+            if !flags.has('noNavMenu')
+                div.top-bar__menu.top-bar__menu--closed
+                    +nav-menu([ flags.has('dark') && 'dark', flags.has('hideMainLink') && 'hideMainLink' ], { currentPage: params.currentPage })
+            //- i.far.fa-bars.top-bar__mobile-menu(role="button")
+            //- i.fal.fa-times.top-bar__mobile-menu-close(role="button")

@@ -150,6 +150,8 @@
             }
 
             &__head {
+                @include headerFont;
+
                 display: inline-block;
                 margin: 0;
                 color: white;
@@ -277,6 +279,8 @@
                 }
 
                 p {
+                    @include textFont;
+                    
                     margin: 0;
                     margin-left: v(16);
                     float: left;
@@ -377,12 +381,13 @@
             cursor: pointer;
 
             p {
+                @include textFont;
+                
                 display: inline;
                 margin: 0;
                 font-size: v(12);
                 line-height: v(24);
                 color: #9e9e9e; // #CCCCCC;
-                font-family: 'Source Sans Pro';
                 margin-right: 8px;
                 text-align: right;
 
@@ -430,19 +435,6 @@
 
         .mouse-help-icon {
             display: none;
-        }
-
-        .top-bar {
-            &__logo {
-                top: v(16);
-                left: v(24);
-                width: v(72);
-                height: v(64);
-            }
-
-            .request-estimate-btn {
-                margin-top: v(33);
-            }
         }
 
         .hero-slide {
