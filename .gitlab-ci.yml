@@ -6,9 +6,9 @@ before_script:
   - chmod 700 ./key
   - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 
-# cache:
-#   paths:
-#     - node_modules/
+cache:
+  paths:
+    - node_modules/
 
 deploy backend dev:
   stage: deploy

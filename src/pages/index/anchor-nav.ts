@@ -22,6 +22,15 @@ export class AnchorNav {
         this.anchors = anchors;
     }
 
+    reset = () => {
+        const anchor = this.getCurrentAnchor();
+        if (anchor) {
+            this.currentAnchorIndex = anchor[1];
+        } else {
+            this.setCurrentAnchor(0, 'force');
+        }
+    };
+
     /** current in-view anchor; returns [ anchor, index ] or undefined */
     getCurrentAnchor = (): [ AnchorDef, number ]|undefined => {
         const wndRect = getWindowGlobalRect();
@@ -96,6 +105,8 @@ export class AnchorNav {
         const prevIndex = Math.max(0, curA[1] - 1);
         if (prevIndex === curA[1]) return;
     
+        console.log('prev anchor');
+    
         const anch = this.anchors[prevIndex];
     
         if (curA[0].onLeave) await curA[0].onLeave();
@@ -114,6 +125,8 @@ export class AnchorNav {
     
         const nextIndex = curA[1] + 1;
         if (nextIndex === curA[1] || this.anchors.length === nextIndex) return;
+
+        console.log('next anchor');
     
         const anch = this.anchors[nextIndex];
     

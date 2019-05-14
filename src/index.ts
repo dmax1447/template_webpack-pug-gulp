@@ -11,6 +11,7 @@ import { initAnimations } from './core/anim';
 import { initCarousels } from './core/owl-carousel';
 import { remFix } from './core/rem-fix';
 import { loadAllLazied } from './core/lazy';
+import { initTopBars } from './parts/top-bar/code';
 
 remFix();
 initAnimations();
@@ -18,6 +19,8 @@ initAnimations();
 window.onload = () => {
     // init smoothscroll
     smoothscroll.polyfill();
+
+    initTopBars();
 
     // setup nav with smoothscroll
     $all<HTMLAnchorElement>('a[href]').forEach(el => {

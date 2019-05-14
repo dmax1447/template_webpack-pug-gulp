@@ -74,12 +74,17 @@ async function resetAnchor() {
     await anchorNav.setCurrentAnchor(anchorNav.currentAnchorIndex, 'force');
 }
 
+let _lastResizeMobile = isMobileScreen();
+
 function handleWindowResize() {
     anchorControls.reset();
+    // anchorNav.reset();
     hero.reset();
 
-    if (!isMobileScreen()) {
-        resetAnchor();
+    if (_lastResizeMobile !== isMobileScreen()) {
+        if (!isMobileScreen()) {
+            resetAnchor();
+        }
     }
 }
 

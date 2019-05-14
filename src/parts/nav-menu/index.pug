@@ -1,7 +1,6 @@
 //- params = href, text, class
 mixin nav-menu-item(params={ href: '', text: '', class: '', currentPage: '' })
     a(href=params.href, class=classNames("nav-menu__item", params.class, params.currentPage === params.href && 'nav-menu__item--current'))
-        span.nav-menu__item-placeholder= params.text
         span.nav-menu__item-text= params.text
 
 //- flags = dark, hideMainLink
@@ -11,12 +10,12 @@ mixin nav-menu(flags=[], params={ currentPage: '' })
         role="navigation",
         class=classNames("nav-menu", flags.has('dark') && 'nav-menu--dark')
     )
-        //- if !flags.has('hideMainLink')
-        //-     +nav-menu-item({ href: "/", text: "Главная", class: 'first-el', currentPage: params.currentPage })
-        //- +nav-menu-item({ href: "/cases", text: "Кейсы", class: flags.has('hideMainLink') && 'first-el', currentPage: params.currentPage })
-        //- //- +nav-menu-item({ href: "/tech",     text: "Technology",   currentPage: params.currentPage })
-        //- //- +nav-menu-item({ href: "/team",     text: "Team",         currentPage: params.currentPage })
-        //- +nav-menu-item({ href: "/contacts", text: "Контакты",     currentPage: params.currentPage })
+        if !flags.has('hideMainLink')
+            +nav-menu-item({ href: "/", text: "Главная", class: 'first-el', currentPage: params.currentPage })
+        +nav-menu-item({ href: "/cases", text: "Кейсы", class: flags.has('hideMainLink') && 'first-el', currentPage: params.currentPage })
+        //- +nav-menu-item({ href: "/tech",     text: "Technology",   currentPage: params.currentPage })
+        //- +nav-menu-item({ href: "/team",     text: "Team",         currentPage: params.currentPage })
+        +nav-menu-item({ href: "/contacts", text: "Контакты",     currentPage: params.currentPage })
 
         if block
             block

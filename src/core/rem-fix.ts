@@ -12,7 +12,7 @@ export function remFix(
     const rootFontSize = parseInt(window.getComputedStyle(document.querySelector('html')!).fontSize || '0', 10);
     const noRem = rootFontSize > maximumBasePixel;
     if (noRem) {
-        document.querySelector('html')!.classList.toggle('no-rem');
+        document.querySelector('html')!.classList.add('no-rem');
     }
     if (then) then(noRem, rootFontSize);
 }
