@@ -150,6 +150,8 @@
             }
 
             &__head {
+                @include headerFont;
+
                 display: inline-block;
                 margin: 0;
                 color: white;
@@ -277,6 +279,8 @@
                 }
 
                 p {
+                    @include textFont;
+                    
                     margin: 0;
                     margin-left: v(16);
                     float: left;

@@ -2,6 +2,7 @@
 import {
     $q, getWindowGlobalRect, intersectionRate, smoothScrollTo, getGlobalRect,
 } from '../../core/utils';
+import { _updateGlobalAnimations } from '../../core/anim';
 
 export type AnchorDef = {
     selector: string,
@@ -74,6 +75,8 @@ export class AnchorNav {
         const scrollingTask = smoothScrollTo($q(`#${anch.hash}`));
         this.currentAnchorIndex = index;
         this.lastTimeAnchorChanged = now;
+
+        _updateGlobalAnimations();
 
         return scrollingTask;
     };

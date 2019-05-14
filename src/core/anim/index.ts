@@ -155,6 +155,12 @@ export function updateAnimations(els: HTMLElement[]) {
     }
 }
 
+let globalAnimatedElementsCache: HTMLElement[] = [];
+
+export function _updateGlobalAnimations() {
+    updateAnimations(globalAnimatedElementsCache);
+}
+
 /**
  * Prepare animations & setup handlers.  
  * Run it once immediately after dom loaded (before `window.onload` fired).
@@ -170,6 +176,9 @@ export function initAnimations() {
     
     $all('[--anim]').forEach(el => {
         animatedElements.push(el);
+        if (!globalAnimatedElementsCache.includes(el)) {
+            globalAnimatedElementsCache.push(el);
+        }
     });
 
     let updateTimeout: any;
@@ -216,7 +225,7 @@ export function initAnimations() {
 
     window.addEventListener('load', () => {
         clearInterval(incrementalUpdateElements);
-    })
+    });
 
     // AWESOME MOBILE BORWSERS THANKS A LOT
 
