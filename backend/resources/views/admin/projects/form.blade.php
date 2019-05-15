@@ -15,7 +15,12 @@
     'name' => 'project_cover',
     'label' => 'Обложка превью',
     'required' => true,
+    'withAddInfo' => false,
     'withCaption' => false
+    ])
+    @formField('files', [
+    'name' => 'video_preview',
+    'label' => 'Видео превью',
     ])
     @formField('input', [
     'name' => 'tech',
@@ -42,6 +47,65 @@
 @stop
 
 @section('fieldsets')
+    <a17-fieldset title="Галерея" id="gallery">
+        @formField('medias', [
+        'name' => 'project_desktop',
+        'label' => 'Десктоп превью',
+        'required' => false,
+        'withAddInfo' => false,
+        'withCaption' => false
+        ])
+        @formField('medias', [
+        'name' => 'project_mobile',
+        'max' => 2,
+        'label' => 'Мобильные превью',
+        'required' => false,
+        'withAddInfo' => false,
+        'withCaption' => false
+        ])
+        @formField('medias', [
+        'name' => 'project_tablet',
+        'max' => 2,
+        'label' => 'Планшет превью',
+        'required' => false,
+        'withAddInfo' => false,
+        'withCaption' => false
+        ])
+        @formField('medias', [
+        'name' => 'project_result',
+        'max' => 4,
+        'label' => 'Результаты',
+        'required' => false,
+        'withAddInfo' => false,
+        'withCaption' => false
+        ])
+    </a17-fieldset>
+
     <a17-fieldset title="Дополнительные атрибуты" id="attributes">
+        @formField('color', [
+        'name' => 'backgroundColor',
+        'label' => 'Цвет темного фона',
+        ])
+        @formField('color', [
+        'name' => 'fontColor',
+        'label' => 'Цвет текста темного фона',
+        ])
+
+        @formField('wysiwyg', [
+        'name' => 'goal',
+        'label' => 'Цель',
+        'translated' => true,
+        'editSource' => true,
+        'toolbarOptions' => [ [ 'header' => [2, 3, 4, 5, false] ], 'list-ordered', 'list-unordered', 'clean' ],
+        ])
+
+        @formField('wysiwyg', [
+        'name' => 'result',
+        'label' => 'Результат',
+        'translated' => true,
+        'editSource' => true,
+        'toolbarOptions' => [ [ 'header' => [2, 3, 4, 5, false] ], 'list-ordered', 'list-unordered', 'clean' ],
+        ])
+        @formField('block_editor', ['blocks' => ['project_step', 'client_review']])
     </a17-fieldset>
 @stop

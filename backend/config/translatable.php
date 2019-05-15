@@ -11,8 +11,8 @@ return [
     |
      */
     'locales' => [
+        'ru',
         'en',
-        'ru'
     ],
 
     /*

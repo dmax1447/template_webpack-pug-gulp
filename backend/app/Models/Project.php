@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use A17\Twill\Models\Behaviors\HasBlocks;
+use A17\Twill\Models\Behaviors\HasFiles;
 use A17\Twill\Models\Behaviors\HasTranslation;
 use A17\Twill\Models\Behaviors\HasMedias;
 use A17\Twill\Models\Behaviors\HasPosition;
@@ -11,7 +12,10 @@ use A17\Twill\Models\Model;
 
 class Project extends Model implements Sortable
 {
-    use HasBlocks, HasTranslation, HasMedias, HasPosition;
+    use HasBlocks, HasTranslation, HasMedias, HasPosition, HasFiles;
+    protected $casts = [
+        'makeup' => 'array'
+    ];
 
     protected $fillable = [
         'published',
@@ -21,6 +25,11 @@ class Project extends Model implements Sortable
         'tech',
         'lead',
         'description',
+        'goal',
+        'result',
+        'makeup',
+        'backgroundColor',
+        'fontColor',
         'position',
     ];
 
@@ -29,6 +38,8 @@ class Project extends Model implements Sortable
          'tech',
          'lead',
          'description',
+         'goal',
+         'result',
          'active',
      ];
     
@@ -36,6 +47,8 @@ class Project extends Model implements Sortable
     public $checkboxes = [
         'published'
     ];
+
+    public $filesParams = ['video_preview'];
 
     // uncomment and modify this as needed if you use the HasMedias trait
      public $mediasParams = [
@@ -47,5 +60,57 @@ class Project extends Model implements Sortable
                  ],
              ]
          ],
+         'project_desktop' => [
+             'default' => [
+                 [
+                     'name' => 'default',
+                     'ratio' => 16/9,
+                 ],
+             ]
+         ],
+         'project_mobile' => [
+             'default' => [
+                 [
+                     'name' => 'default',
+                     'ratio' => 1,
+                 ],
+             ]
+         ],
+         'project_tablet' => [
+             'default' => [
+                 [
+                     'name' => 'default',
+                     'ratio' => 1,
+                 ],
+             ]
+         ],
+         'project_result' => [
+             'default' => [
+                 [
+                     'name' => 'default',
+                     'ratio' => 1,
+                 ],
+             ]
+         ],
      ];
+
+    public function getBackgroundColorAttribute() {
+         return $this->makeup['backgroundColor'] ?? '';
+     }
+
+    public function setBackgroundColorAttribute($val) {
+        $v = $this->makeup;
+        $v['backgroundColor'] = $val;
+        $this->makeup = $v;
+    }
+
+    public function getFontColorAttribute() {
+        return $this->makeup['fontColor'] ?? '';
+    }
+
+    public function setFontColorAttribute($val) {
+        $v = $this->makeup;
+        $v['fontColor'] = $val;
+        $this->makeup = $v;
+    }
 }
