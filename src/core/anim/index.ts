@@ -1,5 +1,5 @@
 import {
-    $q, $all, isElementInViewport, getGlobalRect, isGlobalRectInViewport, intersectionRate, getWindowGlobalRect, isElementVisible,
+    $q, $all, isElementInViewport, getGlobalRect, isGlobalRectInViewport, intersectionRate, getWindowGlobalRect, isElementVisible, sleep,
 } from '../utils';
 
 export function isAnimWaiting(el: HTMLElement) {
@@ -127,9 +127,13 @@ export function runAnimation(el: HTMLElement, animParams: AnimParams) {
 
 export function updateAnimations(els: HTMLElement[]) {
     const wndRect = getWindowGlobalRect();
-
+    let totalUpdates = 0;
+    
     for (const el of els) {
-        if (!isElementVisible(el) || isAnimPlaying(el) || isAnimStopped(el)) continue;
+        if (!isElementVisible(el) || isAnimPlaying(el) || isAnimStopped(el)) {
+            continue;
+        }
+        totalUpdates++;
 
         const animParams = pickAnimParams(el);
 
@@ -153,12 +157,20 @@ export function updateAnimations(els: HTMLElement[]) {
             prepareAnimation(el, animParams);
         }
     }
+    return totalUpdates;
 }
 
 let globalAnimatedElementsCache: HTMLElement[] = [];
 
-export function _updateGlobalAnimations() {
+export function _forceUpdateGlobalAnimations() {
     updateAnimations(globalAnimatedElementsCache);
+}
+
+export function _forceUpdateGlobalAnimatedElementsCache() {
+    globalAnimatedElementsCache = [];
+    $all('[--anim]').forEach(el => {
+        globalAnimatedElementsCache.push(el);
+    });
 }
 
 /**
@@ -172,41 +184,22 @@ export function _updateGlobalAnimations() {
  * ```
  */
 export function initAnimations() {
-    let animatedElements: HTMLElement[] = [];
-    
-    $all('[--anim]').forEach(el => {
-        animatedElements.push(el);
-        if (!globalAnimatedElementsCache.includes(el)) {
-            globalAnimatedElementsCache.push(el);
-        }
-    });
+    _forceUpdateGlobalAnimatedElementsCache();
 
     let updateTimeout: any;
     let updateInterval: any;
 
     function afterUpdateTimeout() {
-        updateAnimations(animatedElements);
+        updateAnimations(globalAnimatedElementsCache);
         clearTimeout(updateTimeout);
         clearInterval(updateInterval);
         updateTimeout = undefined;
         updateInterval = undefined;
     }
 
-    function afterUpdateIntervalFrame() {
-        updateAnimations(animatedElements);
-    }
-
-    function afterUpdateInterval() {
-        requestAnimationFrame(afterUpdateIntervalFrame);
-    }
-
     function emitUpdate() {
         if (updateTimeout) clearTimeout(updateTimeout);
         updateTimeout = setTimeout(afterUpdateTimeout, 50);
-
-        if (!updateInterval) {
-            updateInterval = setInterval(afterUpdateInterval, 50);
-        }
     }
 
     window.addEventListener('scroll', emitUpdate);
@@ -216,11 +209,11 @@ export function initAnimations() {
 
     const incrementalUpdateElements = setInterval(() => {
         $all('[--anim]').forEach(el => {
-            if (animatedElements.indexOf(el) === -1) {
-                animatedElements.push(el);
+            if (globalAnimatedElementsCache.indexOf(el) === -1) {
+                globalAnimatedElementsCache.push(el);
             }
         });
-        afterUpdateIntervalFrame();
+        updateAnimations(globalAnimatedElementsCache);
     }, 100);
 
     window.addEventListener('load', () => {
@@ -231,18 +224,22 @@ export function initAnimations() {
 
     const MOBILE_UPDATE_TIMEOUT = 100;
     let mobileLastUpdate = 0;
+    let mobileZeroUpdatedCounter = 0;
 
-    function mobileUpdate() {
+    async function mobileUpdate() {
         const now = Date.now();
         if (mobileLastUpdate + MOBILE_UPDATE_TIMEOUT > now) {
             mobileLastUpdate = now;
         } else {
-            afterUpdateIntervalFrame();
+            const totalUpdates = updateAnimations(globalAnimatedElementsCache);
+            if (totalUpdates === 0) mobileZeroUpdatedCounter++;
         }
-        requestAnimationFrame(mobileUpdate);
+        // should be without timeouts because eg iphone6 ignores it for a long time
+        if (mobileZeroUpdatedCounter < 200)
+            requestAnimationFrame(mobileUpdate);
     }
     
-    if (mobileAndTabletCheck) {
+    if (mobileAndTabletCheck()) {
         mobileUpdate();
     }
 }

@@ -43,8 +43,6 @@ $accentFg: white;
     }
 
     &__about {
-        padding-left: v(48);
-        padding-right: v(48);
         margin-bottom: v(120);
 
         h2 {
@@ -116,7 +114,6 @@ $accentFg: white;
         padding-right: v(168);
         padding-top: v(48);
         padding-bottom: v(48);
-        box-sizing: border-box;
 
         h3 {
             @include headerFont;
@@ -180,8 +177,6 @@ $accentFg: white;
         padding-left: v(168);
         padding-right: v(168);
         padding-top: v(48);
-        box-sizing: border-box;
-
         padding-bottom: v(336);
 
         h3 {

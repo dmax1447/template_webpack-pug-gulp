@@ -15,14 +15,7 @@
         padding-left: v(21);
         padding-right: v(21);
 
-        .nav-menu__item-placeholder {
-            opacity: 0;
-        }
-
         .nav-menu__item-text {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
             white-space: nowrap;
             text-align: inherit;
             color: black;
@@ -46,7 +39,7 @@
                 }
             }
 
-            &::after {
+            &::after, .nav-menu__item-text::after {
                 position: absolute;
                 content: ' ';
                 width: 80%;
@@ -55,14 +48,22 @@
                 background-color: $accentLight60;
                 top: v(40);
             }
-        }
-
-        @include mobile {
-            .nav-menu__item-placeholder {
-                opacity: 1;
-            }
-            .nav-menu__item-text {
+            .nav-menu__item-text::after {
                 display: none;
+                width: 100%;
+                left: 0;
+            }
+        }
+    }
+
+    @include mobile {
+        a, .nav-menu__item {
+            &--current {
+                &::after { display: none; }
+
+                .nav-menu__item-text::after {
+                    display: initial;
+                }
             }
         }
     }

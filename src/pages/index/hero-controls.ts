@@ -1,13 +1,13 @@
-import { $q, isMobileScreen, listenSwipe } from "../../core/utils";
-
-const Lethargy = require("exports-loader?this.Lethargy!lethargy/lethargy");
-const lethargy = new Lethargy();
+import { $q, isMobileScreen, listenSwipe, SwipeListener } from "../../core/utils";
+import { isInertionScroll } from "../../core/lethargy-scroll";
+import { listenMouseWheel, MouseWheelListener } from "../../core/mouse-wheel";
 
 export class HeroControls {
     prevSlide: (wrap?: false|'wrap') => void;
     nextSlide: (wrap?: false|'wrap') => void;
 
-    _registeredSwipe: Function|undefined;
+    _registeredSwipe?: Function;
+    _registeredMouseWheel?: Function;
 
     constructor(params: {
         prevSlide: (wrap?: false|'wrap') => void,
@@ -19,23 +19,32 @@ export class HeroControls {
 
     reset = () => {
         this.unregister();
-        this.register();
+        this._register();
     };
 
-    register = () => {
+    /** use `reset` instead */
+    _register = () => {
         if (isMobileScreen()) {
-            this._registeredSwipe = listenSwipe($q('section.hero'), (direction) => {
-                if (direction === 'left') this.prevSlide('wrap');
-                else if (direction === 'right') this.nextSlide('wrap');
-            }, 30);
+            this._registeredSwipe = listenSwipe($q('section.hero'), this._onSwipe, 30);
         }
         
-        $('html').on('mousewheel', this._onWheel);
         window.addEventListener('keydown', this._onKeyDown);
+
+        if (this._registeredMouseWheel) {
+            this._registeredMouseWheel();
+            this._registeredMouseWheel = undefined;
+        }
+        this._registeredMouseWheel = listenMouseWheel(window, this._onWheel, {
+            checkInertion: true,
+            checkDirection: true,
+        });
     };
 
     unregister = () => {
-        $('html').off('mousewheel', this._onWheel as any);
+        if (this._registeredMouseWheel) {
+            this._registeredMouseWheel();
+            this._registeredMouseWheel = undefined;
+        }
         if (this._registeredSwipe) {
             this._registeredSwipe();
             this._registeredSwipe = undefined;
@@ -43,13 +52,16 @@ export class HeroControls {
         window.removeEventListener('keydown', this._onKeyDown);
     };
 
-    _onWheel = (evt: JQueryMousewheel.JQueryMousewheelEventObject) => {
-        if(lethargy.check(evt) === false) return;
-
-        const scrollDown = evt.deltaY < 0;
-
-        if (scrollDown) this.nextSlide();
+    _onWheel: MouseWheelListener = ({ isInertion, directionY }) => {
+        console.log('_onWheel', isInertion, directionY);
+        if (isInertion || !directionY) return;
+        if (directionY === 'down') this.nextSlide();
         else this.prevSlide('wrap');
+    };
+
+    _onSwipe: SwipeListener = (direction) => {
+        if (direction === 'left') this.prevSlide('wrap');
+        else if (direction === 'right') this.nextSlide('wrap');
     };
 
     _onKeyDown = (evt: KeyboardEvent) => {

@@ -123,9 +123,11 @@ function _detectingScreenSwipe(
     return destroy;
 }
 
+export type SwipeListener = (direction: 'up'|'down'|'left'|'right') => void;
+
 export function listenSwipe(
     el: HTMLElement|Window,
-    onSwipe: (direction: 'up'|'down'|'left'|'right') => void,
+    onSwipe: SwipeListener,
     deadZone = 15,
 ): () => void {
     let lastActionDestroy: Function;
