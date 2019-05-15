@@ -127,8 +127,13 @@ export function runAnimation(el: HTMLElement, animParams: AnimParams) {
 
 export function updateAnimations(els: HTMLElement[]) {
     const wndRect = getWindowGlobalRect();
+    let totalUpdates = 0;
+    
     for (const el of els) {
-        if (!isElementVisible(el) || isAnimPlaying(el) || isAnimStopped(el)) continue;
+        if (!isElementVisible(el) || isAnimPlaying(el) || isAnimStopped(el)) {
+            continue;
+        }
+        totalUpdates++;
 
         const animParams = pickAnimParams(el);
 
@@ -152,6 +157,7 @@ export function updateAnimations(els: HTMLElement[]) {
             prepareAnimation(el, animParams);
         }
     }
+    return totalUpdates;
 }
 
 let globalAnimatedElementsCache: HTMLElement[] = [];
@@ -191,10 +197,6 @@ export function initAnimations() {
         updateInterval = undefined;
     }
 
-    function afterUpdateIntervalFrame() {
-        updateAnimations(globalAnimatedElementsCache);
-    }
-
     function emitUpdate() {
         if (updateTimeout) clearTimeout(updateTimeout);
         updateTimeout = setTimeout(afterUpdateTimeout, 50);
@@ -211,7 +213,7 @@ export function initAnimations() {
                 globalAnimatedElementsCache.push(el);
             }
         });
-        afterUpdateIntervalFrame();
+        updateAnimations(globalAnimatedElementsCache);
     }, 100);
 
     window.addEventListener('load', () => {
@@ -222,16 +224,19 @@ export function initAnimations() {
 
     const MOBILE_UPDATE_TIMEOUT = 100;
     let mobileLastUpdate = 0;
+    let mobileZeroUpdatedCounter = 0;
 
     async function mobileUpdate() {
         const now = Date.now();
         if (mobileLastUpdate + MOBILE_UPDATE_TIMEOUT > now) {
             mobileLastUpdate = now;
         } else {
-            afterUpdateIntervalFrame();
+            const totalUpdates = updateAnimations(globalAnimatedElementsCache);
+            if (totalUpdates === 0) mobileZeroUpdatedCounter++;
         }
-        await sleep(1000);
-        requestAnimationFrame(mobileUpdate);
+        // should be without timeouts because eg iphone6 ignores it for a long time
+        if (mobileZeroUpdatedCounter < 200)
+            requestAnimationFrame(mobileUpdate);
     }
     
     if (mobileAndTabletCheck()) {

@@ -27,15 +27,18 @@ html(lang="ru")
         meta(name="twitter:card" content="summary_large_image")
 
         style.
-            html {
-                font-size: 4px;
-            }
+            html { font-size: 4px; }
 
         +linkLazyCSS("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400|Ubuntu:300,500&amp;subset=cyrillic")
         +linkLazyCSS("assets/css/fontawesome-all.min.css")
 
         script(src="https://code.jquery.com/jquery-3.3.1.min.js" async defer integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
         noscript
+            style.
+                .anim {
+                    animation: none !important;
+                    opacity: 1 !important;
+                }
             //- link(href="../../core/no-script.scss" rel="stylesheet")
         block head
     body
