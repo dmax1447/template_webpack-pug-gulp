@@ -73,7 +73,7 @@ export class Hero {
         if (this.isHeroMode && !force) return;
         console.warn('enterHeroMode');
         this._isHeroMode = true;
-        this.heroControls.register();
+        this.heroControls.reset();
         if (!isMobileScreen()) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }

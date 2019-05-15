@@ -35,6 +35,7 @@ const anchorNav = new AnchorNav([
         hash: "hero",
         selector: '#hero',
         onEnter: () => hero.enterHeroMode(),
+        onLeave: () => hero.leaveHeroMode(),
     },
     {
         hash: 'we-help',
