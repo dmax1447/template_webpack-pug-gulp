@@ -33,8 +33,8 @@ section.features#features
         .features__we-offer-items
             each feature, index in features
                 .features__we-offer-item
-                    img.anim(-lazy-src=feature.icon, --anim="slide-in-back", --anim-speed="1.2s", --anim-delay="0.5s")
-                    div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.4s")
+                    img.anim(-lazy-src=feature.icon, --anim="slide-in-back", --anim-speed="0.8s", --anim-delay="0.5s", --anim-irate="0.1")
+                    div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.4s", , --anim-irate="0.1")
                         h2= feature.title
                         ul
                             each item, index2 in feature.items
@@ -42,4 +42,4 @@ section.features#features
                                     i(class=item['fa-icon'])
                                     span= item.title
 
-        p.features__we-offer-text !{siteData('page_main.content')}
+        p.features__we-offer-text.anim(--anim="slide-in-up", --anim-speed="1s", --anim-irate="0.1") !{siteData('page_main.content')}

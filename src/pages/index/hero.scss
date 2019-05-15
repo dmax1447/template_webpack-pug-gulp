@@ -71,6 +71,7 @@
     & > .section-content {
         min-height: v(696);
         height: 100vh;
+        padding: 0;
     }
 
     .hero-video-backdrop {
@@ -150,6 +151,8 @@
             }
 
             &__head {
+                @include headerFont;
+
                 display: inline-block;
                 margin: 0;
                 color: white;
@@ -277,6 +280,8 @@
                 }
 
                 p {
+                    @include textFont;
+                    
                     margin: 0;
                     margin-left: v(16);
                     float: left;

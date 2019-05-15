@@ -1,7 +1,6 @@
 //- params = href, text, class
 mixin nav-menu-item(params={ href: '', text: '', class: '', currentPage: '' })
     a(href=params.href, class=classNames("nav-menu__item", params.class, params.currentPage === params.href && 'nav-menu__item--current'))
-        span.nav-menu__item-placeholder= params.text
         span.nav-menu__item-text= params.text
 
 //- flags = dark, hideMainLink

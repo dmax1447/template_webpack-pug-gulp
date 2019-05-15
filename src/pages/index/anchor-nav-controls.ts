@@ -1,14 +1,14 @@
 import { $q, getScroll, isMobileScreen, disableScroll, enableScroll } from "../../core/utils";
 import { Hero } from "./hero";
 import { AnchorNav } from "./anchor-nav";
-
-const Lethargy = require("exports-loader?this.Lethargy!lethargy/lethargy");
-const lethargy = new Lethargy();
+import { isInertionScroll } from "../../core/lethargy-scroll";
+import { listenMouseWheel, MouseWheelListener } from "../../core/mouse-wheel";
 
 export class AnchorNavControls {
     prevousYScroll: number = 0;
     hero: Hero;
     anchorNav: AnchorNav;
+    _registeredMouseWheel?: Function;
 
     constructor(
         hero: Hero,
@@ -24,10 +24,17 @@ export class AnchorNavControls {
         let { top: prevousYScroll } = getScroll();
         this.prevousYScroll = prevousYScroll;
 
-        $('html').off('mousewheel', this._onMouseWheel as any);
+        if (this._registeredMouseWheel) {
+            this._registeredMouseWheel();
+            this._registeredMouseWheel = undefined;
+        }
     
         if (!isMobileScreen()) {
-            $('html').on('mousewheel', this._onMouseWheel);
+            this._registeredMouseWheel = listenMouseWheel(window, this._onMouseWheel, {
+                checkInertion: true,
+                checkDirection: true,
+            });
+
             disableScroll();
         } else {
             enableScroll();
@@ -48,16 +55,15 @@ export class AnchorNavControls {
     /** anchors changing */
     _changing = false;
 
-    _onMouseWheel = async (e: JQueryMousewheel.JQueryMousewheelEventObject) => {
-        if(lethargy.check(e) === false) return;
-        
+    _onMouseWheel: MouseWheelListener = async ({ isInertion, directionY }) => {
+        if (isInertion || !directionY) return;
+
         if ((this.hero.isHeroMode && !this.hero.heroCarousel.isLastSlide()) || this._changing) {
             return;
         }
-        const direction = e.deltaY > 0 ? 'up' : 'down';
-        
+
         this._changing = true;
-        if (direction === 'down') await this.anchorNav.nextAnchor();
+        if (directionY === 'down') await this.anchorNav.nextAnchor();
         else await this.anchorNav.prevAnchor();
         this._changing = false;
     };

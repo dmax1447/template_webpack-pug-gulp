@@ -24,9 +24,15 @@ section {
         position: relative;
         max-width: v(1224);
         margin: 0 auto;
+        box-sizing: border-box;
+        padding-left: v(48);
+        padding-right: v(48);
 
         @include mobile {
             max-width: v(408);
+
+            padding-left: 0;
+            padding-right: 0;
         }
     }
 
@@ -34,6 +40,8 @@ section {
         width: 100%;
         max-width: 100%;
         margin: 0;
+        padding-left: 0;
+        padding-right: 0;
 
         @include mobile {
             max-width: 100%;

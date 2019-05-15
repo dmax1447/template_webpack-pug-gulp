@@ -53,6 +53,32 @@
         opacity: 0;
         height: 0;
     }
+
+    &__mobile-open-btn,
+    &__mobile-close-btn {
+        cursor: pointer;
+        font-size: v(32);
+        line-height: v(48);
+        width: v(48);
+        text-align: center;
+    }
+
+    &__mobile-open-btn {
+        float: right;
+        margin-top: v(24);
+        margin-right: v(16);
+    }
+
+    &__mobile-open-btn,
+    &__mobile-close-btn {
+        display: none;
+    }
+
+    &--dark {
+        .top-bar__mobile-open-btn {
+            color: white;
+        }
+    }
 }
 
 .top-bar-padding {
@@ -70,6 +96,71 @@
 
         .request-estimate-btn {
             margin-top: v(33);
+        }
+
+        &__mobile-close-btn {
+            display: inline-block;
+            position: absolute;
+            right: v(48);
+            top: v(24);
+            color: black;
+        }
+
+        &__mobile-open-btn {
+            display: inline-block;
+        }
+
+        &__menu {
+            position: fixed;
+            margin: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            opacity: 1;
+
+            transition-duration: 0.2s;
+            transition-property: opacity, left;
+
+            .nav-menu {
+                position: absolute;
+                right: v(32);
+                top: v(120);
+
+                &__item {
+                    display: block;
+                    text-align: right;
+                    margin-bottom: v(32);
+                    font-size: v(28);
+                    text-transform: uppercase;
+
+                    .nav-menu__item-text {
+                        position: relative;
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+
+        &--mobile-menu-closed &__menu {
+            left: 110%;
+            opacity: 0;
+        }
+
+        &--dark &__mobile-close-btn {
+            color: white;
+        }
+
+        &--dark &__menu {
+            background-color: black;
+        }
+
+        &--dark {
+            .nav-menu__item {
+                color: white;
+            }
         }
     }
 }

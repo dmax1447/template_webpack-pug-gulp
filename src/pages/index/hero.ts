@@ -62,18 +62,18 @@ export class Hero {
 
     reset = () => {
         if (window.scrollY <= ($q('section.hero').getBoundingClientRect().height / 2)) {
-            this.enterHeroMode();
+            this.enterHeroMode('force');
         } else {
-            this.leaveHeroMode();
+            this.leaveHeroMode(undefined, 'force');
         }
         this.heroControls.reset();
     };
 
-    enterHeroMode = () => {
-        if (this.isHeroMode) return;
+    enterHeroMode = (force: false|'force' = false) => {
+        if (this.isHeroMode && !force) return;
         console.warn('enterHeroMode');
         this._isHeroMode = true;
-        this.heroControls.register();
+        this.heroControls.reset();
         if (!isMobileScreen()) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -81,8 +81,8 @@ export class Hero {
         $q('.features .top-bar').classList.add('top-bar--hidden');
     };
 
-    leaveHeroMode = (nextAnchor?: string) => {
-        if (!this.isHeroMode) return;
+    leaveHeroMode = (nextAnchor?: string, force: false|'force' = false) => {
+        if (!this.isHeroMode && !force) return;
         console.warn('leaveHeroMode');
         this._isHeroMode = false;
         this.heroControls.unregister();

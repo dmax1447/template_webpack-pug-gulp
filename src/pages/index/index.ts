@@ -35,6 +35,7 @@ const anchorNav = new AnchorNav([
         hash: "hero",
         selector: '#hero',
         onEnter: () => hero.enterHeroMode(),
+        onLeave: () => hero.leaveHeroMode(),
     },
     {
         hash: 'we-help',
@@ -74,12 +75,17 @@ async function resetAnchor() {
     await anchorNav.setCurrentAnchor(anchorNav.currentAnchorIndex, 'force');
 }
 
+let _lastResizeMobile = isMobileScreen();
+
 function handleWindowResize() {
     anchorControls.reset();
+    // anchorNav.reset();
     hero.reset();
 
-    if (!isMobileScreen()) {
-        resetAnchor();
+    if (_lastResizeMobile !== isMobileScreen()) {
+        if (!isMobileScreen()) {
+            resetAnchor();
+        }
     }
 }
 
