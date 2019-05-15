@@ -7,7 +7,7 @@ import smoothscroll from 'smoothscroll-polyfill';
 import {
     $q, $all, sendForm,
 } from './core/utils';
-import { initAnimations } from './core/anim';
+import { initAnimations, _forceUpdateGlobalAnimatedElementsCache } from './core/anim';
 import { initCarousels } from './core/owl-carousel';
 import { remFix } from './core/rem-fix';
 import { loadAllLazied } from './core/lazy';
@@ -49,5 +49,6 @@ window.onload = () => {
         };
     });
 
+    _forceUpdateGlobalAnimatedElementsCache();
     loadAllLazied();
 };

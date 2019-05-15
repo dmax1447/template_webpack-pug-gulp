@@ -2,7 +2,7 @@
 import {
     $q, getWindowGlobalRect, intersectionRate, smoothScrollTo, getGlobalRect,
 } from '../../core/utils';
-import { _updateGlobalAnimations } from '../../core/anim';
+import { _forceUpdateGlobalAnimatedElementsCache, _forceUpdateGlobalAnimations } from '../../core/anim';
 
 export type AnchorDef = {
     selector: string,
@@ -85,7 +85,7 @@ export class AnchorNav {
         this.currentAnchorIndex = index;
         this.lastTimeAnchorChanged = now;
 
-        _updateGlobalAnimations();
+        _forceUpdateGlobalAnimations();
 
         return scrollingTask;
     };
