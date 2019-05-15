@@ -26,6 +26,18 @@
         'translated' => true
     ])
     @formField('input', [
+    'label' => 'Кейсы',
+    'name' => 'label_cases',
+    'textLimit' => '100',
+    'translated' => true
+    ])
+    @formField('input', [
+    'label' => 'Контакты',
+    'name' => 'label_contacts',
+    'textLimit' => '100',
+    'translated' => true
+    ])
+    @formField('input', [
     'label' => 'Свяжитесь с нами',
     'name' => 'contact_header',
     'textLimit' => '100',
