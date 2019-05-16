@@ -75,7 +75,8 @@
     .devices-gallery {
         position: absolute;
         top: v(0);
-        right: v(48);
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .devices-gallery__pc .devices-gallery__screen > img {

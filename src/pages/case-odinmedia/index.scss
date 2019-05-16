@@ -101,8 +101,8 @@ $accentFg: white;
         }
 
         .devices-gallery {
-            left: v(48);
-            right: v(48);
+            left: 50%;
+            transform: translateX(-50%);
         }
         .case__about {
             margin-bottom: v(24);
