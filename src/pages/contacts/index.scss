@@ -48,6 +48,7 @@
             float: right;
             width: v(744);
             height: auto;
+            min-height: v(400);
 
             @include mobile {
                 width: 100%;

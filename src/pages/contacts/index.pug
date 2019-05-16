@@ -20,7 +20,8 @@ block body
             a.socials-link(href="https://www.instagram.com/berezadev/", target="_blank")
                 i.fab.fa-instagram
                 span instagram.com/berezadev/
-        a(href="https://yandex.ru/maps/213/moscow/?ll=37.659714%2C55.690732&mode=search&sll=37.657013%2C55.703295&sspn=0.039910%2C0.013833&text=%D0%90%D0%B2%D1%82%D0%BE%D0%B7%D0%B0%D0%B2%D0%BE%D0%B4%D1%81%D0%BA%D0%B0%D1%8F%2C%20%D0%B4.23%2C%20%D1%81%D1%82%D1%80.931&z=17", target="_blank")
-            img.contacts__map(-lazy-src="/assets/contacts-map.jpg")
+
+        .contacts__map#map
+        script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU")
     +feedback-form([ 'section' ])
     +footer
