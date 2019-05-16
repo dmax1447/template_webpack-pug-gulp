@@ -1,6 +1,6 @@
 @import "../../styles.scss";
 
-.case {
+.case-top {
     a.back-to-cases {
         i {
             width: v(24);
@@ -15,6 +15,24 @@
         }
     }
 
+    h2 {
+        @include headerFont;
+        margin: 0;
+        margin-bottom: v(24);
+        font-weight: 500;
+        font-size: v(36);
+        line-height: v(48);
+    }
+
+    @include mobile {
+        h2 {
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+.case {
     a.site-link {
         i {
             width: v(24);
@@ -32,21 +50,13 @@
     &__about {
         margin-bottom: v(120);
 
-        h2 {
-            @include headerFont;
-            margin: 0;
-            margin-bottom: v(24);
-            font-weight: 500;
-            font-size: v(36);
-            line-height: v(48);
-        }
-
         h5 {
             @include headerFont;
             font-style: normal;
             font-weight: 500;
             font-size: v(20);
             line-height: v(28);
+            margin: 0;
         }
 
         p {
@@ -64,7 +74,7 @@
 
     .devices-gallery {
         position: absolute;
-        top: v(112);
+        top: v(0);
         right: v(48);
     }
 
@@ -76,22 +86,16 @@
     }
 
     @include mobile {
+        .section-content {
+            padding-top: v(240);
+        }
+
         .devices-gallery {
-            display: none;
+            left: v(48);
+            right: v(48);
         }
         .case__about {
-            padding-top: v(40);
+            margin-bottom: v(24);
         }
-
-        // .case__about {
-        //     padding-top: v(528);
-        // }
-
-        // .devices-gallery {
-        //     position: absolute;
-        //     top: v(100);
-        //     left: v(24);
-        //     right: v(24);
-        // }
     }
 }

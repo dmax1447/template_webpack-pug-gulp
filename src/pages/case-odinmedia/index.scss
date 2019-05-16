@@ -13,7 +13,7 @@ $accentFg: white;
     }
 }
 
-.case {
+.case-top {
     a.back-to-cases {
         i {
             width: v(24);
@@ -28,6 +28,25 @@ $accentFg: white;
         }
     }
 
+    h2 {
+        @include headerFont;
+        margin: 0;
+        margin-bottom: v(24);
+        font-weight: 500;
+        font-size: v(36);
+        line-height: v(48);
+    }
+
+    @include mobile {
+        h2 {
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+
+.case {
     a.site-link {
         i {
             width: v(24);
@@ -44,15 +63,6 @@ $accentFg: white;
 
     &__about {
         margin-bottom: v(120);
-
-        h2 {
-            @include headerFont;
-            margin: 0;
-            margin-bottom: v(24);
-            font-weight: 500;
-            font-size: v(36);
-            line-height: v(48);
-        }
 
         h5 {
             @include headerFont;
@@ -77,7 +87,7 @@ $accentFg: white;
 
     .devices-gallery {
         position: absolute;
-        top: v(112);
+        top: v(0);
         right: v(48);
         
         .gallery-item__screen--pc img {
@@ -86,23 +96,17 @@ $accentFg: white;
     }
 
     @include mobile {
+        .section-content {
+            padding-top: v(240);
+        }
+
         .devices-gallery {
-            display: none;
+            left: v(48);
+            right: v(48);
         }
         .case__about {
-            padding-top: v(40);
+            margin-bottom: v(24);
         }
-
-        // .case__about {
-        //     padding-top: v(528);
-        // }
-
-        // .devices-gallery {
-        //     position: absolute;
-        //     top: v(100);
-        //     left: v(24);
-        //     right: v(24);
-        // }
     }
 }
 
@@ -131,6 +135,12 @@ $accentFg: white;
             margin: 0;
             font-size: v(16);
             line-height: v(24);
+        }
+
+        @include mobile {
+            padding-top: v(32);
+            padding-left: v(24);
+            padding-right: v(24);
         }
     }
 }
@@ -166,6 +176,17 @@ $accentFg: white;
             margin: 0;
             font-size: v(16);
             line-height: v(24);
+        }
+    }
+
+    @include mobile {
+        display: block;
+        padding-top: v(24);
+        padding-bottom: v(24);
+
+        .dev__item {
+            display: block;
+            margin-bottom: v(24);
         }
     }
 }
@@ -237,6 +258,17 @@ $accentFg: white;
                 opacity: 0.6;
             }
         }
+        
+        @include mobile {
+            padding-top: v(32);
+            padding-left: v(24);
+            padding-right: v(24);
+            padding-bottom: v(48);
+
+            .result__previews {
+                display: none;
+            }
+        }
     }
 }
 
@@ -295,5 +327,17 @@ $accentFg: white;
     .review__quote--right {
         top: v(150);
         right: v(-160);
+    }
+
+    @include mobile {
+        .section-content {
+            padding-top: v(32);
+            padding-bottom: v(32);
+            padding-left: v(24);
+            padding-right: v(24);
+        }
+        .review__text {
+            margin-bottom: v(32);
+        }
     }
 }

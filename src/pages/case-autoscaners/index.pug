@@ -3,12 +3,13 @@ extends ../../layout.pug
 block body
     +section('top')
         +top-bar([ 'sticky', 'padding' ], { currentPage: "/cases" })
+    +section('case-top')
+        a.back-to-cases(href="/cases")
+            i.far.fa-arrow-left
+            span назад к кейсам
+        h2 autoscaners.ru
     +section('case')
         .case__about
-            a.back-to-cases(href="/cases")
-                i.far.fa-arrow-left
-                span назад к кейсам
-            h2 autoscaners.ru
             h5 Web-разработка и техническая<br>поддержка интернет-магазина с<br>более чем 35 000 SKU
             p.
                 Сотрудничество с проектом autoscaners.ru мы начали с отражения DDOS-атаки, которую заказали конкуренты сервиса.<br>
