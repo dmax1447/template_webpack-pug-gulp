@@ -97,7 +97,7 @@ $mobileSingleLeft: percentage($mobileSingleLeftPx / $desktopSlideWidthPx);
             & > img {
                 object-fit: cover;
                 height: 100%;
-                object-position: left;
+                object-position: top left;
             }
         }
     }

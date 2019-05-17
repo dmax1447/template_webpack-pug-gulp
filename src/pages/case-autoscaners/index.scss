@@ -1,1 +1,10 @@
 @import "../../parts/case-layout/styles.scss";
+
+.case {
+    .devices-gallery__pc .devices-gallery__screen > img {
+        object-position: top;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+}
