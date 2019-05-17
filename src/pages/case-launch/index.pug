@@ -1,59 +1,24 @@
-extends ../../layout.pug
+extends ../../parts/case-layout/page.pug
 
-mixin case-thumbnail(key, tech, name, desc, background, backgroundStyle)
-    .case-thumbnail(style=("background: " + backgroundStyle))
-        img(-lazy-src=(background + ".jpg"))
-        .case-thumbnail__content
-            h6!= tech
-            h2!= name
-            p!= desc
+block caseTop
+    +case-top('autoscaners.ru')
 
-block body
-    section.top
-        .section-content
-            +top-bar([ 'sticky', 'padding' ], { currentPage: "/case-launch" })
-    section.cases
-        h1 Кейсы
-        .case-thumbnails
-            +case-thumbnail(
-                "autoscaners",
-                "webdev + UI/UX + Mobile",
-                "autoscaners.ru",
-                "поддержка и развитие e-commerce<br>инфраструктуры",
-                "/assets/cases/thumbnail-autoscaners",
-                ""
-            )
-            +case-thumbnail(
-                "icartool",
-                "UI/UX + mobile",
-                "iCartool",
-                "Мобильное приложение для тестирования<br>автомобильных аккумуляторов",
-                "/assets/cases/thumbnail-icartool",
-                ""
-            )
-            +case-thumbnail(
-                "hakamadamk",
-                "UI/UX + webdev",
-                "Ирина Хакамада",
-                "Разработка и техподдержка тура по Сибири<br>известного мотивационного спикера",
-                "/assets/cases/thumbnail-hakamada",
-                ""
-            )
-            +case-thumbnail(
-                "launch",
-                "UI/UX + Webdev",
-                "Launch",
-                "Сайт официального дилера крупнейшего<br>производителя систем автодиагностики",
-                "/assets/cases/thumbnail-launch",
-                ""
-            )
-            +case-thumbnail(
-                "odinmedia",
-                "UI/UX + webdev",
-                "OdinMedia",
-                "Сайт и SPA-каталог для международного<br>дистрибьютора медиа-контента",
-                "/assets/cases/thumbnail-odinmedia",
-                ""
-            )
-    +feedback-form([ 'section' ])
-    +footer
+block caseAbout
+    h5 Web-разработка и техническая<br>поддержка интернет-магазина с<br>более чем 35 000 SKU
+    p.
+        Сотрудничество с проектом autoscaners.ru мы начали с отражения DDOS-атаки, которую заказали конкуренты сервиса.<br>
+        В сегодняшний день мы проделываем массу работы: постоянно оптимизируем работу 1C Bitrix, выполняем задачи  по SEO-оптимизации, внедрили сквозную аналитику, создали с десяток лендингов и веб приложения для сотрудников торгового зала и склада
+
+block caseSiteLink
+    +case-site-link('https://www.autoscaners.ru/')
+
+block afterCaseAbout
+    +devices-gallery([
+        { type: 'pc', img: '/assets/cases/autoscaners/autoscaners-pc.jpg' },
+        {
+            type: 'mobile2',
+            img: '/assets/cases/autoscaners/autoscaners-mobile.jpg',
+            img2: '/assets/cases/autoscaners/autoscaners-mobile2.jpg',
+            mobileAddress: 'www.autoscaners.ru',
+        },
+    ])

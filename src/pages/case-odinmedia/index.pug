@@ -1,31 +1,32 @@
-extends ../../layout.pug
+extends ../../parts/case-layout/page.pug
 
-block body
-    +section('top')
-        +top-bar([ 'sticky', 'padding' ], { currentPage: "/cases" })
-    +section('case-top')
-        a.back-to-cases(href="/cases")
-            i.far.fa-arrow-left
-            span назад к кейсам
-        h2 Odin Media
-    +section('case')
-        .case__about
-            h5 Сайт–медиакаталог для компании<br>кино- и теледистрибьютора.
-            p.
-                Один Медиа входит в холдинг Формат ТВ. Компания управляет правами на телеконтент (телепрограммы, форматы, сериалы). Главная специализация  — документальные фильмы, в первую очередь научпоп и исторические.<br>
-                <br>
-                Работа началась с проекта, который, как обычно, нужен был «вчера». Ребята только образовались внутри телехолдинга, летели в Канны на медиарынок MIPTV, и им нужно было как-то презентовать свою подборку прав. Мы быстро создали лендинг с инфо о компании, обложками их основных телепроектов и помогли с печатными материалами для презентации.<br>
-                <br>
-                На запуск потратили менее двух недель. В последствии переделали сайт в полноценное SPA.
-            a.site-link(href="https://odinmedia.tv/", target="_blank")
-                i.far.fa-external-link-square
-                span перейти на сайт
-        +devices-gallery(
-            "/assets/cases/odinmedia/odinmedia-pc.jpg",
-            "/assets/cases/odinmedia/odinmedia-mobile.jpg",
-            "/assets/cases/odinmedia/odinmedia-mobile2.jpg",
-            "odinmedia.tv"
-        )
+block caseTop
+    +case-top('Odin Media')
+
+block caseAbout
+    h5 Сайт–медиакаталог для компании<br>кино- и теледистрибьютора.
+    p.
+        Один Медиа входит в холдинг Формат ТВ. Компания управляет правами на телеконтент (телепрограммы, форматы, сериалы). Главная специализация  — документальные фильмы, в первую очередь научпоп и исторические.<br>
+        <br>
+        Работа началась с проекта, который, как обычно, нужен был «вчера». Ребята только образовались внутри телехолдинга, летели в Канны на медиарынок MIPTV, и им нужно было как-то презентовать свою подборку прав. Мы быстро создали лендинг с инфо о компании, обложками их основных телепроектов и помогли с печатными материалами для презентации.<br>
+        <br>
+        На запуск потратили менее двух недель. В последствии переделали сайт в полноценное SPA.
+
+block caseSiteLink
+    +case-site-link('https://odinmedia.tv/')
+
+block afterCaseAbout
+    +devices-gallery([
+        { type: 'pc', img: '/assets/cases/odinmedia/odinmedia-pc.jpg' },
+        {
+            type: 'mobile2',
+            img: '/assets/cases/odinmedia/odinmedia-mobile.jpg',
+            img2: '/assets/cases/odinmedia/odinmedia-mobile2.jpg',
+            mobileAddress: 'odinmedia.tv',
+        },
+    ])
+
+block content
     +section('goal')
         h3 Цель
         p Cоздать презентационный сайт для компании ОдинМедиа, занимающейся производством и продажей ТВ контента различных форматов. Сайт должен был не только представлять заказчика и контент, но и давать возможность купить права на понравившуюся продукцию
@@ -56,5 +57,3 @@ block body
         p.review__job генеральный директор Один Медиа
         img.review__quote.review__quote--left(-lazy-src="/assets/quote-left-ru.svg")
         img.review__quote.review__quote--right(-lazy-src="/assets/quote-right-ru.svg")
-    +feedback-form([ 'section', 'dark' ], { headerText: 'Давайте сделаем что–то полезное и вам!' })
-    +footer

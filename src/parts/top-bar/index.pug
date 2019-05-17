@@ -17,5 +17,5 @@ mixin top-bar(flags=[], params={ currentPage: '' })
                     +request-estimate-btn([ flags.has('dark') && 'dark' ])
             if !flags.has('noNavMenu')
                 div.top-bar__menu
-                    .top-bar__mobile-close-btn.far.fa-times(role="button")
+                    .top-bar__mobile-close-btn.fal.fa-times(role="button")
                     +nav-menu([ flags.has('dark') && 'dark', flags.has('hideMainLink') && 'hideMainLink' ], { currentPage: params.currentPage })

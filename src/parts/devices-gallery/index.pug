@@ -1,4 +1,39 @@
-mixin devices-gallery(pc, mobile1, mobile2, mobileAddress)
+//- items: (
+//-     { type: 'pc', img: 'href' },
+//-     { type: 'mobile2', img: 'href', mobileAddress: '', img2: 'href', mobileAddress2?: '' },
+//-     { type: 'mobile', img: 'href', mobileAddress: '' },
+//- )[]
+mixin devices-gallery(items)
+    .devices-gallery
+        each item in items
+            .devices-gallery__item
+                if item.type === 'pc'
+                    .devices-gallery__pc
+                        img(-lazy-src="/assets/cases/pc.svg")
+                        .devices-gallery__screen
+                            img(-lazy-src=item.img)
+                if item.type === 'mobile'
+                    .devices-gallery__mobile.devices-gallery__mobile--single
+                        img(-lazy-src="/assets/cases/mobile.svg")
+                        if item.mobileAddress
+                            .devices-gallery__mobile-address!= item.mobileAddress
+                        .devices-gallery__screen
+                            img(-lazy-src=item.img)
+                if item.type === 'mobile2'
+                    .devices-gallery__mobile.devices-gallery__mobile--1
+                        img(-lazy-src="/assets/cases/mobile.svg")
+                        if item.mobileAddress
+                            .devices-gallery__mobile-address!= item.mobileAddress
+                        .devices-gallery__screen
+                            img(-lazy-src=item.img)
+                    .devices-gallery__mobile.devices-gallery__mobile--2
+                        img(-lazy-src="/assets/cases/mobile.svg")
+                        if item.mobileAddress2 || item.mobileAddress
+                            .devices-gallery__mobile-address!= item.mobileAddress2 || item.mobileAddress
+                        .devices-gallery__screen
+                            img(-lazy-src=item.img2)
+
+mixin devices-gallery-simple(pc, mobile1, mobile2, mobileAddress)
     .devices-gallery
         .devices-gallery__item
             .devices-gallery__pc
