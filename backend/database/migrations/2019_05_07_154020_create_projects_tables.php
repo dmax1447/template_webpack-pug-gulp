@@ -15,6 +15,7 @@ class CreateProjectsTables extends Migration
             // feel free to modify the name of this column, but title is supported by default (you would need to specify the name of the column Twill should consider as your "title" column in your module controller if you change it)
             $table->string('project_slug', 200)->nullable();
             $table->string('url')->nullable();
+            $table->json('makeup')->nullable();
             
             // use this column with the HasPosition trait
             $table->integer('position')->unsigned()->nullable();
@@ -28,6 +29,8 @@ class CreateProjectsTables extends Migration
             $table->string('tech')->nullable();
             $table->string('lead')->nullable();
             $table->text('description')->nullable();
+            $table->text('goal')->nullable();
+            $table->text('result')->nullable();
         });
     }
 

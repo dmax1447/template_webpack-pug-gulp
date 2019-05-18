@@ -74,6 +74,9 @@ body {
     @return unquote('calc(' + ($px / $basePix) + 'rem - ' + $minusPx + 'px)');
 }
 
+$tabletBreakpointMaxWidth: 768px;
+$mobileBreakpointMaxWidth: 571px;
+
 // Detect mobile screen
 // used as
 //
@@ -82,7 +85,20 @@ body {
 // }
 //
 @mixin mobile {
-	@media (max-width: 571px) {
+	@media (max-width: $mobileBreakpointMaxWidth) {
+		@content;
+	}
+}
+
+// Detect tablet screen
+// used as
+//
+// @include tablet {
+//     ... tablet screen rules ...
+// }
+//
+@mixin tablet {
+	@media (min-width: $mobileBreakpointMaxWidth) and (max-width: $tabletBreakpointMaxWidth) {
 		@content;
 	}
 }

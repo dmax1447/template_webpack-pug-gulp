@@ -11,6 +11,8 @@ class ProjectTranslation extends Model
         'tech',
         'lead',
         'description',
+        'goal',
+        'result',
         'active',
         'locale',
     ];

@@ -1,8 +1,59 @@
+$desktopSlideWidthPx: 744;
+$desktopSlideHeightPx: 456;
+
+$tabletSlideWidthPx: 552;
+$tabletSlideHeightPx: 336;
+
+$mobileSlideWidthPx: 352;
+$mobileSlideHeightPx: 216;
+
+$pcWidthPx: 744;
+$pcHeightPx: 456;
+$pcScreenTopPx: 41;
+$pcScreenLeftPx: 96;
+$pcScreenRightPx: 96;
+$pcScreenBottomPx: 56;
+
+$mobileWidthPx: 216;
+$mobileHeightPx: 428;
+$mobileScreenTopPx: 58.78;
+$mobileScreenLeftPx: 14.13;
+$mobileScreenRightPx: 14.13;
+$mobileScreenBottomPx: 50.76;
+$mobileAddressTopPx: 36.04;
+$mobileAddressLeftPx: 61.5;
+$mobileAddressRightPx: 61.5;
+
+$mobileGroupTopPx: 16.07;
+$mobileGroupSidePx: 144;
+
+// Use percentages to scale freely
+
+$pcWidth: percentage($pcWidthPx / $desktopSlideWidthPx);
+$pcHeight: percentage($pcHeightPx / $desktopSlideHeightPx);
+$pcScreenTop: percentage($pcScreenTopPx / $pcHeightPx);
+$pcScreenLeft: percentage($pcScreenLeftPx / $pcWidthPx);
+$pcScreenRight: percentage($pcScreenRightPx / $pcWidthPx);
+$pcScreenBottom: percentage($pcScreenBottomPx / $pcHeightPx);
+
+$mobileWidth: percentage($mobileWidthPx / $desktopSlideWidthPx);
+$mobileHeight: percentage($mobileHeightPx / $desktopSlideHeightPx);
+$mobileScreenTop: percentage($mobileScreenTopPx / $mobileHeightPx);
+$mobileScreenLeft: percentage($mobileScreenLeftPx / $mobileWidthPx);
+$mobileScreenRight: percentage($mobileScreenRightPx / $mobileWidthPx);
+$mobileScreenBottom: percentage($mobileScreenBottomPx / $mobileHeightPx);
+
+$mobileAddressTop: percentage($mobileAddressTopPx / $mobileHeightPx);
+$mobileAddressLeft: percentage($mobileAddressLeftPx / $mobileWidthPx);
+$mobileAddressRight: percentage($mobileAddressRightPx / $mobileWidthPx);
+
+$mobileGroupTop: percentage($mobileGroupTopPx / $desktopSlideHeightPx);
+$mobileGroupSide: percentage($mobileGroupSidePx / $desktopSlideWidthPx);
 
 .devices-gallery {
     position: relative;
-    width: v(744);
-    height: v(456);
+    width: v($desktopSlideWidthPx);
+    height: v($desktopSlideHeightPx);
 
     cursor: pointer;
 
@@ -23,19 +74,19 @@
         position: absolute;
         left: 0;
         top: 0;
-        width: v(744);
-        height: v(420);
+        width: $pcWidth;
+        height: $pcHeight;
 
         & > img {
-            width: v(744);
-            height: v(420);
+            width: 100%;
+            height: 100%;
         }
 
         & > .devices-gallery__screen {
-            top: v(25);
-            left: v(96);
-            bottom: v(35);
-            right: v(96);
+            top: $pcScreenTop;
+            left: $pcScreenLeft;
+            bottom: $pcScreenBottom;
+            right: $pcScreenRight;
 
             & > img {
                 object-fit: cover;
@@ -47,19 +98,21 @@
 
     &__mobile {
         position: absolute;
+        width: $mobileWidth;
+        height: $mobileHeight;
 
-        &, & > img {
-            width: v(216);
-            height: v(428);
+        & > img {
+            width: 100%;
+            height: 100%;
         }
 
         &-address {
             @include textFont;
 
             position: absolute;
-            top: v(36.04);
-            left: v(61.5);
-            right: v(61.5);
+            top: $mobileAddressTop;
+            left: $mobileAddressLeft;
+            right: $mobileAddressRight;
             
             line-height: v(19);
             font-size: v(10);
@@ -67,24 +120,12 @@
             text-overflow: ellipsis;
             text-align: center;
         }
-
-        // Time egg
-        &-time {
-            position: absolute;
-            top: v(19);
-            left: v(34.67);
-            
-            transform: translateX(-50%);
-            font-size: v(8);
-            text-align: center;
-            font-family: sans-serif;
-        }
         
         & > .devices-gallery__screen {
-            top: v(58.75);
-            left: v(14);
-            right: v(14);
-            height: v(318.46);
+            top: $mobileScreenTop;
+            left: $mobileScreenLeft;
+            right: $mobileScreenRight;
+            bottom: $mobileScreenBottom;
             
             & > img {
                 object-fit: cover;
@@ -93,24 +134,37 @@
         }
 
         &--1 {
-            left: v(144);
-            top: v(-5);
+            left: $mobileGroupSide;
+            top: $mobileGroupTop;
         }
 
         &--2 {
-            right: v(144);
-            top: v(-5);
+            right: $mobileGroupSide;
+            top: $mobileGroupTop;
         }
     }
 }
 
 @include mobile {
-    .devices-gallery, .devices-gallery__item {
-        width: v(360);
-        height: v(216);
-    }
-    .devices-gallery__item__device {
-        width: v(360) !important;
-        height: v(216);
+    .devices-gallery {
+        width: v($mobileSlideWidthPx);
+        height: v($mobileSlideHeightPx);
+
+        &__mobile-address {
+            line-height: v(10);
+            font-size: v(5);
+        }
     }
 }
+
+// @include tablet {
+//     .devices-gallery {
+//         width: v($tabletSlideWidthPx);
+//         height: v($tabletSlideHeightPx);
+
+//         &__mobile-address {
+//             line-height: v(10);
+//             font-size: v(5);
+//         }
+//     }
+// }

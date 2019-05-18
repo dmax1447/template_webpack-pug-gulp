@@ -22,6 +22,16 @@ return [
                 'icon' => 'text',
                 'component' => 'a17-block-features_offered',
             ],
+            'project_step' => [
+                'title' => 'Этапы проекта',
+                'icon' => 'text',
+                'component' => 'a17-block-project_step',
+            ],
+            'client_review' => [
+                'title' => 'Отзыв клиента',
+                'icon' => 'text',
+                'component' => 'a17-block-client_review',
+            ]
         ],
         'repeaters' => [
             'features_offered_item' => [
@@ -42,6 +52,14 @@ return [
             ],
             'icon' => [
                 'desktop' => [
+                    [
+                        'name' => 'desktop',
+                        'ratio' => 1,
+                    ],
+                ]
+            ],
+            'client_photo' => [
+                'default' => [
                     [
                         'name' => 'desktop',
                         'ratio' => 1,

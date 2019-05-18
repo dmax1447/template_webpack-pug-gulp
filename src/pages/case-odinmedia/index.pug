@@ -3,12 +3,13 @@ extends ../../layout.pug
 block body
     +section('top')
         +top-bar([ 'sticky', 'padding' ], { currentPage: "/cases" })
+    +section('case-top')
+        a.back-to-cases(href="/cases")
+            i.far.fa-arrow-left
+            span назад к кейсам
+        h2 Odin Media
     +section('case')
         .case__about
-            a.back-to-cases(href="/cases")
-                i.far.fa-arrow-left
-                span назад к кейсам
-            h2 Odin Media
             h5 Сайт–медиакаталог для компании<br>кино- и теледистрибьютора.
             p.
                 Один Медиа входит в холдинг Формат ТВ. Компания управляет правами на телеконтент (телепрограммы, форматы, сериалы). Главная специализация  — документальные фильмы, в первую очередь научпоп и исторические.<br>
