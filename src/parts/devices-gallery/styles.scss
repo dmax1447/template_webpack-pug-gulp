@@ -12,7 +12,7 @@ $pcHeightPx: 456;
 $pcScreenTopPx: 41;
 $pcScreenLeftPx: 96;
 $pcScreenRightPx: 96;
-$pcScreenBottomPx: 56;
+$pcScreenBottomPx: 54;
 
 $mobileWidthPx: 216;
 $mobileHeightPx: 428;
@@ -24,8 +24,11 @@ $mobileAddressTopPx: 36.04;
 $mobileAddressLeftPx: 61.5;
 $mobileAddressRightPx: 61.5;
 
-$mobileGroupTopPx: 16.07;
+$mobileGroupTopPx: 14;
 $mobileGroupSidePx: 144;
+
+$mobileSingleTopPx: 14;
+$mobileSingleLeftPx: 264;
 
 // Use percentages to scale freely
 
@@ -49,6 +52,9 @@ $mobileAddressRight: percentage($mobileAddressRightPx / $mobileWidthPx);
 
 $mobileGroupTop: percentage($mobileGroupTopPx / $desktopSlideHeightPx);
 $mobileGroupSide: percentage($mobileGroupSidePx / $desktopSlideWidthPx);
+
+$mobileSingleTop: percentage($mobileSingleTopPx / $desktopSlideHeightPx);
+$mobileSingleLeft: percentage($mobileSingleLeftPx / $desktopSlideWidthPx);
 
 .devices-gallery {
     position: relative;
@@ -91,7 +97,7 @@ $mobileGroupSide: percentage($mobileGroupSidePx / $desktopSlideWidthPx);
             & > img {
                 object-fit: cover;
                 height: 100%;
-                object-position: left;
+                object-position: top left;
             }
         }
     }
@@ -141,6 +147,11 @@ $mobileGroupSide: percentage($mobileGroupSidePx / $desktopSlideWidthPx);
         &--2 {
             right: $mobileGroupSide;
             top: $mobileGroupTop;
+        }
+
+        &--single {
+            left: $mobileSingleLeft;
+            top: $mobileSingleTop;
         }
     }
 }

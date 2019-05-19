@@ -1,3 +1,5 @@
+import { isMobileScreenWidth } from "../../core/utils";
+
 export function initTopBars() {
     document.querySelectorAll<HTMLHeadingElement>('.top-bar').forEach(el => {
         initTopBar(el);
@@ -27,14 +29,25 @@ export function initTopBar(topBarEl: HTMLHeadingElement) {
         topBarEl.classList.add('top-bar--mobile-menu-closed');
     };
 
+    let lastMobile = isMobileScreenWidth();
+    const handleResizeMobileDesktop = () => {
+        const isMobileS = isMobileScreenWidth();
+        if (isMobileS !== lastMobile && !isMobileS) {
+            closeMobileMenu();
+        }
+        lastMobile = isMobileS;
+    };
+
     const menuOpenClick = () => openMobileMenu();
 
     menuOpenBtn.addEventListener('click', menuOpenClick);
     menuCloseBtn.addEventListener('click', closeMobileMenu);
+    window.addEventListener('resize', handleResizeMobileDesktop);
 
     const destroy = () => {
         menuOpenBtn.removeEventListener('click', menuOpenClick);
         menuCloseBtn.removeEventListener('click', closeMobileMenu);
+        window.removeEventListener('resize', handleResizeMobileDesktop);
     };
 
     return destroy;

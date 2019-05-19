@@ -36,8 +36,12 @@ export function detectTouch(
 
 let __isMobileHookScreen: boolean|undefined = undefined;
 
+export function isMobileScreenWidth() {
+    return window.innerWidth <= 571;
+}
+
 export function isMobileScreen() {
-    return (__isMobileHookScreen !== undefined && __isMobileHookScreen) || DetectMobileBrowser.isAny() || window.innerWidth <= 571;
+    return (__isMobileHookScreen !== undefined && __isMobileHookScreen) || DetectMobileBrowser.isAny() || isMobileScreenWidth();
 }
 
 export function __unsafe_setIsMobileScreen(hook: boolean) {
