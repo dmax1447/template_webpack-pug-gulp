@@ -1,6 +1,6 @@
 extends ../../layout.pug
 
-mixin case-thumbnail(key, tech, name, desc, background, video, backgroundStyle)
+mixin case-thumbnail(key, tech, name, desc, background, video, backgroundStyle="")
     a.case-thumbnail(href=("/case-" + key), style=("background: " + backgroundStyle))
         img(-lazy-src=background)
         video(playsinline autoplay muted loop)
@@ -17,15 +17,14 @@ block body
         h1= siteData('blocks.label_cases')
         - let cases = siteData('cases');
         .case-thumbnails
-            each case0, index in cases
+            each caseItem, caseItemIndex in cases
                 +case-thumbnail(
-                    case0.slug,
-                    case0.tech,
-                    case0.title,
-                    case0.lead,
-                    case0.cover,
-                    case0.cover_video,
-                    ""
+                    caseItem.slug,
+                    caseItem.tech,
+                    caseItem.title,
+                    caseItem.lead,
+                    caseItem.cover,
+                    caseItem.cover_video
                 )
     +feedback-form([ 'section' ])
     +footer

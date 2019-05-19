@@ -33,13 +33,31 @@ exports.rootDir = function (pathFromRoot) {
     return path.resolve(__dirname, '..', pathFromRoot);
 };
 
-const dataCache = {};
+const _siteDataCache = {};
 
-exports.getSiteData = function(lang, dataPath, name) {
-    const [block, field] = name.split(".");
-    //console.log(block, field);
-    if (!dataCache.hasOwnProperty(block)) {
-        dataCache[block] = JSON.parse(fs.readFileSync(`${dataPath}/${block}.${lang}.json`, 'utf8'));
+exports.getSiteData = function(dataPath, name, lang) {
+    const [ block, field ] = name.split(".");
+
+    if (!_siteDataCache.hasOwnProperty(block)) {
+        let filePath;
+        if (lang) {
+            filePath = `${dataPath}/${block}.${lang}.json`;
+        } else {
+            filePath = `${dataPath}/${block}.json`;
+        }
+
+        const fileStr = fs.readFileSync(filePath, 'utf8');
+        if (!fileStr) {
+            throw new Error(`failed read file from ${dataPath}`);
+        }
+        _siteDataCache[block] = JSON.parse(fileStr);
     }
-    return field ? dataCache[block][field] : dataCache[block];
+
+    const value = field ? _siteDataCache[block][field] : _siteDataCache[block];
+
+    if (!value) {
+        throw new Error(`value not found! dataPath=${dataPath}, name=${name}`);
+    }
+
+    return value;
 };

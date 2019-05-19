@@ -24,8 +24,8 @@ mixin hero-video(key, videoSrc, backgroundStylePlaceholder, isFirst=false)
     div(
         id=(key + "-video"),
         class=("hero-slide-video " + (isFirst ? "hero-slide-video--visible" : "")),
-        data-src=videoSrc,
-        style=backgroundStylePlaceholder
+        data-src!=videoSrc,
+        style!=backgroundStylePlaceholder
     )
         //- placeholder fallback
         if !!isFirst
@@ -34,7 +34,7 @@ mixin hero-video(key, videoSrc, backgroundStylePlaceholder, isFirst=false)
             img(-lazy-src=(videoSrc + ".jpg"), -lazy-fade="0.5s", -lazy-delay="1s")
         video(playsinline autoplay muted)
             if !!isFirst
-                source(-lazy-src=videoSrc, type="video/mp4", -lazy-fade="0.5s", -lazy-delay="2s")
+                source(-lazy-src!=videoSrc, type="video/mp4", -lazy-fade="0.5s", -lazy-delay="2s")
 
 mixin hero-video-progress(key, text, isFirst=false)
     div(id=(key + "-progressbar") class=("hero-video-progress " + (isFirst ? "hero-video-progress--active" : "")))
@@ -44,32 +44,41 @@ mixin hero-video-progress(key, text, isFirst=false)
 
 mixin hero-item-photo(src, ind=1, alt="Фото")
     .hero-slide-item__photo
-        img(-lazy-src=src, alt=alt, style=("z-index:"+(ind + 5)))
+        img(-lazy-src!=src, alt=alt, style=("z-index:"+(ind + 5)))
         .hero-slide-item__photo-backdrop
 
-- var slides = siteData('hero', lang)
-- var slidesBg = ["background: linear-gradient(45deg, rgb(0,0,0) 0%, rgb(81,100,140) 43%, rgb(91,112,156) 54%, rgb(43,8,0) 100%);", "background: linear-gradient(to right, rgb(0,0,0) 0%, rgb(42,42,87) 19%, rgb(175,179,186) 54%, rgb(186,186,186) 100%);", "background: linear-gradient(to bottom, rgb(227,211,123) 0%, rgb(74,59,48) 19%, rgb(0,0,0) 100%);"];
-section.hero.full#hero
-    each slide, index in slides
+- var slides = siteData('hero');
+- var slidesData = siteData('hero_slides', null);
+
+section.hero#hero
+    each slide, slideIndex in slides
         +hero-video(
             slide.id,
-            `assets/bereza-slide-0${index+1}.mp4`,
-            slidesBg[index],
-            index ? "" : "first video"
+            slidesData[slide.id] ? slidesData[slide.id].video : '',
+            slidesData[slide.id] ? slidesData[slide.id].backgroundStyle : '',
+            slideIndex ? "" : "first video"
         )
+
     .section-content
         +top-bar([ 'dark', 'hideMainLink' ])
         .hero-slide-wrapper
             +mouse-help-icon
-            each slide, index in slides
-                +hero-slide(slide.id, slide.header, slide.text, slide.cta.text, slide.cta.link, index ? "" : "first")
+            each slide, slideIndex in slides
+                +hero-slide(
+                    slide.id,
+                    slide.header,
+                    slide.text,
+                    slide.cta.text,
+                    slide.cta.link,
+                    slideIndex ? "" : "first"
+                )
                     if slide.icons[0] && slide.icons[0].number
-                        each icon, index2 in slide.icons
+                        each icon, iconIndex in slide.icons
                             +hero-slide-item([], icon.title, icon.number)
                                 each photo, k in icon.icons
                                     +hero-item-photo(photo, icon.icons.length - k)
                     else
-                        each icon, index2 in slide.icons
+                        each icon, iconIndex in slide.icons
                             +hero-slide-item(icon.icons, icon.title)
 
         .hero-video-progress-menu
