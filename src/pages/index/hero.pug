@@ -14,7 +14,7 @@ mixin hero-slide-item(icons, text, number_)
         if block
             block
         each iconSrc in icons
-            img.hero-slide-item__icon(-lazy-src=iconSrc)
+            img.hero-slide-item__icon(-lazy-src=assetUrl(iconSrc))
         if number_ !== undefined
             .hero-slide-item__number(data-number=number_)
         p
@@ -24,17 +24,17 @@ mixin hero-video(key, videoSrc, backgroundStylePlaceholder, isFirst=false)
     div(
         id=(key + "-video"),
         class=("hero-slide-video " + (isFirst ? "hero-slide-video--visible" : "")),
-        data-src!=videoSrc,
+        data-src!=assetUrl(videoSrc),
         style!=backgroundStylePlaceholder
     )
         //- placeholder fallback
         if !!isFirst
-            img(src=(videoSrc + ".jpg"))
+            img(src=assetUrl(videoSrc + ".jpg"))
         else
-            img(-lazy-src=(videoSrc + ".jpg"), -lazy-fade="0.5s", -lazy-delay="1s")
+            img(-lazy-src=assetUrl(videoSrc + ".jpg"), -lazy-fade="0.5s", -lazy-delay="1s")
         video(playsinline autoplay muted)
             if !!isFirst
-                source(-lazy-src!=videoSrc, type="video/mp4", -lazy-fade="0.5s", -lazy-delay="2s")
+                source(-lazy-src!=assetUrl(videoSrc), type="video/mp4", -lazy-fade="0.5s", -lazy-delay="2s")
 
 mixin hero-video-progress(key, text, isFirst=false)
     div(id=(key + "-progressbar") class=("hero-video-progress " + (isFirst ? "hero-video-progress--active" : "")))
@@ -75,7 +75,7 @@ section.hero#hero
                         each icon, iconIndex in slide.icons
                             +hero-slide-item([], icon.title, icon.number)
                                 each photo, k in icon.icons
-                                    +hero-item-photo(photo, icon.icons.length - k)
+                                    +hero-item-photo(assetUrl(photo), icon.icons.length - k)
                     else
                         each icon, iconIndex in slide.icons
                             +hero-slide-item(icon.icons, icon.title)

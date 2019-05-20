@@ -23,8 +23,8 @@ block body
                     caseItem.tech,
                     caseItem.title,
                     caseItem.lead,
-                    caseItem.cover,
-                    caseItem.cover_video
+                    assetUrl(caseItem.cover),
+                    assetUrl(caseItem.cover_video)
                 )
     +feedback-form([ 'section' ])
     +footer

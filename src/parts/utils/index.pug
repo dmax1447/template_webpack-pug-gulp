@@ -37,6 +37,16 @@
     // Monkey patch for `flags.has('dark')`
     Array.prototype.has = Array.prototype.includes;
 
+    // Map to dev uploads for dev builds
+    function assetUrl(url) {
+        if (process.env.BUILD === 'prod') return url;
+        if (url.startsWith('/assets/') || url.startsWith('assets/')) return url;
+
+        if (!url.startsWith('/')) url = '/' + url;
+        // dev build & path not to assets
+        return `http://dev.berezadev.com${url}`;
+    }
+
 //- Load css lazily with noscript fallback
 //- eg:
 //-
@@ -53,9 +63,9 @@ mixin linkLazyCSS(href)
         link(href=href, rel="stylesheet")&attributes(attributes)
 
 //- do not base on this mixin, it's only a shorthand for [section & .section-content]
-mixin section(class_)
+mixin section(class_, contentAttributes={})
     section(class=class_)&attributes(attributes)
         if block
-            .section-content
+            .section-content&attributes(contentAttributes)
                 block
                 

@@ -33,7 +33,7 @@ section.features#features
         .features__we-offer-items
             each feature, index in features
                 .features__we-offer-item
-                    img.anim(-lazy-src=feature.icon, --anim="slide-in-back", --anim-speed="0.8s", --anim-delay="0.5s", --anim-irate="0.1")
+                    img.anim(-lazy-src=assetUrl(feature.icon), --anim="slide-in-back", --anim-speed="0.8s", --anim-delay="0.5s", --anim-irate="0.1")
                     div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.4s", --anim-irate="0.1")
                         h2= feature.title
                         ul

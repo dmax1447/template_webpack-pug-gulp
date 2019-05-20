@@ -2,6 +2,10 @@ extends ../../parts/case-layout/page.pug
 
 block init
     - let caseData = siteData('case_' + caseSlug);
+    - let accentStyles = caseData.makeup ? `
+    -    background-color: ${caseData.makeup.backgroundColor};
+    -    color: ${caseData.makeup.fontColor};
+    - ` : '';
 
 block caseTop
     +case-top(caseData.title)
@@ -13,44 +17,42 @@ block caseSiteLink
     +case-site-link(caseData.url)
 
 block afterCaseAbout
-    +devices-gallery([
-        { type: 'pc', img: '/assets/cases/odinmedia/odinmedia-pc.jpg' },
-        {
-            type: 'mobile2',
-            img: '/assets/cases/odinmedia/odinmedia-mobile.jpg',
-            img2: '/assets/cases/odinmedia/odinmedia-mobile2.jpg',
-            mobileAddress: 'odinmedia.tv',
-        },
-    ])
+    if caseData.gallery && caseData.gallery.length !== 0
+        +devices-gallery(caseData.gallery.map(x => Object.assign({}, x, {
+            img: assetUrl(x.img),
+            img2: x.img2 && assetUrl(x.img2)
+        })))
 
 block content
-    +section('goal')
-        h3 Цель
-        p Cоздать презентационный сайт для компании ОдинМедиа, занимающейся производством и продажей ТВ контента различных форматов. Сайт должен был не только представлять заказчика и контент, но и давать возможность купить права на понравившуюся продукцию
-    +section('dev')
-        .dev__item
-            h4 Дизайн
-            p Основная тема сайта, как и у многих проектов Один Медиа — космос. Цветовая гамма - оранжево-бордовая. Геометрическими формами планет в стиле Low-Poly мы поддержали логотип компании. На фоне — параллакс c перспективой из стилизованных планет. По пожеланию заказчика добавили в шапку анимированное слайд-шоу из обложек самых актуальных проектов компании. 
-        .dev__item
-            h4 Разработка
-            p.
-                Верстка полностью responsive. Создали 4 размерных версии сайта: для очень больших экранов, для экранов ноутбуков и горизонтальных планшетов, для вертикальных планшетов и мобильных телефонов.<br>
-                <br>
-                Сделали SPA Front-end на Vue.js, кастомный back-end для управления карточками медиа-продуктов на связке Vue.js+PHP. Оптимизировали UX добавления видео-трейлеров и стоп-кадров.
-    +section('result')
-        h3 Результат
-        p.
-            Сначала создали лендинг, а потом переделали его в SPA приложение. Визуально сайт изменился незначительно, но у сайта значительно расширились возможности.<br>
-            <br>
-            Для каждого фильма была сделана  карточка с описанием, техническими характеристиками, трейлером,  галереей стоп-кадров и т.д.  По сути каждая карточка — это мини сайт, который индексируется поисковиками. Также на странице любого ТВ продукта есть возможность «запросить права». 
-        .result__previews
-            img(-lazy-src="/assets/cases/odinmedia/preview1.jpg")
-            img(-lazy-src="/assets/cases/odinmedia/preview2.jpg")
-            img(-lazy-src="/assets/cases/odinmedia/preview3.jpg")
-    +section('review')
-        p.review__text Ребята используют самые передовые технологии для разработки продуктов. Уровень их компетенции позволяет подсказать верное решение конкретных задач. И эти решения реально работают. Благодаря профессионализму и творческому подходу студии к нашим проектам, все было реализовано на высочайшем уровне и в срок. Грамотный менеджмент превратил работу над проектом в сплошное удовольствие.
-        img.review__avatar(-lazy-src="/assets/cases/odinmedia/review-avatar1.svg")
-        h3.review__name Ольга Затулкина
-        p.review__job генеральный директор Один Медиа
-        img.review__quote.review__quote--left(-lazy-src="/assets/quote-left-ru.svg")
-        img.review__quote.review__quote--right(-lazy-src="/assets/quote-right-ru.svg")
+    if caseData.goal
+        +section('goal')(style=accentStyles)
+            != caseData.goal
+
+    if caseData.steps
+        +section('dev')
+            for stepItem in caseData.steps
+                .dev__item
+                    h4!= stepItem.title
+                    != stepItem.content
+
+    if caseData.result
+        - let resultHasGallery = caseData.results_gallery && caseData.results_gallery.length !== 0
+        
+        +section(classNames('result', resultHasGallery && 'result--has-previews'))(style=accentStyles)
+            h3 Результат
+            != caseData.result
+
+            if resultHasGallery
+                .result__previews
+                    img(-lazy-src=assetUrl(caseData.results_gallery[0]))
+                    img(-lazy-src=assetUrl(caseData.results_gallery[1]))
+                    img(-lazy-src=assetUrl(caseData.results_gallery[2]))
+
+    if caseData.client_review
+        +section('review')
+            .review__text!= caseData.client_review.client_review
+            img.review__avatar(-lazy-src=assetUrl(caseData.client_review.client_photo))
+            h3.review__name!= caseData.client_review.client_name
+            p.review__job!= caseData.client_review.client_position
+            img.review__quote.review__quote--left(-lazy-src="/assets/quote-left-ru.svg")
+            img.review__quote.review__quote--right(-lazy-src="/assets/quote-right-ru.svg")
