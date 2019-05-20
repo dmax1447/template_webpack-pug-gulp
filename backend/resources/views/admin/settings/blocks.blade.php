@@ -38,6 +38,12 @@
     'translated' => true
     ])
     @formField('input', [
+    'label' => 'Стажировка',
+    'name' => 'job_label',
+    'textLimit' => '100',
+    'translated' => true
+    ])
+    @formField('input', [
     'label' => 'Свяжитесь с нами',
     'name' => 'contact_header',
     'textLimit' => '100',

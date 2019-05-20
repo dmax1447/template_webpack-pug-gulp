@@ -187,7 +187,6 @@ class BuildSite extends Command
             });
             $data[] = $c;
         }
-        dump($data);
         return $data;
     }
 }
