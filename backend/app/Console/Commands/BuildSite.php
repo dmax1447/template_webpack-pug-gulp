@@ -63,7 +63,7 @@ class BuildSite extends Command
         }
 
         $this->info("Compiling pages at " . base_path());
-        exec('cd '. base_path(). ' && export PATH=/usr/local/bin:/usr/bin:/bin && npm --scripts-prepend-node-path=auto run build-on-vps 2>&1', $out, $err);
+        exec('cd '. base_path(). ' && export PATH=/usr/local/bin:/usr/bin:/bin && LANG=ru npm --scripts-prepend-node-path=auto run build-on-vps 2>&1', $out, $err);
         $this->info(join("\n", $out));
         $this->info("Complete");
     }
@@ -156,7 +156,7 @@ class BuildSite extends Command
                 'lead' => $case->lead,
                 'description' => $case->description,
                 'cover' => $case->image('project_cover', 'desktop'),
-                'cover_video' => $case->imageVideo('project_cover'),
+                'cover_video' => $case->file('video_preview'),
                 'makeup' => $case->makeup,
                 'goal' => $case->goal,
                 'result' => $case->result,
