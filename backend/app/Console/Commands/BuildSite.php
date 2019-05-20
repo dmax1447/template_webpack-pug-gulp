@@ -83,6 +83,8 @@ class BuildSite extends Command
                     'text' => $slide->cta_text,
                     'link' => $slide->cta_link,
                 ],
+                'video' => $slide->video,
+                'backgroundStyle' => $slide->backgroundStyle,
                 'icons' => []
             ];
             foreach ($slide->blocks as $block) {

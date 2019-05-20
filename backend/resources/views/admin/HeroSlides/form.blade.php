@@ -40,5 +40,17 @@
         'note' => 'Ссылка слайда'
     ])
 
+    @formField('input', [
+    'name' => 'video',
+    'label' => 'Путь к Видео',
+    'maxlength' => 250,
+    ])
+
+    @formField('input', [
+    'name' => 'backgroundStyle',
+    'label' => 'backgroundStyle',
+    'maxlength' => 250,
+    ])
+
     @formField('block_editor', ['blocks' => ['slide_item']])
 @stop

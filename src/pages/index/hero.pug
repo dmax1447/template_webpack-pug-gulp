@@ -48,14 +48,13 @@ mixin hero-item-photo(src, ind=1, alt="Фото")
         .hero-slide-item__photo-backdrop
 
 - var slides = siteData('hero');
-- var slidesData = siteData('hero_slides', null);
 
 section.hero#hero
     each slide, slideIndex in slides
         +hero-video(
             slide.id,
-            slidesData[slide.id] ? slidesData[slide.id].video : '',
-            slidesData[slide.id] ? slidesData[slide.id].backgroundStyle : '',
+            slide.video,
+            slide.backgroundStyle,
             slideIndex ? "" : "first video"
         )
 
