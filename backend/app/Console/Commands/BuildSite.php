@@ -155,7 +155,36 @@ class BuildSite extends Command
                 'description' => $case->description,
                 'cover' => $case->image('project_cover', 'desktop'),
                 'cover_video' => $case->imageVideo('project_cover'),
+                'makeup' => $case->makeup,
+                'goal' => $case->goal,
+                'result' => $case->result,
+                'gallery' => [],
+                'results_gallery' => []
             ];
+            $images = $case->images('project_desktop', 'default');
+            foreach ($images as $img) {
+                $c['gallery'][] = ['type' => 'pc', 'href' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
+            }
+            $images = $case->images('project_mobile', 'default');
+            foreach ($images as $img) {
+                $c['gallery'][] = ['type' => 'mobile2', 'href' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
+            }
+            $images = $case->images('project_tablet', 'default');
+            foreach ($images as $img) {
+                $c['gallery'][] = ['type' => 'mobile', 'href' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
+            }
+            $c['results_gallery'] = $case->images('project_result', 'default');
+
+            $case->blocks->where('type', 'project_step')->each(function($block) use(&$c) {
+                $c['steps'][] = ['title' => $block->translatedInput('title'), 'content' => $block->translatedInput('content')];
+            });
+            $case->blocks->where('type', 'client_review')->each(function($block) use(&$c) {
+                $c['client_review']= ['client_name' => $block->translatedInput('client_name'),
+                    'client_position' => $block->translatedInput('client_position'),
+                    'client_photo' => $block->image('client_photo', 'default'),
+                    'client_review' => $block->translatedInput('client_review'),
+                ];
+            });
             $data[] = $c;
         }
         dump($data);

@@ -15,7 +15,7 @@
     'name' => 'project_cover',
     'label' => 'Обложка превью',
     'required' => true,
-    'withAddInfo' => false,
+    'withAddInfo' => true,
     'withCaption' => false
     ])
     @formField('files', [
