@@ -43,7 +43,7 @@ class BuildSite extends Command
         $slides = [];
         $blocks = [];
         $this->info("Collecting data");
-        \Storage::disk('local')->cleanDirectory('build');
+        \Storage::disk('local')->deleteDirectory('build', true);
         foreach ((array) config('translatable.locales') as $locale) {
             $slides[$locale] = $this->buildSlides($locale);
             \Storage::disk('local')->put('build/hero.' . $locale . '.json', json_encode($slides[$locale], JSON_UNESCAPED_UNICODE));
