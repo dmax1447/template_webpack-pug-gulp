@@ -15,7 +15,7 @@ class BuildSite extends Command
      *
      * @var string
      */
-    protected $signature = 'bereza:build';
+    protected $signature = 'bereza:build {--commit-content} {--build}';
 
     /**
      * The console command description.
@@ -43,6 +43,7 @@ class BuildSite extends Command
         $slides = [];
         $blocks = [];
         $this->info("Collecting data");
+        \Storage::disk('local')->cleanDirectory('build');
         foreach ((array) config('translatable.locales') as $locale) {
             $slides[$locale] = $this->buildSlides($locale);
             \Storage::disk('local')->put('build/hero.' . $locale . '.json', json_encode($slides[$locale], JSON_UNESCAPED_UNICODE));
@@ -62,9 +63,20 @@ class BuildSite extends Command
             }
         }
 
-        $this->info("Compiling pages at " . base_path());
-        exec('cd '. base_path(). ' && export PATH=/usr/local/bin:/usr/bin:/bin && LANG=ru npm --scripts-prepend-node-path=auto run build-on-vps 2>&1', $out, $err);
-        $this->info(join("\n", $out));
+        if ($this->option('build')) {
+            \Log::info("Compiling pages at " . base_path());
+            exec('cd '. base_path(). ' && export PATH=/usr/local/bin:/usr/bin:/bin && LANG=ru npm --scripts-prepend-node-path=auto run build-on-vps 2>&1', $out, $err);
+            \Log::info(join("\n", $out));
+            $this->info(join("\n", $out));
+        }
+
+        if ($this->option('commit-content')) {
+            \Log::info("Pushing content");
+            $this->info("Pushing content");
+            exec('cp ' . storage_path('app/build/') . '*.json '. base_path(). '/content-repo', $out, $err);
+            exec('cd '. base_path(). '/content-repo && git add . && git commit -m "content build update" && git push', $out, $err);
+            \Log::info(join("\n", $out));
+        }
         $this->info("Complete");
     }
 

@@ -12,7 +12,7 @@
 */
 
 Route::get('/build', function () {
-    Artisan::call('bereza:build');
+    Artisan::call('bereza:build', ['--commit-content' => true]);
     return view('welcome');
 });
 
