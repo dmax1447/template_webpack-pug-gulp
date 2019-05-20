@@ -46,20 +46,20 @@ class BuildSite extends Command
         \Storage::disk('local')->deleteDirectory('build', true);
         foreach ((array) config('translatable.locales') as $locale) {
             $slides[$locale] = $this->buildSlides($locale);
-            \Storage::disk('local')->put('build/hero.' . $locale . '.json', json_encode($slides[$locale], JSON_UNESCAPED_UNICODE));
+            \Storage::disk('local')->put('build/hero.' . $locale . '.json', json_encode($slides[$locale], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
             $blocks[$locale] = $this->buildBlocks($locale);
-            \Storage::disk('local')->put('build/blocks.' . $locale . '.json', json_encode($blocks[$locale], JSON_UNESCAPED_UNICODE));
+            \Storage::disk('local')->put('build/blocks.' . $locale . '.json', json_encode($blocks[$locale], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
             $pages = $this->buildPages($locale);
             foreach ($pages as $page) {
-                \Storage::disk('local')->put('build/page_' . $page['slug']. '.' . $locale . '.json', json_encode($page, JSON_UNESCAPED_UNICODE));
+                \Storage::disk('local')->put('build/page_' . $page['slug']. '.' . $locale . '.json', json_encode($page, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
             }
             $cases = $this->buildCases($locale);
             $casesAll = collect($cases)->map(function($el) {
                 return collect($el)->only(['slug', 'title', 'tech', 'lead', 'cover', 'cover_video']);
             });
-            \Storage::disk('local')->put('build/cases.'  . $locale . '.json', json_encode($casesAll, JSON_UNESCAPED_UNICODE));
+            \Storage::disk('local')->put('build/cases.'  . $locale . '.json', json_encode($casesAll, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
             foreach ($cases as $case) {
-                \Storage::disk('local')->put('build/case_' . $case['slug']. '.' . $locale . '.json', json_encode($case, JSON_UNESCAPED_UNICODE));
+                \Storage::disk('local')->put('build/case_' . $case['slug']. '.' . $locale . '.json', json_encode($case, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
             }
         }
 
@@ -177,15 +177,18 @@ class BuildSite extends Command
             ];
             $images = $case->images('project_desktop', 'default');
             foreach ($images as $img) {
-                $c['gallery'][] = ['type' => 'pc', 'href' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
+                $c['gallery'][] = ['type' => 'pc', 'img' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
             }
             $images = $case->images('project_mobile', 'default');
-            foreach ($images as $img) {
-                $c['gallery'][] = ['type' => 'mobile2', 'href' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
+            $g = ['type' => 'mobile2'];
+            foreach ($images as $k =>$img) {
+                $g['img' . ($k ? ($k + 1) : '')] = $img;
+                $g['mobileAddress' . ($k ? ($k + 1) : '')] = parse_url($c['url'], PHP_URL_HOST);
             }
+            $c['gallery'][] = $g;
             $images = $case->images('project_tablet', 'default');
             foreach ($images as $img) {
-                $c['gallery'][] = ['type' => 'mobile', 'href' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
+                $c['gallery'][] = ['type' => 'mobile', 'img' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
             }
             $c['results_gallery'] = $case->images('project_result', 'default');
 
