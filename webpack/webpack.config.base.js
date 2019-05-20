@@ -27,18 +27,9 @@ module.exports = function (isDev = 'dev') {
         test: /\.pug$/,
         // test: /(src\/pages\/.+\/.+\.pug$)|(src\\pages\\.+\\.+\.pug$)/,
         use: [
-            htmlLoader,
+            // htmlLoader,
             {
-                loader: 'pug-html-loader',
-                options: {
-                    data: {
-                        loaderUtils: loaderUtils,
-                        buildLanguage: buildLanguage,
-                        siteData: function (name, lang = buildLanguage) {
-                            return getSiteData(stringsDataPath, name, lang);
-                        }
-                    }
-                }
+                loader: 'pug-loader',
             },
         ]
     };
@@ -166,17 +157,44 @@ module.exports = function (isDev = 'dev') {
         ],
     };
 
-    for (const pathname in pages) {
-        console.log(`pathname="${pathname}" pages[pathname]="${pages[pathname]}"`);
-        // Configured to generate the html file, define paths, etc.
+    const pushPage = (outputName, templateFilePath, chunkName = outputName, additionalParams = {}) => {
+        console.log(`page name = "${outputName}" templateFilePath="${templateFilePath}"`);
         const conf = {
-            filename: `${pathname}.html`, // html output pathname
-            template: `${pages[pathname]}`, // Template path
+            filename: `${outputName}.html`, // html output pathname
+            template: `${templateFilePath}`, // Template path
+            templateParameters: {
+                loaderUtils: loaderUtils,
+                buildLanguage: buildLanguage,
+                siteData: function (name, lang = buildLanguage) {
+                    return getSiteData(stringsDataPath, name, lang);
+                },
+                ...additionalParams,
+            },
             inject: 'head',
-            chunks: ['commons', 'vendors', 'app', pathname],
+            chunks: ['commons', 'vendors', 'app', chunkName],
             chunksSortMode: 'manual',
         };
         config.plugins.push(new HtmlWebpackPlugin(conf));
+    };
+
+    const pushCaseFromTemplate = (caseSlug) => {
+        pushPage(
+            `case-${caseSlug}`,
+            rootDir('./src/pages/_case-template/index.pug'),
+            '_case-template', {
+                caseSlug
+            }
+        );
+    };
+
+    for (const pageName in pages) {
+        if (pageName.startsWith('_')) continue;
+        pushPage(pageName, pages[pageName]);
+    }
+
+    const casesInfoArr = getSiteData(stringsDataPath, 'cases', buildLanguage);
+    for (const { slug } of casesInfoArr) {
+        pushCaseFromTemplate(slug);
     }
 
     return config;

@@ -55,6 +55,7 @@
 
     &__about {
         margin-bottom: v(120);
+        max-width: v(420);
 
         h5 {
             @include headerFont;

@@ -44,6 +44,7 @@ mixin case-site-link(href)
         span перейти на сайт
 
 block body
+    block init
     +section('top')
         +top-bar([ 'sticky', 'padding' ], { currentPage: "/cases" })
     block caseTop
