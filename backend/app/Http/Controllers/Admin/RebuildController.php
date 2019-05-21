@@ -16,7 +16,7 @@ class RebuildController extends ModuleController
 
         public function index($parentModuleId = null) {
 
-        Artisan::call('bereza:build', ['--commit-content' => true, '--build' => true]);
+        \Artisan::call('bereza:build', ['--commit-content' => true, '--build' => true]);
 
         return view('admin.rebuild.index', []);
     }
