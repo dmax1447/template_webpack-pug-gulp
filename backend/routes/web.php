@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/build', function () {
-    Artisan::call('bereza:build', ['--commit-content' => true]);
-    return view('welcome');
-});
+//Route::get('/build', 'Admin\RebuildController@index')->name('build');
 
 Route::get('/contact', function () {
     return view('contact');

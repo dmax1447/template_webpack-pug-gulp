@@ -33,5 +33,9 @@ return [
                 'params' => ['section' => 'blocks']
             ],
         ]
-    ]
+    ],
+    'rebuild' => [
+        'title' => 'Выгрузить данные',
+        'module' => true
+    ],
 ];

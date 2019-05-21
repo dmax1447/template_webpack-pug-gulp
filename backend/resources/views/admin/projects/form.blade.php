@@ -57,7 +57,7 @@
         ])
         @formField('medias', [
         'name' => 'project_mobile',
-        'max' => 2,
+        'max' => 4,
         'label' => 'Мобильные превью',
         'required' => false,
         'withAddInfo' => false,

@@ -179,13 +179,15 @@ class BuildSite extends Command
             foreach ($images as $img) {
                 $c['gallery'][] = ['type' => 'pc', 'img' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
             }
-            $images = $case->images('project_mobile', 'default');
-            $g = ['type' => 'mobile2'];
-            foreach ($images as $k =>$img) {
-                $g['img' . ($k ? ($k + 1) : '')] = $img;
-                $g['mobileAddress' . ($k ? ($k + 1) : '')] = parse_url($c['url'], PHP_URL_HOST);
+            $chunks = array_chunk($case->images('project_mobile', 'default'), 2);
+            foreach ($chunks as $images) {
+                $g = ['type' => 'mobile2'];
+                foreach ($images as $k =>$img) {
+                    $g['img' . ($k ? ($k + 1) : '')] = $img;
+                    $g['mobileAddress' . ($k ? ($k + 1) : '')] = parse_url($c['url'], PHP_URL_HOST);
+                }
+                $c['gallery'][] = $g;
             }
-            $c['gallery'][] = $g;
             $images = $case->images('project_tablet', 'default');
             foreach ($images as $img) {
                 $c['gallery'][] = ['type' => 'mobile', 'img' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
