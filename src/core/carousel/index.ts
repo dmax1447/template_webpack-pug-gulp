@@ -49,6 +49,11 @@ export function singleCarouselFade(
     }
     rootEl = root;
 
+    if (rootEl.children.length <= 1) {
+        console.warn('singleCarouselFade: one or less items');
+        return null;
+    }
+
     const initReset = () => {
         for (let i = 0, len = rootEl.children.length; i < len; ++i) {
             const el = rootEl.children.item(i)! as HTMLElement;

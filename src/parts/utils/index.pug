@@ -40,7 +40,12 @@
     // Map to dev uploads for dev builds
     function assetUrl(url) {
         if (process.env.BUILD === 'prod') return url;
-        if (url.startsWith('/assets/') || url.startsWith('assets/')) return url;
+        if (
+            url.startsWith('/assets/') ||
+            url.startsWith('assets/') ||
+            url.startsWith('http://') ||
+            url.startsWith('https://')
+        ) return url;
 
         if (!url.startsWith('/')) url = '/' + url;
         // dev build & path not to assets
