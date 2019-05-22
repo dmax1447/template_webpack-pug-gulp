@@ -70,7 +70,7 @@ section.cases > .section-content > h1 {
         padding-bottom: v(24);
         padding-right: v(48);
 
-        background-color: rgba(0,0,0,0.6);
+        background-color: rgba(0,0,0,0.8);
         transition-duration: $hoverTransitionDuration;
         transition-property: background-color;
     }
@@ -103,7 +103,7 @@ section.cases > .section-content > h1 {
     &:hover {
         .case-thumbnail__content {
             color: $accentLight40;
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0,0,0,0.6);
         }
         & > img {
             transform: scale(1.1,1.1);
