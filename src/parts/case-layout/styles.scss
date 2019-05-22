@@ -39,6 +39,10 @@
 }
 
 .case {
+    .section-content {
+        min-height: v(420);
+    }
+
     a.site-link {
         i {
             width: v(24);
