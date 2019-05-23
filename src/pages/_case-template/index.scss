@@ -137,20 +137,20 @@ $accentFg: white;
     &__previews {
         position: absolute;
         top: 100%;
-        left: 0;
-        right: 0;
+        left: v(24);
+        right: v(24);
 
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         align-items: stretch;
         align-content: space-around;
         justify-content: space-around;
 
         img {
             flex: 1;
-            max-width: v(360);
-            width: v(360);
+            max-width: v(320);
+            width: v(320);
             height: auto;
             object-fit: contain;
             object-position: left top;
@@ -159,13 +159,13 @@ $accentFg: white;
             border-top-left-radius: v(10);
             border-top-right-radius: v(10);
 
-            transform: translateY(v(-302));
+            transform: translateY(v(-288));
             transition-property: transform, box-shadow;
             transition-duration: 0.5s;
             box-shadow: 0px 4px 16px rgba(0, 0, 0, 0);
 
             &:hover {
-                transform: translateY(v(-326));
+                transform: translateY(v(-312));
                 box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.5);
             }
         }
@@ -176,11 +176,21 @@ $accentFg: white;
             padding-top: v(32);
             padding-left: v(24);
             padding-right: v(24);
-            padding-bottom: v(48);
+            // padding-bottom: v(48);
+            padding-bottom: v(342);
         }
 
         .result__previews {
-            display: none;
+            // display: none;
+            img {
+                margin-right: v(18);
+                margin-left: v(18);
+            }
+
+            ._1,
+            ._3 {
+                opacity: 0.7;
+            }
         }
     }
 }

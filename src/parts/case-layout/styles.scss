@@ -91,13 +91,14 @@
 
     @include mobile {
         .section-content {
-            padding-top: v(240);
+            padding-top: v(270);
         }
 
         .devices-gallery {
             left: 50%;
             transform: translateX(-50%);
         }
+        
         .case__about {
             margin-bottom: v(24);
         }

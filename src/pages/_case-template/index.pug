@@ -6,6 +6,8 @@ block init
     -    background-color: ${caseData.makeup.backgroundColor};
     -    color: ${caseData.makeup.fontColor};
     - ` : '';
+    if caseData.makeup && caseData.makeup.backgroundColor
+        style!= ".single-carousel-fade__dot--current { background-color: " + caseData.makeup.backgroundColor + " !important; }"
 
 block caseTop
     +case-top(caseData.title)
@@ -26,6 +28,7 @@ block afterCaseAbout
 block content
     if caseData.goal
         +section('goal')(style=accentStyles)
+            h3 Цель
             != caseData.goal
 
     if caseData.steps
@@ -44,9 +47,9 @@ block content
 
             if resultHasGallery
                 .result__previews
-                    img(-lazy-src=assetUrl(caseData.results_gallery[0]))
-                    img(-lazy-src=assetUrl(caseData.results_gallery[1]))
-                    img(-lazy-src=assetUrl(caseData.results_gallery[2]))
+                    img._1(-lazy-src=assetUrl(caseData.results_gallery[0]))
+                    img._2(-lazy-src=assetUrl(caseData.results_gallery[1]))
+                    img._3(-lazy-src=assetUrl(caseData.results_gallery[2]))
 
     if caseData.client_review
         +section('review')

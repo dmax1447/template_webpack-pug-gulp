@@ -40,8 +40,8 @@
     height: 100%;
     background-color: $primaryDark30;
 
-    transition-duration: 2s;
-    transition-property: width, margin-left 1.5s, margin-right 1.5s, background-color;
+    transition-duration: 1.8s;
+    transition-property: width, margin-left 1.4s, margin-right 1.4s, background-color;
 
     &--current {
         width: v(16);
