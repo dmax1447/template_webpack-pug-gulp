@@ -8,6 +8,8 @@
     }
 
     input, textarea {
+        @include textFont;
+        
         position: relative;
         width: v(504);
         height: v(64);
@@ -30,10 +32,20 @@
         transition: border-color 0.2s;
         color: black;
 
+        &::placeholder {
+            color: $primaryDark30;
+        }
+
         &:-webkit-autofill {
             background: none !important;
             -webkit-text-fill-color: black;
             transition: background-color 5000s ease-in-out 0s;
+        }
+
+        &:invalid,
+        &:-moz-submit-invalid,
+        &:-moz-ui-invalid {
+            box-shadow: none;
         }
     }
 
@@ -64,6 +76,8 @@
             transition: border-color 0.2s;
         }
         label {
+            @include textFont;
+
             display: inline-block;
             flex-basis: max-content;
             margin-left: v(14);
@@ -71,7 +85,7 @@
             transform: translateY(-50%);
             height: v(16);
             line-height: v(16);
-            color: $primaryDark60;
+            color: $primaryDark40;
             font-size: v(16);
             transition: color 0.2s;
         }
@@ -89,16 +103,31 @@
             border-color: $accentLight30;
 
             & + .input-w-top-label__lg > .input-w-top-label__lg-left,
-              + .textarea-w-top-label__lg > .textarea-w-top-label__lg-left,
-              + .input-w-top-label__lg > .input-w-top-label__lg-right,
-              + .textarea-w-top-label__lg > .textarea-w-top-label__lg-right,
-              + .input-w-top-label__lg > label,
-              + .textarea-w-top-label__lg > label
+            & + .textarea-w-top-label__lg > .textarea-w-top-label__lg-left,
+            & + .input-w-top-label__lg > .input-w-top-label__lg-right,
+            & + .textarea-w-top-label__lg > .textarea-w-top-label__lg-right,
+            & + .input-w-top-label__lg > label,
+            & + .textarea-w-top-label__lg > label
             {
                 border-color: $accentLight30;
                 color: $accentLight30;
             }
         }
+        
+        // &:invalid,
+        // &:-moz-ui-invalid {
+        //     border-color: rgb(233, 51, 44) !important;
+
+        //     & + .input-w-top-label__lg > .input-w-top-label__lg-left,
+        //     & + .textarea-w-top-label__lg > .textarea-w-top-label__lg-left,
+        //     & + .input-w-top-label__lg > .input-w-top-label__lg-right,
+        //     & + .textarea-w-top-label__lg > .textarea-w-top-label__lg-right,
+        //     & + .input-w-top-label__lg > label,
+        //     & + .textarea-w-top-label__lg > label
+        //     {
+        //         border-color: rgb(233, 51, 44) !important;
+        //     }
+        // }
     }
 
     &--dark {
@@ -107,6 +136,17 @@
             
             &:-webkit-autofill {
                 -webkit-text-fill-color: white;
+            }
+
+            &::placeholder {
+                color: $primaryDark70;
+            }
+        }
+
+        .input-w-top-label__lg,
+        .textarea-w-top-label__lg {
+            label {
+                color: $primaryDark60;
             }
         }
     }
