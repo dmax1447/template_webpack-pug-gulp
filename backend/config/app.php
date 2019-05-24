@@ -230,5 +230,6 @@ return [
         'subject' => 'Заполнена форма связи',
         'to' => env('MAIL_TO_ADDRESS', 'is@berezadev.com'),
         'success' => 'Спасибо, мы уже звоним Вам!'
-    ]
+    ],
+    'force_croppa_filters' => env('FORCE_CROPPA_FILTERS', true)
 ];

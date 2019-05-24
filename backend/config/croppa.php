@@ -110,14 +110,14 @@
      *
      * @var integer
      */
-    'jpeg_quality' => 95,
+    'jpeg_quality' => 99,
 
     /**
      * Turn on interlacing to make progessive jpegs.
      *
      * @var boolean
      */
-    'interlace' => true,
+    'interlace' => false,
 
     /**
      * If the source image is smaller than the requested size, allow Croppa to
