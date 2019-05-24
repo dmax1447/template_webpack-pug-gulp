@@ -14,7 +14,7 @@ class CroppaHandler extends Handler {
     public function render($request_path) {
         $crop_path = parent::render($request_path);
         $absolute_path = config('croppa.crops_dir') . '/' . $crop_path;
-        $cmd = 'jpegoptim -o -s -m96 --all-normal ' . escapeshellarg($absolute_path);
+        $cmd = sprintf('jpegoptim -o -s -m%s --all-normal ' . escapeshellarg($absolute_path), config('app.jpegoptim_quality'));
         $res = exec($cmd);
         \Log::info($res);
         return $crop_path;

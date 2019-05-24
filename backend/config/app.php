@@ -231,5 +231,6 @@ return [
         'to' => env('MAIL_TO_ADDRESS', 'is@berezadev.com'),
         'success' => 'Спасибо, мы уже звоним Вам!'
     ],
-    'force_croppa_filters' => env('FORCE_CROPPA_FILTERS', true)
+    'force_croppa_filters' => env('FORCE_CROPPA_FILTERS', true),
+    'jpegoptim_quality' => env('JPEGOPTIM_QUALITY', 80),
 ];
