@@ -65,7 +65,7 @@ class BuildSite extends Command
 
         if ($this->option('build')) {
             \Log::info("Compiling pages at " . base_path());
-            exec('cd '. base_path(). ' && export PATH=/usr/local/bin:/usr/bin:/bin && LANG=ru npm --scripts-prepend-node-path=auto run build-on-vps 2>&1', $out, $err);
+            exec('cd '. base_path(). ' && export PATH=/usr/local/bin:/usr/bin:/bin && BUILD_LANG=ru npm --scripts-prepend-node-path=auto run build-on-vps 2>&1', $out, $err);
             \Log::info(join("\n", $out));
             $this->info(join("\n", $out));
         }
