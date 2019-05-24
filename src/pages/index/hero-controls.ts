@@ -53,7 +53,7 @@ export class HeroControls {
     };
 
     _onWheel: MouseWheelListener = ({ isInertion, directionY }) => {
-        console.log('_onWheel', isInertion, directionY);
+        // console.log('_onWheel', isInertion, directionY);
         if (isInertion || !directionY) return;
         if (directionY === 'down') this.nextSlide();
         else this.prevSlide('wrap');

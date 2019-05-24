@@ -9,7 +9,7 @@ const entries = getEntries(rootDir('./src/pages/'), 'index', 'ts');
 const pages = getEntries(rootDir('./src/pages/'), 'index', 'pug');
 const outputPath = process.env.BUILD_OUTPUT || './dist';
 const stringsDataPath = rootDir('./content');
-const buildLanguage = process.env.LANG || 'ru';
+const buildLanguage = process.env.BUILD_LANG || 'ru';
 
 /** isDev should be 'dev' or 'prod' */
 module.exports = function (isDev = 'dev') {
