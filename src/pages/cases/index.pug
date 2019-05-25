@@ -1,7 +1,7 @@
 extends ../../layout.pug
 
 mixin case-thumbnail(key, tech, name, desc, background, video, backgroundStyle="")
-    a.case-thumbnail(href=("/case-" + key), style=("background: " + backgroundStyle))
+    a.case-thumbnail(href=("/case-" + key), style=(backgroundStyle ? ("background: " + backgroundStyle) : ""))
         img(-lazy-src=background)
         video(playsinline autoplay muted loop)
             source(-data-src=video, type="video/mp4")
