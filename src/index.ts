@@ -8,12 +8,16 @@ import {
     $q, $all, sendForm,
 } from './core/utils';
 import { initAnimations, _forceUpdateGlobalAnimatedElementsCache } from './core/anim';
-import { initCarousels } from './core/owl-carousel';
+// import { initCarousels } from './core/owl-carousel';
 import { remFix } from './core/rem-fix';
 import { loadAllLazied } from './core/lazy';
 import { initTopBars } from './parts/top-bar/code';
 
-remFix();
+document.addEventListener('DOMContentLoaded', () => {
+    remFix();
+});
+
+// remFix();
 initAnimations();
 
 window.onload = () => {
