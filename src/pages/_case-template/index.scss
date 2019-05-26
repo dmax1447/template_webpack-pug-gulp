@@ -195,6 +195,12 @@ $accentFg: white;
     }
 }
 
+.goal, .dev, .result {
+    p + p {
+        margin-top: v($casePMarginBottom);
+    }
+}
+
 .review {
     .section-content {
         padding-top: v(72);
@@ -255,13 +261,35 @@ $accentFg: white;
 
     @include mobile {
         .section-content {
-            padding-top: v(32);
-            padding-bottom: v(32);
-            padding-left: v(24);
-            padding-right: v(24);
+            padding-top: v(72);
+            padding-bottom: v(72);
+            padding-left: v(48);
+            padding-right: v(48);
         }
         .review__text {
-            margin-bottom: v(32);
+            margin-bottom: v(72);
+        }
+        .review__text, p {
+            font-size: v(20);
+        }
+        .review__quote {
+            width: v(72);
+            &--left {
+                top: initial;
+                bottom: v(170);
+                left: v(24);
+            }
+            &--right {
+                top: initial;
+                bottom: v(170);
+                right: v(24);
+            }
+        }
+        .review__job {
+            font-size: v(16);
+        }
+        .review__name {
+            font-size: v(24);
         }
     }
 }

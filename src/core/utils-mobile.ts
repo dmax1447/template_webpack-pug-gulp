@@ -133,6 +133,7 @@ export function listenSwipe(
     el: HTMLElement|Window,
     onSwipe: SwipeListener,
     deadZone = 15,
+    onlyTouch: false|'only touch' = false,
 ): () => void {
     let lastActionDestroy: Function;
 
@@ -146,7 +147,7 @@ export function listenSwipe(
         lastActionDestroy = _detectingScreenSwipe(onSwipe, undefined, deadZone);
     };
 
-    el.addEventListener('mousedown', mouseDown);
+    if (!onlyTouch) el.addEventListener('mousedown', mouseDown);
     el.addEventListener('touchstart', touchStart);
 
     const destroy = () => {
