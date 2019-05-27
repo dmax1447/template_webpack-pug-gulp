@@ -1,0 +1,115 @@
+extends ../../layout.pug
+
+//- members -> [ {
+//-     avatar,
+//-     name,
+//-     job,
+//- } ]
+mixin lead(key, category, avatar, name, job, spec, text, members)
+    .lead
+        h4.lead__category!= category + (members.length ? (' (' + members.length + ')') : '')
+        img.lead__avatar&attributes(imgAttrs(avatar, 216))
+        h5.lead__name!= name
+        p.lead__job!= job
+        p.lead__spec!= 'специализация — ' + spec
+
+        if text.indexOf('<p>') !== -1
+            .lead__text!= text
+        else
+            p.lead__text!= text
+        
+mixin lead-members(key, alsoHeader, members)
+    .lead-members
+        h6.lead-members__header!= alsoHeader
+        .lead-members__wrapper
+            for member, i in members
+                .lead-member(style='z-index: ' + (members.length - i) + ';')
+                    img.lead-member__avatar&attributes(imgAttrs(member.avatar, 72))
+                    .lead-member__info
+                        .lead-member__name!= member.name
+                        .lead-member__job!= member.job
+
+block body
+    -
+        let leads = [
+            {
+                key: 'yd',
+                category: 'UI/UX и иллюстрация',
+                avatar: '/assets/team/yd-portrait.jpg',
+                name: 'Юрий Дручинин',
+                job: 'full-stack дизайнер',
+                spec: 'UI/UX',
+                text: 'В web-разработке с 1999 года, начинал как front-end разработчик. В дизайне с 2001. Проектировал web-интерфейсы для telecom-сервисов с MAU >100K, online-media  с MAU >1M, отраслевые SaaS ERP и CRM системы.  Рулил собственной студией, три года работал digital–директором на федеральном телеканале. Выступает спикером на дизайн–событиях',
+                alsoHeader: 'также В дизайн–команде:',
+                members: [
+                    { avatar: '/assets/team/er-small.jpg', name: 'Эд', job: 'UI/UX/Motion-дизайнер' },
+                    { avatar: '/assets/team/dz-small.jpg', name: 'Денис', job: 'UX-проектировщик' },
+                    { avatar: '/assets/team/ab-small.jpg', name: 'Анастасия', job: 'UI/UX-дизайнер' },
+                    { avatar: '/assets/team/me-square.jpg', name: 'Мария', job: 'UX-писатель, копирайтер' },
+                    { avatar: '/assets/team/az-small.jpg', name: 'Артём', job: 'менеджер/иллюстратор' },
+                    { avatar: '/assets/team/aza-small.jpg', name: 'Алексей', job: 'иллюстратор' },
+                ]
+            },
+            {
+                key: 'vk',
+                category: 'Front-end и QA',
+                avatar: '/assets/team/vk.jpg',
+                name: 'Владимир Кружков',
+                job: 'full-stack разработчик',
+                spec: 'front-end и mobile',
+                text: 'В web-разработке с NNNN года, в основном  front-end на React/TypeScript и back-end на Node.js. До этого 2 года в геймдеве, работа с OpenGL/GPU на C#. Разрабатывал  мобильные приложения на Android (Java) и iOS(Swift). Архитектор и разработчик online-media сервисов и e-mail- и web-конструкторов.',
+                alsoHeader: 'также Во front–end–команде:',
+                members: [
+                    { avatar: '/assets/team/dx-small.jpg', name: 'Даниил', job: 'Front-end разработчик' },
+                    { avatar: '/assets/team/nd-small.jpg', name: 'Анастасия', job: 'Front-end разработчик' }
+                ]
+            },
+            {
+                key: 'is',
+                category: 'Back-end и DevOps',
+                avatar: '/assets/team/is-square.jpg',
+                name: 'Игорь Сажнев',
+                job: 'full-stack дизайнер',
+                spec: 'back-end и devops',
+                text: 'В web-разработке с 2006 года, в основном back-end на PHP (Symfony, Laravel, Bitrix), но в стеке есть Node.js, Vue и React. Разрабатывал и поддерживал высоконагруженные e-com проекты с MAU >3M, и online-media сервисы с MAU >1M. Архитектор и разработчик 3-х версий CMS на разных стеках, более 100 внедрений.',
+                alsoHeader: 'также В back–end–команде:',
+                members: [
+                    { avatar: '/assets/team/ps-small.jpg', name: 'Владимир', job: 'Back-end разработчик' },
+                    { avatar: '/assets/team/vs-square.jpg', name: 'Пётр', job: 'Back-end разработчик' }
+                ]
+            },
+        ]
+
+    +section('top')
+        +top-bar([ 'sticky', 'padding' ], { currentPage: "/team" })
+
+    +section('intro')
+        h1 Команда
+        p.
+            Мы сочетаем опыт и энергию молодости. Наши лиды в web-разработке — десятилетия, но постоянно осваивают новые технологии и совершенствуют процессы. Джуны и миды также развиваются ежедневно. Дизайн и front-end находится в Москве, back-end и иллюстраторы — в регионах.<br>
+            <br>
+            У нас нет оверхеда на менеджмент — клиенты общаются напрямую с лидами.
+    +section('leads')
+        .leads__row
+            for lead in leads
+                +lead(
+                    lead.key,
+                    lead.category,
+                    lead.avatar,
+                    lead.name,
+                    lead.job,
+                    lead.spec,
+                    lead.text,
+                    lead.members
+                )
+        .leads__row
+            for lead in leads
+                +lead-members(
+                    lead.key,
+                    lead.alsoHeader,
+                    lead.members
+                )
+    +section('post-info')
+        p.
+            Каждый коммит и элемент дизайна проходят ревью, оценку и доводится до уровня senior-специалиста. Цены даём по middle, оценку в часах по senior, а затраты и риски по доведению результата до этого уровня берём на себя. 
+    +feedback-form([ 'section' ])

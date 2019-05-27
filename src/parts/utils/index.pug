@@ -52,6 +52,48 @@
         return `http://dev.berezadev.com${url}`;
     }
 
+    function _responsiveImg(url, width) {
+        let endLen = 0;
+        if (url.endsWith('.jpg')) endLen = 4;
+        if (url.endsWith('.jpeg')) endLen = 5;
+
+        if (endLen === 0) {
+            console.warn('_responsiveImg: no reponsive for not jpg, url='+url);
+            return url;
+        }
+
+        let end = url.substr(url.length - endLen);
+        return url.substr(0, url.length - endLen) + '-' + width + 'x_' + end;
+    }
+
+    // desktopWidth - target image size on desktop
+    // mobileWidth? - target image size on mobile
+    function responsiveImgSrcSet(url, desktopWidth, mobileWidth = Math.floor(desktopWidth * 0.6)) {
+        let sm = mobileWidth;
+        let reg = Math.floor(desktopWidth);
+        let big = Math.floor(desktopWidth * 1.4);
+
+        return [
+            _responsiveImg(url, sm) + ' ' + sm + 'w',
+            _responsiveImg(url, reg) + ' ' + reg + 'w',
+            _responsiveImg(url, big) + ' ' + big + 'w',
+        ].join(', ');        
+    }
+
+    function imgAttrs(url, desktopWidth, mobileWidth, noAssetUrl = false) {
+        if (!noAssetUrl) url = assetUrl(url);
+
+        if (process.env.BUILD === 'prod') {
+            return ({
+                '-lazy-srcset': responsiveImgSrcSet(url, desktopWidth, mobileWidth),
+                '-lazy-src': url,
+            });
+        }
+        return ({
+            '-lazy-src': url,
+        });
+    }
+
 //- Load css lazily with noscript fallback
 //- eg:
 //-
