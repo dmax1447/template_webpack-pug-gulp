@@ -7,7 +7,7 @@ extends ../../layout.pug
 //- } ]
 mixin lead(key, category, avatar, name, job, spec, text, alsoHeader, members)
     .lead
-        h4.lead__category!= category + (members.length ? (' (' + members.length + ')') : '')
+        h4.lead__category!= category
         img.lead__avatar&attributes(imgAttrs(avatar, 216))
         h5.lead__name!= name
         p.lead__job!= job
