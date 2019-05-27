@@ -44,7 +44,7 @@ mixin hero-video-progress(key, text, isFirst=false)
 
 mixin hero-item-photo(src, ind=1, alt="Фото")
     .hero-slide-item__photo
-        img(-lazy-src!=src, alt=alt, style=("z-index:"+(ind + 5)))
+        +img(src)(alt=alt, style=("z-index:"+(ind + 5)))
         .hero-slide-item__photo-backdrop
 
 - var slides = siteData('hero');
