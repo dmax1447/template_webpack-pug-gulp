@@ -125,7 +125,7 @@ class BuildSite extends Command
         foreach ($pages as $p) {
             //dump($p);
             $s = [
-                'slug' => $p->getSlug('en'),
+                'slug' => $p->getSlug('en') | $p->getSlug('ru'),
                 'title' => $p->title,
                 'content' => $p->content
             ];
@@ -148,6 +148,36 @@ class BuildSite extends Command
                     }
                     $s['features_offered'][] = $f;
                     //dump($el);
+                });
+            }
+            if ($s['slug'] == 'team') {
+                $s['end_text'] = '';
+                $b0 = $p->blocks->where('type', 'translated_text')->first();
+                if ($b0) {
+                    $s['end_text'] = $b0->translatedInput('content');
+                }
+                $s['leads'] = [];
+                $p->blocks->where('type', 'team_groups')->each(function($feature) use(&$s) {
+                    $f = [
+                        'key' => $feature->input('key'),
+                        'category' => $feature->translatedInput('category'),
+                        'name' => $feature->translatedInput('name'),
+                        'job' => $feature->translatedInput('job'),
+                        'spec' => $feature->translatedInput('spec'),
+                        'text' => $feature->translatedInput('text'),
+                        'alsoHeader' => $feature->translatedInput('alsoHeader'),
+                        'icon' => $feature->image('icon', 'desktop'),
+                        'members' => []
+                    ];
+
+                    foreach ($feature->children as $fblock) {
+                        $f['members'][] = [
+                            'name' => $fblock->translatedInput('name'),
+                            'job' => $fblock->translatedInput('job'),
+                            'avatar' => $feature->image('avatar'),
+                        ];
+                    }
+                    $s['leads'][] = $f;
                 });
             }
             $data[] = $s;

@@ -17,6 +17,11 @@ return [
                 'icon' => 'image',
                 'component' => 'a17-block-image',
             ],
+            'translated_text' => [
+                'title' => 'Текст1',
+                'icon' => 'text',
+                'component' => 'a17-block-translated_text',
+            ],
             'features_offered' => [
                 'title' => 'Блоки Предлагаем',
                 'icon' => 'text',
@@ -31,13 +36,25 @@ return [
                 'title' => 'Отзыв клиента',
                 'icon' => 'text',
                 'component' => 'a17-block-client_review',
+            ],
+            'team_groups' => [
+                'title' => 'Блок Команды',
+                'icon' => 'text',
+                'component' => 'a17-block-team_group',
             ]
+
         ],
         'repeaters' => [
             'features_offered_item' => [
                 'title' => 'Пункты',
                 'trigger' => 'Добавить пункт',
                 'component' => 'a17-block-features_offered_item',
+                'max' => 10,
+            ],
+            'team_group_member' => [
+                'title' => 'Члены команды',
+                'trigger' => 'Добавить',
+                'component' => 'a17-block-team_group_member',
                 'max' => 10,
             ],
         ],
@@ -59,6 +76,14 @@ return [
                 ]
             ],
             'client_photo' => [
+                'default' => [
+                    [
+                        'name' => 'desktop',
+                        'ratio' => 1,
+                    ],
+                ]
+            ],
+            'avatar' => [
                 'default' => [
                     [
                         'name' => 'desktop',

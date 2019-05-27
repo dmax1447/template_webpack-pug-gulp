@@ -8,5 +8,5 @@
         'editSource' => true,
     ])
 
-    @formField('block_editor', ['blocks' => ['features_offered', 'image']])
+    @formField('block_editor', ['blocks' => ['features_offered', 'image', 'team_groups', 'translated_text']])
 @stop
