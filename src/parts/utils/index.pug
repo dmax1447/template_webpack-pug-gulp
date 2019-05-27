@@ -37,14 +37,25 @@
     // Monkey patch for `flags.has('dark')`
     Array.prototype.has = Array.prototype.includes;
 
+    function isAssetLocalUrl(url) {
+        return (
+            url.startsWith('/assets/') ||
+            url.startsWith('assets/')
+        );
+    }
+
     // Map to dev uploads for dev builds
     function assetUrl(url) {
         if (process.env.BUILD === 'prod') return url;
         if (
+            // is local?
             url.startsWith('/assets/') ||
             url.startsWith('assets/') ||
-            url.startsWith('http://') ||
-            url.startsWith('https://')
+            // direct link is set?
+            url.startsWith('http://berezadev.') ||
+            url.startsWith('https://berezadev.') ||
+            url.startsWith('http://dev.berezadev.') ||
+            url.startsWith('https://dev.berezadev.')
         ) return url;
 
         if (!url.startsWith('/')) url = '/' + url;
@@ -83,7 +94,7 @@
     function imgAttrs(url, desktopWidth, mobileWidth, noAssetUrl = false) {
         if (!noAssetUrl) url = assetUrl(url);
 
-        if (process.env.BUILD === 'prod') {
+        if (desktopWidth && !isAssetLocalUrl(url)) {
             return ({
                 '-lazy-srcset': responsiveImgSrcSet(url, desktopWidth, mobileWidth),
                 '-lazy-src': url,
@@ -116,3 +127,6 @@ mixin section(class_, contentAttributes={})
             .section-content&attributes(contentAttributes)
                 block
                 
+
+mixin img(url, desktopWidth, mobileWidth, noAssetUrl = false)
+    img&attributes(imgAttrs(url, desktopWidth, mobileWidth, noAssetUrl))&attributes(attributes)

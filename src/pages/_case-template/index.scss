@@ -224,6 +224,9 @@ $accentFg: white;
         width: v(120);
         height: v(120);
 
+        box-sizing: border-box;
+        border: v(8) solid #F2F2F2;
+
         border-radius: 50%;
         box-shadow: 0 v(4) 0 rgba(0, 0, 0, 0.2);
     }
