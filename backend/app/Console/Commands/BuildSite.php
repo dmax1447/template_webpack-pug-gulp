@@ -174,7 +174,7 @@ class BuildSite extends Command
                         $f['members'][] = [
                             'name' => $fblock->translatedInput('name'),
                             'job' => $fblock->translatedInput('job'),
-                            'avatar' => $feature->image('avatar'),
+                            'avatar' => $fblock->image('avatar'),
                         ];
                     }
                     $s['leads'][] = $f;
