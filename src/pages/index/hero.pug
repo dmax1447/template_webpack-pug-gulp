@@ -14,7 +14,7 @@ mixin hero-slide-item(icons, text, number_)
         if block
             block
         each iconSrc in icons
-            img.hero-slide-item__icon(-lazy-src=assetUrl(iconSrc))
+            +img(iconSrc).hero-slide-item__icon
         if number_ !== undefined
             .hero-slide-item__number(data-number=number_)
         p
@@ -29,9 +29,9 @@ mixin hero-video(key, videoSrc, backgroundStylePlaceholder, isFirst=false)
     )
         //- placeholder fallback
         if !!isFirst
-            img(src=assetUrl(videoSrc + ".jpg"))
+            +img(videoSrc + ".jpg", 1224, 408)
         else
-            img(-lazy-src=assetUrl(videoSrc + ".jpg"), -lazy-fade="0.5s", -lazy-delay="1s")
+            +img(videoSrc + ".jpg", 1224, 408)(-lazy-fade="0.5s", -lazy-delay="1s")
         video(playsinline autoplay muted)
             if !!isFirst
                 source(-lazy-src!=assetUrl(videoSrc), type="video/mp4", -lazy-fade="0.5s", -lazy-delay="2s")
@@ -44,7 +44,7 @@ mixin hero-video-progress(key, text, isFirst=false)
 
 mixin hero-item-photo(src, ind=1, alt="Фото")
     .hero-slide-item__photo
-        img(-lazy-src!=src, alt=alt, style=("z-index:"+(ind + 5)))
+        +img(src)(alt=alt, style=("z-index:"+(ind + 5)))
         .hero-slide-item__photo-backdrop
 
 - var slides = siteData('hero');

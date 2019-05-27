@@ -162,11 +162,11 @@ $accentFg: white;
             transform: translateY(v(-288));
             transition-property: transform, box-shadow;
             transition-duration: 0.5s;
-            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0);
+            box-shadow: 0px v(4) v(16) rgba(0, 0, 0, 0);
 
             &:hover {
                 transform: translateY(v(-312));
-                box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.5);
+                box-shadow: 0px v(4) v(16) rgba(0, 0, 0, 0.5);
             }
         }
     }
@@ -195,6 +195,12 @@ $accentFg: white;
     }
 }
 
+.goal, .dev, .result {
+    p + p {
+        margin-top: v($casePMarginBottom);
+    }
+}
+
 .review {
     .section-content {
         padding-top: v(72);
@@ -217,6 +223,9 @@ $accentFg: white;
 
         width: v(120);
         height: v(120);
+
+        box-sizing: border-box;
+        border: v(8) solid #F2F2F2;
 
         border-radius: 50%;
         box-shadow: 0 v(4) 0 rgba(0, 0, 0, 0.2);
@@ -255,13 +264,35 @@ $accentFg: white;
 
     @include mobile {
         .section-content {
-            padding-top: v(32);
-            padding-bottom: v(32);
-            padding-left: v(24);
-            padding-right: v(24);
+            padding-top: v(72);
+            padding-bottom: v(72);
+            padding-left: v(48);
+            padding-right: v(48);
         }
         .review__text {
-            margin-bottom: v(32);
+            margin-bottom: v(72);
+        }
+        .review__text, p {
+            font-size: v(20);
+        }
+        .review__quote {
+            width: v(72);
+            &--left {
+                top: initial;
+                bottom: v(170);
+                left: v(24);
+            }
+            &--right {
+                top: initial;
+                bottom: v(170);
+                right: v(24);
+            }
+        }
+        .review__job {
+            font-size: v(16);
+        }
+        .review__name {
+            font-size: v(24);
         }
     }
 }

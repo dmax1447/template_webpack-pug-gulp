@@ -1,10 +1,10 @@
 extends ../../layout.pug
 
 mixin case-thumbnail(key, tech, name, desc, background, video, backgroundStyle="")
-    a.case-thumbnail(href=("/case-" + key), style=("background: " + backgroundStyle))
-        img(-lazy-src=background)
+    a.case-thumbnail(href=("/case-" + key), style=(backgroundStyle ? ("background: " + backgroundStyle) : ""))
+        +img(background, 612, 408)
         video(playsinline autoplay muted loop)
-            source(-data-src=video, type="video/mp4")
+            source(-data-src=assetUrl(video), type="video/mp4")
         .case-thumbnail__content
             h6!= tech
             h2!= name
@@ -23,8 +23,8 @@ block body
                     caseItem.tech,
                     caseItem.title,
                     caseItem.lead,
-                    assetUrl(caseItem.cover),
-                    assetUrl(caseItem.cover_video)
+                    caseItem.cover,
+                    caseItem.cover_video
                 )
     +feedback-form([ 'section' ])
     +footer

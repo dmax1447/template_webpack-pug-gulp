@@ -20,10 +20,7 @@ block caseSiteLink
 
 block afterCaseAbout
     if caseData.gallery && caseData.gallery.length !== 0
-        +devices-gallery(caseData.gallery.map(x => Object.assign({}, x, {
-            img: assetUrl(x.img),
-            img2: x.img2 && assetUrl(x.img2)
-        })))
+        +devices-gallery(caseData.gallery)
 
 block content
     if caseData.goal
@@ -47,14 +44,14 @@ block content
 
             if resultHasGallery
                 .result__previews
-                    img._1(-lazy-src=assetUrl(caseData.results_gallery[0]))
-                    img._2(-lazy-src=assetUrl(caseData.results_gallery[1]))
-                    img._3(-lazy-src=assetUrl(caseData.results_gallery[2]))
+                    +img(caseData.results_gallery[0], 312)._1
+                    +img(caseData.results_gallery[1], 312)._2
+                    +img(caseData.results_gallery[2], 312)._3
 
     if caseData.client_review
         +section('review')
             .review__text!= caseData.client_review.client_review
-            img.review__avatar(-lazy-src=assetUrl(caseData.client_review.client_photo))
+            +img(caseData.client_review.client_photo, 120).review__avatar
             h3.review__name!= caseData.client_review.client_name
             p.review__job!= caseData.client_review.client_position
             img.review__quote.review__quote--left(-lazy-src="/assets/quote-left-ru.svg")

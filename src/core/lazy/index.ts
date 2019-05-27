@@ -3,6 +3,7 @@ import { $all } from "../utils";
 export const LAZY_ATTR_NAME = '-lazy-attr';
 export const LAZY_ATTR_VALUE = '-lazy-value';
 export const LAZY_SRC = '-lazy-src';
+export const LAZY_SRCSET = '-lazy-srcset';
 export const LAZY_HREF = '-lazy-href';
 /** fade in time */
 export const LAZY_ATTR_FADE = '-lazy-fade';
@@ -16,6 +17,7 @@ export function loadAllLazied() {
         target.removeAttribute(LAZY_ATTR_NAME);
         target.removeAttribute(LAZY_ATTR_VALUE);
         target.removeAttribute(LAZY_SRC);
+        target.removeAttribute(LAZY_SRCSET);
 
         if (target.parentElement && target.tagName.toLowerCase() === 'source') {
             if ('load' in (target.parentElement as any) && typeof (target.parentElement as any)['load'] === 'function') {
@@ -24,8 +26,11 @@ export function loadAllLazied() {
         }
     }
 
-    $all(`[${LAZY_ATTR_NAME}][${LAZY_ATTR_VALUE}], [${LAZY_SRC}], [${LAZY_HREF}]`).forEach((el: HTMLElement) => {
+    $all(`[${LAZY_ATTR_NAME}][${LAZY_ATTR_VALUE}], [${LAZY_SRC}], [${LAZY_SRCSET}], [${LAZY_HREF}]`).forEach((el: HTMLElement) => {
         let name: string|undefined, val: string|undefined;
+
+        // pairs
+        let foundAttrs = [];
 
         attrsSearch: for (let i = 0; i < el.attributes.length; ++i) {
             const attr = el.attributes.item(i)!;
@@ -36,19 +41,22 @@ export function loadAllLazied() {
                 val = attr.value;
             }
             if (attr.name === LAZY_SRC) {
-                name = 'src';
-                val = attr.value;
-                break attrsSearch;
+                foundAttrs.push([ 'src', attr.value ]);
+            }
+            if (attr.name === LAZY_SRCSET) {
+                foundAttrs.push([ 'srcset', attr.value ]);
             }
             if (attr.name === LAZY_HREF) {
-                name = 'href';
-                val = attr.value;
-                break attrsSearch;
+                foundAttrs.push([ 'href', attr.value ]);
             }
         }
 
         if (name !== undefined && val !== undefined) {
-            if (el.tagName.toLowerCase() === 'img' && name === 'src') {
+            foundAttrs.push([ name, val ]);
+        }
+
+        for (const [ name, val ] of foundAttrs) {
+            if (el.tagName.toLowerCase() === 'img' && (name === 'src' || name === 'srcset') && !el.classList.contains('lazy-loading')) {
                 const initialTransition = window.getComputedStyle(el).transition;
                 const initialStyleTransition = el.style.transition;
                 const lazyDelay = el.getAttribute(LAZY_ATTR_FADE) || LAZY_DEFAULT_FADE;
@@ -63,7 +71,6 @@ export function loadAllLazied() {
                 };
 
                 el.addEventListener('load', onload);
-
                 el.classList.add('lazy-loading');
             }
 

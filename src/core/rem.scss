@@ -1,57 +1,69 @@
+// "base pixel" default size. all units in v() specified in this base pixels 
+$basePx: 4;
+
+// min font size should be used coz WHY THE FUCK CHROME ON MACOS HAS fixed min font size = 6 specified in configs
+$minFontSize: 6;
+
+@function normalizeBasePx($px) {
+    @return $minFontSize * $px;
+}
+
 html {
-    font-size: 4px;
+    font-size: normalizeBasePx(4px);
 }
 
 body {
     font-size: initial;
 }
 
-
 @media screen and (min-width: 306px) {
     html {
-        font-size: 3px;
+        font-size: normalizeBasePx(3px);
     }
 }
 
 
 @media screen and (min-width: 408px) {
     html {
-        font-size: 4px;
+        font-size: normalizeBasePx(4px);
     }
 }
 
 @media screen and (min-width: 570px) {
     html {
-        font-size: 5px;
+        font-size: normalizeBasePx(5px);
     }
 }
 
 // -------- FIX --------------
 @media screen and (min-width: 571px) {
     html {
-        font-size: 2px;
+        font-size: normalizeBasePx(2px);
     }
 }
 // ---------------------------
 
 @media screen and (min-width: 882px) {
     html {
-        font-size: 3px;
+        font-size: normalizeBasePx(3px);
     }
 }
 
 
 @media screen and (min-width: 1176px) {
     html {
-        font-size: 4px;
+        font-size: normalizeBasePx(4px);
     }
 }
 
 @media screen and (min-width: 1470px) { // width >= 1470
     html {
-        font-size: 5px;
+        font-size: normalizeBasePx(5px);
     }
 }
+
+// px / base * html:rem = px
+// px / (base + 6) * (html:rem + 6) = px
 
 // Convert pixel units to rems based on base pixel.
 //
@@ -61,7 +73,9 @@ body {
 //
 // on the most berёza ui templates, base pixel equals `4`
 //
-@function v($px, $basePix: 4, $minusPx: 0) {
+@function v($px, $basePix: $basePx, $minusPx: 0) {
+    $px: $px / $minFontSize;
+
     @if $minusPx == 0 {
         @if variable-exists(noRems) {
             @return ($px - $minusPx) + px;

@@ -1,4 +1,31 @@
-type CAROUSEL_TRIGGER = 'click'|'timeout';
+import { listenSwipe } from "../utils-mobile";
+
+type CAROUSEL_TRIGGER = 'click'|'timeout'|'touch swipe';
+
+type SingleCarouselFadeParams = {
+    fadeTimeMS?: number,
+    timeoutMS?: number,
+    trigger?: Array<CAROUSEL_TRIGGER>,
+    pauseOnHover?: boolean,
+    firstItemIndex?: number,
+    itemClass?: string,
+    itemClassHidden?: string,
+    itemClassShow?: string,
+    itemClassFadeout?: string,
+    itemClassCurrent?: string,
+    dotsContainerClass?: string,
+    dotsClass?: string,
+    dotsClassCurrent?: string,
+    dotsStyles?: CSSStyleDeclaration,
+    noDots?: boolean,
+    /** can change to next item? can be used eg to pause changing in some conditions */
+    canChange?: (params: {
+        currentItem: HTMLElement,
+        nextItem: HTMLElement,
+        nextItemIndex: number,
+        params: SingleCarouselFadeParams,
+    }) => boolean,
+};
 
 /**
  * DOM should be:  
@@ -14,28 +41,12 @@ type CAROUSEL_TRIGGER = 'click'|'timeout';
  */
 export function singleCarouselFade(
     root: HTMLElement|string,
-    params: {
-        fadeTimeMS?: number,
-        timeoutMS?: number,
-        trigger?: CAROUSEL_TRIGGER[],
-        pauseOnHover?: boolean,
-        firstItemIndex?: number,
-        itemClass?: string,
-        itemClassHidden?: string,
-        itemClassShow?: string,
-        itemClassFadeout?: string,
-        itemClassCurrent?: string,
-        dotsContainerClass?: string,
-        dotsClass?: string,
-        dotsClassCurrent?: string,
-        dotsStyles?: CSSStyleDeclaration,
-        noDots?: boolean,
-    } = {},
+    params: SingleCarouselFadeParams = {},
 ) {
     const {
         fadeTimeMS = 2000,
         timeoutMS = 6000,
-        trigger = [ 'click', 'timeout' ],
+        trigger = [ 'click', 'timeout', 'touch swipe' ] as Array<CAROUSEL_TRIGGER>,
         pauseOnHover = true,
         firstItemIndex = 0,
         itemClass = 'single-carousel-fade__item',
@@ -157,12 +168,6 @@ export function singleCarouselFade(
         disposePool.clear();
     };
 
-    const carouselControl = {
-        dispose,
-        stopTimer,
-        startTimer,
-    };
-
     const fadeInItem = (el: HTMLElement) => {
         el.classList.add(itemClassFadeout);
         el.classList.remove(itemClassHidden);
@@ -233,6 +238,17 @@ export function singleCarouselFade(
 
         const { nextItem, nextItemIndex } = findNextItem(currentItem);
 
+        if (params.canChange) {
+            if (!params.canChange({
+                currentItem,
+                nextItem,
+                nextItemIndex,
+                params,
+            })) {
+                console.log('singleCarouselFade: canChange returned false, skipping change');
+            }
+        }
+
         if (_nextItemTimer) {
             clearTimeout(_nextItemTimer.timer);
             _hideItem(_nextItemTimer.element);
@@ -241,6 +257,13 @@ export function singleCarouselFade(
         setCurrentDot(nextItemIndex);
         fadeInItem(nextItem);
         _nextItemTimer = fadeOutItem(currentItem);
+    };
+
+    const carouselControl = {
+        dispose,
+        stopTimer,
+        startTimer,
+        nextItem,
     };
 
     if (trigger.includes('timeout')) {
@@ -260,6 +283,14 @@ export function singleCarouselFade(
 
         rootEl.addEventListener('click', onClick);
         disposePool.add(() => rootEl.removeEventListener('click', onClick));
+    }
+
+    if (trigger.includes('touch swipe')) {
+        listenSwipe(rootEl, (dir) => {
+            if (dir === 'right' || dir === 'down') {
+                nextItem();
+            }
+        }, undefined, 'only touch');
     }
 
     if (pauseOnHover && trigger.includes('timeout')) {
