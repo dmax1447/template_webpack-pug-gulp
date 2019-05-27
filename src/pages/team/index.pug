@@ -5,7 +5,7 @@ extends ../../layout.pug
 //-     name,
 //-     job,
 //- } ]
-mixin lead(key, category, avatar, name, job, spec, text, members)
+mixin lead(key, category, avatar, name, job, spec, text, alsoHeader, members)
     .lead
         h4.lead__category!= category + (members.length ? (' (' + members.length + ')') : '')
         img.lead__avatar&attributes(imgAttrs(avatar, 216))
@@ -17,6 +17,13 @@ mixin lead(key, category, avatar, name, job, spec, text, members)
             .lead__text!= text
         else
             p.lead__text!= text
+
+        //- for mobile version
+        +lead-members(
+            key,
+            alsoHeader,
+            members
+        )
         
 mixin lead-members(key, alsoHeader, members)
     .lead-members
@@ -100,6 +107,7 @@ block body
                     lead.job,
                     lead.spec,
                     lead.text,
+                    lead.alsoHeader,
                     lead.members
                 )
         .leads__row
@@ -113,3 +121,4 @@ block body
         p.
             Каждый коммит и элемент дизайна проходят ревью, оценку и доводится до уровня senior-специалиста. Цены даём по middle, оценку в часах по senior, а затраты и риски по доведению результата до этого уровня берём на себя. 
     +feedback-form([ 'section' ])
+    +footer

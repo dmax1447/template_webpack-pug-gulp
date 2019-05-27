@@ -40,6 +40,10 @@ section.leads {
         flex: 1;
         width: v(350);
 
+        & > .lead-members {
+            display: block;
+        }
+
         &__category {
             @include headerFont;
 
@@ -196,6 +200,27 @@ section.leads {
                 .lead-member__info {
                     opacity: 1;
                 }
+            }
+        }
+    }
+
+    @include mobile {
+        .section-content > .leads__row {
+            display: block;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .lead-members {
+            display: none;
+            width: 100%;
+        }
+        
+        .lead {
+            width: 100%;
+
+            & > .lead-members {
+                display: block;
             }
         }
     }
