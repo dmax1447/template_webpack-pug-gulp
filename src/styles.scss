@@ -49,6 +49,12 @@ section {
     }
 }
 
+input, button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
 section, footer.full {
     overflow: hidden;
 }

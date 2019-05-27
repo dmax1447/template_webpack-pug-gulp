@@ -235,3 +235,10 @@ section.post-info {
 
     color: $primaryDark80;
 }
+
+@media (min-width: 571px) and (max-width: 882px) {
+    .lead__category {
+        height: v(64);
+        margin-bottom: v(92);
+    }
+}
