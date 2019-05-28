@@ -38,11 +38,11 @@ mixin lead-members(key, alsoHeader, members)
 
 block body
     -
-        let leads = [
+        let leads = siteData('page_team.leads'); /*[
             {
                 key: 'yd',
                 category: 'UI/UX и иллюстрация',
-                avatar: '/assets/team/yd-portrait.jpg',
+                icon: '/assets/team/yd-portrait.jpg',
                 name: 'Юрий Дручинин',
                 job: 'full-stack дизайнер',
                 spec: 'UI/UX',
@@ -60,7 +60,7 @@ block body
             {
                 key: 'vk',
                 category: 'Front-end и QA',
-                avatar: '/assets/team/vk.jpg',
+                icon: '/assets/team/vk.jpg',
                 name: 'Владимир Кружков',
                 job: 'full-stack разработчик',
                 spec: 'front-end и mobile',
@@ -74,7 +74,7 @@ block body
             {
                 key: 'is',
                 category: 'Back-end и DevOps',
-                avatar: '/assets/team/is-square.jpg',
+                icon: '/assets/team/is-square.jpg',
                 name: 'Игорь Сажнев',
                 job: 'full-stack разработчик',
                 spec: 'back-end и devops',
@@ -85,24 +85,24 @@ block body
                     { avatar: '/assets/team/vs-square.jpg', name: 'Пётр', job: 'Back-end разработчик' }
                 ]
             },
-        ]
+        ]*/
 
     +section('top')
         +top-bar([ 'sticky', 'padding' ], { currentPage: "/team" })
 
     +section('intro')
-        h1 Команда
-        p.
-            Мы сочетаем опыт и энергию молодости. Наши лиды в web-разработке — десятилетия, но постоянно осваивают новые технологии и совершенствуют процессы. Джуны и миды также развиваются ежедневно. Дизайн и front-end находится в Москве, back-end и иллюстраторы — в регионах.<br>
-            <br>
-            У нас нет оверхеда на менеджмент — клиенты общаются напрямую с лидами.
+        h1!= siteData('page_team.title')
+        p!= siteData('page_team.content')
+            //- Мы сочетаем опыт и энергию молодости. Наши лиды в web-разработке — десятилетия, но постоянно осваивают новые технологии и совершенствуют процессы. Джуны и миды также развиваются ежедневно. Дизайн и front-end находится в Москве, back-end и иллюстраторы — в регионах.<br>
+            //- <br>
+            //- У нас нет оверхеда на менеджмент — клиенты общаются напрямую с лидами.
     +section('leads')
         .leads__row
             for lead in leads
                 +lead(
                     lead.key,
                     lead.category,
-                    lead.avatar,
+                    lead.icon,
                     lead.name,
                     lead.job,
                     lead.spec,
@@ -117,8 +117,7 @@ block body
                     lead.alsoHeader,
                     lead.members
                 )
-    +section('post-info')
-        p.
-            Каждый коммит и элемент дизайна проходят ревью, оценку и доводится до уровня senior-специалиста. Цены даём по middle, оценку в часах по senior, а затраты и риски по доведению результата до этого уровня берём на себя. 
+    +section('post-info')!= siteData('page_team.end_text')
+
     +feedback-form([ 'section' ])
     +footer
