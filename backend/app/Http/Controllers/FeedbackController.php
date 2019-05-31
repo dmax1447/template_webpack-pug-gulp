@@ -11,7 +11,7 @@ class FeedbackController extends Controller {
         $validator = $this->buildValidator();
         $this->validate($request, $validator);
         if ($request->input('work')) {
-            //return ['success' => true, 'message' => config('contact.success')];
+            return ['success' => true, 'message' => config('contact.success')];
         }
         $result = $this->store($request);
         $this->dispatch(new SendRequestResultEmail($result));
