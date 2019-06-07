@@ -7,10 +7,10 @@ $accentFg: white;
     color: $accentFg;
     background: $accentBg;
 
-    ::selection {
-        color: $accentBg;
-        background: $accentFg;
-    }
+    // ::selection {
+    //     color: $accentBg;
+    //     background: $accentFg;
+    // }
 }
 
 .goal {

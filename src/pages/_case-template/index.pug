@@ -7,7 +7,13 @@ block init
     -    color: ${caseData.makeup.fontColor};
     - ` : '';
     if caseData.makeup && caseData.makeup.backgroundColor
-        style!= ".single-carousel-fade__dot--current { background-color: " + caseData.makeup.backgroundColor + " !important; }"
+        - let styles = [
+        -   caseData.makeup.backgroundColor && (".single-carousel-fade__dot--current { background-color: " + caseData.makeup.backgroundColor + " !important; }"),
+        //- -   `*::selection, *::-moz-selection { color: ${caseData.makeup.fontColor}; background: ${caseData.makeup.backgroundColor}; }`,
+        //- -   `.goal::selection, .result::selection, .goal::-moz-selection, .result::-moz-selection, .goal ::selection, .result ::selection, .goal ::-moz-selection, .result ::-moz-selection { color: ${caseData.makeup.backgroundColor}; background: ${caseData.makeup.fontColor}; }`
+        - ].filter(Boolean).join('\n\n');
+
+        style!= styles
 
 block caseTop
     +case-top(caseData.title)
