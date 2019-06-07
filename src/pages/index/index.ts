@@ -54,13 +54,15 @@ const anchorNav = new AnchorNav([
 const anchorControls = new AnchorNavControls(hero, anchorNav);
 
 function fixScrollHelpAnimForSafari() {
-    $q('.mouse-help-icon__wheel').style.animation = 'none';
-    $q('.mouse-help-icon__wheel').style.webkitAnimation = 'none';
-
-    setTimeout(() => {
-        $q('.mouse-help-icon__wheel').style.animation = '';
-        $q('.mouse-help-icon__wheel').style.webkitAnimation = '';
-    }, 100);
+    if (window.navigator.userAgent.match(/safari/i)) {
+        $q('.mouse-help-icon__wheel').style.animation = 'none';
+        $q('.mouse-help-icon__wheel').style.webkitAnimation = 'none';
+    
+        setTimeout(() => {
+            $q('.mouse-help-icon__wheel').style.animation = '';
+            $q('.mouse-help-icon__wheel').style.webkitAnimation = '';
+        }, 100);
+    }
 }
 
 async function resetAnchor() {
