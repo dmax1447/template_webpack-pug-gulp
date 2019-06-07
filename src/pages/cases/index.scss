@@ -2,6 +2,11 @@
 
 $hoverTransitionDuration: 1.5s;
 
+section.cases > .section-content {
+    max-width: v(2000) !important;
+    margin: 0 auto !important;
+}
+
 section.cases > .section-content > h1 {
     @include headerFont;
 
@@ -111,5 +116,11 @@ section.cases > .section-content > h1 {
         & > video {
             opacity: 1;
         }
+    }
+}
+
+@media (min-width: 2000px) {
+    .case-thumbnail {
+        min-width: 33%;
     }
 }
