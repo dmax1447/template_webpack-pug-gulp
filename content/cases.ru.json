@@ -5,7 +5,7 @@
         "tech": "UI\/UX + webdev",
         "lead": "Сайт и SPA-каталог для международного<br>дистрибьютора медиа-контента",
         "cover": "\/uploads\/3b2101ba-1c07-413e-8f35-31acb1b3e70e\/thumbnail-odinmedia.jpg",
-        "cover_video": "http:\/\/dev.berezadev.com\/uploads\/e05a3343-42b6-4e85-b77c-8a54c281338d\/thumbnail-odinmedia.mp4"
+        "cover_video": "\/uploads\/e05a3343-42b6-4e85-b77c-8a54c281338d\/thumbnail-odinmedia.mp4"
     },
     {
         "slug": "launch",
@@ -13,7 +13,7 @@
         "tech": "UI\/UX + webdev",
         "lead": "Монобрендовый интернет-магазин<br>для официального дилера LAUNCH",
         "cover": "\/uploads\/86e7afad-212b-43fe-8420-d8648b5de1ef\/thumbnail-launchmp4-snapshot-0000.jpg",
-        "cover_video": "http:\/\/dev.berezadev.com\/uploads\/02a0911a-8e99-4fc8-b795-8980bde75fcf\/thumbnail-launch.mp4"
+        "cover_video": "\/uploads\/02a0911a-8e99-4fc8-b795-8980bde75fcf\/thumbnail-launch.mp4"
     },
     {
         "slug": "Ирина Хакамада",
@@ -21,7 +21,7 @@
         "tech": "UI\/UX + webdev +seo +smm",
         "lead": "Ивент-контент и рекламная кампании в сети для мастер-класса Ирины Хакамада в Тюмени",
         "cover": "\/uploads\/15b822f9-7c19-4662-845d-9d192cd1c7bb\/screen1.jpg",
-        "cover_video": "http:\/\/dev.berezadev.com\/uploads\/02a0911a-8e99-4fc8-b795-8980bde75fcf\/thumbnail-hakamada.mp4"
+        "cover_video": "\/uploads\/02a0911a-8e99-4fc8-b795-8980bde75fcf\/thumbnail-hakamada.mp4"
     },
     {
         "slug": "autoscaners",
@@ -29,7 +29,7 @@
         "tech": "1C Bitrix +SEO",
         "lead": "Web-разработка и техническая поддержка интернет-магазина с 35 000 SKU",
         "cover": "\/uploads\/a7510a22-e93d-4cf1-b6c8-9684dd4ab070\/thumbnail-autoscaners.jpg",
-        "cover_video": "http:\/\/dev.berezadev.com\/uploads\/02a0911a-8e99-4fc8-b795-8980bde75fcf\/thumbnail-autoscaners.mp4"
+        "cover_video": "\/uploads\/02a0911a-8e99-4fc8-b795-8980bde75fcf\/thumbnail-autoscaners.mp4"
     },
     {
         "slug": "iCartool",
@@ -37,6 +37,6 @@
         "tech": "iCartool",
         "lead": "UI мобильного приложения для тестеров автомобильных аккумуляторов",
         "cover": "\/uploads\/08ecd8f2-3026-4a59-b5aa-1c7f678bb4f0\/thumbnail-icartool.jpg",
-        "cover_video": "http:\/\/dev.berezadev.com\/uploads\/02a0911a-8e99-4fc8-b795-8980bde75fcf\/thumbnail-icartool.mp4"
+        "cover_video": "\/uploads\/02a0911a-8e99-4fc8-b795-8980bde75fcf\/thumbnail-icartool.mp4"
     }
 ]
