@@ -1,0 +1,3 @@
+[submodule "content"]
+	path = content
+	url = https://gitlab+deploy-token-68283:ZvaYKZtDccQgH6YZv6Ri@gitlab.com/bereza-dev/bereza-portfolio-data.git
