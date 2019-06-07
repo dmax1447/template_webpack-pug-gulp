@@ -1,0 +1,42 @@
+[
+    {
+        "slug": "odin",
+        "title": "Odin Media",
+        "tech": null,
+        "lead": null,
+        "cover": "\/uploads\/3b2101ba-1c07-413e-8f35-31acb1b3e70e\/thumbnail-odinmedia.jpg",
+        "cover_video": "http:\/\/dev.berezadev.com\/uploads\/e05a3343-42b6-4e85-b77c-8a54c281338d\/thumbnail-odinmedia.mp4"
+    },
+    {
+        "slug": "launch",
+        "title": null,
+        "tech": null,
+        "lead": null,
+        "cover": "\/uploads\/86e7afad-212b-43fe-8420-d8648b5de1ef\/thumbnail-launchmp4-snapshot-0000.jpg",
+        "cover_video": null
+    },
+    {
+        "slug": "Ирина Хакамада",
+        "title": null,
+        "tech": null,
+        "lead": null,
+        "cover": "\/uploads\/15b822f9-7c19-4662-845d-9d192cd1c7bb\/screen1.jpg",
+        "cover_video": null
+    },
+    {
+        "slug": "autoscaners",
+        "title": null,
+        "tech": null,
+        "lead": null,
+        "cover": "\/uploads\/a7510a22-e93d-4cf1-b6c8-9684dd4ab070\/thumbnail-autoscaners.jpg",
+        "cover_video": null
+    },
+    {
+        "slug": "iCartool",
+        "title": null,
+        "tech": null,
+        "lead": null,
+        "cover": "\/uploads\/08ecd8f2-3026-4a59-b5aa-1c7f678bb4f0\/thumbnail-icartool.jpg",
+        "cover_video": null
+    }
+]

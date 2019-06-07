@@ -1,0 +1,47 @@
+{
+    "slug": "iCartool",
+    "title": null,
+    "url": null,
+    "tech": null,
+    "lead": null,
+    "description": null,
+    "cover": "\/uploads\/08ecd8f2-3026-4a59-b5aa-1c7f678bb4f0\/thumbnail-icartool.jpg",
+    "cover_video": null,
+    "makeup": {
+        "fontColor": "#ffffff",
+        "backgroundColor": "#333333"
+    },
+    "goal": null,
+    "result": null,
+    "gallery": [
+        {
+            "type": "mobile2",
+            "img": "\/uploads\/489f4ce2-4e08-42c2-8f96-5cc263c15d5e\/mob1.jpg",
+            "mobileAddress": null,
+            "img2": "\/uploads\/489f4ce2-4e08-42c2-8f96-5cc263c15d5e\/mob2.jpg",
+            "mobileAddress2": null
+        },
+        {
+            "type": "mobile2",
+            "img": "\/uploads\/489f4ce2-4e08-42c2-8f96-5cc263c15d5e\/mob3.jpg",
+            "mobileAddress": null,
+            "img2": "\/uploads\/489f4ce2-4e08-42c2-8f96-5cc263c15d5e\/mob4.jpg",
+            "mobileAddress2": null
+        }
+    ],
+    "results_gallery": [
+        "\/uploads\/489f4ce2-4e08-42c2-8f96-5cc263c15d5e\/pic1.jpg",
+        "\/uploads\/\/pic2.jpg",
+        "\/uploads\/\/pic3.jpg"
+    ],
+    "steps": [
+        {
+            "title": null,
+            "content": null
+        },
+        {
+            "title": null,
+            "content": null
+        }
+    ]
+}

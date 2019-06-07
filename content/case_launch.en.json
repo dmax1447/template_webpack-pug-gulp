@@ -1,0 +1,45 @@
+{
+    "slug": "launch",
+    "title": null,
+    "url": "http:\/\/launch.autoscaners.ru\/",
+    "tech": null,
+    "lead": null,
+    "description": null,
+    "cover": "\/uploads\/86e7afad-212b-43fe-8420-d8648b5de1ef\/thumbnail-launchmp4-snapshot-0000.jpg",
+    "cover_video": null,
+    "makeup": {
+        "fontColor": "#ffffff",
+        "backgroundColor": "#B22428"
+    },
+    "goal": null,
+    "result": null,
+    "gallery": [
+        {
+            "type": "pc",
+            "img": "\/uploads\/3037e3be-a991-478b-8b33-29e9f63d9056\/screen-2.jpg",
+            "mobileAddress": "launch.autoscaners.ru"
+        },
+        {
+            "type": "mobile2",
+            "img": "\/uploads\/3037e3be-a991-478b-8b33-29e9f63d9056\/screenshot.jpg",
+            "mobileAddress": "launch.autoscaners.ru",
+            "img2": "\/uploads\/\/screenshot-1.jpg",
+            "mobileAddress2": "launch.autoscaners.ru"
+        }
+    ],
+    "results_gallery": [
+        "\/uploads\/3037e3be-a991-478b-8b33-29e9f63d9056\/pic1.jpg",
+        "\/uploads\/3037e3be-a991-478b-8b33-29e9f63d9056\/pic2.jpg",
+        "\/uploads\/3037e3be-a991-478b-8b33-29e9f63d9056\/pic3.jpg"
+    ],
+    "steps": [
+        {
+            "title": null,
+            "content": null
+        },
+        {
+            "title": null,
+            "content": null
+        }
+    ]
+}

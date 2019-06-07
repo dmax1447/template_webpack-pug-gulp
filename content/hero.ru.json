@@ -1,0 +1,116 @@
+[
+    {
+        "id": "rapiddev",
+        "title": "создаем",
+        "header": "Скоростная<br>web и mobile<br>разработка",
+        "text": "Смета за несколько часов<br>Прототип за несколько дней<br>MVP за несколько недель",
+        "cta": {
+            "text": "Смотреть кейсы",
+            "link": "\/ru\/cases"
+        },
+        "video": "assets\/bereza-slide-01.mp4",
+        "backgroundStyle": "background: linear-gradient(45deg, rgb(0,0,0) 0%, rgb(81,100,140) 43%, rgb(91,112,156) 54%, rgb(43,8,0) 100%);",
+        "icons": [
+            {
+                "title": "UX исследования и аналитика<br>UI\/UX Прототипирование & Дизайн",
+                "icons": [
+                    "\/uploads\/1c5d44b9-61e5-45d4-939c-05bf2f66cf5e\/hero-design-icon.svg"
+                ],
+                "number": null
+            },
+            {
+                "title": "Кроссплатформенная разработка<br>Front-end, Back-end и API",
+                "icons": [
+                    "\/uploads\/1c5d44b9-61e5-45d4-939c-05bf2f66cf5e\/hero-dev-icon.svg"
+                ],
+                "number": null
+            },
+            {
+                "title": "Специализация в разработке<br>E-commerce & Online-media",
+                "icons": [
+                    "\/uploads\/1c5d44b9-61e5-45d4-939c-05bf2f66cf5e\/hero-ecom-icon.svg"
+                ],
+                "number": null
+            }
+        ]
+    },
+    {
+        "id": "moderntech",
+        "title": "используем",
+        "header": "Проверенный,<br>современный стек<br>и процессы",
+        "text": "JavaScript, TypeScript, Node.js<br>Continuos Integration и Continuos Delivery<br>Agile подход",
+        "cta": {
+            "text": "Процессы и технологии",
+            "link": "\/ru\/tech\/"
+        },
+        "video": "assets\/bereza-slide-02.mp4",
+        "backgroundStyle": "background: linear-gradient(to right, rgb(0,0,0) 0%, rgb(42,42,87) 19%, rgb(175,179,186) 54%, rgb(186,186,186) 100%);",
+        "icons": [
+            {
+                "title": "Уникальный подход к доставке<br>дизайна во Front-end",
+                "icons": [
+                    "\/uploads\/d3f06cfc-9716-4352-ae08-b1d3b10ebb9b\/hero-bullfinch-icon.svg",
+                    "\/uploads\/d3f06cfc-9716-4352-ae08-b1d3b10ebb9b\/hero-figma-icon.svg"
+                ],
+                "number": null
+            },
+            {
+                "title": "JavaScript\/TypeScript стек<br>для новых продуктов",
+                "icons": [
+                    "\/uploads\/\/hero-react-icon.svg",
+                    "\/uploads\/d3f06cfc-9716-4352-ae08-b1d3b10ebb9b\/hero-nodejs-icon.svg"
+                ],
+                "number": null
+            },
+            {
+                "title": "Поддержка и разработка<br>систем на PHP",
+                "icons": [
+                    "\/uploads\/d3f06cfc-9716-4352-ae08-b1d3b10ebb9b\/hero-laravel-icon.svg",
+                    "\/uploads\/d3f06cfc-9716-4352-ae08-b1d3b10ebb9b\/hero-bitrix-icon.svg"
+                ],
+                "number": null
+            }
+        ]
+    },
+    {
+        "id": "expteam",
+        "title": "являемся",
+        "header": "Опытная,<br>универсальная и<br>передовая команда",
+        "text": "UI\/UX Дизайнеры<br>Front-end и Back-end Разработчики<br>QA и DevOps",
+        "cta": {
+            "text": "Познакомиться с командой",
+            "link": "\/ru\/team\/"
+        },
+        "video": "assets\/bereza-slide-03.mp4",
+        "backgroundStyle": "background: linear-gradient(to bottom, rgb(227,211,123) 0%, rgb(74,59,48) 19%, rgb(0,0,0) 100%);",
+        "icons": [
+            {
+                "title": "Дизайн и менеджмент",
+                "icons": [
+                    "\/uploads\/\/yd-square.jpg",
+                    "\/uploads\/c1037148-03b0-48ce-b5a0-8934f055c615\/dz-square.jpg",
+                    "\/uploads\/c1037148-03b0-48ce-b5a0-8934f055c615\/ab-square.jpg",
+                    "\/uploads\/c1037148-03b0-48ce-b5a0-8934f055c615\/me-square.jpg"
+                ],
+                "number": "4"
+            },
+            {
+                "title": "Front-end & Mobile",
+                "icons": [
+                    "\/uploads\/\/vk.jpg",
+                    "\/uploads\/\/nd.jpg",
+                    "\/uploads\/c1037148-03b0-48ce-b5a0-8934f055c615\/dg.jpg"
+                ],
+                "number": "3"
+            },
+            {
+                "title": "Back-end & DevOps",
+                "icons": [
+                    "\/uploads\/c1037148-03b0-48ce-b5a0-8934f055c615\/is-square.jpg",
+                    "\/uploads\/\/vs-square.jpg"
+                ],
+                "number": "2"
+            }
+        ]
+    }
+]

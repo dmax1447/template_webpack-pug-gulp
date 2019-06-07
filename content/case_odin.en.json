@@ -1,0 +1,51 @@
+{
+    "slug": "odin",
+    "title": "Odin Media",
+    "url": "https:\/\/odinmedia.tv\/",
+    "tech": null,
+    "lead": null,
+    "description": null,
+    "cover": "\/uploads\/3b2101ba-1c07-413e-8f35-31acb1b3e70e\/thumbnail-odinmedia.jpg",
+    "cover_video": "http:\/\/dev.berezadev.com\/uploads\/e05a3343-42b6-4e85-b77c-8a54c281338d\/thumbnail-odinmedia.mp4",
+    "makeup": {
+        "fontColor": "#ffffff",
+        "backgroundColor": "#540d11"
+    },
+    "goal": null,
+    "result": null,
+    "gallery": [
+        {
+            "type": "pc",
+            "img": "\/uploads\/1c172a22-e945-4d5e-b15c-232248496cbb\/odinmedia-pc.jpg",
+            "mobileAddress": "odinmedia.tv"
+        },
+        {
+            "type": "mobile2",
+            "img": "\/uploads\/fd41a41e-c226-4a5e-9748-d8806722ed4d\/odinmedia-mobile.jpg",
+            "mobileAddress": "odinmedia.tv",
+            "img2": "\/uploads\/fd41a41e-c226-4a5e-9748-d8806722ed4d\/odinmedia-mobile2.jpg",
+            "mobileAddress2": "odinmedia.tv"
+        }
+    ],
+    "results_gallery": [
+        "\/uploads\/70e0a576-fa22-4903-9a71-ba1d72477c3a\/preview1.jpg",
+        "\/uploads\/70e0a576-fa22-4903-9a71-ba1d72477c3a\/preview2.jpg",
+        "\/uploads\/70e0a576-fa22-4903-9a71-ba1d72477c3a\/preview3.jpg"
+    ],
+    "steps": [
+        {
+            "title": null,
+            "content": null
+        },
+        {
+            "title": null,
+            "content": null
+        }
+    ],
+    "client_review": {
+        "client_name": null,
+        "client_position": null,
+        "client_photo": "\/uploads\/b298967a-8995-4a9d-b3a4-c2c36b05ccf2\/olga.jpg",
+        "client_review": null
+    }
+}

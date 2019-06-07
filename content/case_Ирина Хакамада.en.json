@@ -1,0 +1,45 @@
+{
+    "slug": "Ирина Хакамада",
+    "title": null,
+    "url": "http:\/\/hakamada-tmn.ru\/",
+    "tech": null,
+    "lead": null,
+    "description": null,
+    "cover": "\/uploads\/15b822f9-7c19-4662-845d-9d192cd1c7bb\/screen1.jpg",
+    "cover_video": null,
+    "makeup": {
+        "fontColor": "#ffffff",
+        "backgroundColor": "#000000"
+    },
+    "goal": null,
+    "result": null,
+    "gallery": [
+        {
+            "type": "pc",
+            "img": "\/uploads\/15b822f9-7c19-4662-845d-9d192cd1c7bb\/screen1.jpg",
+            "mobileAddress": "hakamada-tmn.ru"
+        },
+        {
+            "type": "mobile2",
+            "img": "\/uploads\/8e00d3f6-280b-4a0e-90cd-a61150ab0f92\/screenshot-1.jpg",
+            "mobileAddress": "hakamada-tmn.ru",
+            "img2": "\/uploads\/15b822f9-7c19-4662-845d-9d192cd1c7bb\/screenshot.jpg",
+            "mobileAddress2": "hakamada-tmn.ru"
+        }
+    ],
+    "results_gallery": [
+        "\/uploads\/15b822f9-7c19-4662-845d-9d192cd1c7bb\/pic1.jpg",
+        "\/uploads\/15b822f9-7c19-4662-845d-9d192cd1c7bb\/pic2.jpg",
+        "\/uploads\/15b822f9-7c19-4662-845d-9d192cd1c7bb\/pic2-1.jpg"
+    ],
+    "steps": [
+        {
+            "title": null,
+            "content": null
+        },
+        {
+            "title": null,
+            "content": null
+        }
+    ]
+}

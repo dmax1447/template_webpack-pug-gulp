@@ -1,0 +1,18 @@
+{
+    "copyright": "© 2019. ООО «Береза-Развитие».",
+    "label_main_help": "помогаем",
+    "label_main_offer": "предлагаем",
+    "label_main_contact": "общаемся",
+    "contact_header": "Свяжитесь с нами",
+    "contact_name_label": "Ваше имя",
+    "contact_name_placeholder": "Имя и фамилия",
+    "contact_email_label": "Ваш e-mail",
+    "contact_phone_label": "Ваш телефон",
+    "contact_msg_label": "что-то, что нам нужно знать заранее",
+    "contact_msg_placeholder": "Информация о проекте",
+    "label_cases": "Кейсы",
+    "label_contacts": "Контакты",
+    "contact_btn_label": "Отправить",
+    "contact_agreement": null,
+    "job_label": "Стажировка"
+}
