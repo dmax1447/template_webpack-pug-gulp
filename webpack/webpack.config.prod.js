@@ -8,6 +8,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 const { rootDir } = require('./utils.js');
 
+process.env.BUILD = 'prod';
+
 module.exports = webpackMerge(webpackConfigBase('prod'), {
     module: {
         rules: [
