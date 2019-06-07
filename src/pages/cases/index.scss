@@ -2,6 +2,11 @@
 
 $hoverTransitionDuration: 1.5s;
 
+section.cases > .section-content {
+    max-width: v(2000) !important;
+    margin: 0 auto !important;
+}
+
 section.cases > .section-content > h1 {
     @include headerFont;
 
@@ -70,7 +75,7 @@ section.cases > .section-content > h1 {
         padding-bottom: v(24);
         padding-right: v(48);
 
-        background-color: rgba(0,0,0,0.6);
+        background-color: rgba(0,0,0,0.8);
         transition-duration: $hoverTransitionDuration;
         transition-property: background-color;
     }
@@ -103,7 +108,7 @@ section.cases > .section-content > h1 {
     &:hover {
         .case-thumbnail__content {
             color: $accentLight40;
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0,0,0,0.6);
         }
         & > img {
             transform: scale(1.1,1.1);
@@ -111,5 +116,11 @@ section.cases > .section-content > h1 {
         & > video {
             opacity: 1;
         }
+    }
+}
+
+@media (min-width: 2000px) {
+    .case-thumbnail {
+        min-width: 33%;
     }
 }

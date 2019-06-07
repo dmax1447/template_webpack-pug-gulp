@@ -9,6 +9,10 @@ return [
         'title' => 'Страницы',
         'module' => true
     ],
+    'projects' => [
+        'title' => 'Кейсы',
+        'module' => true
+    ],
     'feedback' => [
         'title' => 'Фидбэк',
         'module' => true
@@ -29,5 +33,9 @@ return [
                 'params' => ['section' => 'blocks']
             ],
         ]
-    ]
+    ],
+    'rebuild' => [
+        'title' => 'Выгрузить данные',
+        'module' => true
+    ],
 ];

@@ -10,12 +10,12 @@ mixin top-bar(flags=[], params={ currentPage: '' })
                     img.top-bar__logo(-lazy-src=(flags.has('dark') ? "assets/logo-white.svg" : "assets/logo.svg"))
             else
                 img.top-bar__logo(-lazy-src=(flags.has('dark') ? "assets/logo-white.svg" : "assets/logo.svg"))
-            //- if !flags.has('noNavMenu')
-            //-     i.top-bar__mobile-open-btn.far.fa-bars(role="button")
+            if !flags.has('noNavMenu')
+                i.top-bar__mobile-open-btn.far.fa-bars(role="button")
             if !flags.has('noFeedbackBtn')
                 a(href="#feedback")
                     +request-estimate-btn([ flags.has('dark') && 'dark' ])
-            //- if !flags.has('noNavMenu')
-            //-     div.top-bar__menu
-            //-         .top-bar__mobile-close-btn.far.fa-times(role="button")
-            //-         +nav-menu([ flags.has('dark') && 'dark', flags.has('hideMainLink') && 'hideMainLink' ], { currentPage: params.currentPage })
+            if !flags.has('noNavMenu')
+                div.top-bar__menu
+                    .top-bar__mobile-close-btn.fal.fa-times(role="button")
+                    +nav-menu([ flags.has('dark') && 'dark', flags.has('hideMainLink') && 'hideMainLink' ], { currentPage: params.currentPage })

@@ -1,5 +1,6 @@
 const glob = require('glob');
 const path = require('path');
+const fs = require('fs');
 
 /**
  * getEntries('./src/pages/', 'index', 'js');
@@ -30,4 +31,33 @@ exports.getEntries = function (entriesDir, entryName, extension) {
 exports.rootDir = function (pathFromRoot) {
     if (path.isAbsolute(pathFromRoot)) return pathFromRoot;
     return path.resolve(__dirname, '..', pathFromRoot);
+};
+
+const _siteDataCache = {};
+
+exports.getSiteData = function(dataPath, name, lang) {
+    const [ block, field ] = name.split(".");
+
+    if (!_siteDataCache.hasOwnProperty(block)) {
+        let filePath;
+        if (lang) {
+            filePath = `${dataPath}/${block}.${lang}.json`;
+        } else {
+            filePath = `${dataPath}/${block}.json`;
+        }
+
+        const fileStr = fs.readFileSync(filePath, 'utf8');
+        if (!fileStr) {
+            throw new Error(`failed read file from ${dataPath}`);
+        }
+        _siteDataCache[block] = JSON.parse(fileStr);
+    }
+
+    const value = field ? _siteDataCache[block][field] : _siteDataCache[block];
+
+    if (!value) {
+        throw new Error(`value not found! dataPath=${dataPath}, name=${name}`);
+    }
+
+    return value;
 };

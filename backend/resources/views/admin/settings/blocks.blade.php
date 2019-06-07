@@ -26,6 +26,24 @@
         'translated' => true
     ])
     @formField('input', [
+    'label' => 'Кейсы',
+    'name' => 'label_cases',
+    'textLimit' => '100',
+    'translated' => true
+    ])
+    @formField('input', [
+    'label' => 'Контакты',
+    'name' => 'label_contacts',
+    'textLimit' => '100',
+    'translated' => true
+    ])
+    @formField('input', [
+    'label' => 'Стажировка',
+    'name' => 'job_label',
+    'textLimit' => '100',
+    'translated' => true
+    ])
+    @formField('input', [
     'label' => 'Свяжитесь с нами',
     'name' => 'contact_header',
     'textLimit' => '100',
@@ -68,5 +86,16 @@
     'textLimit' => '100',
     'translated' => true,
     'note' => 'Placeholder',
+    ])
+    @formField('input', [
+    'label' => 'Текст на кнопке',
+    'name' => 'contact_btn_label',
+    'textLimit' => '100',
+    'translated' => true,
+    ])
+    @formField('input', [
+    'label' => 'Текст соглашения',
+    'name' => 'contact_agreement',
+    'translated' => true,
     ])
 @stop

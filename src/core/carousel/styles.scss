@@ -1,3 +1,4 @@
+@import "../../constants.scss";
 
 .single-carousel-fade__item {
     opacity: 0;
@@ -18,4 +19,34 @@
     }
 
     &--current {}
+}
+
+.single-carousel-fade__dot-container {
+    position: absolute;
+    top: unquote("calc(100% + " + v(22) + ")");
+    height: v(2);
+    left: 50%;
+    transform: translate(-50%);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: space-between;
+}
+
+.single-carousel-fade__dot {
+    display: block;
+    width: v(10);
+    height: 100%;
+    background-color: $primaryDark30;
+
+    transition-duration: 1.8s;
+    transition-property: width, margin-left 1.4s, margin-right 1.4s, background-color;
+
+    &--current {
+        width: v(16);
+        margin-left: v(4);
+        margin-right: v(4);
+        background-color: $accentLight60;
+    }
 }

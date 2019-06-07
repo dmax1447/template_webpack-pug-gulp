@@ -45,13 +45,20 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => env('APP_CONTENT_PATH') ? base_path(env('APP_CONTENT_PATH')) : storage_path('app'),
         ],
 
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+        // twill use libraries disk by default
+        'libraries' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/uploads',
             'visibility' => 'public',
         ],
 

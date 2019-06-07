@@ -1,20 +1,55 @@
-mixin devices-gallery(pc, mobile1, mobile2, mobileAddress)
+//- items: (
+//-     { type: 'pc', img: 'href' },
+//-     { type: 'mobile2', img: 'href', mobileAddress: '', img2: 'href', mobileAddress2?: '' },
+//-     { type: 'mobile', img: 'href', mobileAddress: '' },
+//- )[]
+mixin devices-gallery(items)
     .devices-gallery
-        .devices-gallery__item
-            .devices-gallery__pc
-                img(-lazy-src="/assets/cases/pc.svg")
-                .devices-gallery__screen
-                    img(-lazy-src=pc)
-        .devices-gallery__item
-            .devices-gallery__mobile.devices-gallery__mobile--1
-                img(-lazy-src="/assets/cases/mobile.svg")
-                if mobileAddress
-                    .devices-gallery__mobile-address!= mobileAddress
-                .devices-gallery__screen
-                    img(-lazy-src=mobile1)
-            .devices-gallery__mobile.devices-gallery__mobile--2
-                img(-lazy-src="/assets/cases/mobile.svg")
-                if mobileAddress
-                    .devices-gallery__mobile-address!= mobileAddress
-                .devices-gallery__screen
-                    img(-lazy-src=mobile2)
+        each item in items
+            .devices-gallery__item
+                if item.type === 'pc'
+                    .devices-gallery__pc
+                        img(-lazy-src="/assets/cases/pc.svg")
+                        .devices-gallery__screen
+                            +img(item.img, 552, 300)
+                if item.type === 'mobile'
+                    .devices-gallery__mobile.devices-gallery__mobile--single
+                        img(-lazy-src="/assets/cases/mobile.svg")
+                        if item.mobileAddress
+                            .devices-gallery__mobile-address!= item.mobileAddress
+                        .devices-gallery__screen
+                            +img(item.img, 188, 120)
+                if item.type === 'mobile2'
+                    .devices-gallery__mobile.devices-gallery__mobile--1
+                        img(-lazy-src="/assets/cases/mobile.svg")
+                        if item.mobileAddress
+                            .devices-gallery__mobile-address!= item.mobileAddress
+                        .devices-gallery__screen
+                            +img(item.img, 188, 120)
+                    .devices-gallery__mobile.devices-gallery__mobile--2
+                        img(-lazy-src="/assets/cases/mobile.svg")
+                        if item.mobileAddress2 || item.mobileAddress
+                            .devices-gallery__mobile-address!= item.mobileAddress2 || item.mobileAddress
+                        .devices-gallery__screen
+                            +img(item.img2, 188, 120)
+
+//- mixin devices-gallery-simple(pc, mobile1, mobile2, mobileAddress)
+//-     .devices-gallery
+//-         .devices-gallery__item
+//-             .devices-gallery__pc
+//-                 img(-lazy-src="/assets/cases/pc.svg")
+//-                 .devices-gallery__screen
+//-                     img(-lazy-src=pc)
+//-         .devices-gallery__item
+//-             .devices-gallery__mobile.devices-gallery__mobile--1
+//-                 img(-lazy-src="/assets/cases/mobile.svg")
+//-                 if mobileAddress
+//-                     .devices-gallery__mobile-address!= mobileAddress
+//-                 .devices-gallery__screen
+//-                     img(-lazy-src=mobile1)
+//-             .devices-gallery__mobile.devices-gallery__mobile--2
+//-                 img(-lazy-src="/assets/cases/mobile.svg")
+//-                 if mobileAddress
+//-                     .devices-gallery__mobile-address!= mobileAddress
+//-                 .devices-gallery__screen
+//-                     img(-lazy-src=mobile2)

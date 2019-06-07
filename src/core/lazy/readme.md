@@ -32,6 +32,9 @@ For lazily set any attribute:
 For lazily set `src` attribute:
 * `-lazy-src` - Lazily set `src` attribute. Invokes `.load` on parent if `source` element is lazied.
 
+For lazily set `srcset` attribute:
+* `-lazy-srcset` - Lazily set `srcset` attribute. Invokes `.load` on parent if `source` element is lazied.
+
 For lazily set `href` attribute:
 * `-lazy-href`
 

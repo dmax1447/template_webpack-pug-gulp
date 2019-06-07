@@ -1,0 +1,71 @@
+extends ../../layout.pug
+
+//-
+//-       EXAMPLE USAGE:
+//-
+//- extends ../../parts/case-layout/page.pug
+//-
+//- block caseTop
+//-     +case-top('autoscaners.ru')
+//-
+//- block caseAbout
+//-     h5 Web-разработка и техническая<br>поддержка интернет-магазина с<br>более чем 35 000 SKU
+//-     p.
+//-         Сотрудничество с проектом autoscaners.ru мы начали с отражения DDOS-атаки, которую заказали конкуренты сервиса.<br>
+//-         В сегодняшний день мы проделываем массу работы: постоянно оптимизируем работу 1C Bitrix, выполняем задачи  по SEO-оптимизации, внедрили сквозную аналитику, создали с десяток лендингов и веб приложения для сотрудников торгового зала и склада
+//-
+//- block caseSiteLink
+//-     +case-site-link('https://www.autoscaners.ru/')
+//-
+//- block afterCaseAbout
+//-     +devices-gallery([
+//-         { type: 'pc', img: '/assets/cases/autoscaners/autoscaners-pc.jpg' },
+//-         {
+//-             type: 'mobile2',
+//-             img: '/assets/cases/autoscaners/autoscaners-mobile.jpg',
+//-             img2: '/assets/cases/autoscaners/autoscaners-mobile2.jpg',
+//-             mobileAddress: 'www.autoscaners.ru',
+//-         },
+//-     ])
+//-
+//- block content
+//-    ... rest sections ...
+
+mixin case-top(caseName)
+    +section('case-top')
+        a.back-to-cases(href="/cases")
+            i.far.fa-arrow-left
+            span назад к кейсам
+        h2!= caseName
+
+mixin case-site-link(href)
+    a.site-link(href=href, target="_blank")
+        i.far.fa-external-link-square
+        span перейти на сайт
+
+block body
+    block init
+    +section('top')
+        +top-bar([ 'sticky', 'padding' ], { currentPage: "/cases" })
+    block caseTop
+        +case-top('Кейс без имени')
+    +section('case')
+        .case__about
+            block caseAbout
+                h5 Заголовок кейса
+                p Текст кейса
+            block caseSiteLink
+                +case-site-link('')
+        block afterCaseAbout
+            +devices-gallery([
+                { type: 'pc', img: '/assets/cases/autoscaners/autoscaners-pc.jpg' },
+                {
+                    type: 'mobile2',
+                    img: '/assets/cases/autoscaners/autoscaners-mobile.jpg',
+                    img2: '/assets/cases/autoscaners/autoscaners-mobile2.jpg',
+                    mobileAddress: 'www.autoscaners.ru',
+                },
+            ])
+    block content
+    +feedback-form([ 'section' ])
+    +footer

@@ -18,61 +18,28 @@
         'hakamada', 'iCartool'
     ];
 
+    features = siteData('page_main.features_offered');
+
 section.features#features
     .section-content
         +top-bar([ "sticky", 'hideMainLink' ])(style="display:none")
         +menu-placeholder("we-help")
-        +side-header("помогаем")
+        +side-header(siteData('blocks.label_main_help'))
         .features__we-help-items
             for item in weHelpItems
                 img(class=("features__we-help-item " + (weHelpFadeItems.indexOf(item) !== -1 ? 'features__we-help-item--fade' : '')), -lazy-src=("assets/main-features/" + item + ".svg"))
         +menu-placeholder("we-offer")
-        +side-header("предлагаем")
+        +side-header(siteData('blocks.label_main_offer'))
         .features__we-offer-items
-            .features__we-offer-item
-                img.anim(-lazy-src=("assets/rocket-sticker.svg"), --anim="slide-in-back", --anim-speed="0.8s", --anim-delay="0.5s", --anim-irate="0.1")
-                div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.4s", --anim-irate="0.1")
-                    h2 Стартапам
-                    ul
-                        li
-                            i(class="far fa-seedling")
-                            span Превратим вашу идею в прототип, MVP и коммерческую версию
-                        li
-                            i(class="far fa-mobile")
-                            span Cоздадим любое веб и мобильное приложение для ваших целей
-                        li
-                            i(class="far fa-comments-alt")
-                            span Разъясним и подскажем на каждом этапе создания вашего продукта
-            .features__we-offer-item
-                img.anim(-lazy-src=("assets/share-sticker.svg"), --anim="slide-in-back", --anim-speed="0.8s", --anim-delay="0.5s", --anim-irate="0.1")
-                div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.6s", --anim-irate="0.1")
-                    h2 Агентствам
-                    ul
-                        li
-                            i(class="far fa-analytics")
-                            span Мы — продуктовые ребята.  Нам понятен язык бизнеса и метрик
-                        li
-                            i(class="far fa-laptop")
-                            span Лучше всего проектируем и кодим сложные дэшборды и админки
-                        li
-                            i(class="far fa-chart-pie-alt")
-                            span Нам можно отдать часть работ, например только фронт или только бэк
-            .features__we-offer-item
-                img.anim(-lazy-src=("assets/brain-sticker.svg"), --anim="slide-in-back", --anim-speed="0.8s", --anim-delay="0.5s", --anim-irate="0.1")
-                div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.8s", --anim-irate="0.1")
-                    h2 Корпорациям
-                    ul
-                        li
-                            i(class="far fa-layer-plus")
-                            span Поручите нам новый продукт или переход с legacy на современный стек
-                        li
-                            i(class="far fa-dumbbell")
-                            span Усильте нами существующую команду, когда нет времени на долгий найм
-                        li
-                            i(class="far fa-user-friends")
-                            span Мы поддержим проекты, которые не займут вашу штатную единицу на 100%
-        p.features__we-offer-text.anim(--anim="slide-in-up", --anim-speed="1s", --anim-irate="0.1").
-            Команд, способных собрать лендинг или сайт на конструкторе — сотни.<br>
-            Сделать сложный технологичный продукт понятным и ярким — единицы.<br>
-            <br>
-            Мы — можем!
+            each feature, index in features
+                .features__we-offer-item
+                    img.anim(-lazy-src=assetUrl(feature.icon), --anim="slide-in-back", --anim-speed="0.8s", --anim-delay="0.5s", --anim-irate="0.1")
+                    div.anim(--anim="slide-in-up", --anim-speed="1s", --anim-delay="0.4s", --anim-irate="0.1")
+                        h2= feature.title
+                        ul
+                            each item, index2 in feature.items
+                                li
+                                    i(class=item['fa-icon'])
+                                    span= item.title
+
+        p.features__we-offer-text.anim(--anim="slide-in-up", --anim-speed="1s", --anim-irate="0.1") !{siteData('page_main.content')}

@@ -4,5 +4,5 @@ block body
     include ./hero.pug
     include ./features.pug
     +feedback-form([ 'dark', 'section' ])
-        +side-header("общаемся", undefined, "on-dark")
+        +side-header(siteData('blocks.label_main_contact'), undefined, "on-dark")
     +footer

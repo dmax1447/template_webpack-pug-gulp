@@ -36,8 +36,12 @@ export function detectTouch(
 
 let __isMobileHookScreen: boolean|undefined = undefined;
 
+export function isMobileScreenWidth() {
+    return window.innerWidth <= 571;
+}
+
 export function isMobileScreen() {
-    return (__isMobileHookScreen !== undefined && __isMobileHookScreen) || DetectMobileBrowser.isAny() || window.innerWidth <= 571;
+    return (__isMobileHookScreen !== undefined && __isMobileHookScreen) || DetectMobileBrowser.isAny() || isMobileScreenWidth();
 }
 
 export function __unsafe_setIsMobileScreen(hook: boolean) {
@@ -129,6 +133,7 @@ export function listenSwipe(
     el: HTMLElement|Window,
     onSwipe: SwipeListener,
     deadZone = 15,
+    onlyTouch: false|'only touch' = false,
 ): () => void {
     let lastActionDestroy: Function;
 
@@ -142,7 +147,7 @@ export function listenSwipe(
         lastActionDestroy = _detectingScreenSwipe(onSwipe, undefined, deadZone);
     };
 
-    el.addEventListener('mousedown', mouseDown);
+    if (!onlyTouch) el.addEventListener('mousedown', mouseDown);
     el.addEventListener('touchstart', touchStart);
 
     const destroy = () => {

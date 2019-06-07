@@ -14,7 +14,7 @@ mixin hero-slide-item(icons, text, number_)
         if block
             block
         each iconSrc in icons
-            img.hero-slide-item__icon(-lazy-src=iconSrc)
+            +img(iconSrc).hero-slide-item__icon
         if number_ !== undefined
             .hero-slide-item__number(data-number=number_)
         p
@@ -24,17 +24,17 @@ mixin hero-video(key, videoSrc, backgroundStylePlaceholder, isFirst=false)
     div(
         id=(key + "-video"),
         class=("hero-slide-video " + (isFirst ? "hero-slide-video--visible" : "")),
-        data-src=videoSrc,
-        style=backgroundStylePlaceholder
+        data-src!=assetUrl(videoSrc),
+        style!=backgroundStylePlaceholder
     )
         //- placeholder fallback
         if !!isFirst
-            img(src=(videoSrc + ".jpg"))
+            +img(videoSrc + ".jpg", 1224, 408)
         else
-            img(-lazy-src=(videoSrc + ".jpg"), -lazy-fade="0.5s", -lazy-delay="1s")
+            +img(videoSrc + ".jpg", 1224, 408)(-lazy-fade="0.5s", -lazy-delay="1s")
         video(playsinline autoplay muted)
             if !!isFirst
-                source(-lazy-src=videoSrc, type="video/mp4", -lazy-fade="0.5s", -lazy-delay="2s")
+                source(-lazy-src!=assetUrl(videoSrc), type="video/mp4", -lazy-fade="0.5s", -lazy-delay="2s")
 
 mixin hero-video-progress(key, text, isFirst=false)
     div(id=(key + "-progressbar") class=("hero-video-progress " + (isFirst ? "hero-video-progress--active" : "")))
@@ -44,52 +44,42 @@ mixin hero-video-progress(key, text, isFirst=false)
 
 mixin hero-item-photo(src, ind=1, alt="Фото")
     .hero-slide-item__photo
-        img(-lazy-src=src, alt=alt, style=("z-index:"+(ind + 5)))
+        +img(src)(alt=alt, style=("z-index:"+(ind + 5)))
         .hero-slide-item__photo-backdrop
 
+- var slides = siteData('hero');
+
 section.hero#hero
-    +hero-video(
-        "rapiddev",
-        "assets/bereza-slide-01.mp4",
-        "background: linear-gradient(45deg, rgb(0,0,0) 0%, rgb(81,100,140) 43%, rgb(91,112,156) 54%, rgb(43,8,0) 100%);",
-        "first video"
-    )
-    +hero-video(
-        "moderntech",
-        "assets/bereza-slide-02.mp4",
-        "background: linear-gradient(to right, rgb(0,0,0) 0%, rgb(42,42,87) 19%, rgb(175,179,186) 54%, rgb(186,186,186) 100%);"
-    )
-    +hero-video(
-        "expteam",
-        "assets/bereza-slide-03.mp4",
-        "background: linear-gradient(to bottom, rgb(227,211,123) 0%, rgb(74,59,48) 19%, rgb(0,0,0) 100%);"
-    )
+    each slide, slideIndex in slides
+        +hero-video(
+            slide.id,
+            slide.video,
+            slide.backgroundStyle,
+            slideIndex ? "" : "first video"
+        )
+
     .section-content
         +top-bar([ 'dark', 'hideMainLink' ])
         .hero-slide-wrapper
             +mouse-help-icon
-            +hero-slide("rapiddev", "Скоростная<br>web и mobile<br>разработка", "Смета за несколько часов<br>Прототип за несколько дней<br>MVP за несколько недель", "Смотреть кейсы", "#cases", "first")
-                +hero-slide-item([ "assets/hero-design-icon.svg" ], "UX исследования и аналитика<br>UI/UX Прототипирование & Дизайн")
-                +hero-slide-item([ "assets/hero-dev-icon.svg" ], "Кроссплатформенная разработка<br>Front-end, Back-end и API")
-                +hero-slide-item([ "assets/hero-ecom-icon.svg" ], "Специализация в разработке<br>E-commerce & Online-media")
-            +hero-slide("moderntech", "Проверенный,<br>современный стек<br>и процессы", "JavaScript, TypeScript, Node.js<br>Continuos Integration и Continuos Delivery<br>Agile подход", "Процессы и технологии", "#tech")
-                +hero-slide-item([ "assets/hero-bullfinch-icon.svg", "assets/hero-figma-icon.svg" ], "Уникальный подход к доставке<br>дизайна во Front-end")
-                +hero-slide-item([ "assets/hero-react-icon.svg", "assets/hero-nodejs-icon.svg" ], "JavaScript/TypeScript стек<br>для новых продуктов")
-                +hero-slide-item([ "assets/hero-laravel-icon.svg", "assets/hero-bitrix-icon.svg" ], "Поддержка и разработка<br>систем на PHP")
-            +hero-slide("expteam", "Опытная,<br>универсальная и<br>передовая команда", "UI/UX Дизайнеры<br>Front-end и Back-end Разработчики<br>QA и DevOps", "Познакомиться с командой", "#team")
-                +hero-slide-item([], "Дизайн и менеджмент", 4)
-                    +hero-item-photo("assets/team/yd-square.jpg", 4)
-                    +hero-item-photo("assets/team/dz-square.jpg", 3)
-                    +hero-item-photo("assets/team/ab-square.jpg", 2)
-                    +hero-item-photo("assets/team/me-square.jpg", 1)
-                +hero-slide-item([], "Front-end & Mobile", 3)
-                    +hero-item-photo("assets/team/vk.jpg", 3)
-                    +hero-item-photo("assets/team/nd.jpg", 2)
-                    +hero-item-photo("assets/team/dg.jpg", 1)
-                +hero-slide-item([], "Back-end & DevOps", 2)
-                    +hero-item-photo("assets/team/is-square.jpg", 2)
-                    +hero-item-photo("assets/team/vs-square.jpg", 1)
+            each slide, slideIndex in slides
+                +hero-slide(
+                    slide.id,
+                    slide.header,
+                    slide.text,
+                    slide.cta.text,
+                    slide.cta.link,
+                    slideIndex ? "" : "first"
+                )
+                    if slide.icons[0] && slide.icons[0].number
+                        each icon, iconIndex in slide.icons
+                            +hero-slide-item([], icon.title, icon.number)
+                                each photo, k in icon.icons
+                                    +hero-item-photo(assetUrl(photo), icon.icons.length - k)
+                    else
+                        each icon, iconIndex in slide.icons
+                            +hero-slide-item(icon.icons, icon.title)
+
         .hero-video-progress-menu
-            +hero-video-progress("rapiddev", "создаем", "first")
-            +hero-video-progress("moderntech", "используем")
-            +hero-video-progress("expteam", "являемся")
+            each slide, index in slides
+                +hero-video-progress(slide.id, slide.title, index ? "" : "first")

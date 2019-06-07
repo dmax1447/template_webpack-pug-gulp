@@ -10,12 +10,17 @@ mixin nav-menu(flags=[], params={ currentPage: '' })
         role="navigation",
         class=classNames("nav-menu", flags.has('dark') && 'nav-menu--dark')
     )
-        if !flags.has('hideMainLink')
-            +nav-menu-item({ href: "/", text: "Главная", class: 'first-el', currentPage: params.currentPage })
-        +nav-menu-item({ href: "/cases", text: "Кейсы", class: flags.has('hideMainLink') && 'first-el', currentPage: params.currentPage })
-        //- +nav-menu-item({ href: "/tech",     text: "Technology",   currentPage: params.currentPage })
-        //- +nav-menu-item({ href: "/team",     text: "Team",         currentPage: params.currentPage })
-        +nav-menu-item({ href: "/contacts", text: "Контакты",     currentPage: params.currentPage })
+        -
+            let items = [
+                !flags.has('hideMainLink') && { href: "/", text: "Главная", class: 'first-el', currentPage: params.currentPage },
+                { href: "/cases", text: "Кейсы", class: flags.has('hideMainLink') && 'first-el', currentPage: params.currentPage },
+                { href: "/tech",     text: "Технологии",   currentPage: params.currentPage },
+                { href: "/team",     text: "Команда",         currentPage: params.currentPage },
+                { href: "/contacts", text: "Контакты",     currentPage: params.currentPage }
+            ].filter(Boolean)
+
+        for item in items
+            +nav-menu-item(item)
 
         if block
             block

@@ -1,0 +1,73 @@
+@import "../../styles.scss";
+
+section.intro > .section-content {
+    h1 {
+        @include headerFont;
+    
+        width: 100%;
+        text-align: center;
+        font-size: v(36);
+        font-weight: 400;
+        line-height: v(48);
+
+        margin-bottom: v(60);
+    }
+
+    p {
+        @include textFont;
+
+        font-size: v(24);
+        line-height: v(32);
+        text-align: center;
+        
+        color: $primaryDark80;
+        margin-bottom: v(72);
+    }
+}
+
+section.tech {
+    .section-content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        margin-bottom: v(160);
+    }
+
+    .tech-item {
+        position: relative;
+        flex: 1;
+        margin-bottom: v(24);
+
+        width: v(168);
+        min-width: v(168);
+        height: v(120);
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: v(168);
+        }
+
+        &--Figma {
+            img {
+                top: v(-5);
+            }
+        }
+
+        &__text {
+            @include textFont;
+
+            position: absolute;
+            top: v(68);
+            height: v(48);
+            line-height: v(48);
+            
+            font-size: v(16);
+            text-align: center;
+            width: 100%;
+        }
+    }
+}

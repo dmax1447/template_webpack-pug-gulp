@@ -37,6 +37,74 @@
     // Monkey patch for `flags.has('dark')`
     Array.prototype.has = Array.prototype.includes;
 
+    function isAssetLocalUrl(url) {
+        return (
+            url.startsWith('/assets/') ||
+            url.startsWith('assets/')
+        );
+    }
+
+    // Map to dev uploads for dev builds
+    function assetUrl(url) {
+        if (process.env.BUILD === 'prod') return url;
+        if (
+            // is local?
+            url.startsWith('/assets/') ||
+            url.startsWith('assets/') ||
+            // direct link is set?
+            url.startsWith('http://berezadev.') ||
+            url.startsWith('https://berezadev.') ||
+            url.startsWith('http://dev.berezadev.') ||
+            url.startsWith('https://dev.berezadev.')
+        ) return url;
+
+        if (!url.startsWith('/')) url = '/' + url;
+        // dev build & path not to assets
+        return `http://dev.berezadev.com${url}`;
+    }
+
+    function _responsiveImg(url, width) {
+        let endLen = 0;
+        if (url.endsWith('.jpg')) endLen = 4;
+        if (url.endsWith('.jpeg')) endLen = 5;
+
+        if (endLen === 0) {
+            console.warn('_responsiveImg: no reponsive for not jpg, url='+url);
+            return url;
+        }
+
+        let end = url.substr(url.length - endLen);
+        return url.substr(0, url.length - endLen) + '-' + width + 'x_' + end;
+    }
+
+    // desktopWidth - target image size on desktop
+    // mobileWidth? - target image size on mobile
+    function responsiveImgSrcSet(url, desktopWidth, mobileWidth = Math.floor(desktopWidth * 0.6)) {
+        let sm = mobileWidth;
+        let reg = Math.floor(desktopWidth);
+        let big = Math.floor(desktopWidth * 1.4);
+
+        return [
+            _responsiveImg(url, sm) + ' ' + sm + 'w',
+            _responsiveImg(url, reg * 1.5) + ' ' + reg + 'w',
+            _responsiveImg(url, big * 2) + ' ' + big + 'w',
+        ].join(', ');        
+    }
+
+    function imgAttrs(url, desktopWidth, mobileWidth, noAssetUrl = false) {
+        if (!noAssetUrl) url = assetUrl(url);
+
+        if (desktopWidth && !isAssetLocalUrl(url)) {
+            return ({
+                '-lazy-srcset': responsiveImgSrcSet(url, desktopWidth, mobileWidth),
+                '-lazy-src': url,
+            });
+        }
+        return ({
+            '-lazy-src': url,
+        });
+    }
+
 //- Load css lazily with noscript fallback
 //- eg:
 //-
@@ -53,9 +121,12 @@ mixin linkLazyCSS(href)
         link(href=href, rel="stylesheet")&attributes(attributes)
 
 //- do not base on this mixin, it's only a shorthand for [section & .section-content]
-mixin section(class_)
+mixin section(class_, contentAttributes={})
     section(class=class_)&attributes(attributes)
         if block
-            .section-content
+            .section-content&attributes(contentAttributes)
                 block
                 
+
+mixin img(url, desktopWidth, mobileWidth, noAssetUrl = false)
+    img&attributes(imgAttrs(url, desktopWidth, mobileWidth, noAssetUrl))&attributes(attributes)

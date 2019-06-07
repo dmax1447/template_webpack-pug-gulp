@@ -1,0 +1,244 @@
+@import "../../styles.scss";
+
+section.intro > .section-content {
+    h1 {
+        @include headerFont;
+    
+        width: 100%;
+        text-align: center;
+        font-size: v(36);
+        font-weight: 400;
+        line-height: v(48);
+
+        margin-bottom: v(72);
+    }
+
+    p {
+        @include textFont;
+
+        font-size: v(24);
+        line-height: v(32);
+        text-align: center;
+        
+        color: $primaryDark80;
+        margin-bottom: v(72);
+    }
+}
+
+section.leads {
+    overflow: visible;
+
+    .section-content > .leads__row {
+        display: flex;
+        flex-direction: row;
+        align-content: space-between;
+        padding-left: v(32);
+        padding-right: v(32);
+    }
+
+    .lead {
+        flex: 1;
+        width: v(350);
+
+        & > .lead-members {
+            display: none;
+        }
+
+        &__category {
+            @include headerFont;
+
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 32px;
+            text-align: center;
+
+            color: black;
+        }
+
+        &__avatar {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+
+            width: v(216);
+            height: v(216);
+            box-sizing: border-box;
+            border: v(8) solid #F2F2F2;
+            box-shadow: 0px v(4) 0px rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+        }
+
+        &__name {
+            @include headerFont;
+
+            font-weight: 500;
+            font-size: v(20);
+            line-height: v(28);
+            text-align: center;
+            margin-bottom: v(12);
+
+            color: $primaryDark90;
+        }
+
+        &__job,
+        &__spec {
+            @include textFont;
+
+            font-size: v(16);
+            line-height: v(24);
+            text-align: center;
+            margin: 0;
+
+            color: black;
+        }
+
+        &__spec {
+            margin-bottom: v(24);
+        }
+
+        &__text {
+            @include textFont;
+
+            font-size: v(16);
+            line-height: v(24);
+            padding-left: v(23);
+            padding-right: v(23);
+            margin: 0;
+            margin-bottom: v(24);
+
+            color: black;
+        }
+
+        &-members {
+            flex: 1;
+            width: v(350);
+            margin-bottom: v(72);
+
+            &__header {
+                @include headerFont;
+                
+                font-weight: bold;
+                font-size: v(12);
+                line-height: v(24);
+                height: v(48);
+                margin: 0;
+    
+                text-align: center;
+                text-transform: uppercase;
+            }
+
+            &__wrapper {
+                text-align: center;
+            }
+        }
+
+        &-member {
+            $transDur: 0.5s;
+            
+            position: relative;
+            display: inline-block;
+            width: v(56);
+            height: v(72);
+            line-height: 0;
+            
+            z-index: 0;
+
+            transition-duration: $transDur;
+
+            &__avatar {
+                position: absolute;
+                left: 0;
+                top: 0;
+
+                width: v(72);
+                height: v(72);
+                border: v(4) solid #F2F2F2;
+                box-sizing: border-box;
+                box-shadow: 0px v(2) 0px rgba(0, 0, 0, 0.2);
+                border-radius: 50%;
+
+                transition-property: border-color;
+                transition-duration: $transDur;
+            }
+
+            &__info {
+                position: absolute;
+                top: unquote("calc(100% + " + v(10) + ");");
+                left: unquote("calc(50% + " + v((72 - 56) / 2) + ");");
+                transform: translateX(-50%);
+
+                opacity: 0;
+                transition-property: opacity;
+                transition-duration: $transDur;
+            }
+
+            &__name {
+                @include headerFont;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            &__job {
+                @include textFont;
+            }
+
+            &__name, &__job {
+                margin: 0;
+                font-size: v(12);
+                line-height: v(16);
+                text-transform: uppercase;
+                text-align: center;
+                white-space: nowrap;
+            }
+
+            &:hover {
+                z-index: 99 !important;
+
+                .lead-member__avatar {
+                    border-color: $accentLight30;
+                }
+                .lead-member__info {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    @include mobile {
+        .section-content > .leads__row {
+            display: block;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .lead-members {
+            display: none;
+            width: 100%;
+        }
+        
+        .lead {
+            width: 100%;
+
+            & > .lead-members {
+                display: block;
+            }
+        }
+    }
+}
+
+section.post-info {
+    @include textFont;
+    
+    font-size: v(24);
+    line-height: v(32);
+    text-align: center;
+
+    color: $primaryDark80;
+}
+
+@media (min-width: 571px) and (max-width: 882px) {
+    .lead__category {
+        height: v(64);
+        margin-bottom: v(92);
+    }
+}

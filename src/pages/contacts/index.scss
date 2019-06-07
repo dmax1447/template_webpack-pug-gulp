@@ -12,6 +12,8 @@
 
     .contacts {
         &__info {
+            float: left;
+
             h5 {
                 @include headerFont;
 
@@ -43,23 +45,13 @@
         }
 
         &__map {
-            position: absolute;
-            right: v(48);
-            height: v(456);
-            top: v(112);
+            float: right;
+            width: v(744);
+            height: auto;
+            min-height: v(400);
 
             @include mobile {
-                position: relative;
-                display: block;
-                right: initial;
-                top: initial;
                 width: 100%;
-                height: initial;
-
-                img {
-                    width: 100%;
-                    height: auto;
-                }
             }
         }
     }

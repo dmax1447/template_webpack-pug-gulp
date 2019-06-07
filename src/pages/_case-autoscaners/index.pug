@@ -1,0 +1,24 @@
+extends ../../parts/case-layout/page.pug
+
+block caseTop
+    +case-top('autoscaners.ru')
+
+block caseAbout
+    h5 Web-разработка и техническая<br>поддержка интернет-магазина с<br>более чем 35 000 SKU
+    p.
+        Сотрудничество с проектом autoscaners.ru мы начали с отражения DDOS-атаки, которую заказали конкуренты сервиса.<br>
+        В сегодняшний день мы проделываем массу работы: постоянно оптимизируем работу 1C Bitrix, выполняем задачи  по SEO-оптимизации, внедрили сквозную аналитику, создали с десяток лендингов и веб приложения для сотрудников торгового зала и склада
+
+block caseSiteLink
+    +case-site-link('https://www.autoscaners.ru/')
+
+block afterCaseAbout
+    +devices-gallery([
+        { type: 'pc', img: '/assets/cases/autoscaners/autoscaners-pc.jpg' },
+        {
+            type: 'mobile2',
+            img: '/assets/cases/autoscaners/autoscaners-mobile.jpg',
+            img2: '/assets/cases/autoscaners/autoscaners-mobile2.jpg',
+            mobileAddress: 'www.autoscaners.ru',
+        },
+    ])
