@@ -1,7 +1,7 @@
 import './index.scss';
 import { $all } from '../../core/utils';
 
-if (process.env.BUILD === 'prod') {
+if (true === true) {
     require('./no-rem.scss');
 }
 
