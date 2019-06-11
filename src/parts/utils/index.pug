@@ -46,7 +46,7 @@
 
     // Map to dev uploads for dev builds
     function assetUrl(url) {
-        if (true === true) return url;
+        if (BUILD_MODE === 'prod') return url;
         if (
             // is local?
             url.startsWith('/assets/') ||
@@ -102,6 +102,21 @@
         }
         return ({
             '-lazy-src': url,
+        });
+    }
+
+    // eg:
+    //
+    // +img('car.png', 216)&attributes(animAttrs("slide-in-up", "0.8s", "0.2s"))
+    // .wrapper&attributes(animAttrs("slide-in-up", "0.8s", "0.2s"))
+    //
+    function animAttrs(animName, speed, delay, irate = '0.1') {
+        return ({
+            class: 'anim',
+            '--anim': animName,
+            '--anim-speed': speed,
+            '--anim-delay': delay,
+            '--anim-irate': irate,
         });
     }
 

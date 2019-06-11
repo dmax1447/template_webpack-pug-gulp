@@ -4,10 +4,15 @@ block body
     +section('top')
         +top-bar([ 'sticky', 'padding' ], { currentPage: "/tech" })
     
-    +section('intro')
-        h1 Технологии
-
     +section('tech')
+        h1 Технологии
+        -
+            // (Math.floor(Math.random() * 80 + 30) / 100 + "s")
+            let pregeneratedDelay = ["0.71s", "0.74s", "0.41s", "0.31s", "0.83s", "0.69s", "0.99s", "0.48s", "0.85s", "0.64s", "0.3s", "0.62s", "0.63s", "0.78s", "0.73s", "1.05s", "0.36s", "0.88s", "1.01s", "0.39s", "0.83s", "0.43s", "0.96s", "0.38s"];
+            function getDelay(i) {
+                if (pregeneratedDelay.length <= i) return (Math.floor(Math.random() * 80 + 30) / 100 + "s");
+                return pregeneratedDelay[i];
+            }
         -
             let techs = [
                 { name: 'React',        icon: '/assets/tech/React.jpg', key: 'React' },
@@ -36,14 +41,15 @@ block body
                 { name: 'Animate',      icon: '/assets/tech/Animate.jpg', key: 'Animate' },
             ]
         
-        for techItem, itemIndex in techs
-            div(class=('tech-item tech-item--' + techItem.key))
-                //- svg
-                //- img(-lazy-src!=techItem.icon)
+        .items-container
+            for techItem, itemIndex in techs
+                div(class=classNames('tech-item', 'tech-item--' + techItem.key, 'anim'), --anim="slide-in-back", --anim-speed="0.9s", --anim-delay=(getDelay(itemIndex)), --anim-irate="0.1")
+                    //- svg
+                    //- img(-lazy-src!=techItem.icon)
 
-                //- jpg
-                +img(techItem.icon, 168, 168)
-                .tech-item__text!= techItem.name
+                    //- jpg
+                    +img(techItem.icon, 168, 168)
+                    .tech-item__text!= techItem.name
     
     +feedback-form([ 'section', 'dark' ])
     +footer

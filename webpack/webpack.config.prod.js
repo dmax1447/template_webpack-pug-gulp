@@ -1,3 +1,5 @@
+process.env.BUILD = 'prod';
+
 const path = require('path');
 const webpackMerge = require('webpack-merge');
 const webpackConfigBase = require('./webpack.config.base.js');
@@ -7,8 +9,6 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
 
 const { rootDir } = require('./utils.js');
-
-process.env.BUILD = 'prod';
 
 module.exports = webpackMerge(webpackConfigBase('prod'), {
     module: {

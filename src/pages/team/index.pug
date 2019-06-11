@@ -5,33 +5,34 @@ extends ../../layout.pug
 //-     name,
 //-     job,
 //- } ]
-mixin lead(key, category, avatar, name, job, spec, text, alsoHeader, members)
+mixin lead(key, leadIndex, category, avatar, name, job, spec, text, alsoHeader, members)
     .lead
-        h4.lead__category!= category
-        img.lead__avatar&attributes(imgAttrs(avatar, 216))
-        h5.lead__name!= name
-        p.lead__job!= job
-        p.lead__spec!= 'специализация — ' + spec
+        h4.lead__category&attributes(animAttrs("slide-in-up", "0.8s", "0.2s"))!= category
+        +img(avatar, 216).lead__avatar
+        h5.lead__name&attributes(animAttrs("slide-in-up", "0.8s", "0.2s"))!= name
+        p.lead__job&attributes(animAttrs("slide-in-up", "0.8s", "0.3s"))!= job
+        p.lead__spec&attributes(animAttrs("slide-in-up", "0.8s", "0.2s"))!= 'специализация — ' + spec
 
         if text.indexOf('<p>') !== -1
-            .lead__text!= text
+            .lead__text&attributes(animAttrs("slide-in-up", "0.8s", (0.2 + 0.1 * leadIndex + "s")))!= text
         else
-            p.lead__text!= text
+            p.lead__text&attributes(animAttrs("slide-in-up", "0.8s", (0.2 + 0.1 * leadIndex + "s")))!= text
 
         //- for mobile version
         +lead-members(
             key,
+            leadIndex,
             alsoHeader,
             members
         )
         
-mixin lead-members(key, alsoHeader, members)
-    .lead-members
-        h6.lead-members__header!= alsoHeader
+mixin lead-members(key, leadIndex, alsoHeader, members)
+    .lead-members&attributes(attributes)
+        h6.lead-members__header&attributes(animAttrs("slide-in-up", "0.8s", "0.4s"))!= alsoHeader
         .lead-members__wrapper
             for member, i in members
-                .lead-member(style='z-index: ' + (members.length - i) + ';')
-                    img.lead-member__avatar&attributes(imgAttrs(member.avatar, 72))
+                .lead-member(style=('z-index: ' + (members.length - i) + ';'))&attributes(animAttrs("slide-in-up", "0.8s", (0.2 + 0.05 * i + "s")))
+                    +img(member.avatar, 72).lead-member__avatar
                     .lead-member__info
                         .lead-member__name!= member.name
                         .lead-member__job!= member.job
@@ -92,15 +93,16 @@ block body
 
     +section('intro')
         h1!= siteData('page_team.title')
-        p!= siteData('page_team.content')
+        p&attributes(animAttrs("slide-in-up", "0.8s", "0.2s"))!= siteData('page_team.content')
             //- Мы сочетаем опыт и энергию молодости. Наши лиды в web-разработке — десятилетия, но постоянно осваивают новые технологии и совершенствуют процессы. Джуны и миды также развиваются ежедневно. Дизайн и front-end находится в Москве, back-end и иллюстраторы — в регионах.<br>
             //- <br>
             //- У нас нет оверхеда на менеджмент — клиенты общаются напрямую с лидами.
     +section('leads')
         .leads__row
-            for lead in leads
+            for lead, leadIndex in leads
                 +lead(
                     lead.key,
+                    leadIndex,
                     lead.category,
                     lead.icon,
                     lead.name,
@@ -111,13 +113,14 @@ block body
                     lead.members
                 )
         .leads__row
-            for lead in leads
+            for lead, leadIndex in leads
                 +lead-members(
                     lead.key,
+                    leadIndex,
                     lead.alsoHeader,
                     lead.members
                 )
-    +section('post-info')!= siteData('page_team.end_text')
+    +section('post-info')&attributes(animAttrs("slide-in-up", "0.8s", "0.2s"))!= siteData('page_team.end_text')
 
     +feedback-form([ 'section' ])
     +footer

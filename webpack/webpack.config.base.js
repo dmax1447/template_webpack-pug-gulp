@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const loaderUtils = require('loader-utils');
+const webpack = require('webpack');
 
 const { getEntries, rootDir, getSiteData } = require('./utils.js');
 
@@ -10,6 +11,8 @@ const pages = getEntries(rootDir('./src/pages/'), 'index', 'pug');
 const outputPath = process.env.BUILD_OUTPUT || './dist';
 const stringsDataPath = rootDir('./content');
 const buildLanguage = process.env.BUILD_LANG || 'ru';
+
+const buildGlobalConst = [ 'prod', 'production' ].includes(process.env.BUILD || process.env.NODE_ENV) ? 'prod' : 'dev'
 
 /** isDev should be 'dev' or 'prod' */
 module.exports = function (isDev = 'dev') {
@@ -154,6 +157,9 @@ module.exports = function (isDev = 'dev') {
             new CopyWebpackPlugin([
                 { from: 'static' }
             ]),
+            new webpack.DefinePlugin({
+                BUILD_MODE: JSON.stringify(buildGlobalConst),
+            }),
         ],
     };
 
@@ -163,6 +169,7 @@ module.exports = function (isDev = 'dev') {
             filename: `${outputName}.html`, // html output pathname
             template: `${templateFilePath}`, // Template path
             templateParameters: {
+                BUILD_MODE: buildGlobalConst,
                 loaderUtils: loaderUtils,
                 buildLanguage: buildLanguage,
                 siteData: function (name, lang = buildLanguage) {

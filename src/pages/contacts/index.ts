@@ -1,7 +1,7 @@
 import './index.scss';
 declare var ymaps: any;
 
-if (true === true) {
+if (BUILD_MODE === 'prod') {
     require('./no-rem.scss');
 }
 

@@ -1,7 +1,7 @@
 import './index.scss';
 import { $all } from '../../core/utils';
 
-if (true === true) {
+if (BUILD_MODE === 'prod') {
     require('./no-rem.scss');
 }
 

@@ -8,7 +8,7 @@
     "twill-copy-blocks": "npm run twill-clean-blocks && mkdir -p resources/assets/js/blocks/ && cp -R resources/assets/js/blocks/ vendor/area17/twill/frontend/js/components/blocks/customs/",
     "twill-clean-blocks": "rm -rf vendor/area17/twill/frontend/js/components/blocks/customs",
     "build-on-vps": "npm run build && cp -R dist/* public/",
-    "build": "BUILD=prod webpack --config ./webpack/webpack.config.prod.js --mode production",
+    "build": "webpack --config ./webpack/webpack.config.prod.js --mode production",
     "start": "webpack-dev-server --open --config ./webpack/webpack.config.dev.js --mode development",
     "start-no-open": "webpack-dev-server --config ./webpack/webpack.config.dev.js --mode development"
   },

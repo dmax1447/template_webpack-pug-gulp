@@ -1,6 +1,20 @@
 @import "../../styles.scss";
 
-section.intro > .section-content {
+section.tech > .section-content {
+
+    // p {
+    //     @include textFont;
+
+    //     font-size: v(24);
+    //     line-height: v(32);
+    //     text-align: center;
+        
+    //     color: $primaryDark80;
+    //     margin-bottom: v(72);
+    // }
+}
+
+section.tech {
     h1 {
         @include headerFont;
     
@@ -13,20 +27,7 @@ section.intro > .section-content {
         margin-bottom: v(60);
     }
 
-    p {
-        @include textFont;
-
-        font-size: v(24);
-        line-height: v(32);
-        text-align: center;
-        
-        color: $primaryDark80;
-        margin-bottom: v(72);
-    }
-}
-
-section.tech {
-    .section-content {
+    .items-container {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
