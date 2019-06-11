@@ -32,6 +32,11 @@ return [
                 'route' => 'admin.settings',
                 'params' => ['section' => 'blocks']
             ],
+            'presentation' => [
+                'title' => 'Презентация PDF',
+                'route' => 'admin.settings',
+                'params' => ['section' => 'presentation']
+            ],
         ]
     ],
     'rebuild' => [
