@@ -26,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
                 $app['request'],
                 $this->getConfig());
         });
+
+        $this->app->bind('A17\Twill\Repositories\SettingRepository', 'App\Repositories\SettingRepository');
     }
 
     /**

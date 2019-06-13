@@ -11,10 +11,19 @@
 |
 */
 
-//Route::get('/build', 'Admin\RebuildController@index')->name('build');
-
-Route::get('/contact', function () {
-    return view('contact');
-});
-
 Route::post('/contact', 'FeedbackController@index');
+
+Route::get('/{name}.pdf', function ($name) {
+    $map = ['pres' => 'presentation', 'pres-min' => 'presentation_min'];
+    if (!isset($map[$name])) {
+        abort(404);
+    }
+
+    $el = \App\Models\Setting::query()
+        ->where('section', 'presentation')->where('key', $map[$name])
+        ->with('files')->first();
+    if (!$el) abort(404);
+
+
+    return response()->file(public_path($el->file($map[$name])));
+});
