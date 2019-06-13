@@ -38,14 +38,14 @@ body {
 // -------- FIX --------------
 @media screen and (min-width: 571px) {
     html {
-        font-size: normalizeBasePx(2px);
+        font-size: normalizeBasePx(3px);
     }
 }
 // ---------------------------
 
 @media screen and (min-width: 882px) {
     html {
-        font-size: normalizeBasePx(3px);
+        font-size: normalizeBasePx(4px);
     }
 }
 

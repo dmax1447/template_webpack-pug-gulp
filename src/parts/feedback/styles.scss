@@ -57,7 +57,7 @@
         border-radius: v(32);
         height: v(56);
         width: v(216);
-        background-color: $accentLight40;
+        background-color: $accentLight60;
         color: white;
         box-shadow: 0px v(4) 0px rgba(0, 0, 0, 0.1);
 
@@ -76,6 +76,10 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
+
+        &:hover {
+            background-color: $accentLight40;
+        }
     }
 
     &--centered {

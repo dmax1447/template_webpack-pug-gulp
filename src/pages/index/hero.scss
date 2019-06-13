@@ -246,6 +246,7 @@
                 display: block;
                 width: 100%;
                 padding-left: v(72);
+                box-sizing: border-box;
 
                 transform: translateY(0%);
 
@@ -483,6 +484,12 @@
                 line-height: v(24) !important;
                 padding-left: v(24) !important;
             }
+
+            &__cta {
+                margin-left: v(24) !important;
+                margin-bottom: 0 !important;
+                width: 100%;
+            }
         }
         .hero-video-progress-menu {
             right: v(10);
@@ -498,7 +505,7 @@
             position: relative !important;
             bottom: initial !important;
             padding-left: v(24) !important;
-            margin-top: v(72) !important;
+            margin-top: v(48) !important;
         }
         .hero-slide-item {
             display: block !important;
