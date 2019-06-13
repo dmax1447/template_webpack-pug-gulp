@@ -40,6 +40,14 @@ class BuildSite extends Command
      * @return mixed
      */
     public function handle() {
+        // pull git updates
+        if ($this->option('commit-content')) {
+            \Log::info("Pulling  content");
+            $this->info("Pulling  content");
+            exec('cd '. base_path(). '/content-repo && git pull', $out, $err);
+            \Log::info(join("\n", $out));
+        }
+
         $slides = [];
         $blocks = [];
         $this->info("Collecting data");
