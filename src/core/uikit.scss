@@ -1,0 +1,164 @@
+@import "../styles.scss";
+
+body {
+    margin: 0;
+    @include textFont;
+}
+
+a {
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nobr {
+    white-space: nowrap;
+}
+
+input, button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.mobile-br {
+    display: none;
+}
+
+::selection {
+    color: white;
+    background: rgba(0, 0, 0, 0.65);
+}
+
+@include mobile {
+    .mobile-br {
+        display: block;
+    }
+}
+
+// -----------------------------
+//           Sections
+// -----------------------------
+
+section, footer.full {
+    overflow: hidden;
+}
+
+section {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+
+    & > .section-content {
+        position: relative;
+        max-width: v(1224);
+        margin: 0 auto;
+        box-sizing: border-box;
+        padding-left: v(48);
+        padding-right: v(48);
+
+        @include mobile {
+            max-width: v(408);
+
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    &.full > .section-content {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding-left: 0;
+        padding-right: 0;
+
+        @include mobile {
+            max-width: 100%;
+        }
+    }
+}
+
+// -----------------------------
+//           Headers
+// -----------------------------
+
+.--header {
+    @include headerFont;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    @include --header;
+}
+
+h1, .h1 {
+    width: 100%;
+    font-size: v(36);
+    font-weight: 400;
+    line-height: v(48);
+
+    text-align: center;
+}
+
+h2, .h2 {
+    @include h1;
+
+    color: $primaryDark100;
+}
+
+h3, .h3 {
+    font-weight: 500;
+    font-size: v(28);
+    line-height: v(40);
+}
+
+h4, .h4 {
+    font-weight: 500;
+    font-size: v(24);
+    line-height: v(48);
+}
+
+h5, .h5 {
+    font-weight: 500;
+    font-size: v(20);
+    line-height: v(28);
+}
+
+h6, .h6 {
+    font-size: v(12);
+    line-height: v(24);
+}
+
+// --------------------------------------
+//               Paragraphs
+// --------------------------------------
+
+.--paragraph {
+    @include textFont;
+    margin: 0;
+    font-style: normal;
+    font-weight: normal;
+}
+
+p, .p {
+    @include --paragraph;
+}
+
+p, .p {
+    font-size: v(16);
+    line-height: v(24);
+}
+
+.p {
+    &--big {
+        font-size: v(24);
+        line-height: v(32);
+    }
+
+    &--small {
+        font-size: v(12);
+        line-height: v(24);
+    }
+}

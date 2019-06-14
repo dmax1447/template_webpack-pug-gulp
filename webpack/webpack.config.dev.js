@@ -30,7 +30,7 @@ const webpackConfigDev = webpackMerge(webpackConfigBase('dev'), {
         proxy: {
             '*': {
                 bypass: function(req, res, proxyOptions) {
-                    if (!req.url.endsWith('.html') && req.headers.accept.indexOf('text/html') !== -1) {
+                    if (!req.url.endsWith('.html') && req.headers.accept && req.headers.accept.indexOf('text/html') !== -1) {
                         console.log(`bypass "${req.url}"; redirect to .html. You can change this in webpack\\webpack.config.dev.js`);
                         return req.url + '.html';
                     }
