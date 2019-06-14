@@ -78,7 +78,7 @@ section.hero#hero
                                 each photo, k in photos
                                     +hero-item-photo(assetUrl(photo), photos.length - k)
                                 if ((icon.icons.length > 3) || (icon.number > 3))
-                                    +hero-item-photo('/static/assets/dots.svg', 0)
+                                    +hero-item-photo('/assets/dots.svg', 0)
                     else
                         each icon, iconIndex in slide.icons
                             +hero-slide-item(icon.icons, icon.title)
