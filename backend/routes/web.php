@@ -14,7 +14,10 @@
 Route::post('/contact', 'FeedbackController@index');
 
 Route::get('/{name}.pdf', function ($name) {
-    $map = ['pres' => 'presentation', 'pres-min' => 'presentation_min'];
+    $map = [
+        'pres' => 'presentation', 'pres-min' => 'presentation_min',
+        'presentation' => 'presentation', 'presentation-min' => 'presentation_min'
+    ];
     if (!isset($map[$name])) {
         abort(404);
     }
