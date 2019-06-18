@@ -24,12 +24,8 @@ $casePMarginBottom: 14;
     }
 
     h2 {
-        @include headerFont;
-        margin: 0;
         margin-bottom: v(48);
-        font-weight: 500;
-        font-size: v(36);
-        line-height: v(48);
+        text-align: left;
     }
 
     @include mobile {
@@ -64,11 +60,6 @@ $casePMarginBottom: 14;
         max-width: v(420);
 
         h5 {
-            @include headerFont;
-            font-style: normal;
-            font-weight: 500;
-            font-size: v(20);
-            line-height: v(28);
             margin: 0;
             margin-bottom: v(24);
         }

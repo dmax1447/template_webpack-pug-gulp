@@ -46,6 +46,11 @@
 
     // Map to dev uploads for dev builds
     function assetUrl(url) {
+        if (typeof url !== 'string') {
+            console.error(`bad url, in template ${BUILD_INFO ? BUILD_INFO.templateFilePath : 'unknown'}`);
+            return '';
+        }
+
         if (BUILD_MODE === 'prod') return url;
         if (
             // is local?
