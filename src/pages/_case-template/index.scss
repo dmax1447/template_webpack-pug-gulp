@@ -13,6 +13,13 @@ $accentFg: white;
     // }
 }
 
+.case-top .section-content {
+    h2 {
+        margin-top: 0;
+        margin-bottom: v(48);
+    }
+}
+
 .goal {
     @include accentColorSection;
 
@@ -24,21 +31,7 @@ $accentFg: white;
     }
 
     h3 {
-        @include headerFont;
-
-        margin: 0;
         margin-bottom: v(8);
-        font-weight: 500;
-        font-size: v(28);
-        line-height: v(40);
-    }
-
-    p {
-        @include textFont;
-
-        margin: 0;
-        font-size: v(16);
-        line-height: v(24);
     }
 
     @include mobile {
@@ -67,23 +60,6 @@ $accentFg: white;
     &__item {
         flex: 1;
         max-width: v(504);
-
-        h4 {
-            @include headerFont;
-            
-            margin: 0;
-            font-weight: 500;
-            font-size: v(24);
-            line-height: v(48);
-        }
-
-        p {
-            @include textFont;
-            
-            margin: 0;
-            font-size: v(16);
-            line-height: v(24);
-        }
     }
 
     @include mobile {
@@ -111,21 +87,7 @@ $accentFg: white;
     }
 
     h3 {
-        @include headerFont;
-
-        margin: 0;
         margin-bottom: v(8);
-        font-weight: 500;
-        font-size: v(28);
-        line-height: v(40);
-    }
-
-    p {
-        @include textFont;
-
-        margin: 0;
-        font-size: v(16);
-        line-height: v(24);
     }
 
     &--has-previews {
@@ -210,11 +172,8 @@ $accentFg: white;
 
     &__text,
     &__text p {
-        @include textFont;
-
-        font-size: v(24);
-        line-height: v(32);
-        margin: 0;
+        @extend .p--big;
+        
         margin-bottom: v(16);
     }
     &__avatar {

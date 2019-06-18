@@ -169,6 +169,10 @@ module.exports = function (isDev = 'dev') {
             filename: `${outputName}.html`, // html output pathname
             template: `${templateFilePath}`, // Template path
             templateParameters: {
+                BUILD_INFO: {
+                    templateFilePath,
+                    outputName,
+                },
                 BUILD_MODE: buildGlobalConst,
                 loaderUtils: loaderUtils,
                 buildLanguage: buildLanguage,

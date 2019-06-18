@@ -7,16 +7,6 @@ section.cases > .section-content {
     margin: 0 auto !important;
 }
 
-section.cases > .section-content > h1 {
-    @include headerFont;
-
-    width: 100%;
-    text-align: center;
-    font-size: v(36);
-    font-weight: 400;
-    line-height: v(48);
-}
-
 .case-thumbnails {
     display: flex;
     flex-direction: row;
@@ -89,20 +79,8 @@ section.cases > .section-content > h1 {
     }
 
     h2 {
-        @include headerFont;
-
-        font-size: v(36);
-        line-height: v(48);
-        font-weight: 500;
-        margin: 0;
-    }
-
-    p {
-        @include textFont;
-
-        font-size: v(16);
-        line-height: v(24);
-        margin: 0;
+        text-align: left;
+        color: inherit;
     }
 
     &:hover {

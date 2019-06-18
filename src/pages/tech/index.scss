@@ -1,29 +1,7 @@
 @import "../../styles.scss";
 
-section.tech > .section-content {
-
-    // p {
-    //     @include textFont;
-
-    //     font-size: v(24);
-    //     line-height: v(32);
-    //     text-align: center;
-        
-    //     color: $primaryDark80;
-    //     margin-bottom: v(72);
-    // }
-}
-
 section.tech {
-    h1 {
-        @include headerFont;
-    
-        width: 100%;
-        text-align: center;
-        font-size: v(36);
-        font-weight: 400;
-        line-height: v(48);
-
+    h2 {
         margin-bottom: v(60);
     }
 
@@ -31,8 +9,6 @@ section.tech {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-
-        margin-bottom: v(160);
     }
 
     .tech-item {
