@@ -58,6 +58,8 @@ section.leads {
             border: v(8) solid #F2F2F2;
             box-shadow: 0px v(4) 0px rgba(0, 0, 0, 0.2);
             border-radius: 50%;
+
+            background: white;
         }
 
         &__name {
@@ -151,6 +153,8 @@ section.leads {
 
                 transition-property: border-color;
                 transition-duration: $transDur;
+                
+                background: white;
             }
 
             &__info {

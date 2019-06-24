@@ -42,6 +42,10 @@ input, button {
     appearance: none;
 }
 
+.desktop-br {
+    display: block;
+}
+
 .mobile-br {
     display: none;
 }
@@ -54,6 +58,9 @@ input, button {
 @include mobile {
     .mobile-br {
         display: block;
+    }
+    .desktop-br {
+        display: none;
     }
 }
 
@@ -231,5 +238,32 @@ section > .section-content {
 
     & > * {
         flex: 1;
+    }
+}
+
+.t-center {
+    text-align: center;
+}
+
+// Layout items in rows
+.l-items-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.l-center-block {
+    display: block;
+    margin: 0 auto;
+}
+
+// Display only for mobile
+.d-mobile {
+    display: none;
+}
+
+@include mobile {
+    .d-mobile {
+        display: initial;
     }
 }
