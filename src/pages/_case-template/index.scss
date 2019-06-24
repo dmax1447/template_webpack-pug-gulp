@@ -124,11 +124,12 @@ $accentFg: white;
             transform: translateY(v(-288));
             transition-property: transform, box-shadow;
             transition-duration: 0.5s;
-            box-shadow: 0px v(4) v(16) rgba(0, 0, 0, 0);
+
+            // box-shadow: 0px v(4) v(16) rgba(0, 0, 0, 0);
 
             &:hover {
                 transform: translateY(v(-312));
-                box-shadow: 0px v(4) v(16) rgba(0, 0, 0, 0.5);
+                // box-shadow: 0px v(4) v(16) rgba(0, 0, 0, 0.5);
             }
         }
     }
