@@ -84,6 +84,14 @@ class Project extends Model implements Sortable
                  ],
              ]
          ],
+         'project_clean' => [
+             'default' => [
+                 [
+                     'name' => 'default',
+                     'ratio' => 1,
+                 ],
+             ]
+         ],
          'project_result' => [
              'default' => [
                  [

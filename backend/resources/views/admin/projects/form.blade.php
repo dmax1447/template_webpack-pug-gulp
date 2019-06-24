@@ -72,6 +72,14 @@
         'withCaption' => false
         ])
         @formField('medias', [
+        'name' => 'project_clean',
+        'max' => 4,
+        'label' => 'Превью без обвеса',
+        'required' => false,
+        'withAddInfo' => false,
+        'withCaption' => false
+        ])
+        @formField('medias', [
         'name' => 'project_result',
         'max' => 4,
         'label' => 'Результаты',

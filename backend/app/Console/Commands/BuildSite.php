@@ -260,6 +260,11 @@ class BuildSite extends Command
             foreach ($images as $img) {
                 $c['gallery'][] = ['type' => 'mobile', 'img' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
             }
+            $images = $case->images('project_clean', 'default');
+            foreach ($images as $img) {
+                $c['gallery'][] = ['type' => 'clean', 'img' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
+            }
+
             $c['results_gallery'] = $case->images('project_result', 'default');
 
             $case->blocks->where('type', 'project_step')->each(function($block) use(&$c) {
