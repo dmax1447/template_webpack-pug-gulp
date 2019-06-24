@@ -71,14 +71,14 @@ class BuildSite extends Command
             }
         }
 
-        if ($this->option('build')) {
+        if (false && $this->option('build')) {
             \Log::info("Compiling pages at " . base_path());
             exec('cd '. base_path(). ' && export PATH=/usr/local/bin:/usr/bin:/bin && BUILD_LANG=ru npm --scripts-prepend-node-path=auto run build-on-vps 2>&1', $out, $err);
             \Log::info(join("\n", $out));
             $this->info(join("\n", $out));
         }
 
-        if ($this->option('commit-content')) {
+        if (false && $this->option('commit-content')) {
             \Log::info("Pushing content");
             $this->info("Pushing content");
             exec('cp ' . storage_path('app/build/') . '*.json '. base_path(). '/content-repo', $out, $err);
@@ -187,6 +187,36 @@ class BuildSite extends Command
                     }
                     $s['leads'][] = $f;
                 });
+            }
+            if ($s['slug'] == 'tech') {
+                $s['end_text'] = '';
+                $b0 = $p->blocks->where('type', 'translated_text')->first();
+                if ($b0) {
+                    $s['end_text'] = $b0->translatedInput('content');
+                }
+                $s['header2'] = '';
+                $b0 = $p->blocks->where('type', 'translated_header')->first();
+                if ($b0) {
+                    $s['header2'] = $b0->translatedInput('content');
+                }
+
+                $s['techs'] = [];
+                $tech = $p->blocks->where('type', 'technologies')->first();
+                foreach ($tech->children as $fblock) {
+                    $s['techs'][] = [
+                        'name' => $fblock->translatedInput('title'),
+                        'icon' => $fblock->image('icon', 'desktop'),
+                    ];
+                }
+
+                $s['tech_workflow'] = [];
+                $tech = $p->blocks->where('type', 'tech_workflow')->first();
+                foreach ($tech->children as $fblock) {
+                    $s['tech_workflow'][] = [
+                        'text' => $fblock->translatedInput('title'),
+                        'icon' => $fblock->image('icon', 'desktop'),
+                    ];
+                }
             }
             $data[] = $s;
         }
