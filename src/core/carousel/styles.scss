@@ -36,17 +36,20 @@
 
 .single-carousel-fade__dot {
     display: block;
-    width: v(10);
+    width: v(16);
     height: 100%;
-    background-color: $primaryDark30;
+    background-color: $accentLight60;
+    // background-color: $primaryDark30;
+
+    margin-left: v(4);
+    margin-right: v(4);
 
     transition-duration: 1.8s;
     transition-property: width, margin-left 1.4s, margin-right 1.4s, background-color;
 
     &--current {
-        width: v(16);
-        margin-left: v(4);
-        margin-right: v(4);
-        background-color: $accentLight60;
+        width: v(56);
+        background-color: $primaryDark30;
+        // background-color: $accentLight60;
     }
 }
