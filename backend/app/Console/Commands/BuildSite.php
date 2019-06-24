@@ -71,14 +71,14 @@ class BuildSite extends Command
             }
         }
 
-        if (false && $this->option('build')) {
+        if ($this->option('build')) {
             \Log::info("Compiling pages at " . base_path());
             exec('cd '. base_path(). ' && export PATH=/usr/local/bin:/usr/bin:/bin && BUILD_LANG=ru npm --scripts-prepend-node-path=auto run build-on-vps 2>&1', $out, $err);
             \Log::info(join("\n", $out));
             $this->info(join("\n", $out));
         }
 
-        if (false && $this->option('commit-content')) {
+        if ($this->option('commit-content')) {
             \Log::info("Pushing content");
             $this->info("Pushing content");
             exec('cp ' . storage_path('app/build/') . '*.json '. base_path(). '/content-repo', $out, $err);
