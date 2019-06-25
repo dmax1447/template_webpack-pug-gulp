@@ -241,7 +241,8 @@ class BuildSite extends Command
                 'goal' => $case->goal,
                 'result' => $case->result,
                 'gallery' => [],
-                'results_gallery' => []
+                'results_gallery' => [],
+                'results_stroke' => $case->resultStroke
             ];
             $images = $case->images('project_desktop', 'default');
             foreach ($images as $img) {

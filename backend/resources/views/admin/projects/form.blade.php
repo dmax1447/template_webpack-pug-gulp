@@ -87,6 +87,14 @@
         'withAddInfo' => false,
         'withCaption' => false
         ])
+        @formField('select', [
+        'name' => 'resultStroke',
+        'label' => 'Тип обводки результата',
+        'options' => [
+            ['value' => 'android', 'label' => 'android'],
+            ['value' => 'ios', 'label' => 'ios'],
+            ['value' => 'browser', 'label' => 'browser'],
+        ]])
     </a17-fieldset>
 
     <a17-fieldset title="Дополнительные атрибуты" id="attributes">

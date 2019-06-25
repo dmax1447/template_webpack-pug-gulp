@@ -31,6 +31,7 @@ class Project extends Model implements Sortable
         'backgroundColor',
         'fontColor',
         'position',
+        'resultStroke'
     ];
 
      public $translatedAttributes = [
@@ -119,6 +120,16 @@ class Project extends Model implements Sortable
     public function setFontColorAttribute($val) {
         $v = $this->makeup;
         $v['fontColor'] = $val;
+        $this->makeup = $v;
+    }
+
+    public function getResultStrokeAttribute() {
+        return $this->makeup['resultStroke'] ?? 'browser';
+    }
+
+    public function setResultStrokeAttribute($val) {
+        $v = $this->makeup;
+        $v['resultStroke'] = $val;
         $this->makeup = $v;
     }
 }
