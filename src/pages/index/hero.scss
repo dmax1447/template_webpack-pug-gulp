@@ -252,7 +252,7 @@ $heroMobileRightOffset: v($heroMobileRightOffsetPx);
                 list-style-type: none;
                 display: block;
                 width: 100%;
-                padding-left: $heroLeftOffset;
+                padding-left: v(72);
                 box-sizing: border-box;
 
                 transform: translateY(0%);
