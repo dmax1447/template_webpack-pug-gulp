@@ -4,6 +4,9 @@ $heroLeftOffset: v($heroLeftOffsetPx);
 $heroRightOffsetPx: $topBar_marginRight_px;
 $heroRightOffset: $topBar_marginRight;
 
+$heroMobileRightOffsetPx: 10;
+$heroMobileRightOffset: v($heroMobileRightOffsetPx);
+
 @keyframes hero-cta-arrow-anim {
     0% {
         transform: rotate3d(1,0,0,0deg);
@@ -496,7 +499,7 @@ $heroRightOffset: $topBar_marginRight;
             }
         }
         .hero-video-progress-menu {
-            right: v(10);
+            right: $heroMobileRightOffset;
             bottom: v(70);
             top: initial;
 
