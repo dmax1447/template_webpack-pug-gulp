@@ -1,3 +1,6 @@
+$topBar_marginRight_px: 32;
+$topBar_marginRight: v($topBar_marginRight_px);
+
 .top-bar {
     position: absolute;
     top: 0;
@@ -35,7 +38,7 @@
     .request-estimate-btn {
         float: right;
         margin-top: v(30);
-        margin-right: v(32);
+        margin-right: $topBar_marginRight;
     }
 
     &__logo {
