@@ -88,15 +88,24 @@ section.cases > .section-content {
         color: inherit;
     }
 
+    .cta-arrow {
+        opacity: 0;
+        will-change: opacity;
+    }
+
     &:hover {
         .case-thumbnail__content {
-            color: $accentLight40;
+            // color: $accentLight40;
             background-color: rgba(0,0,0,0.6);
         }
         & > img {
             transform: scale(1.1,1.1);
         }
         & > video {
+            opacity: 1;
+        }
+        .cta-arrow {
+            @extend .cta-arrow:hover;
             opacity: 1;
         }
     }

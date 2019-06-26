@@ -7,34 +7,6 @@ $heroRightOffset: $topBar_marginRight;
 $heroMobileRightOffsetPx: 10;
 $heroMobileRightOffset: v($heroMobileRightOffsetPx);
 
-@keyframes hero-cta-arrow-anim {
-    0% {
-        transform: rotate3d(1,0,0,0deg);
-        color: $accentLight60;
-    }
-    50% {
-        transform: rotate3d(1,0,0,180deg);
-        color: $accentLight80;
-    }
-    100% {
-        transform: rotate3d(1,0,0,360deg);
-        color: $accentLight60;
-    }
-}
-
-@keyframes hero-cta-arrow-anim2 {
-    0% {
-        transform: rotate3d(1,0,0,180deg);
-        opacity: 0;
-    }
-    50% {
-        transform: rotate3d(1,0,0,0deg);
-    }
-    100% {
-        transform: rotate3d(1,0,0,-180deg);
-    }
-}
-
 @keyframes hero-slide-head-appearing {
     0% {
         max-width: 0;
@@ -216,33 +188,8 @@ $heroMobileRightOffset: v($heroMobileRightOffsetPx);
             }
 
             &__cta {
-                position: relative;
-                display: inline-block;
-                cursor: pointer;
                 margin-left: $heroLeftOffset;
-                color: $accentLight60;
-                height: v(24);
                 margin-bottom: v(72);
-
-                i {
-                    position: absolute;
-                    left: 0;
-                    top: 40%;
-                    font-size: v(14);
-                    animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95);
-                }
-
-                span {
-                    margin-left: v(24);
-                    font-size: v(24);
-                    line-height: v(32);
-                }
-
-                &:hover {
-                    i {
-                        animation: hero-cta-arrow-anim 1s infinite;
-                    }
-                }
             }
 
             &__items {

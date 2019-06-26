@@ -134,20 +134,32 @@ p, .p {
     @include --paragraph;
 }
 
-p, .p {
+@mixin --p {
     font-size: v(16);
+    line-height: v(24);
+}
+
+p, .p {
+    @include --p;
+}
+
+@mixin --p-big {
+    font-size: v(24);
+    line-height: v(32);
+}
+
+@mixin --p-small {
+    font-size: v(12);
     line-height: v(24);
 }
 
 .p {
     &--big {
-        font-size: v(24);
-        line-height: v(32);
+        @include --p-big;
     }
 
     &--small {
-        font-size: v(12);
-        line-height: v(24);
+        @include --p-small;
     }
 }
 

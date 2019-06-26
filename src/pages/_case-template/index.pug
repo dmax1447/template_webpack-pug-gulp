@@ -56,9 +56,12 @@ block content
 
     if caseData.client_review
         +section('review')
-            .review__text!= caseData.client_review.client_review
+            div(class=classNames([ 'review__text', caseData.client_review.client_review.match(/(\<p\>)+/gi).length > 1 && 'review__text--small' ]))!= caseData.client_review.client_review
             +img(caseData.client_review.client_photo, 120).review__avatar
             h3.review__name!= caseData.client_review.client_name
             p.review__job!= caseData.client_review.client_position
             img.review__quote.review__quote--left(-lazy-src="/assets/quote-left-ru.svg")
             img.review__quote.review__quote--right(-lazy-src="/assets/quote-right-ru.svg")
+        +feedback-form([ 'section', 'dark' ])
+    else
+        +feedback-form([ 'section' ])

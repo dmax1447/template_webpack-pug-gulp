@@ -58,7 +58,7 @@ $accentFg: white;
     }
 
     h4 {
-        margin-top: 0;
+        margin: 0;
     }
 
     &__item {
@@ -177,10 +177,16 @@ $accentFg: white;
 
     &__text,
     &__text p {
-        @extend .p--big;
+        @include --p-big;
         
         margin-bottom: v(16);
     }
+
+    &__text--small,
+    &__text--small p {
+        @include --p;
+    }
+
     &__avatar {
         display: block;
         margin: 0 auto;
