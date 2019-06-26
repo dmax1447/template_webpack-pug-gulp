@@ -18,7 +18,7 @@ block body
     +section('cases full')
         h1= siteData('blocks.label_cases')
         - let casesData = siteData('cases');
-        - let cases = [ 'autoscaners', 'Squadrille', 'launch', 'iCartool', 'Ирина Хакамада', 'odin' ].map(slug => casesData.find(x => x.slug === slug)).filter(Boolean);
+        - let cases = [ 'autoscaners', 'Squadrille', 'launch', 'iCartool', 'icartool', 'Ирина Хакамада', 'odin' ].map(slug => casesData.find(x => x.slug === slug)).filter(Boolean);
         - casesData.forEach(x => cases.indexOf(x) === -1 && cases.push(x));
 
         .case-thumbnails
