@@ -200,6 +200,32 @@ export function singleCarouselFade(
         }
     };
 
+    // const findCurrentItem = (): { item: HTMLElement, itemIndex: number } => {
+    //     let currentIndex = -1;
+    //     const items = rootEl.querySelectorAll(`.${itemClass}`);
+
+    //     findCurrentIndex: for (let i = 0, len = items.length; i < len; ++i) {
+    //         const el = items.item(i);
+    //         if (el.classList.contains(itemClassCurrent)) {
+    //             currentIndex = i;
+    //             break findCurrentIndex;
+    //         }
+    //     }
+
+    //     if (currentIndex === -1) {
+    //         console.warn('singleCarouselFade: failed find current index');
+    //         currentIndex = 0;
+    //     }
+
+    //     currentIndex = (currentIndex + 1) % items.length;
+    //     const item = items.item(currentIndex)! as HTMLElement;
+
+    //     return {
+    //         item,
+    //         itemIndex: currentIndex,
+    //     };
+    // };
+
     const findNextItem = (current: HTMLElement): { nextItem: HTMLElement, nextItemIndex: number } => {
         let currentIndex = -1;
         const items = rootEl.querySelectorAll(`.${itemClass}`);
@@ -225,6 +251,38 @@ export function singleCarouselFade(
             nextItemIndex: currentIndex,
         };
     };
+
+    // const setItem = (newItemIndex: number) => {
+    //     const { itemIndex: currentIndex, item: currentItem } = findCurrentItem();
+    //     if (!currentItem) {
+    //         console.warn('singleCarouselFade: no current item found, resetting');
+    //         initReset();
+    //         return;
+    //     }
+
+    //     const items = rootEl.querySelectorAll(`.${itemClass}`);
+    //     const nextItem = items.item(newItemIndex)! as HTMLElement;
+
+    //     if (params.canChange) {
+    //         if (!params.canChange({
+    //             currentItem,
+    //             nextItem,
+    //             nextItemIndex: newItemIndex,
+    //             params,
+    //         })) {
+    //             console.log('singleCarouselFade: canChange returned false, skipping change');
+    //         }
+    //     }
+
+    //     if (_nextItemTimer) {
+    //         clearTimeout(_nextItemTimer.timer);
+    //         _hideItem(_nextItemTimer.element);
+    //     }
+
+    //     setCurrentDot(newItemIndex);
+    //     fadeInItem(nextItem);
+    //     _nextItemTimer = fadeOutItem(currentItem);
+    // };
 
     let _nextItemTimer: ReturnType<typeof fadeOutItem>|null = null;
     
@@ -283,6 +341,16 @@ export function singleCarouselFade(
 
         rootEl.addEventListener('click', onClick);
         disposePool.add(() => rootEl.removeEventListener('click', onClick));
+
+        rootEl.querySelectorAll(`.${dotsClass}`).forEach((dotEl, dotIndex) => {
+            const onDotClick = (evt: Event) => {
+                // evt.stopPropagation();
+                // evt.preventDefault();
+                // setItem(dotIndex);
+            };
+            dotEl.addEventListener('click', onDotClick);
+            disposePool.add(() => dotEl.removeEventListener('click', onDotClick));
+        });
     }
 
     if (trigger.includes('touch swipe')) {

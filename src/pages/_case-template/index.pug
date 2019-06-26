@@ -6,14 +6,14 @@ block init
     -    background-color: ${caseData.makeup.backgroundColor};
     -    color: ${caseData.makeup.fontColor};
     - ` : '';
-    if caseData.makeup && caseData.makeup.backgroundColor
-        - let styles = [
-        -   caseData.makeup.backgroundColor && (".single-carousel-fade__dot--current { background-color: " + caseData.makeup.backgroundColor + " !important; }"),
-        //- -   `*::selection, *::-moz-selection { color: ${caseData.makeup.fontColor}; background: ${caseData.makeup.backgroundColor}; }`,
-        //- -   `.goal::selection, .result::selection, .goal::-moz-selection, .result::-moz-selection, .goal ::selection, .result ::selection, .goal ::-moz-selection, .result ::-moz-selection { color: ${caseData.makeup.backgroundColor}; background: ${caseData.makeup.fontColor}; }`
-        - ].filter(Boolean).join('\n\n');
+    //- if caseData.makeup && caseData.makeup.backgroundColor
+    //-     - let styles = [
+    //-     //- -   caseData.makeup.backgroundColor && (".single-carousel-fade__dot--current { background-color: " + caseData.makeup.backgroundColor + " !important; }"),
+    //-     //- -   `*::selection, *::-moz-selection { color: ${caseData.makeup.fontColor}; background: ${caseData.makeup.backgroundColor}; }`,
+    //-     //- -   `.goal::selection, .result::selection, .goal::-moz-selection, .result::-moz-selection, .goal ::selection, .result ::selection, .goal ::-moz-selection, .result ::-moz-selection { color: ${caseData.makeup.backgroundColor}; background: ${caseData.makeup.fontColor}; }`
+    //-     - ].filter(Boolean).join('\n\n');
 
-        style!= styles
+    //-     style!= styles
 
 block caseTop
     +case-top(caseData.title)
@@ -22,7 +22,8 @@ block caseAbout
     != caseData.description
 
 block caseSiteLink
-    +case-site-link(caseData.url)
+    if caseData.url && !!caseData.url.trim()
+        +case-site-link(caseData.url)
 
 block afterCaseAbout
     if caseData.gallery && caseData.gallery.length !== 0
@@ -56,9 +57,12 @@ block content
 
     if caseData.client_review
         +section('review')
-            .review__text!= caseData.client_review.client_review
+            div(class=classNames([ 'review__text', caseData.client_review.client_review.match(/(\<p\>)+/gi).length > 1 && 'review__text--small' ]))!= caseData.client_review.client_review
             +img(caseData.client_review.client_photo, 120).review__avatar
             h3.review__name!= caseData.client_review.client_name
             p.review__job!= caseData.client_review.client_position
             img.review__quote.review__quote--left(-lazy-src="/assets/quote-left-ru.svg")
             img.review__quote.review__quote--right(-lazy-src="/assets/quote-right-ru.svg")
+        +feedback-form([ 'section', 'dark' ])
+    else
+        +feedback-form([ 'section' ])

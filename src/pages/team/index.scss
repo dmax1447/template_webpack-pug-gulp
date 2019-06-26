@@ -2,14 +2,6 @@
 
 section.intro > .section-content {
     h1 {
-        @include headerFont;
-    
-        width: 100%;
-        text-align: center;
-        font-size: v(36);
-        font-weight: 400;
-        line-height: v(48);
-
         margin-bottom: v(72);
     }
 
@@ -66,6 +58,8 @@ section.leads {
             border: v(8) solid #F2F2F2;
             box-shadow: 0px v(4) 0px rgba(0, 0, 0, 0.2);
             border-radius: 50%;
+
+            background: white;
         }
 
         &__name {
@@ -159,6 +153,8 @@ section.leads {
 
                 transition-property: border-color;
                 transition-duration: $transDur;
+                
+                background: white;
             }
 
             &__info {
@@ -227,13 +223,18 @@ section.leads {
 }
 
 section.post-info {
-    @include textFont;
+    & , & p {
+        @include textFont;
+        
+        font-size: v(24);
+        line-height: v(32);
+        text-align: center;
     
-    font-size: v(24);
-    line-height: v(32);
-    text-align: center;
+        color: $primaryDark80;
 
-    color: $primaryDark80;
+        margin-top: v(18);
+        margin-bottom: v(18);
+    }
 }
 
 @media (min-width: 571px) and (max-width: 882px) {

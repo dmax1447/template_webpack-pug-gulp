@@ -1,30 +1,11 @@
-@keyframes hero-cta-arrow-anim {
-    0% {
-        transform: rotate3d(1,0,0,0deg);
-        color: $accentLight60;
-    }
-    50% {
-        transform: rotate3d(1,0,0,180deg);
-        color: $accentLight80;
-    }
-    100% {
-        transform: rotate3d(1,0,0,360deg);
-        color: $accentLight60;
-    }
-}
+$heroLeftOffsetPx: 50; // 72 before, 48 from figma 
+$heroLeftOffset: v($heroLeftOffsetPx);
 
-@keyframes hero-cta-arrow-anim2 {
-    0% {
-        transform: rotate3d(1,0,0,180deg);
-        opacity: 0;
-    }
-    50% {
-        transform: rotate3d(1,0,0,0deg);
-    }
-    100% {
-        transform: rotate3d(1,0,0,-180deg);
-    }
-}
+$heroRightOffsetPx: $topBar_marginRight_px;
+$heroRightOffset: $topBar_marginRight;
+
+$heroMobileRightOffsetPx: 10;
+$heroMobileRightOffset: v($heroMobileRightOffsetPx);
 
 @keyframes hero-slide-head-appearing {
     0% {
@@ -163,17 +144,16 @@
                 margin: 0;
                 margin-top: v(144);
                 margin-bottom: v(24);
-                margin-left: v(72);
+                margin-left: $heroLeftOffset;
             }
 
             &__head {
-                @include headerFont;
-
                 display: inline-block;
-                margin: 0;
                 color: white;
                 font-size: v(54);
                 line-height: v(64);
+                text-align: left;
+                font-weight: 700;
 
                 white-space: nowrap;
                 
@@ -198,44 +178,18 @@
             // }
 
             &__text {
-                margin: 0;
-                padding-left: v(72);
+                @extend .p--big;
+
+                padding-left: $heroLeftOffset;
                 margin-bottom: v(24);
                 color: white;
-                line-height: v(32);
-                font-size: v(24);
 
                 text-shadow: 0px 0px v(24) rgba(0, 0, 0, 0.25);
             }
 
             &__cta {
-                position: relative;
-                display: inline-block;
-                cursor: pointer;
-                margin-left: v(72);
-                color: $accentLight60;
-                height: v(24);
+                margin-left: $heroLeftOffset;
                 margin-bottom: v(72);
-
-                i {
-                    position: absolute;
-                    left: 0;
-                    top: 40%;
-                    font-size: v(14);
-                    animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95);
-                }
-
-                span {
-                    margin-left: v(24);
-                    font-size: v(24);
-                    line-height: v(32);
-                }
-
-                &:hover {
-                    i {
-                        animation: hero-cta-arrow-anim 1s infinite;
-                    }
-                }
             }
 
             &__items {
@@ -392,7 +346,7 @@
 
     .hero-video-progress-menu {
         position: absolute;
-        right: v(72);
+        right: v($heroRightOffsetPx + 10);
         top: v(312);
 
         .hero-video-progress {
@@ -492,7 +446,7 @@
             }
         }
         .hero-video-progress-menu {
-            right: v(10);
+            right: $heroMobileRightOffset;
             bottom: v(70);
             top: initial;
 

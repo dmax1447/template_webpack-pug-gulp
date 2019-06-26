@@ -29,12 +29,9 @@
     width: v(504);
 
     & > h4 {
-        @include headerFont;
-        
-        font-size: v(24);
-        line-height: v(72);
         margin: 0;
-        font-weight: 500;
+        margin-bottom: v(8);
+        line-height: v(72);
         color: $primaryDark90;
         text-align: center;
     }

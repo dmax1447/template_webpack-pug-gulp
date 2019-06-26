@@ -1,4 +1,25 @@
-@import "../styles.scss";
+@import "../constants.scss";
+
+@import "./rem.scss";
+@import "./anim/styles.scss";
+@import "./lazy/styles.scss";
+@import "./carousel/styles.scss";
+
+// ----------------------
+//          Font
+// ----------------------
+
+@mixin headerFont {
+    font-family: $headerFontFamily;
+}
+
+@mixin textFont {
+    font-family: $textFontFamily;
+}
+
+// ------------------------
+//       Core elements
+// ------------------------
 
 body {
     margin: 0;
@@ -21,6 +42,10 @@ input, button {
     appearance: none;
 }
 
+.desktop-br {
+    display: block;
+}
+
 .mobile-br {
     display: none;
 }
@@ -33,6 +58,124 @@ input, button {
 @include mobile {
     .mobile-br {
         display: block;
+    }
+    .desktop-br {
+        display: none;
+    }
+}
+
+// -----------------------------
+//           Headers
+// -----------------------------
+
+@mixin --header {
+    @include headerFont;
+}
+
+h1, h2, h3,
+.h1, .h2, .h3 {
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    @include --header;
+}
+
+h1, .h1 {
+    width: 100%;
+    font-size: v(36);
+    font-weight: 400;
+    line-height: v(48);
+    text-align: center;
+}
+
+h2, .h2 {
+    @extend .h1;
+
+    color: $primaryDark100;
+}
+
+h3, .h3 {
+    font-weight: 500;
+    font-size: v(28);
+    line-height: v(40);
+}
+
+h4, .h4 {
+    font-weight: 500;
+    font-size: v(24);
+    line-height: v(48);
+}
+
+h5, .h5 {
+    font-weight: 500;
+    font-size: v(20);
+    line-height: v(28);
+}
+
+h6, .h6 {
+    font-size: v(12);
+    line-height: v(24);
+}
+
+// --------------------------------------
+//               Paragraphs
+// --------------------------------------
+
+@mixin --paragraph {
+    @include textFont;
+    margin: 0;
+    font-style: normal;
+    font-weight: normal;
+}
+
+p, .p {
+    @include --paragraph;
+}
+
+@mixin --p {
+    font-size: v(16);
+    line-height: v(24);
+}
+
+p, .p {
+    @include --p;
+}
+
+@mixin --p-big {
+    font-size: v(24);
+    line-height: v(32);
+}
+
+@mixin --p-small {
+    font-size: v(12);
+    line-height: v(24);
+}
+
+.p {
+    &--big {
+        @include --p-big;
+    }
+
+    &--small {
+        @include --p-small;
+    }
+}
+
+.p-note {
+    & , & p {
+        @extend .p;
+        @extend .p--big;
+        
+        font-size: v(24);
+        line-height: v(32);
+        text-align: center;
+    
+        color: $primaryDark80;
+    
+        margin-top: v(18);
+        margin-bottom: v(18);
     }
 }
 
@@ -79,86 +222,60 @@ section {
     }
 }
 
-// -----------------------------
-//           Headers
-// -----------------------------
-
-.--header {
-    @include headerFont;
-    margin: 0;
+section > .section-content {
+    & > h1,
+    & > .h1 {
+        margin-top: v(29.88);
+        margin-bottom: v(29.88);
+    }
 }
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
-    @include --header;
+// --------------------------------
+//            Layout
+// --------------------------------
+
+// Layout break
+.l-break {
+    margin-bottom: v(72);
 }
 
-h1, .h1 {
-    width: 100%;
-    font-size: v(36);
-    font-weight: 400;
-    line-height: v(48);
+// Layout items in one row
+.l-items-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 
+    list-style: none;
+    list-style-type: none;
+
+    & > * {
+        flex: 1;
+    }
+}
+
+.t-center {
     text-align: center;
 }
 
-h2, .h2 {
-    @include h1;
-
-    color: $primaryDark100;
+// Layout items in rows
+.l-items-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
-h3, .h3 {
-    font-weight: 500;
-    font-size: v(28);
-    line-height: v(40);
+.l-center-block {
+    display: block;
+    margin: 0 auto;
 }
 
-h4, .h4 {
-    font-weight: 500;
-    font-size: v(24);
-    line-height: v(48);
+// Display only for mobile
+.d-mobile {
+    display: none;
 }
 
-h5, .h5 {
-    font-weight: 500;
-    font-size: v(20);
-    line-height: v(28);
-}
-
-h6, .h6 {
-    font-size: v(12);
-    line-height: v(24);
-}
-
-// --------------------------------------
-//               Paragraphs
-// --------------------------------------
-
-.--paragraph {
-    @include textFont;
-    margin: 0;
-    font-style: normal;
-    font-weight: normal;
-}
-
-p, .p {
-    @include --paragraph;
-}
-
-p, .p {
-    font-size: v(16);
-    line-height: v(24);
-}
-
-.p {
-    &--big {
-        font-size: v(24);
-        line-height: v(32);
-    }
-
-    &--small {
-        font-size: v(12);
-        line-height: v(24);
+@include mobile {
+    .d-mobile {
+        display: initial;
     }
 }

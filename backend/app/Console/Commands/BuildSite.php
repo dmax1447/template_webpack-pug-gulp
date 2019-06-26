@@ -188,6 +188,36 @@ class BuildSite extends Command
                     $s['leads'][] = $f;
                 });
             }
+            if ($s['slug'] == 'tech') {
+                $s['end_text'] = '';
+                $b0 = $p->blocks->where('type', 'translated_text')->first();
+                if ($b0) {
+                    $s['end_text'] = $b0->translatedInput('content');
+                }
+                $s['header2'] = '';
+                $b0 = $p->blocks->where('type', 'translated_header')->first();
+                if ($b0) {
+                    $s['header2'] = $b0->translatedInput('content');
+                }
+
+                $s['techs'] = [];
+                $tech = $p->blocks->where('type', 'technologies')->first();
+                foreach ($tech->children as $fblock) {
+                    $s['techs'][] = [
+                        'name' => $fblock->translatedInput('title'),
+                        'icon' => $fblock->image('icon', 'desktop'),
+                    ];
+                }
+
+                $s['tech_workflow'] = [];
+                $tech = $p->blocks->where('type', 'tech_workflow')->first();
+                foreach ($tech->children as $fblock) {
+                    $s['tech_workflow'][] = [
+                        'text' => $fblock->translatedInput('title'),
+                        'icon' => $fblock->image('icon', 'desktop'),
+                    ];
+                }
+            }
             $data[] = $s;
         }
         return $data;
@@ -211,7 +241,8 @@ class BuildSite extends Command
                 'goal' => $case->goal,
                 'result' => $case->result,
                 'gallery' => [],
-                'results_gallery' => []
+                'results_gallery' => [],
+                'results_stroke' => $case->resultStroke
             ];
             $images = $case->images('project_desktop', 'default');
             foreach ($images as $img) {
@@ -230,6 +261,11 @@ class BuildSite extends Command
             foreach ($images as $img) {
                 $c['gallery'][] = ['type' => 'mobile', 'img' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
             }
+            $images = $case->images('project_clean', 'default');
+            foreach ($images as $img) {
+                $c['gallery'][] = ['type' => 'clean', 'img' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
+            }
+
             $c['results_gallery'] = $case->images('project_result', 'default');
 
             $case->blocks->where('type', 'project_step')->each(function($block) use(&$c) {

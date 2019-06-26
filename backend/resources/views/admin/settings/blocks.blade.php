@@ -50,6 +50,12 @@
     'translated' => true
     ])
     @formField('input', [
+    'label' => 'Заинтересовались? Свяжитесь с нами',
+    'name' => 'contact_header_interest',
+    'textLimit' => '100',
+    'translated' => true
+    ])
+    @formField('input', [
     'label' => 'Ваше имя',
     'name' => 'contact_name_label',
     'textLimit' => '100',

@@ -13,6 +13,13 @@ $accentFg: white;
     // }
 }
 
+.case-top .section-content {
+    h2 {
+        margin-top: v(24);
+        margin-bottom: v(24);
+    }
+}
+
 .goal {
     @include accentColorSection;
 
@@ -24,21 +31,7 @@ $accentFg: white;
     }
 
     h3 {
-        @include headerFont;
-
-        margin: 0;
         margin-bottom: v(8);
-        font-weight: 500;
-        font-size: v(28);
-        line-height: v(40);
-    }
-
-    p {
-        @include textFont;
-
-        margin: 0;
-        font-size: v(16);
-        line-height: v(24);
     }
 
     @include mobile {
@@ -59,31 +52,18 @@ $accentFg: white;
         align-content: space-around;
         justify-content: space-around;
         
-        padding-top: v(48);
+        padding-top: v(40);
         padding-bottom: v(48);
         box-sizing: border-box;
+    }
+
+    h4 {
+        margin: 0;
     }
 
     &__item {
         flex: 1;
         max-width: v(504);
-
-        h4 {
-            @include headerFont;
-            
-            margin: 0;
-            font-weight: 500;
-            font-size: v(24);
-            line-height: v(48);
-        }
-
-        p {
-            @include textFont;
-            
-            margin: 0;
-            font-size: v(16);
-            line-height: v(24);
-        }
     }
 
     @include mobile {
@@ -111,21 +91,7 @@ $accentFg: white;
     }
 
     h3 {
-        @include headerFont;
-
-        margin: 0;
         margin-bottom: v(8);
-        font-weight: 500;
-        font-size: v(28);
-        line-height: v(40);
-    }
-
-    p {
-        @include textFont;
-
-        margin: 0;
-        font-size: v(16);
-        line-height: v(24);
     }
 
     &--has-previews {
@@ -162,11 +128,12 @@ $accentFg: white;
             transform: translateY(v(-288));
             transition-property: transform, box-shadow;
             transition-duration: 0.5s;
-            box-shadow: 0px v(4) v(16) rgba(0, 0, 0, 0);
+
+            // box-shadow: 0px v(4) v(16) rgba(0, 0, 0, 0);
 
             &:hover {
                 transform: translateY(v(-312));
-                box-shadow: 0px v(4) v(16) rgba(0, 0, 0, 0.5);
+                // box-shadow: 0px v(4) v(16) rgba(0, 0, 0, 0.5);
             }
         }
     }
@@ -210,13 +177,16 @@ $accentFg: white;
 
     &__text,
     &__text p {
-        @include textFont;
-
-        font-size: v(24);
-        line-height: v(32);
-        margin: 0;
+        @include --p-big;
+        
         margin-bottom: v(16);
     }
+
+    &__text--small,
+    &__text--small p {
+        @include --p;
+    }
+
     &__avatar {
         display: block;
         margin: 0 auto;

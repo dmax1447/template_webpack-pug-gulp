@@ -65,14 +65,8 @@
         margin: 0 auto;
     }
     h2 {
-        @include headerFont;
-
-        color: $primaryDark100;
-        line-height: v(48);
-        font-size: v(36);
-        text-align: center;
-        margin: 0;
         margin-bottom: v(24);
+        font-weight: 700;
     }
     ul {
         list-style: none;
@@ -98,9 +92,9 @@
                 height: v(20);
                 text-align: center;
             }
-            span {
+            // span {
 
-            }
+            // }
         }
     }
 }

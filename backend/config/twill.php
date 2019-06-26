@@ -41,8 +41,22 @@ return [
                 'title' => 'Блок Команды',
                 'icon' => 'text',
                 'component' => 'a17-block-team_group',
-            ]
-
+            ],
+            'translated_header' => [
+                'title' => 'Подзаголовок',
+                'icon' => 'text',
+                'component' => 'a17-block-translated_header',
+            ],
+            'technologies' => [
+                'title' => 'Технологии',
+                'icon' => 'text',
+                'component' => 'a17-block-technologies',
+            ],
+            'tech_workflow' => [
+                'title' => 'Как мы работаем',
+                'icon' => 'text',
+                'component' => 'a17-block-tech_workflow',
+            ],
         ],
         'repeaters' => [
             'features_offered_item' => [
@@ -57,6 +71,18 @@ return [
                 'component' => 'a17-block-team_group_member',
                 'max' => 10,
             ],
+            'technology' => [
+                'title' => 'Технология',
+                'trigger' => 'Добавить',
+                'component' => 'a17-block-technology',
+                'max' => 30,
+            ],
+            'tech_workflow_item' => [
+                'title' => 'Элемент',
+                'trigger' => 'Добавить',
+                'component' => 'a17-block-tech_workflow_item',
+                'max' => 10,
+            ]
         ],
         'crops' => [
             'icons' => [

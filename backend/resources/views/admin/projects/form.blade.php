@@ -72,6 +72,14 @@
         'withCaption' => false
         ])
         @formField('medias', [
+        'name' => 'project_clean',
+        'max' => 4,
+        'label' => 'Превью без обвеса',
+        'required' => false,
+        'withAddInfo' => false,
+        'withCaption' => false
+        ])
+        @formField('medias', [
         'name' => 'project_result',
         'max' => 4,
         'label' => 'Результаты',
@@ -79,6 +87,14 @@
         'withAddInfo' => false,
         'withCaption' => false
         ])
+        @formField('select', [
+        'name' => 'resultStroke',
+        'label' => 'Тип обводки результата',
+        'options' => [
+            ['value' => 'android', 'label' => 'android'],
+            ['value' => 'ios', 'label' => 'ios'],
+            ['value' => 'browser', 'label' => 'browser'],
+        ]])
     </a17-fieldset>
 
     <a17-fieldset title="Дополнительные атрибуты" id="attributes">

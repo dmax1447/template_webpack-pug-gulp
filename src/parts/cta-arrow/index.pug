@@ -1,0 +1,9 @@
+mixin cta-arrow(ctaLink, ctaText, small=false)
+    if ctaLink
+        a(class=classNames(['cta-arrow', small && 'cta-arrow--small']), href=ctaLink)&attributes(attributes)
+            i.fas.fa-arrow-right
+            span!= ctaText
+    else
+        span(class=classNames(['cta-arrow', small && 'cta-arrow--small']))&attributes(attributes)
+            i.fas.fa-arrow-right
+            span!= ctaText
