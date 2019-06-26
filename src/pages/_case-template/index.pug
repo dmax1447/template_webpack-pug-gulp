@@ -22,7 +22,8 @@ block caseAbout
     != caseData.description
 
 block caseSiteLink
-    +case-site-link(caseData.url)
+    if caseData.url && !!caseData.url.trim()
+        +case-site-link(caseData.url)
 
 block afterCaseAbout
     if caseData.gallery && caseData.gallery.length !== 0
