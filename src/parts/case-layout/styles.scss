@@ -42,6 +42,9 @@ $casePMarginBottom: 14;
     }
 
     a.site-link {
+        display: inline-block;
+        margin-bottom: v(24);
+
         i {
             width: v(24);
             height: v(24);
@@ -56,7 +59,7 @@ $casePMarginBottom: 14;
     }
 
     &__about {
-        margin-bottom: v(120);
+        // margin-bottom: v(120);
         max-width: v(420);
 
         h5 {
@@ -85,6 +88,10 @@ $casePMarginBottom: 14;
     }
 
     @include mobile {
+        a.site-link {
+            margin-bottom: 0;
+        }
+
         .section-content {
             padding-top: v(270);
         }
