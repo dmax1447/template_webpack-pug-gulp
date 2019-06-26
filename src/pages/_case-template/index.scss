@@ -52,9 +52,13 @@ $accentFg: white;
         align-content: space-around;
         justify-content: space-around;
         
-        padding-top: v(48);
+        padding-top: v(40);
         padding-bottom: v(48);
         box-sizing: border-box;
+    }
+
+    h4 {
+        margin-top: 0;
     }
 
     &__item {

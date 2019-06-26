@@ -1,3 +1,12 @@
+$heroLeftOffsetPx: 50; // 72 before, 48 from figma 
+$heroLeftOffset: v($heroLeftOffsetPx);
+
+$heroRightOffsetPx: $topBar_marginRight_px;
+$heroRightOffset: $topBar_marginRight;
+
+$heroMobileRightOffsetPx: 10;
+$heroMobileRightOffset: v($heroMobileRightOffsetPx);
+
 @keyframes hero-cta-arrow-anim {
     0% {
         transform: rotate3d(1,0,0,0deg);
@@ -163,7 +172,7 @@
                 margin: 0;
                 margin-top: v(144);
                 margin-bottom: v(24);
-                margin-left: v(72);
+                margin-left: $heroLeftOffset;
             }
 
             &__head {
@@ -199,7 +208,7 @@
             &__text {
                 @extend .p--big;
 
-                padding-left: v(72);
+                padding-left: $heroLeftOffset;
                 margin-bottom: v(24);
                 color: white;
 
@@ -210,7 +219,7 @@
                 position: relative;
                 display: inline-block;
                 cursor: pointer;
-                margin-left: v(72);
+                margin-left: $heroLeftOffset;
                 color: $accentLight60;
                 height: v(24);
                 margin-bottom: v(72);
@@ -390,7 +399,7 @@
 
     .hero-video-progress-menu {
         position: absolute;
-        right: v(72);
+        right: v($heroRightOffsetPx + 10);
         top: v(312);
 
         .hero-video-progress {
@@ -490,7 +499,7 @@
             }
         }
         .hero-video-progress-menu {
-            right: v(10);
+            right: $heroMobileRightOffset;
             bottom: v(70);
             top: initial;
 
