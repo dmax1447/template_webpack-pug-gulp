@@ -39,4 +39,15 @@
             animation: cta-arrow-anim 1s infinite;
         }
     }
+
+    &--small {
+        i {
+            top: 28%;
+            font-size: v(12);
+        }
+        span {
+            @include --p;
+            margin-left: v(20);
+        }
+    }
 }
