@@ -79,6 +79,9 @@
         'withAddInfo' => false,
         'withCaption' => false
         ])
+    </a17-fieldset>
+
+    <a17-fieldset title="Дополнительные атрибуты" id="attributes">
         @formField('medias', [
         'name' => 'project_result',
         'max' => 4,
@@ -91,13 +94,11 @@
         'name' => 'resultStroke',
         'label' => 'Тип обводки результата',
         'options' => [
-            ['value' => 'android', 'label' => 'android'],
-            ['value' => 'ios', 'label' => 'ios'],
-            ['value' => 'browser', 'label' => 'browser'],
+        ['value' => 'android', 'label' => 'android'],
+        ['value' => 'ios', 'label' => 'ios'],
+        ['value' => 'browser', 'label' => 'browser'],
         ]])
-    </a17-fieldset>
 
-    <a17-fieldset title="Дополнительные атрибуты" id="attributes">
         @formField('color', [
         'name' => 'backgroundColor',
         'label' => 'Цвет темного фона',
@@ -122,6 +123,7 @@
         'editSource' => true,
         'toolbarOptions' => [ [ 'header' => [2, 3, 4, 5, false] ], 'list-ordered', 'list-unordered', 'clean' ],
         ])
-        @formField('block_editor', ['blocks' => ['project_step', 'client_review']])
     </a17-fieldset>
+
+    @formField('block_editor', ['blocks' => ['project_step', 'client_review', 'project_preview'], 'withoutSeparator' => true])
 @stop

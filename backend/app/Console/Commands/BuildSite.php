@@ -244,26 +244,28 @@ class BuildSite extends Command
                 'results_gallery' => [],
                 'results_stroke' => $case->resultStroke
             ];
-            $images = $case->images('project_desktop', 'default');
-            foreach ($images as $img) {
-                $c['gallery'][] = ['type' => 'pc', 'img' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
-            }
-            $chunks = array_chunk($case->images('project_mobile', 'default'), 2);
-            foreach ($chunks as $images) {
-                $g = ['type' => 'mobile2'];
-                foreach ($images as $k =>$img) {
-                    $g['img' . ($k ? ($k + 1) : '')] = $img;
-                    $g['mobileAddress' . ($k ? ($k + 1) : '')] = parse_url($c['url'], PHP_URL_HOST);
+
+            $gallery = $case->blocks->where('type', 'project_preview')->first();
+            if ($gallery) {
+                foreach ($gallery->children as $iblock) {
+                    $images = $iblock->images('image', 'default');
+                    if ($iblock->input('type') !== 'mobile2') {
+                        foreach ($images as $img) {
+                            $c['gallery'][] = ['type' => $iblock->input('type'), 'img' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
+                        }
+                    } else {
+                        $chunks = array_chunk($images, 2);
+                        foreach ($chunks as $images) {
+                            $g = ['type' => 'mobile2'];
+                            foreach ($images as $k =>$img) {
+                                $g['img' . ($k ? ($k + 1) : '')] = $img;
+                                $g['mobileAddress' . ($k ? ($k + 1) : '')] = parse_url($c['url'], PHP_URL_HOST);
+                            }
+                            $c['gallery'][] = $g;
+                        }
+
+                    }
                 }
-                $c['gallery'][] = $g;
-            }
-            $images = $case->images('project_tablet', 'default');
-            foreach ($images as $img) {
-                $c['gallery'][] = ['type' => 'mobile', 'img' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
-            }
-            $images = $case->images('project_clean', 'default');
-            foreach ($images as $img) {
-                $c['gallery'][] = ['type' => 'clean', 'img' => $img, 'mobileAddress' => parse_url($c['url'], PHP_URL_HOST)];
             }
 
             $c['results_gallery'] = $case->images('project_result', 'default');
