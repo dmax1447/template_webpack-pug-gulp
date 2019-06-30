@@ -47,38 +47,7 @@
 @stop
 
 @section('fieldsets')
-    <a17-fieldset title="Галерея" id="gallery">
-        @formField('medias', [
-        'name' => 'project_desktop',
-        'label' => 'Десктоп превью',
-        'required' => false,
-        'withAddInfo' => false,
-        'withCaption' => false
-        ])
-        @formField('medias', [
-        'name' => 'project_mobile',
-        'max' => 4,
-        'label' => 'Мобильные превью',
-        'required' => false,
-        'withAddInfo' => false,
-        'withCaption' => false
-        ])
-        @formField('medias', [
-        'name' => 'project_tablet',
-        'max' => 2,
-        'label' => 'Планшет превью',
-        'required' => false,
-        'withAddInfo' => false,
-        'withCaption' => false
-        ])
-        @formField('medias', [
-        'name' => 'project_clean',
-        'max' => 4,
-        'label' => 'Превью без обвеса',
-        'required' => false,
-        'withAddInfo' => false,
-        'withCaption' => false
-        ])
+    <a17-fieldset title="Дополнительные атрибуты" id="attributes">
         @formField('medias', [
         'name' => 'project_result',
         'max' => 4,
@@ -91,13 +60,11 @@
         'name' => 'resultStroke',
         'label' => 'Тип обводки результата',
         'options' => [
-            ['value' => 'android', 'label' => 'android'],
-            ['value' => 'ios', 'label' => 'ios'],
-            ['value' => 'browser', 'label' => 'browser'],
+        ['value' => 'android', 'label' => 'android'],
+        ['value' => 'ios', 'label' => 'ios'],
+        ['value' => 'browser', 'label' => 'browser'],
         ]])
-    </a17-fieldset>
 
-    <a17-fieldset title="Дополнительные атрибуты" id="attributes">
         @formField('color', [
         'name' => 'backgroundColor',
         'label' => 'Цвет темного фона',
@@ -122,6 +89,7 @@
         'editSource' => true,
         'toolbarOptions' => [ [ 'header' => [2, 3, 4, 5, false] ], 'list-ordered', 'list-unordered', 'clean' ],
         ])
-        @formField('block_editor', ['blocks' => ['project_step', 'client_review']])
     </a17-fieldset>
+
+    @formField('block_editor', ['blocks' => ['project_step', 'client_review', 'project_preview'], 'withoutSeparator' => true])
 @stop
