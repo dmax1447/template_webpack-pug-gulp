@@ -63,6 +63,7 @@
         ['value' => 'android', 'label' => 'android'],
         ['value' => 'ios', 'label' => 'ios'],
         ['value' => 'browser', 'label' => 'browser'],
+        ['value' => 'none', 'label' => 'без обводки'],
         ]])
 
         @formField('color', [
