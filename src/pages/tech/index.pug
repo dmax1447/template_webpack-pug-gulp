@@ -6,7 +6,7 @@ block body
     
     +section('tech')
         h1!= siteData('page_tech.title')
-        p.l-break.p-note!= siteData('page_tech.content')
+        .p-note!= siteData('page_tech.content')
 
         -
             // (Math.floor(Math.random() * 80 + 30) / 100 + "s")
@@ -46,7 +46,7 @@ block body
 
         .l-items-grid
             for techItem, itemIndex in techs
-                div(class=classNames('tech-item', 'tech-item--' + techItem.key, 'anim'), --anim="slide-in-back", --anim-speed="0.9s", --anim-delay=(getDelay(itemIndex)), --anim-irate="0.1")
+                div(class=classNames('tech-item', 'tech-item--' + slugify(techItem.name, { lower: true }), 'anim'), --anim="slide-in-back", --anim-speed="0.9s", --anim-delay=(getDelay(itemIndex)), --anim-irate="0.1")
                     //- svg
                     //- img(-lazy-src!=techItem.icon)
 
