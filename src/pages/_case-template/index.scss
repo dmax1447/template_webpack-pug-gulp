@@ -111,7 +111,7 @@ $accentFg: white;
         flex-wrap: nowrap;
         align-items: stretch;
         align-content: space-around;
-        justify-content: space-around;
+        justify-content: space-evenly;
 
         .rg-item {
             @function shadows($y: v(4), $blur: v(16), $spread: v(0), $color: rgba(0, 0, 0, 0.5)) {
@@ -124,6 +124,8 @@ $accentFg: white;
             position: relative;
             flex: 1;
             max-width: v(320);
+            min-width: v(320);
+            width: v(320);
 
             transform: translateY(v(-288));
             transition-property: transform;
