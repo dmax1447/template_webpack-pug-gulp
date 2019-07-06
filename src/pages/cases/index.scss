@@ -73,7 +73,7 @@ section.cases > .section-content {
         background-color: rgba(0,0,0,0.6);
         transition-duration: $hoverTransitionDuration;
         transition-property: background-color, text-shadow;
-        text-shadow: 0 0 20px black;
+        text-shadow: 0 0 v(20) black;
     }
 
     h6 {
@@ -98,7 +98,7 @@ section.cases > .section-content {
         .case-thumbnail__content {
             // color: $accentLight40;
             background-color: rgba(0,0,0,0.6);
-            text-shadow: 0 0 20px rgba(0,0,0,0);
+            text-shadow: 0 0 v(20) rgba(0,0,0,0);
         }
         & > img {
             transform: scale(1.1,1.1);
