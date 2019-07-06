@@ -57,6 +57,11 @@ return [
                 'icon' => 'text',
                 'component' => 'a17-block-tech_workflow',
             ],
+            'project_preview' => [
+                'title' => 'Галерея',
+                'icon' => 'text',
+                'component' => 'a17-block-project_preview',
+            ],
         ],
         'repeaters' => [
             'features_offered_item' => [
@@ -82,6 +87,12 @@ return [
                 'trigger' => 'Добавить',
                 'component' => 'a17-block-tech_workflow_item',
                 'max' => 10,
+            ],
+            'project_preview_item' => [
+                'title' => 'Превью',
+                'trigger' => 'Добавить',
+                'component' => 'a17-block-project_preview_item',
+                'max' => 20,
             ]
         ],
         'crops' => [
@@ -118,6 +129,12 @@ return [
                 ]
             ],
             'image' => [
+                'default' => [
+                    [
+                        'name' => 'default',
+                        'ratio' => 1,
+                    ],
+                ],
                 'desktop' => [
                     [
                         'name' => 'desktop',

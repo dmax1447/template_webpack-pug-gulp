@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const loaderUtils = require('loader-utils');
 const webpack = require('webpack');
+const slugify = require('slugify');
 
 const { getEntries, rootDir, getSiteData } = require('./utils.js');
 
@@ -33,6 +34,11 @@ module.exports = function (isDev = 'dev') {
             // htmlLoader,
             {
                 loader: 'pug-loader',
+                options: {
+                    templateParameters: {
+                        slugify,
+                    }
+                }
             },
         ]
     };
@@ -179,6 +185,7 @@ module.exports = function (isDev = 'dev') {
                 siteData: function (name, lang = buildLanguage) {
                     return getSiteData(stringsDataPath, name, lang);
                 },
+                slugify,
                 ...additionalParams,
             },
             inject: 'head',

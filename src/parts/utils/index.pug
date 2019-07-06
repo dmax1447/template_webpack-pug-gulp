@@ -72,6 +72,7 @@
         let endLen = 0;
         if (url.endsWith('.jpg')) endLen = 4;
         if (url.endsWith('.jpeg')) endLen = 5;
+        if (url.endsWith('.png')) endLen = 4;
 
         if (endLen === 0) {
             console.warn('_responsiveImg: no reponsive for not jpg, url='+url);
