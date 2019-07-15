@@ -15,7 +15,7 @@ mixin nav-menu(flags=[], params={ currentPage: '' })
                 !flags.has('hideMainLink') && { href: "/", text: "Главная", class: 'first-el', currentPage: params.currentPage },
                 { href: "/cases", text: "Кейсы", class: flags.has('hideMainLink') && 'first-el', currentPage: params.currentPage },
                 { href: "/tech",     text: "Технологии",   currentPage: params.currentPage },
-                { href: "/team",     text: "Команда",         currentPage: params.currentPage },
+                //- { href: "/team",     text: "Команда",         currentPage: params.currentPage },
                 { href: "/contacts", text: "Контакты",     currentPage: params.currentPage }
             ].filter(Boolean)
 
