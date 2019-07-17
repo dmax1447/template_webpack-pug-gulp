@@ -213,3 +213,21 @@ export function listenWindowResize(handler: (evt: UIEvent) => void, resizeTimeou
 
     return destroy;
 }
+
+export function isIE_10_11() {
+    try {
+        if (navigator.appVersion.indexOf("MSIE 10") !== -1) {
+            console.warn('ie10 found');
+            return true;
+        }
+        if (navigator.userAgent.indexOf("Trident") !== -1 && navigator.userAgent.indexOf("rv:11") !== -1) {
+            console.warn('ie11 found');
+            return true;
+        }
+    } catch(err) {
+        console.error('isIE_10_11 catched exception');
+        console.error(err);
+        return true;
+    }
+    return false;
+}
