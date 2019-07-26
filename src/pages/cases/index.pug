@@ -1,7 +1,7 @@
 extends ../../layout.pug
 
 mixin case-thumbnail(key, tech, name, desc, background, video, backgroundStyle="")
-    a.case-thumbnail(href=("/case-" + key), style=(backgroundStyle ? ("background: " + backgroundStyle) : ""))
+    a.case-thumbnail(href=("/case-" + key), style=(backgroundStyle ? ("background: " + backgroundStyle) : ""))&attributes(attributes)
         +img(background, 612, 408)
         video(playsinline autoplay muted loop)
             source(-data-src=assetUrl(video), type="video/mp4")
@@ -11,6 +11,16 @@ mixin case-thumbnail(key, tech, name, desc, background, video, backgroundStyle="
             p!= desc
             +cta-arrow("", "Смотреть кейс", 'small')
 
+mixin casesList(casesArr)
+    each caseItem, caseItemIndex in casesArr
+        +case-thumbnail(
+            caseItem.slug,
+            caseItem.tech,
+            caseItem.title,
+            caseItem.lead,
+            caseItem.cover,
+            caseItem.cover_video
+        )
 
 block body
     +section('top')
@@ -18,18 +28,17 @@ block body
     +section('cases full')
         h1= siteData('blocks.label_cases')
         - let casesData = siteData('cases');
-        - let cases = [ 'autoscaners', 'squadrille', 'launch', 'icartool', 'hakamada', 'odinmedia' ].map(slug => casesData.find(x => x.slug === slug)).filter(Boolean);
+        - let cases = [ 'squadrille', 'binary-management', 'autoscaners', 'launch', 'icartool', 'hakamada', 'odinmedia' ].map(slug => casesData.find(x => x.slug === slug)).filter(Boolean);
         - casesData.forEach(x => cases.indexOf(x) === -1 && cases.push(x));
+        - const firstRowLen = cases.length % 2 === 0 ? 3 : 2;
+        - let casesFirstRow = cases.slice(0, firstRowLen).filter(Boolean);
+        - let otherCases = cases.slice(firstRowLen);
+        //- - for (let i = firstRowLen; i < cases.length; ++i) otherCases.push
 
         .case-thumbnails
-            each caseItem, caseItemIndex in cases
-                +case-thumbnail(
-                    caseItem.slug,
-                    caseItem.tech,
-                    caseItem.title,
-                    caseItem.lead,
-                    caseItem.cover,
-                    caseItem.cover_video
-                )
+            +casesList(casesFirstRow)
+        .case-thumbnails
+            +casesList(otherCases)
+    
     +feedback-form([ 'section' ])
     +footer

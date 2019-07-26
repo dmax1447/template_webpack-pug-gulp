@@ -25,6 +25,10 @@ section.cases > .section-content {
     overflow: hidden;
     cursor: pointer;
 
+    // &--col2 {
+    //     min-width: v(600);
+    // }
+
     & > img {
         position: absolute;
         object-fit: cover;
