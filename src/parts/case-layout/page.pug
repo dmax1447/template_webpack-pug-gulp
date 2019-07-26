@@ -49,7 +49,7 @@ block body
         +top-bar([ 'sticky', 'padding' ], { currentPage: "/cases" })
     block caseTop
         +case-top('Кейс без имени')
-    +section('case')
+    +section(`case case--${caseSlug}`)
         .case__about
             block caseAbout
                 h5 Заголовок кейса

@@ -365,3 +365,13 @@ $accentFg: white;
         }
     }
 }
+
+// -------------------------------
+
+.case--binary-management {
+    .devices-gallery__screen {
+        & > img {
+            width: 100%;
+        }
+    }
+}
