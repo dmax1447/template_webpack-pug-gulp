@@ -420,6 +420,9 @@ $heroMobileRightOffset: v($heroMobileRightOffsetPx);
             &__head {
                 font-size: v(36) !important;
                 line-height: v(42) !important;
+
+                width: 90vw;
+                white-space: normal !important;
             }
 
             &--visible {
