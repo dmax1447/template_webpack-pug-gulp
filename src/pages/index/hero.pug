@@ -3,8 +3,9 @@ mixin hero-slide(key, head, text, ctaText, ctaLink, isFirst=false)
         .hero-slide__head-wrapper
             h1.hero-slide__head!= head
         p.hero-slide__text!= text
-        if key.indexOf('expteam') === -1
+        //- if key.indexOf('expteam') === -1
             +cta-arrow(ctaLink, ctaText).hero-slide__cta
+        +cta-arrow(ctaLink, ctaText).hero-slide__cta
         ul.hero-slide__items
             block
 
