@@ -37,7 +37,7 @@ mixin lead-members(key, leadIndex, alsoHeader, members)
     .lead-members&attributes(attributes)
         //- h6.lead-members__header&attributes(_animAttrs("slide-in-up", "0.8s", "0.4s"))!= alsoHeader
         - let commandName = [ 'Всего в дизайн команде', 'Всего во front–end команде', 'Всего в back–end команде' ][leadIndex];
-        h6.lead-members__header&attributes(_animAttrs("slide-in-up", "0.8s", "0.4s"))= commandName + ' ' + (members.length + 1)
+        h6.lead-members__header&attributes(_animAttrs("slide-in-up", "0.8s", "0.4s"))= commandName + ': ' + (members.length + 1) + ' чел.'
         //- .lead-members__wrapper
         //-     for member, i in members
         //-         .lead-member(style=('z-index: ' + (members.length - i) + ';'))&attributes(_animAttrs("slide-in-up", "0.8s", (0.2 + 0.05 * i + "s")))
