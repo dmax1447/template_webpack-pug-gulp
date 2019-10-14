@@ -28,7 +28,7 @@ block body
     +section('cases full')
         h1= siteData('blocks.label_cases')
         - let casesData = siteData('cases');
-        - let cases = [ 'squadrille', 'binary-management', 'autoscaners', 'launch', 'icartool', 'odinmedia', 'hakamada' ].map(slug => casesData.find(x => x.slug === slug)).filter(Boolean);
+        - let cases = [ 'squadrille', /* 'binary-management', */ 'autoscaners', 'launch', 'icartool', 'odinmedia', 'hakamada' ].map(slug => casesData.find(x => x.slug === slug)).filter(Boolean);
         - casesData.forEach(x => cases.indexOf(x) === -1 && cases.push(x));
         - const firstRowLen = cases.length % 2 === 0 ? 3 : 2;
         - let casesFirstRow = cases.slice(0, firstRowLen).filter(Boolean);

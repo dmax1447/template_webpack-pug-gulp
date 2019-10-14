@@ -3,5 +3,6 @@
 /.cache
 /.idea
 /dist
+/content_langs
 
 !public/.gitkeep
