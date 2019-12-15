@@ -37,14 +37,14 @@ export function remFix(
     }
 
     const prevHtmlFontSize = htmlEl.style.fontSize;
-    htmlEl.style.fontSize = '10px';
+    htmlEl.style.fontSize = '30px';
 
     const remTestEl = document.createElement('div');
-    remTestEl.setAttribute('style', 'height: 2rem !important; min-height: 2rem !important; max-height: 2rem !important;');
+    remTestEl.setAttribute('style', 'width: 0.1rem !important; min-width: 0.1rem !important; max-width: 0.1rem !important;');
     document.body.appendChild(remTestEl);
 
-    const testHeight = remTestEl.getBoundingClientRect().height;
-    const badRem = isIE || testHeight !== 20;
+    const testWidth = remTestEl.getBoundingClientRect().width;
+    const badRem = isIE || testWidth !== 3;
 
     remTestEl.remove();
     htmlEl.style.fontSize = prevHtmlFontSize;

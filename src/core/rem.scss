@@ -74,17 +74,19 @@ body {
 // on the most berёza ui templates, base pixel equals `4`
 //
 @function v($px, $basePix: $basePx, $minusPx: 0) {
-    $px: $px / $minFontSize;
-
     @if $minusPx == 0 {
         @if variable-exists(noRems) {
             @return ($px - $minusPx) + px;
         }
+        
+        $px: $px / $minFontSize;
         @return ($px / $basePix) + rem;
     }
     @if variable-exists(noRems) {
         @return $px + px;
     }
+
+    $px: $px / $minFontSize;
     @return unquote('calc(' + ($px / $basePix) + 'rem - ' + $minusPx + 'px)');
 }
 
