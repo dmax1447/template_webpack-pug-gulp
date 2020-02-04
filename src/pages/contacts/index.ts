@@ -20,5 +20,5 @@ function init_ymap(pos: number[], label: string) {
 }
 
 window.addEventListener('load', () => {
-    init_ymap([55.702850, 37.648465], 'мы здесь');
+    init_ymap([55.762840, 37.658472], 'мы здесь');
 });
