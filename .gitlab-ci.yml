@@ -21,11 +21,11 @@ deploy backend dev:
     paths:
     - vendor/
   script:
-  - scp -P 2222 -i ./key -r backend/* gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
-  - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/dev.berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress; php artisan migrate; rm -rf src static webpack"
-  - scp -P 2222 -i ./key -r src static webpack gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
-  - scp -P 2222 -i ./key *.json .postcssrc gitlab@omp-frontend.elantum.com:/var/www/dev.berezadev.com
-  - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/dev.berezadev.com; npm i; php artisan bereza:build --build"
+  - scp -P 2222 -i ./key -r backend/* git@berezadev.com:/var/www/dev.berezadev.com
+  - ssh -p 2222 -i ./key git@berezadev.com "cd /var/www/dev.berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress; php artisan migrate; rm -rf src static webpack"
+  - scp -P 2222 -i ./key -r src static webpack git@berezadev.com:/var/www/dev.berezadev.com
+  - scp -P 2222 -i ./key *.json .postcssrc git@berezadev.com:/var/www/dev.berezadev.com
+  - ssh -p 2222 -i ./key git@berezadev.com "cd /var/www/dev.berezadev.com; npm i; php artisan bereza:build --build"
 
 deploy backend prod:
   stage: deploy
@@ -36,8 +36,8 @@ deploy backend prod:
     paths:
     - vendor/
   script:
-  - scp -P 2222 -i ./key -r backend/* gitlab@omp-frontend.elantum.com:/var/www/berezadev.com
-  - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-dev; php artisan migrate"
+  - scp -P 2222 -i ./key -r backend/* git@berezadev.com:/var/www/berezadev.com
+  - ssh -p 2222 -i ./key git@berezadev.com "cd /var/www/berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-dev; php artisan migrate"
 
 pages:
   only:
@@ -58,6 +58,6 @@ prod:
   script:
   - npm install
   - BUILD=prod npm run build
-  - scp -P 2222 -v -i ./key -r dist/* gitlab@omp-frontend.elantum.com:/var/www/berezadev.com/public
-  - scp -P 2222 -i ./key -r backend/* gitlab@omp-frontend.elantum.com:/var/www/berezadev.com
-  - ssh -p 2222 -i ./key gitlab@omp-frontend.elantum.com "cd /var/www/berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress; php artisan migrate; cp -R /var/www/dev.berezadev.com/public/uploads /var/www/berezadev.com/public"
+  - scp -P 2222 -v -i ./key -r dist/* git@berezadev.com:/var/www/berezadev.com/public
+  - scp -P 2222 -i ./key -r backend/* git@berezadev.com:/var/www/berezadev.com
+  - ssh -p 2222 -i ./key git@berezadev.com "cd /var/www/berezadev.com; composer install --prefer-dist --no-ansi --no-interaction --no-progress; php artisan migrate; cp -R /var/www/dev.berezadev.com/public/uploads /var/www/berezadev.com/public"
