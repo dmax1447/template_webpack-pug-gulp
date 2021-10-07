@@ -1,0 +1,88 @@
+.popup {
+	position: fixed;
+	left: 100vw;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+
+	transition: left ease-in-out 0.3s;
+	z-index: 10;
+	overflow: auto;
+	@include scroll;
+
+	&.active {
+		left: 0;
+	}
+
+	&__wrapper {
+		display: flex;
+
+	}
+
+	&__buttons {
+		position: fixed;
+		top: 0;
+		right: -100vw;
+		height: 100vh;
+		@include button-reset;
+		flex-shrink: 0;
+		background-color: #747474;
+		display: flex;
+		justify-content: center;
+		width: 140px;
+		padding-top: 363px;
+		transition: right ease-in-out 0.3s;
+
+		.active & {
+			right: 0;
+		}
+
+
+		@include tablets {
+			padding-top: 469px;
+			width: 93px;
+		}
+
+		@include phone {
+			padding-top: 291px;
+			width: 57px;
+		}
+	}
+
+	&__button {
+		font-size: 24px;
+		line-height: 32px;
+		color: #FFFFFF;
+
+		@include phone {
+			font-size: 16px;
+			line-height: 24px;
+		}
+	}
+
+	&__button-icon {
+		font-size: 24px;
+		line-height: 32px;
+		color: #FFFFFF;
+
+		@include phone {
+			width: 25px;
+			height: 25px;
+		}
+	}
+
+	&__content {
+		width: calc(100vw + 4px - 140px);
+		height: 100%;
+		background-color: #333333;
+
+		@include tablets {
+			width: calc(100vw + 4px - 93px);
+		}
+
+		@include phone {
+			width: calc(100vw + 4px - 57px);
+		}
+	}
+
+}

@@ -1,0 +1,14 @@
+
+//dependencies
+@import '../../node_modules/normalize.css/normalize.css';
+@import '../../node_modules/owl.carousel/dist/assets/owl.carousel.min.css';
+@import '../../node_modules/owl.carousel/dist/assets/owl.theme.default.min.css';
+@import '../../node_modules/ion-rangeslider/css/ion.rangeSlider.min.css';
+
+//layout
+@import 'layout/fonts';
+@import 'layout/mixins';
+@import 'layout/settings';
+
+//common
+@import 'common/**/*.scss';

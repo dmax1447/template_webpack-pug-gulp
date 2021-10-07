@@ -1,0 +1,15 @@
+extends ../_template
+
+block variables
+	- var title = 'Home page';
+
+block content
+	.wrapper
+		include ../common/_header.pug
+		main.page
+			section.cases.cases--page(data-cases)
+				.container
+					p Кейсы
+
+			include ../common/_cookies.pug
+		include ../common/_footer.pug

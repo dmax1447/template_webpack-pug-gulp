@@ -1,0 +1,142 @@
+%clearfix {
+  &:after, &:before {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+
+@mixin scroll($width:5px) {
+  &::-webkit-scrollbar-thumb {
+    background: #FFC141;
+  }
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #DDA939;
+  }
+}
+
+@mixin horizontal-scroll($width:5px) {
+  &::-webkit-scrollbar-thumb {
+    background: #FFC141;
+  }
+  &::-webkit-scrollbar {
+    height: $width;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #DDA939;
+  }
+}
+
+@mixin retina {
+	@media screen and (-webkit-mon-device-pixel-ratio:1.5), screen and (min-resolution: 144dpi){
+		@content;
+	}
+}
+
+@mixin placeholder {
+	&::-webkit-input-placeholder { @content; }
+	&:-moz-placeholder           { @content; }
+	&::-moz-placeholder          { @content; }
+	&:-ms-input-placeholder      { @content; }
+}
+
+@mixin centered($axis: 'both'){
+	position: absolute;
+
+	@if $axis == 'both'{
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	@if $axis == 'x'{
+		left: 50%;
+		transform:translateX(-50%);
+	}
+
+	@if $axis == 'y'{
+		top: 50%;
+		transform:translateY(-50%);
+	}
+}
+
+@mixin narrow {
+	font-family: 'Gotham Pro Narrow';
+}
+
+@mixin media($width) {
+	@media screen and (max-width: $width) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media screen and (min-width:1440px){
+		@content;
+	}
+}
+
+@mixin laptop {
+	@media screen and (max-width:1440px){
+		@content;
+	}
+}
+
+@mixin tablets {
+	@media screen and (max-width:1024px){
+		@content;
+	}
+}
+
+@mixin phone {
+	@media screen and (max-width:767px){
+		@content;
+	}
+}
+
+@mixin autofill {
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover,
+	input:-webkit-autofill:focus,
+	textarea:-webkit-autofill,
+	textarea:-webkit-autofill:hover,
+	textarea:-webkit-autofill:focus,
+	select:-webkit-autofill,
+	select:-webkit-autofill:hover,
+	select:-webkit-autofill:focus {
+		@content;
+	}
+}
+
+@mixin button-reset {
+	padding: 0;
+	border: none;
+	font: inherit;
+	color: inherit;
+	background-color: transparent;
+	cursor: pointer;
+	//outline: none;
+}
+
+@mixin scroll($width:4px) {
+	&::-webkit-scrollbar-thumb {
+		background: rgba(#fff, 0.5);
+		border-radius: 2px;
+	}
+	&::-webkit-scrollbar {
+		width: $width;
+		height: $width;
+		border-radius: 2px;
+	}
+	&::-webkit-scrollbar-thumb:hover {
+		background: rgba(#fff, 0.5);
+	}
+}

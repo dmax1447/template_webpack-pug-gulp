@@ -1,0 +1,124 @@
+.cases {
+	margin-bottom: 120px;
+	@include tablets {
+		margin-bottom: 112px;
+	}
+	@include phone {
+		margin-bottom: 138px;
+	}
+	&--page {
+		padding-top: 74px;
+		@include tablets {
+			padding-top: 80px;
+		}
+		@include phone {
+			padding-top: 50px;
+		}
+	}
+	&__tags {
+		margin-bottom: 24px;
+	}
+	&__container {
+		position: relative;
+	}
+	&__title {
+		margin-bottom: 64px;
+		@include tablets {
+			margin-bottom: 48px;
+		}
+	}
+	&__list{
+		// margin-right: -65px;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content:space-between;
+	}
+	&__link {
+		position: absolute;
+		right: 41px;
+		bottom: 80px;
+		@include tablets {
+			bottom: 40px;
+		}
+		@include phone {
+			bottom: -38px;
+			right: 19px;
+		}
+	}
+	&__item {
+		// margin-left: 65px;
+		margin-bottom: 80px;
+		@include tablets {
+			margin-bottom: 50px;
+		}
+		@include phone {
+			width: 100%;
+			margin-bottom: 32px;
+		}
+		&--index {
+			&--1 {
+				width: 60%;
+				@include tablets {
+					width: 52%;
+				}
+			}
+			&--2 {
+				width: 35%;
+				@include tablets {
+					width: 43%;
+				}
+			}
+			&--3 {
+				width: 82%;
+			}
+			&--4 {
+				width: 48%;
+			}
+			&--5 {
+				width: 48%;
+			}
+			&--6 {
+				width: 65%;
+			}
+			&--7 {
+				width: 52%;
+			}
+			&--8 {
+				width: 43%;
+			}
+			&--9 {
+				width: 82%;
+			}
+			&--10 {
+				width: 48%;
+			}
+			&--11 {
+				width: 48%;
+			}
+			&--12 {
+				width: 65%;
+			}
+			&--13 {
+				width: 36%;
+				@include tablets {
+					width: 52%;
+				}
+			}
+			&--14 {
+				width: 60%;
+				@include tablets {
+					width: 43%;
+				}
+			}
+			&--15 {
+				width: 82%;
+			}
+			&--16 {
+				width: 48%;
+			}
+			&--17 {
+				width: 48%;
+			}
+		}
+	}
+}

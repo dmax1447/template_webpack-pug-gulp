@@ -1,0 +1,15 @@
+extends ../_template
+
+block variables
+	- var title = 'Home page';
+
+block content
+	.wrapper
+		include ../common/_header.pug
+		main.page
+			section.hero
+				.container
+					p hero
+
+			include ../common/_cookies.pug
+		include ../common/_footer.pug
