@@ -36,6 +36,7 @@ exports.rootDir = function (pathFromRoot) {
 const _siteDataCache = {};
 
 exports.getSiteData = function(dataPath, name, lang) {
+    return {}
     const [ block, field ] = name.split(".");
 
     if (!_siteDataCache.hasOwnProperty(block)) {

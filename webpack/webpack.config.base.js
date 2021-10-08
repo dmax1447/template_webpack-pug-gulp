@@ -7,7 +7,7 @@ const slugify = require('slugify');
 
 const { getEntries, rootDir, getSiteData } = require('./utils.js');
 
-const entries = getEntries(rootDir('./src/pages/'), 'index', 'ts');
+const entries = getEntries(rootDir('./src/pages/'), 'index', 'js');
 const pages = getEntries(rootDir('./src/pages/'), 'index', 'pug');
 const outputPath = process.env.BUILD_OUTPUT || './dist';
 const stringsDataPath = rootDir('./content');
@@ -68,7 +68,7 @@ module.exports = function (isDev = 'dev') {
     const config = {
         entry: Object.assign(
             entries,
-            { app: rootDir('./src/index.ts'), }
+            { app: rootDir('./src/index.js'), }
         ),
         output: {
             pathinfo: false,
@@ -195,25 +195,11 @@ module.exports = function (isDev = 'dev') {
         config.plugins.push(new HtmlWebpackPlugin(conf));
     };
 
-    const pushCaseFromTemplate = (caseSlug) => {
-        pushPage(
-            `case-${caseSlug}`,
-            rootDir('./src/pages/_case-template/index.pug'),
-            '_case-template', {
-                caseSlug
-            }
-        );
-    };
-
     for (const pageName in pages) {
         if (pageName.startsWith('_')) continue;
         pushPage(pageName, pages[pageName]);
     }
 
-    const casesInfoArr = getSiteData(stringsDataPath, 'cases', buildLanguage);
-    for (const { slug } of casesInfoArr) {
-        pushCaseFromTemplate(slug);
-    }
 
     return config;
 }
